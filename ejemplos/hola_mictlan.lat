@@ -1,0 +1,10 @@
+
+# Mi primer programa de Mictlán
+
+escribir("¡Hola desde Mictlán!")
+
+nombre = "Mictlán"
+escribir("Bienvenido a " .. nombre)
+
+numero = 6 * 7
+escribir("El resultado es: " .. numero)
