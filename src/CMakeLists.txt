@@ -115,6 +115,13 @@ else()
     add_executable(${PROJECT_NAME} ${SRC_LIB})
 endif()
 
+# Nombre público del ejecutable de Mictlán.
+# El nombre interno del target sigue siendo latino
+# para conservar la compatibilidad durante la transición.
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    OUTPUT_NAME mictlan
+)
+
 
 if(MSVC)
     SET ( CMAKE_SHARED_LINKER_FLAGS /MANIFEST:NO )

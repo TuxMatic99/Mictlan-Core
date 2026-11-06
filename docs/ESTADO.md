@@ -22,15 +22,18 @@ desarrollo/mictlan-alpha
 - Biblioteca estática: generada.
 - Programa ejemplos/hola_mictlan.lat: ejecutado.
 - Suites de regresión: 11 de 11 aprobadas.
+- Ejecutable `mictlan`: compilado correctamente.
+- Primer programa ejecutado mediante `mictlan`: correcto.
+- Configuración Linux: ya no modifica `latino.rc`.
+- Biblioteca `liblatino.so`: conservada por compatibilidad.
 
 ## Limitaciones conocidas
 
-- El ejecutable todavía se llama `latino`.
-- La sintaxis sigue siendo la de Latino.
-- La configuración CMake modifica latino.rc.
-- Existen advertencias históricas del compilador.
-- No se ha publicado una distribución de Mictlán.
-- Las pruebas no garantizan ausencia total de defectos.
+- El intérprete conserva internamente la arquitectura de Latino.
+- El objetivo CMake todavía se llama `latino`.
+- La biblioteca compartida conserva el nombre `liblatino.so`.
+- La generación de recursos de Windows requiere mejoras adicionales.
+- Persisten advertencias heredadas del compilador.
 
 ## Siguientes objetivos
 

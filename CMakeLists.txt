@@ -37,7 +37,12 @@ message(STATUS "Tipo de Build .......... ${CMAKE_BUILD_TYPE}"   )
 
 include(GetLatVersion)
 message(STATUS "Latino Version ......... ${LATINO_VERSION}"     )
-include(ResourceUpdate)
+
+# Los recursos .rc pertenecen al ejecutable de Windows.
+# En Linux no necesitamos actualizar ese archivo.
+if(WIN32)
+    include(ResourceUpdate)
+endif()
 
 include(BuildLatOptions)
 
