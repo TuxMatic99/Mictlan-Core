@@ -316,3 +316,24 @@ include(CPack)
 
 # Forzar prefijo de instalación relativo en el staging de CPack
 set(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR};${PROJECT_NAME};ALL;/")
+
+
+# ============================================
+# MICTLÁN: DISTRIBUCIÓN PORTABLE EXPERIMENTAL
+# ============================================
+
+# Instalar únicamente el intérprete de consola.
+install(TARGETS latino
+    RUNTIME DESTINATION bin
+    COMPONENT MictlanPortable
+    EXCLUDE_FROM_ALL
+)
+
+# Incluir nuestro primer programa de ejemplo.
+install(FILES
+    "${CMAKE_SOURCE_DIR}/ejemplos/hola_mictlan.lat"
+    DESTINATION share/mictlan/ejemplos
+    COMPONENT MictlanPortable
+    EXCLUDE_FROM_ALL
+)
+
