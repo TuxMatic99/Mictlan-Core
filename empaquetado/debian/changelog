@@ -1,0 +1,12 @@
+mictlan (0.1.0-0~alpha1) UNRELEASED; urgency=low
+
+  * Primera version alfa experimental del interprete Mictlan.
+  * Distribucion inicial para Debian AMD64.
+  * Incluido un programa de ejemplo.
+  * Incorporada documentacion y licencia MIT del nucleo.
+  * Dependencias detectadas mediante CPack.
+  * Corregidos los permisos de directorios.
+  * Eliminados simbolos innecesarios del ejecutable.
+  * Incorporada la pagina de manual mictlan(1).
+
+ -- Tuxmatic <videosexperimentalesmarioia@gmail.com>  Sat, 07 Nov 2026 00:30:00 -0600
