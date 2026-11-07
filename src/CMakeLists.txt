@@ -337,3 +337,21 @@ install(FILES
     EXCLUDE_FROM_ALL
 )
 
+
+# Licencia del nucleo para distribucion portable.
+install(FILES
+    "${CMAKE_SOURCE_DIR}/LICENSE"
+    DESTINATION share/doc/mictlan
+    RENAME copyright
+    COMPONENT MictlanPortable
+    EXCLUDE_FROM_ALL
+)
+
+# Manual de la distribucion portable.
+install(FILES
+    "${CMAKE_SOURCE_DIR}/docs/README_PORTABLE.md"
+    DESTINATION .
+    RENAME README.md
+    COMPONENT MictlanPortable
+    EXCLUDE_FROM_ALL
+)
