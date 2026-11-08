@@ -100,6 +100,7 @@ int main(int argc, char *argv[]) {
     char *infile = NULL;
     int pe = false;
     int pf = false;
+    int codigo_salida = EXIT_SUCCESS;
     /* procesa params de latino */
     for (i = 1; i < argc; i++) {
         if (strstr(argv[1], ".lat") || argv[1][0] != '-') {
@@ -143,7 +144,7 @@ int main(int argc, char *argv[]) {
             latL_agregar(mv, latC_checar_lista(mv, mv->global->argv),
                          latC_crear_cadena(mv, argv[j]));
         }
-        int status;
+        int status = EXIT_FAILURE;
         /* debug eliminado: Iniciando parseo */
         ast *nodo = latA_analizar_arch(infile, &status);
         /* debug eliminado: Parseo terminado */
@@ -187,6 +188,12 @@ int main(int argc, char *argv[]) {
             }
             latO_destruir(mv, main_func);
         }
+
+
+        if (status != 0 || nodo == NULL) {
+            codigo_salida = EXIT_FAILURE;
+        }
+
         latA_destruir(nodo);
     } else {
         lat_version();
@@ -194,5 +201,6 @@ int main(int argc, char *argv[]) {
         latR_REPL(mv);
     }
     latC_destruir_mv(mv);
-    return EXIT_SUCCESS;
+    return codigo_salida;
+
 }

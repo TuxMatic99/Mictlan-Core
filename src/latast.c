@@ -401,15 +401,25 @@ ast *latA_analizar_arch(char *infile, int *status) {
   }
   char *dot = strrchr(infile, '.');
   char *extension;
-  if (!dot || dot == infile) {
+if (dot == NULL) {
     extension = "";
-  } else {
+} else {
     extension = dot + 1;
-    if (strcmp(extension, "lat")) {
-      printf("El archivo '%s' no contiene la extension .lat\n", infile);
-      return NULL;
-    }
-  }
+}
+/*
+ * Mictlan utiliza .mict como extension principal.
+ * Conservamos .lat por compatibilidad.
+ */
+if (strcmp(extension, "mict") != 0 &&
+    strcmp(extension, "lat") != 0) {
+
+    printf(
+        "El archivo '%s' debe tener extension .mict o .lat\n",
+        infile
+    );
+
+    return NULL;
+}
   FILE *file = fopen(infile, "r");
   if (file == NULL) {
     printf("No se pudo abrir el archivo: %s\n", infile);
