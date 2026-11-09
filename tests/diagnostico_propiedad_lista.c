@@ -50,7 +50,7 @@ int main(void)
             0
         );
 
-    
+
 double valor = latC_checar_numerico(&mv, elemento);
 
 printf("Valor conservado: %.0f\n", valor);
