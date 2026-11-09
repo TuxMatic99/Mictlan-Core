@@ -178,38 +178,45 @@ LATINO_API nodo_lista *latL_obtener_nodo(lat_mv *mv, lista *list, int pos) {
   return NULL;
 }
 
-LATINO_API void latL_insertar_elemento(lat_mv *mv, lista *list, void *data,
-                                       int pos) {
-  // FIXME: Memory leak and for performance
+
+LATINO_API void latL_insertar_elemento(lat_mv *mv, lista *list,
+                                       void *data, int pos) {
+
   int len = latL_longitud(list);
+
+  /* Comprobar que la posicion sea valida. */
   if (pos < 0 || pos > len) {
     latC_error(mv, "Indice fuera de rango");
+    return;
   }
+
+  /* Insertar al principio. */
   if (pos == 0) {
     latL_insertar_inicio(mv, list, data);
     return;
   }
+
+  /* Insertar al final. */
   if (pos == len) {
     latL_agregar(mv, list, data);
     return;
   }
-  lista *tmp1 = latL_crear(mv);
-  lista *tmp2 = latL_crear(mv);
-  int i = 0;
 
-  LIST_FOREACH(list, primero, siguiente, cur) {
-    if (i < pos) {
-      latL_agregar(mv, tmp1, cur->valor);
-    } else {
-      latL_agregar(mv, tmp2, cur->valor);
-    }
-    i++;
-  }
-  lista *nl = latL_crear(mv);
-  latL_extender(mv, nl, tmp1);
-  latL_agregar(mv, nl, data);
-  latL_extender(mv, nl, tmp2);
-  *list = *nl;
-  latM_liberar(mv, tmp1);
-  latM_liberar(mv, tmp2);
+  /* Encontrar los nodos entre los que insertaremos. */
+  nodo_lista *siguiente = latL_obtener_nodo(mv, list, pos);
+  nodo_lista *anterior = siguiente->anterior;
+
+  /* Reservar solamente un nodo nuevo. */
+  nodo_lista *nuevo = latM_asignar(mv, sizeof(nodo_lista));
+
+  nuevo->valor = data;
+  nuevo->anterior = anterior;
+  nuevo->siguiente = siguiente;
+
+  /* Conectar los dos vecinos con el nuevo nodo. */
+  anterior->siguiente = nuevo;
+  siguiente->anterior = nuevo;
+
+  /* Registrar que la lista contiene otro elemento. */
+  list->longitud++;
 }
