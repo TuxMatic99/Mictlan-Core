@@ -1,0 +1,35 @@
+
+# Mictlan Core
+# Prueba de listas anidadas y referencias compartidas.
+
+escribir("=== LISTAS ANIDADAS ===")
+
+base = [8, 16]
+
+contenedor = [base, base]
+
+alias = contenedor[1]
+primero = contenedor[0]
+
+# Modificar una lista interna por medio de un alias.
+alias[0] = 99
+
+escribir("Valor desde la primera referencia:")
+escribir(primero[0])
+
+# Reasignar la variable original.
+base = [7, 14]
+
+escribir("Valor conservado por alias:")
+escribir(alias[0])
+
+escribir("Valor de la nueva base:")
+escribir(base[0])
+
+# Modificar nuevamente la lista compartida.
+alias[1] = 77
+
+escribir("Segundo elemento compartido:")
+escribir(primero[1])
+
+escribir("=== FIN ===")

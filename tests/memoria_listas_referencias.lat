@@ -1,0 +1,33 @@
+
+# Mictlan Core
+# Prueba de referencias compartidas y reasignacion.
+
+escribir("=== LISTAS COMPARTIDAS ===")
+
+original = [8, 16]
+alias = original
+
+alias[0] = 99
+
+escribir("Original despues de modificar alias:")
+escribir(original[0])
+
+escribir("=== REASIGNACION ===")
+
+# Original comienza a apuntar a otra lista.
+original = [7, 14]
+
+# Alias debe conservar la lista anterior.
+escribir("Alias despues de reasignar original:")
+escribir(alias[0])
+
+escribir("Nueva lista original:")
+escribir(original[0])
+
+# Comprobar que alias sigue siendo utilizable.
+alias[1] = 77
+
+escribir("Segundo elemento del alias:")
+escribir(alias[1])
+
+escribir("=== FIN ===")

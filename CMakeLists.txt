@@ -63,6 +63,22 @@ enable_testing()
 #se comentan los test que requieren entrada de datos leer()
 add_test(NAME coverage COMMAND latino ejemplos/coverage.lat)
 
+# Regresion: listas compartidas y reasignacion.
+
+add_test(
+    NAME mictlan_memoria_listas_referencias
+    COMMAND
+        "${CMAKE_COMMAND}"
+        "-DMICTLAN_EJECUTABLE=$<TARGET_FILE:latino>"
+        "-DMICTLAN_PROGRAMA=${CMAKE_CURRENT_SOURCE_DIR}/tests/memoria_listas_referencias.lat"
+        -P
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests/verificar_memoria_listas_referencias.cmake"
+)
+
+set_tests_properties(
+    mictlan_memoria_listas_referencias
+    PROPERTIES TIMEOUT 15
+)
 #if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
 #    include(CodeCoverage)
 #    setup_target_for_coverage(${PROJECT}_coverage ${PROJECT_TEST_NAME} coverage)

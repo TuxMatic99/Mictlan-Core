@@ -1064,8 +1064,12 @@ static void latMV_build_list(lat_mv *mv, lat_bytecode cur)
     latL_insertar_inicio(mv, latC_checar_lista(mv, obj), tmp);
   }
   latC_apilar(mv, obj);
+#if !HABILITAR_GC
+  /* La pila conserva la referencia a la lista.
+     Liberar solo el envoltorio temporal. */
+  latM_liberar(mv, obj);
+#endif
 }
-
 static void latMV_load_attr(lat_mv *mv, lat_bytecode cur, lat_bytecode next)
 {
   lat_objeto *obj = latC_desapilar(mv);
