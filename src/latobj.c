@@ -308,15 +308,28 @@ void latO_destruir(lat_mv *mv, lat_objeto *o) {
   latM_liberar(mv, o);
 }
 
+
 static lista *latL_clonar(lat_mv *mv, lista *list) {
   lista *ret = latL_crear(mv);
 
   LIST_FOREACH(list, primero, siguiente, cur) {
     lat_objeto *tmp = (lat_objeto *)cur->valor;
+
+    /*
+     * Correccion experimental:
+     * una lista clonada no debe compartir la propiedad
+     * de un objeto numerico que la otra puede destruir.
+     */
+    if (tmp != NULL && tmp->tipo == T_NUMERIC) {
+      tmp = latO_clonar(mv, tmp);
+    }
+
     latL_agregar(mv, ret, tmp);
   }
+
   return ret;
 }
+
 
 lat_objeto *latO_clonar(lat_mv *mv, lat_objeto *obj) {
   lat_objeto *ret = NULL;

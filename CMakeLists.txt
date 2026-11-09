@@ -79,6 +79,77 @@ set_tests_properties(
     mictlan_memoria_listas_referencias
     PROPERTIES TIMEOUT 15
 )
+# ==============================================
+# MICTLAN CORE: PROPIEDAD DE LISTAS CON ASAN
+# ==============================================
+
+# Registrar este diagnostico solamente cuando
+# Core este compilado con AddressSanitizer.
+if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
+
+    add_executable(
+        mictlan_test_propiedad_lista
+        tests/diagnostico_propiedad_lista.c
+    )
+
+    target_include_directories(
+        mictlan_test_propiedad_lista
+        PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    )
+
+    target_link_libraries(
+        mictlan_test_propiedad_lista
+        PRIVATE
+        liblatino
+    )
+
+    add_test(
+        NAME mictlan_memoria_propiedad_numerica_asan
+        COMMAND mictlan_test_propiedad_lista
+    )
+
+    set_tests_properties(
+        mictlan_memoria_propiedad_numerica_asan
+        PROPERTIES
+            TIMEOUT 15
+            ENVIRONMENT
+                "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
+    )
+# Regresion de propiedad de listas anidadas.
+# Actualmente falla por heap-use-after-free.
+# Debe pasar cuando se corrija la propiedad de memoria.
+
+add_executable(
+    mictlan_test_propiedad_anidada
+    tests/diagnostico_propiedad_lista_anidada.c
+)
+
+target_include_directories(
+    mictlan_test_propiedad_anidada
+    PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
+
+target_link_libraries(
+    mictlan_test_propiedad_anidada
+    PRIVATE
+    liblatino
+)
+
+add_test(
+    NAME mictlan_memoria_propiedad_anidada_asan
+    COMMAND mictlan_test_propiedad_anidada
+)
+
+set_tests_properties(
+    mictlan_memoria_propiedad_anidada_asan
+    PROPERTIES
+        TIMEOUT 15
+        ENVIRONMENT
+            "ASAN_OPTIONS=detect_leaks=0:halt_on_error=1"
+)
+endif()
 #if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
 #    include(CodeCoverage)
 #    setup_target_for_coverage(${PROJECT}_coverage ${PROJECT_TEST_NAME} coverage)
