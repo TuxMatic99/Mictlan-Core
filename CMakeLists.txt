@@ -228,3 +228,40 @@ if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
     )
 
 endif()
+# =============================================
+# MICTLAN: REFERENCIAS REPETIDAS CON ASAN
+# =============================================
+
+if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
+
+    add_executable(
+        mictlan_test_elemento_repetido
+        tests/diagnostico_propiedad_elemento_repetido.c
+    )
+
+    target_include_directories(
+        mictlan_test_elemento_repetido
+        PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    )
+
+    target_link_libraries(
+        mictlan_test_elemento_repetido
+        PRIVATE
+        liblatino
+    )
+
+    add_test(
+        NAME mictlan_memoria_elemento_repetido_asan
+        COMMAND mictlan_test_elemento_repetido
+    )
+
+    set_tests_properties(
+        mictlan_memoria_elemento_repetido_asan
+        PROPERTIES
+            TIMEOUT 15
+            ENVIRONMENT
+                "ASAN_OPTIONS=detect_leaks=0:halt_on_error=1"
+    )
+
+endif()
