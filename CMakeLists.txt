@@ -169,3 +169,62 @@ add_custom_target(coverage
   COMMAND genhtml coverage.info --output-directory ./coverage
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   VERBATIM)
+# ============================================
+# MICTLAN: PRUEBAS DE INSERCION CON ASAN
+# ============================================
+
+if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
+
+    # Primera prueba: insercion entre dos elementos.
+    add_executable(
+        mictlan_test_insercion_lista
+        tests/diagnostico_insercion_lista.c
+    )
+
+    target_include_directories(
+        mictlan_test_insercion_lista
+        PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    )
+
+    target_link_libraries(
+        mictlan_test_insercion_lista
+        PRIVATE liblatino
+    )
+
+    add_test(
+        NAME mictlan_memoria_insercion_basica_asan
+        COMMAND mictlan_test_insercion_lista
+    )
+
+    # Segunda prueba: inserciones y casos limite.
+    add_executable(
+        mictlan_test_insercion_limites
+        tests/diagnostico_insercion_limites.c
+    )
+
+    target_include_directories(
+        mictlan_test_insercion_limites
+        PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    )
+
+    target_link_libraries(
+        mictlan_test_insercion_limites
+        PRIVATE liblatino
+    )
+
+    add_test(
+        NAME mictlan_memoria_insercion_limites_asan
+        COMMAND mictlan_test_insercion_limites
+    )
+
+    # Activar deteccion de fugas para ambas pruebas.
+    set_tests_properties(
+        mictlan_memoria_insercion_basica_asan
+        mictlan_memoria_insercion_limites_asan
+        PROPERTIES
+            TIMEOUT 15
+            ENVIRONMENT
+                "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
+    )
+
+endif()
