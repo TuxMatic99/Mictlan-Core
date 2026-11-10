@@ -80,6 +80,7 @@ set(SRC_LIB
     latlex.c
     latlist.c
     latmem.c
+    latrecurso.c
     latmv.c
     latobj.c
     latparse.c
