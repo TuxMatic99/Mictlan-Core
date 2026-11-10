@@ -303,3 +303,41 @@ if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
     )
 
 endif()
+# ============================================
+# MICTLAN: RECURSO CON LISTA REAL
+# ============================================
+
+if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
+
+    add_executable(
+        mictlan_test_recurso_lista_real
+        tests/test_recurso_lista_real.c
+    )
+
+    target_include_directories(
+        mictlan_test_recurso_lista_real
+        PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/include"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    )
+
+    target_link_libraries(
+        mictlan_test_recurso_lista_real
+        PRIVATE
+        liblatino
+    )
+
+    add_test(
+        NAME mictlan_memoria_recurso_lista_real_asan
+        COMMAND mictlan_test_recurso_lista_real
+    )
+
+    set_tests_properties(
+        mictlan_memoria_recurso_lista_real_asan
+        PROPERTIES
+            TIMEOUT 15
+            ENVIRONMENT
+                "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
+    )
+
+endif()
