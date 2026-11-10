@@ -81,6 +81,7 @@ set(SRC_LIB
     latlist.c
     latmem.c
     latrecurso.c
+    latlista_recursos.c
     latmv.c
     latobj.c
     latparse.c
