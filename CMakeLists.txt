@@ -374,5 +374,42 @@ if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
             ENVIRONMENT
                 "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
     )
+endif()
+
+# ============================================
+# MICTLAN: ELEMENTOS COMPARTIDOS CON ASAN
+# ============================================
+
+if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
+
+    add_executable(
+        mictlan_test_recurso_elemento_compartido
+        tests/test_recurso_elemento_compartido.c
+    )
+
+    target_include_directories(
+        mictlan_test_recurso_elemento_compartido
+        PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/include"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    )
+
+    target_link_libraries(
+        mictlan_test_recurso_elemento_compartido
+        PRIVATE liblatino
+    )
+
+    add_test(
+        NAME mictlan_memoria_recurso_elemento_compartido_asan
+        COMMAND mictlan_test_recurso_elemento_compartido
+    )
+
+    set_tests_properties(
+        mictlan_memoria_recurso_elemento_compartido_asan
+        PROPERTIES
+            TIMEOUT 15
+            ENVIRONMENT
+                "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
+    )
 
 endif()
