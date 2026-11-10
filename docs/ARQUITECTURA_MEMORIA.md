@@ -53,3 +53,64 @@ estas decisiones y validar sus invariantes.
 - Regresiones existentes de Core: aprobadas.
 - Suite funcional del SDK: 32/32.
 - Referencias y mutaciones: semantica preservada.
+
+## 6. Contratos observados en Core
+
+### Listas genericas
+
+latL_agregar() reserva un nodo y almacena un puntero.
+No incrementa contadores de referencias ni copia el
+objeto apuntado.
+
+Los nodos pueden contener lat_objeto u otros tipos de datos.
+
+### Pila de la maquina virtual
+
+latC_apilar() copia valores al espacio de la pila.
+Para T_LIST y T_DIC conserva el recurso interno.
+
+latC_desapilar() retrocede la pila sin liberar
+explicitamente esos recursos.
+
+### Variables y contextos
+
+latH_asignar() crea o actualiza envoltorios.
+Al copiar listas y diccionarios puede compartir
+sus recursos internos.
+
+latH_limpiar() libera envoltorios propios, pero
+conserva determinados recursos compartidos.
+
+### Destruccion
+
+latO_destruir() puede destruir recursivamente
+los elementos de una lista.
+
+Este comportamiento entra en conflicto con
+referencias compartidas sin propiedad registrada.
+
+## 7. Invariantes del nuevo administrador
+
+1. Cada recurso compartido tendra identidad estable.
+2. Cada referencia propietaria debera contabilizarse.
+3. Cada adquisicion tendra una liberacion correspondiente.
+4. Una referencia prestada no destruira el recurso.
+5. La pila no podra liberar recursos todavia utilizados.
+6. Los contextos respetaran alias y reasignaciones.
+7. Los ciclos necesitaran un mecanismo complementario.
+8. No se modificara la ABI publica sin evaluar el SDK.
+
+## 8. Estrategia de integracion
+
+Primero: definir una API interna de retencion y liberacion.
+
+Segundo: integrarla con contenedores de objetos.
+
+Tercero: integrar las copias de la pila y los contextos.
+
+Cuarto: validar las pruebas ASan y LSan existentes.
+
+Quinto: estudiar ciclos y recuperacion de memoria.
+
+No sustituir HABILITAR_GC ni activar un contador global
+antes de completar el contrato de propiedad.
