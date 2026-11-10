@@ -129,12 +129,36 @@ LATINO_API void *latL_eliminar_nodo(lat_mv *mv, lista *list, nodo_lista *node) {
   return result;
 }
 
-LATINO_API void latL_extender(lat_mv *mv, lista *list1, lista *list2) {
 
-  LIST_FOREACH(list2, primero, siguiente, cur) {
-    latL_agregar(mv, list1, cur->valor);
-  }
+LATINO_API void latL_extender(
+    lat_mv *mv,
+    lista *destino,
+    lista *origen
+) {
+    /* Recordar el ultimo nodo original. */
+    nodo_lista *fin_original = origen->ultimo;
+
+    if (fin_original == NULL) {
+        return;
+    }
+
+    nodo_lista *actual = origen->primero;
+
+    for (;;) {
+        /* Guardar el siguiente antes de agregar. */
+        nodo_lista *siguiente = actual->siguiente;
+
+        latL_agregar(mv, destino, actual->valor);
+
+        /* No recorrer los nodos recien agregados. */
+        if (actual == fin_original) {
+            break;
+        }
+
+        actual = siguiente;
+    }
 }
+
 
 LATINO_API bool latL_contiene_valor(lat_mv *mv, lista *list, void *data) {
   lat_objeto *bus = (lat_objeto *)data;

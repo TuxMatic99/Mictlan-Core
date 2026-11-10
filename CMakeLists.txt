@@ -339,5 +339,40 @@ if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
             ENVIRONMENT
                 "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
     )
+endif()
+# ============================================
+# MICTLAN: AUTOEXTENSION DE LISTAS CON ASAN
+# ============================================
+
+if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
+
+    add_executable(
+        mictlan_test_autoextension_lista
+        tests/diagnostico_extender_misma_lista.c
+    )
+
+    target_include_directories(
+        mictlan_test_autoextension_lista
+        PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    )
+
+    target_link_libraries(
+        mictlan_test_autoextension_lista
+        PRIVATE liblatino
+    )
+
+    add_test(
+        NAME mictlan_memoria_autoextension_asan
+        COMMAND mictlan_test_autoextension_lista
+    )
+
+    set_tests_properties(
+        mictlan_memoria_autoextension_asan
+        PROPERTIES
+            TIMEOUT 15
+            ENVIRONMENT
+                "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
+    )
 
 endif()
