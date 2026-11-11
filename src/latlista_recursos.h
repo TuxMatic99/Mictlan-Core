@@ -34,6 +34,18 @@ lat_objeto *latLR_obtener(
 /* Cantidad de elementos. */
 int latLR_longitud(const lat_lista_recursos *contenedor);
 
+/*
+ * Reemplazar el recurso almacenado en una posicion.
+ * Adquiere una referencia propia, sin transferir la del llamador.
+ * Si falla, el contenedor no se modifica.
+ */
+bool latLR_reemplazar(
+    lat_mv *mv,
+    lat_lista_recursos *contenedor,
+    int indice,
+    lat_recurso *recurso
+);
+
 /* Eliminar una posicion y liberar su referencia. */
 bool latLR_eliminar(
     lat_mv *mv,

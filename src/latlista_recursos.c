@@ -67,6 +67,42 @@ lat_objeto *latLR_obtener(
     return (lat_objeto *)latR_dato(recurso);
 }
 
+bool latLR_reemplazar(
+    lat_mv *mv,
+    lat_lista_recursos *c,
+    int indice,
+    lat_recurso *nuevo
+) {
+    if (c == NULL ||
+        nuevo == NULL ||
+        indice < 0 ||
+        indice >= latL_longitud(c->nodos)) {
+        return false;
+    }
+
+    nodo_lista *nodo = latL_obtener_nodo(mv, c->nodos, indice);
+    if (nodo == NULL) {
+        return false;
+    }
+
+    lat_recurso *anterior = (lat_recurso *)nodo->valor;
+
+    /* No modificar contadores si el objeto no cambia. */
+    if (anterior == nuevo) {
+        return true;
+    }
+
+    /* Adquirir primero, para mantener una referencia valida. */
+    lat_recurso *propia = latR_adquirir(nuevo);
+    if (propia == NULL) {
+        return false;
+    }
+
+    nodo->valor = propia;
+    latR_soltar(mv, &anterior);
+    return true;
+}
+
 bool latLR_eliminar(
     lat_mv *mv,
     lat_lista_recursos *c,
