@@ -1144,6 +1144,12 @@ LATINO_API int latC_llamar_funcion(lat_mv *mv, lat_objeto *func) {
   const int profundidad_inicial = mv->ptrctx;
   /* P0.2-C: preservar el contador al entrar al manejador. */
   const int numejec_inicial = mv->numejec;
+  /* P0.2-E: limites del manejador, tambien para llamadas protegidas anidadas.
+   * Son constantes capturadas antes de setjmp: no cambian antes del longjmp.
+   */
+  const int pila_inicial = mv->ptrpila;
+  const int previo_inicial = mv->ptrprevio;
+  const int argumentos_previos = mv->prev_args;
   struct lat_longjmp lj;
   lj.status = 0;
   lj.previo = mv->error;
@@ -1154,6 +1160,17 @@ LATINO_API int latC_llamar_funcion(lat_mv *mv, lat_objeto *func) {
     latMV_recuperar_contextos(mv, profundidad_inicial);
     /* longjmp evita el decremento normal de latMV_call_function. */
     mv->numejec = numejec_inicial;
+    /* Descartar solo operandos nuevos, como latC_desapilar: las celdas son
+     * descriptores prestados, no propietarios que debamos destruir. Si la
+     * funcion consumio argumentos anteriores al manejador, no resucitarlos.
+     * Los retornos de llamadas correctas no pasan por esta recuperacion.
+     */
+    if (mv->ptrpila > pila_inicial) {
+      mv->ptrpila = pila_inicial;
+      mv->tope = mv->pila + pila_inicial;
+    }
+    mv->ptrprevio = previo_inicial;
+    mv->prev_args = argumentos_previos;
   }
   return lj.status;
 }
