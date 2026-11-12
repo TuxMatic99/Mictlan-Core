@@ -103,9 +103,41 @@ static void clonar_ciclo(lat_mv *mv) {
     lat_objeto *o = ciclo(mv, 0);
     (void)latO_clonar(mv, o); /* Debe producir LAT_ERRRUN, sin stack-overflow. */
 }
+static lat_objeto *anidar(lat_mv *mv, int profundidad) {
+    lat_objeto *o = latC_crear_numerico(mv, 8);
+    for (int i = 0; i < profundidad; ++i) o = lista_uno(mv, o);
+    return o;
+}
+static void clonar_profundo(lat_mv *mv) {
+    (void)latO_clonar(mv, anidar(mv, 257));
+}
+static void clonar_valida(lat_mv *mv) {
+    lat_objeto *o = anidar(mv, 32);
+    /* La misma sublista en dos ramas no debe confundirse con un ciclo. */
+    lat_objeto *exterior = lista_uno(mv, o);
+    latL_agregar(mv, getLista(exterior), o);
+    lat_objeto *copia = latO_clonar(mv, exterior);
+    latO_destruir(mv, exterior);
+    for (int k = 0; k < 2; ++k) {
+        lat_objeto *v = latL_obtener_elemento(mv, getLista(copia), k);
+        CHECK(v != o);
+        for (int i = 0; i < 32; ++i) v = elemento(mv, v);
+        CHECK(getNumerico(v) == 8);
+    }
+    latO_destruir(mv, copia);
+    /* Limite inclusivo: 256 listas se clonan; 257 produce error controlado. */
+    o = anidar(mv, 256);
+    copia = latO_clonar(mv, o);
+    lat_objeto *v = copia;
+    for (int i = 0; i < 256; ++i) v = elemento(mv, v);
+    CHECK(getNumerico(v) == 8);
+    latO_destruir(mv, o);
+    latO_destruir(mv, copia);
+}
 static const lat_CReg funciones[] = {
     {"p02f_fallar", fallar, 1}, {"p02f_vector", devolver, 0},
-    {"p02f_clonar_ciclo", clonar_ciclo, 0}, {NULL, NULL, 0}
+    {"p02f_clonar_ciclo", clonar_ciclo, 0}, {"p02f_clonar_profundo", clonar_profundo, 0},
+    {"p02f_clonar_valida", clonar_valida, 0}, {NULL, NULL, 0}
 };
 static void ejecutar(lat_mv *mv, const char *source, int esperado, int ciclos) {
     int estado = -1;
@@ -148,7 +180,9 @@ int main(int argc, char **argv) {
         CHECK(getNumerico(elemento(mv, alias)) == 8);
         CHECK(getNumerico(latL_obtener_elemento(mv, getLista(alias), 1)) == 77);
     } else if (!strcmp(modo, "clonar_ciclo")) {
-        ejecutar(mv, "p02f_clonar_ciclo()\n", LAT_ERRRUN, 1);
+        ejecutar(mv, "p02f_clonar_ciclo()\n", LAT_ERRRUN, 10);
+        ejecutar(mv, "p02f_clonar_profundo()\n", LAT_ERRRUN, 1);
+        ejecutar(mv, "p02f_clonar_valida()\n", 0, 1);
     } else CHECK(0);
     printf("{\"case\":\"%s\",\"before_close_bytes\":%zu}\n", modo, mv->memoria_usada);
     latC_destruir_mv(mv);

@@ -45,3 +45,29 @@ Limite principal: los contenidos sustituidos pueden permanecer reservados hasta
 cerrar la VM. No se afirma que el consumo de una VM de larga duracion este
 acotado, ni que exista GC durante su ejecucion. La base y el commit F1 conservan
 la alternativa anterior sin reescribir historia.
+
+## F3 — clonar sin recursion infinita
+
+F2 queda conservado en `52317c21f2cb9b608796b4075bb6bf2c109ab327`.
+GitHub Actions `43166246005`, SDK `eaae763b8a1bec1127eeb0e9d851fddce0076fdf`,
+comprobo con LSan real los cuatro experimentos sin fugas detectadas (antes:
+0/200/264/528 bytes), listas/referencias de Core sin los 528 bytes y SDK 32/32
+con sanitizadores (antes 30/32, fugas 600/528). Los doce scripts modulares y los
+cuatro contratos SDK de integracion pasan. En Core quedan coverage y clonado
+ciclico; en la VM SDK queda la prueba de pila que corresponde a P0.2-E.
+
+El incremento F3 mantiene las copias existentes para grafos aciclicos y detecta
+si la lista actual reaparece entre sus ancestros. Una sublista compartida entre
+ramas hermanas sigue siendo valida. El recorrido no usa estado global ni un
+contador que pueda quedar alterado despues de longjmp.
+
+Una lista ciclica produce LAT_ERRRUN (2) en lugar de stack-overflow. Se limita
+explicitamente a 256 niveles de listas para evitar agotar la pila C tambien con
+entradas aciclicas extremadamente profundas. Es un limite nuevo de la operacion,
+no una modificacion de estructuras ni ABI. Las copias parciales de una VM real
+pertenecen a su region y se recuperan al cerrar despues del error.
+
+La regresion conserva diez errores ciclicos consecutivos, un exceso de 257
+niveles y clonaciones validas posteriores de 256 niveles y de dos ramas
+compartidas de 32 niveles en la misma VM. Comprueba valores, identidades, pila,
+contexto y numejec. No intercambia esta correccion con P0.2-E ni modifica latdo.c.

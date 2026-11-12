@@ -304,7 +304,18 @@ void latO_destruir(lat_mv *mv, lat_objeto *o) {
 }
 
 
-static lista *latL_clonar(lat_mv *mv, lista *list) {
+typedef struct lat_clon_camino {
+  const lista *lista;
+  const struct lat_clon_camino *anterior;
+} lat_clon_camino;
+
+/* Solo ancestros de esta copia: compartir una sublista entre hermanos no
+   constituye un ciclo. El camino vive en C y no deja estado tras longjmp. */
+static lat_objeto *clonar_objeto(lat_mv *mv, lat_objeto *obj,
+                                const lat_clon_camino *camino, unsigned nivel);
+
+static lista *latL_clonar(lat_mv *mv, lista *list,
+                          const lat_clon_camino *camino, unsigned nivel) {
   lista *ret = latL_crear(mv);
 
   LIST_FOREACH(list, primero, siguiente, cur) {
@@ -316,7 +327,7 @@ static lista *latL_clonar(lat_mv *mv, lista *list) {
      * de un objeto numerico que la otra puede destruir.
      */
     if (tmp != NULL && (tmp->tipo == T_NUMERIC || tmp->tipo == T_LIST)) {
-      tmp = latO_clonar(mv, tmp);
+      tmp = clonar_objeto(mv, tmp, camino, nivel);
     }
 
     latL_agregar(mv, ret, tmp);
@@ -327,6 +338,11 @@ static lista *latL_clonar(lat_mv *mv, lista *list) {
 
 
 lat_objeto *latO_clonar(lat_mv *mv, lat_objeto *obj) {
+  return clonar_objeto(mv, obj, NULL, 0);
+}
+
+static lat_objeto *clonar_objeto(lat_mv *mv, lat_objeto *obj,
+                                const lat_clon_camino *camino, unsigned nivel) {
   lat_objeto *ret = NULL;
   switch (obj->tipo) {
   case T_CONTEXT:
@@ -335,9 +351,22 @@ lat_objeto *latO_clonar(lat_mv *mv, lat_objeto *obj) {
     ret->tam = sizeof(hash_map *);
     setCtx(ret, latH_clonar(mv, getCtx(obj)));
     break;
-  case T_LIST:
-    ret = latC_crear_lista(mv, latL_clonar(mv, latC_checar_lista(mv, obj)));
+  case T_LIST: {
+    lista *origen = latC_checar_lista(mv, obj);
+    for (const lat_clon_camino *p = camino; p; p = p->anterior) {
+      if (p->lista == origen) {
+        latC_error(mv, "No se puede clonar una lista ciclica");
+        return NULL;
+      }
+    }
+    if (nivel >= 256) {
+      latC_error(mv, "Profundidad de clonado de listas excedida (256)");
+      return NULL;
+    }
+    lat_clon_camino actual = {origen, camino};
+    ret = latC_crear_lista(mv, latL_clonar(mv, origen, &actual, nivel + 1));
     break;
+  }
   case T_DIC:
     ret = latC_crear_dic(mv, latH_clonar(mv, latC_checar_dic(mv, obj)));
     break;
