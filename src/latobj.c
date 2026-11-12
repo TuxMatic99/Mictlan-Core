@@ -320,7 +320,7 @@ static lista *latL_clonar(lat_mv *mv, lista *list) {
      * una lista clonada no debe compartir la propiedad
      * de un objeto numerico que la otra puede destruir.
      */
-    if (tmp != NULL && tmp->tipo == T_NUMERIC) {
+    if (tmp != NULL && (tmp->tipo == T_NUMERIC || tmp->tipo == T_LIST)) {
       tmp = latO_clonar(mv, tmp);
     }
 

@@ -147,7 +147,7 @@ set_tests_properties(
     PROPERTIES
         TIMEOUT 15
         ENVIRONMENT
-            "ASAN_OPTIONS=detect_leaks=0:halt_on_error=1"
+            "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
 )
 endif()
 #if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
