@@ -502,6 +502,19 @@ if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
     )
 endif()
 
+# P0.2-F: contratos de vida de objetos, tambien en Debug/Release.
+add_executable(mictlan_test_p02f_ciclo_vida tests/p02f_ciclo_vida.c)
+target_include_directories(mictlan_test_p02f_ciclo_vida PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_p02f_ciclo_vida PRIVATE liblatino)
+foreach(caso IN ITEMS compartidos anidados diccionarios ciclo_lista ciclo_mixto
+                      extraer reasignar clonar_mixto error ffi clonar_ciclo)
+  add_test(NAME mictlan_p02f_${caso}
+           COMMAND mictlan_test_p02f_ciclo_vida ${caso})
+  set_tests_properties(mictlan_p02f_${caso} PROPERTIES TIMEOUT 20
+    LABELS "p02f;memoria;contrato"
+    FAIL_REGULAR_EXPRESSION "P02F_ASSERT;AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+endforeach()
+
 # MICTLAN P0.2-F: regresiones de propiedad (no silenciar fallos de LSan).
 # Estos casos se registran solo en builds instrumentados con ASan.
 if(CMAKE_C_FLAGS MATCHES "fsanitize=address")

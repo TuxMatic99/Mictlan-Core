@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "latlist.h"
 #include "latmem.h"
 #include "latobj.h"
+#include "latpropiedad.h"
 
 /* Los envoltorios de T_FUN se copian sin contar referencias. Por ello el
    payload se conserva hasta el cierre de la VM, no hasta destruir una copia.
@@ -72,41 +73,26 @@ void latO_liberar_funciones(lat_mv *mv) {
 }
 
 lat_objeto latO_nulo_ = {{NULL}, T_NULL};
-/* Los metadatos del compilador se comparten con instrucciones y contextos.
-   Solo sus envoltorios pertenecen a este registro (GC desactivado). */
-struct lat_constante_registro {
-  lat_objeto *objeto;
-  struct lat_constante_registro *siguiente;
-};
-
-static bool constante_registrada(lat_mv *mv, lat_objeto *o) {
-  if (!mv) return false;
-  for (struct lat_constante_registro *r = mv->constantes_propias; r; r = r->siguiente)
-    if (r->objeto == o) return true;
-  return false;
-}
-
 lat_objeto *latO_retener_constante(lat_mv *mv, lat_objeto *o) {
 #if !HABILITAR_GC
-  if (mv && o && o != latO_nulo && o != latO_verdadero && o != latO_falso &&
-      !constante_registrada(mv, o)) {
-    struct lat_constante_registro *r = latM_asignar(mv, sizeof(*r));
-    r->objeto = o;
-    r->siguiente = mv->constantes_propias;
-    mv->constantes_propias = r;
-  }
+  if (mv && o && o != latO_nulo && o != latO_verdadero && o != latO_falso)
+    latP_retener_constante(mv, o);
 #endif
   return o;
 }
 
 void latO_liberar_constantes(lat_mv *mv) {
-  if (!mv) return;
-  while (mv->constantes_propias) {
-    struct lat_constante_registro *r = mv->constantes_propias;
-    mv->constantes_propias = r->siguiente;
-    latM_liberar(mv, r->objeto);
-    latM_liberar(mv, r);
-  }
+  latP_soltar_constantes(mv);
+}
+
+void latP_liberar_objetos(lat_mv *mv) {
+  void *ptr;
+  /* Las tablas liberan sus envoltorios y las listas internas de cubetas.
+     Despues se liberan las listas restantes sin seguir sus valores. */
+  while ((ptr = latP_primero(mv, LAT_P_MAPA))) latH_limpiar(mv, ptr);
+  while ((ptr = latP_primero(mv, LAT_P_LISTA))) latL_destruir(mv, ptr);
+  while ((ptr = latP_primero(mv, LAT_P_OBJETO))) latM_liberar(mv, ptr);
+  latP_cerrar(mv);
 }
 
 void latS_liberar_cadenas(lat_mv *mv) {
@@ -170,6 +156,7 @@ lat_objeto *latO_crear(lat_mv *mv) {
   ret->nref = 0;
   ret->es_vararg = 0;
   ret->marca = 0;
+  latP_registrar(mv, ret, LAT_P_OBJETO);
 #ifdef HABILITAR_GC
   gc_agregar(mv, ret);
 #endif // HABILITAR_GC
@@ -253,13 +240,15 @@ lat_objeto *latO_crear_cfuncion(lat_mv *mv) {
 void latO_destruir(lat_mv *mv, lat_objeto *o) {
   if (o == NULL)
     return;
-  if (constante_registrada(mv, o)) return;
+  if (latP_es_constante(mv, o)) return;
   switch (o->tipo) {
   case T_CONTEXT:
     latH_limpiar(mv, getCtx(o));
     break;
   case T_LIST: {
     lista *list = latC_checar_lista(mv, o);
+    /* Los contenidos administrados pertenecen a la VM, no al envoltorio. */
+    if (latP_contiene(mv, list, LAT_P_LISTA)) break;
     if (list->longitud > 0) {
       LIST_FOREACH(list, primero, siguiente, cur) {
 
@@ -277,7 +266,8 @@ void latO_destruir(lat_mv *mv, lat_objeto *o) {
     latL_destruir(mv, list);
   } break;
   case T_DIC:
-    latH_destruir(mv, latC_checar_dic(mv, o));
+    if (!latP_contiene(mv, getDic(o), LAT_P_MAPA))
+      latH_destruir(mv, latC_checar_dic(mv, o));
     break;
 #if !HABILITAR_GC
   case T_LABEL:
@@ -314,7 +304,18 @@ void latO_destruir(lat_mv *mv, lat_objeto *o) {
 }
 
 
-static lista *latL_clonar(lat_mv *mv, lista *list) {
+typedef struct lat_clon_camino {
+  const lista *lista;
+  const struct lat_clon_camino *anterior;
+} lat_clon_camino;
+
+/* Solo ancestros de esta copia: compartir una sublista entre hermanos no
+   constituye un ciclo. El camino vive en C y no deja estado tras longjmp. */
+static lat_objeto *clonar_objeto(lat_mv *mv, lat_objeto *obj,
+                                const lat_clon_camino *camino, unsigned nivel);
+
+static lista *latL_clonar(lat_mv *mv, lista *list,
+                          const lat_clon_camino *camino, unsigned nivel) {
   lista *ret = latL_crear(mv);
 
   LIST_FOREACH(list, primero, siguiente, cur) {
@@ -326,7 +327,7 @@ static lista *latL_clonar(lat_mv *mv, lista *list) {
      * de un objeto numerico que la otra puede destruir.
      */
     if (tmp != NULL && (tmp->tipo == T_NUMERIC || tmp->tipo == T_LIST)) {
-      tmp = latO_clonar(mv, tmp);
+      tmp = clonar_objeto(mv, tmp, camino, nivel);
     }
 
     latL_agregar(mv, ret, tmp);
@@ -337,6 +338,11 @@ static lista *latL_clonar(lat_mv *mv, lista *list) {
 
 
 lat_objeto *latO_clonar(lat_mv *mv, lat_objeto *obj) {
+  return clonar_objeto(mv, obj, NULL, 0);
+}
+
+static lat_objeto *clonar_objeto(lat_mv *mv, lat_objeto *obj,
+                                const lat_clon_camino *camino, unsigned nivel) {
   lat_objeto *ret = NULL;
   switch (obj->tipo) {
   case T_CONTEXT:
@@ -345,9 +351,22 @@ lat_objeto *latO_clonar(lat_mv *mv, lat_objeto *obj) {
     ret->tam = sizeof(hash_map *);
     setCtx(ret, latH_clonar(mv, getCtx(obj)));
     break;
-  case T_LIST:
-    ret = latC_crear_lista(mv, latL_clonar(mv, latC_checar_lista(mv, obj)));
+  case T_LIST: {
+    lista *origen = latC_checar_lista(mv, obj);
+    for (const lat_clon_camino *p = camino; p; p = p->anterior) {
+      if (p->lista == origen) {
+        latC_error(mv, "No se puede clonar una lista ciclica");
+        return NULL;
+      }
+    }
+    if (nivel >= 256) {
+      latC_error(mv, "Profundidad de clonado de listas excedida (256)");
+      return NULL;
+    }
+    lat_clon_camino actual = {origen, camino};
+    ret = latC_crear_lista(mv, latL_clonar(mv, origen, &actual, nivel + 1));
     break;
+  }
   case T_DIC:
     ret = latC_crear_dic(mv, latH_clonar(mv, latC_checar_dic(mv, obj)));
     break;

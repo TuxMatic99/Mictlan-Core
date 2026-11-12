@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "latgc.h"
 #include "latino.h"
 #include "latmem.h"
+#include "latpropiedad.h"
 #include <string.h>
 #include <stdint.h>
 
@@ -140,6 +141,7 @@ LATINO_API hash_map *latH_crear(lat_mv *mv) {
     ret->buckets[i] = NULL;
   }
 
+  latP_registrar(mv, ret, LAT_P_MAPA);
   return ret;
 }
 
