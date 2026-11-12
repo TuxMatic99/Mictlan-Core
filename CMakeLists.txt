@@ -60,6 +60,19 @@ add_subdirectory(src)
 #ENDIF(UNIX)
 
 enable_testing()
+# Recuperacion real de pila/FFI tras longjmp. Ningun fallo se invierte ni omite.
+add_executable(mictlan_test_stack_recovery tests/stack_recovery_regression.c)
+target_include_directories(mictlan_test_stack_recovery PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_stack_recovery PRIVATE liblatino)
+set_target_properties(mictlan_test_stack_recovery PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED YES)
+foreach(caso IN ITEMS directa anidada prefijo anidada_prefijo prestados reentrada propagar consumido exito)
+    add_test(NAME mictlan_pila_${caso}
+        COMMAND mictlan_test_stack_recovery ${caso} 200)
+    set_tests_properties(mictlan_pila_${caso} PROPERTIES
+        TIMEOUT 60 LABELS "p02e;pila;recuperacion"
+        FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+endforeach()
+
 #se comentan los test que requieren entrada de datos leer()
 add_test(NAME coverage COMMAND latino ejemplos/coverage.lat)
 
