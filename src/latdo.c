@@ -1140,12 +1140,21 @@ LATINO_API void latC_error(lat_mv *mv, const char *fmt, ...)
 
 LATINO_API int latC_llamar_funcion(lat_mv *mv, lat_objeto *func) {
   // printf("latC_llamar_funcion\n");
+  /* Este valor se captura antes de setjmp y no se modifica despues. */
+  const int profundidad_inicial = mv->ptrctx;
+  /* P0.2-C: preservar el contador al entrar al manejador. */
+  const int numejec_inicial = mv->numejec;
   struct lat_longjmp lj;
   lj.status = 0;
   lj.previo = mv->error;
   mv->error = &lj;
   LAT_TRY(mv, &lj, latMV_funcion_correr(mv, func););
   mv->error = lj.previo;
+  if (lj.status != 0) {
+    latMV_recuperar_contextos(mv, profundidad_inicial);
+    /* longjmp evita el decremento normal de latMV_call_function. */
+    mv->numejec = numejec_inicial;
+  }
   return lj.status;
 }
 

@@ -389,6 +389,18 @@ static void desapilar_contexto(lat_mv *mv)
   mv->contexto_actual = mv->contexto[mv->ptrctx];
 }
 
+/* P0.2-A: recuperar solo contextos creados durante la ejecucion fallida.
+   No destruye el contexto que ya existia al entrar al manejador. */
+void latMV_recuperar_contextos(lat_mv *mv, int profundidad_inicial)
+{
+  if (mv == NULL || profundidad_inicial < 0 ||
+      profundidad_inicial > mv->ptrctx)
+    return;
+
+  while (mv->ptrctx > profundidad_inicial)
+    desapilar_contexto(mv);
+}
+
 /* FNV-1a hash for cache keys */
 #define FNV_OFFSET_BASIS 2166136261u
 #define FNV_PRIME 16777619u
@@ -857,7 +869,11 @@ void latMV_set_label(lat_mv *mv, lat_objeto *name, lat_objeto *val)
 static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
                                 lat_bytecode next)
 {
-  lat_objeto *fun = latM_asignar(mv, sizeof(lat_objeto));
+  /* P0.2-B: el descriptor de llamada es temporal. Esta copia local
+     desaparece tanto en el retorno normal como tras un longjmp.
+     No transferir la direccion de fun_local a estructuras persistentes. */
+  lat_objeto fun_local = {0};
+  lat_objeto *fun = &fun_local;
 #if DEPURAR_MEM
   printf("latMV_call_function.fun: %p\n", fun);
 #endif
@@ -922,8 +938,7 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
     // Indicar que esta llamada deja 1 valor en la pila (la instancia)
     mv->prev_args = 1;
 
-    // Liberar copia local y salir
-    latM_liberar(mv, fun);
+    // La copia local termina su vida al retornar.
     return;
   }
 
@@ -1020,7 +1035,6 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
     lat_objeto *ctx = obtener_contexto(mv);
     latO_asignar_ctx(mv, ctx, "varargs", latC_crear_lista(mv, latL_crear(mv)));
   }
-  latM_liberar(mv, fun);
   if (apilar)
   {
     desapilar_contexto(mv);

@@ -222,6 +222,8 @@ void lat_formato_numero(lat_mv *mv);
 lat_bytecode latMV_bytecode_crear(int i, int a, int b, void *meta,
                                   long int nlin, long int ncol,
                                   char *nombre_archivo);
+/* P0.2-A: limpieza de contextos abandonados por longjmp. */
+void latMV_recuperar_contextos(lat_mv *mv, int profundidad_inicial);
 int latMV_funcion_correr(lat_mv *mv, lat_objeto *func);
 void latMV_ejecutar_constructor_padre(lat_mv *mv, lat_objeto *constructor,
                                        lat_objeto *instancia, int nargs);
