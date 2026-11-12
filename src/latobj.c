@@ -265,6 +265,11 @@ void latO_destruir(lat_mv *mv, lat_objeto *o) {
 
         lat_objeto *tmp = (lat_objeto *)cur->valor;
         if (tmp != NULL) {
+          for (nodo_lista *sig = cur->siguiente; sig != NULL; sig = sig->siguiente) {
+            if (sig->valor == tmp) {
+              sig->valor = NULL;
+            }
+          }
           latO_destruir(mv, tmp);
         }
       }

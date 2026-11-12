@@ -261,7 +261,7 @@ if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
         PROPERTIES
             TIMEOUT 15
             ENVIRONMENT
-                "ASAN_OPTIONS=detect_leaks=0:halt_on_error=1"
+                "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
     )
 endif()
 
