@@ -501,3 +501,21 @@ if(CMAKE_C_FLAGS MATCHES "-fsanitize=address")
             ENVIRONMENT "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
     )
 endif()
+
+# MICTLAN P0.2-F: regresiones de propiedad (no silenciar fallos de LSan).
+# Estos casos se registran solo en builds instrumentados con ASan.
+if(CMAKE_C_FLAGS MATCHES "fsanitize=address")
+  foreach(caso IN ITEMS control_numero lista_simple sustitucion alias)
+    add_test(
+      NAME mictlan_p02f_${caso}_asan
+      COMMAND $<TARGET_FILE:latino>
+              "${CMAKE_CURRENT_SOURCE_DIR}/tests/p02f_${caso}.lat"
+    )
+    set_tests_properties(mictlan_p02f_${caso}_asan PROPERTIES
+      TIMEOUT 15
+      LABELS "p02f;memoria;diagnostico"
+      ENVIRONMENT "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1"
+      FAIL_REGULAR_EXPRESSION "ERROR: AddressSanitizer;ERROR: LeakSanitizer;runtime error:"
+    )
+  endforeach()
+endif()

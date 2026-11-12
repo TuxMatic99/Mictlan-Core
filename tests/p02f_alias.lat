@@ -1,0 +1,6 @@
+original = [8, 16]
+alias = original
+alias[0] = 99
+original = [7, 14]
+alias[1] = 77
+escribir(alias[1])

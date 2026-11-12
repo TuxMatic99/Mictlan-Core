@@ -1,0 +1,3 @@
+original = [8, 16]
+original[0] = 99
+escribir(original[0])
