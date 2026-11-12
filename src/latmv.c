@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "latgc.h"
 #include "latlist.h"
 #include "latmem.h"
+#include "latpropiedad.h"
 #include "latmv.h"
 #ifndef DEPURAR_MV
 #define DEPURAR_MV 1
@@ -518,6 +519,9 @@ LATINO_API lat_mv *latC_crear_mv()
   mv->funciones_propias = NULL;
   mv->modulos_propios = NULL;
   mv->constantes_propias = NULL;
+#if !HABILITAR_GC
+  latP_iniciar(mv);
+#endif
 #if DEPURAR_MEM
   printf("------------------------------------------------------------\n");
   printf("inicio latC_crear_mv.mv->memoria_usada: %zu\n", mv->memoria_usada);
@@ -597,6 +601,7 @@ LATINO_API void latC_destruir_mv(lat_mv *mv)
   latH_liberar_modulos(mv);
   latO_liberar_funciones(mv);
   latO_liberar_constantes(mv);
+  latP_liberar_objetos(mv);
   latS_liberar_cadenas(mv);
   latM_liberar(mv, mv->global->strt.hash);
   latM_liberar(mv, mv->global);

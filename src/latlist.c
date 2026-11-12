@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "latgc.h"
 #include "latino.h"
 #include "latmem.h"
+#include "latpropiedad.h"
 
 LATINO_API lista *latL_crear(lat_mv *mv) {
   lista *l = latM_asignar(mv, sizeof(lista));
@@ -36,6 +37,7 @@ LATINO_API lista *latL_crear(lat_mv *mv) {
   l->longitud = 0;
   l->primero = NULL;
   l->ultimo = NULL;
+  latP_registrar(mv, l, LAT_P_LISTA);
   return l;
 }
 

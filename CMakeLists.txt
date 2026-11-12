@@ -507,7 +507,7 @@ add_executable(mictlan_test_p02f_ciclo_vida tests/p02f_ciclo_vida.c)
 target_include_directories(mictlan_test_p02f_ciclo_vida PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(mictlan_test_p02f_ciclo_vida PRIVATE liblatino)
 foreach(caso IN ITEMS compartidos anidados diccionarios ciclo_lista ciclo_mixto
-                      extraer clonar_mixto error ffi clonar_ciclo)
+                      extraer reasignar clonar_mixto error ffi clonar_ciclo)
   add_test(NAME mictlan_p02f_${caso}
            COMMAND mictlan_test_p02f_ciclo_vida ${caso})
   set_tests_properties(mictlan_p02f_${caso} PROPERTIES TIMEOUT 20

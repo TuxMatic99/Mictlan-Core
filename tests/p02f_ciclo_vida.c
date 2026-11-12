@@ -63,6 +63,23 @@ static void extraer(lat_mv *mv) {
     CHECK(getNumerico(valor) == 8);
     latO_destruir(mv, valor);
 }
+static void reasignar(lat_mv *mv) {
+    /* Calentar la capacidad del registro antes de comparar el saldo. */
+    lat_objeto *o = latC_crear_numerico(mv, 8);
+    latO_destruir(mv, o);
+    size_t base = mv->memoria_usada;
+    o = latC_crear_numerico(mv, 8);
+    o = latM_reasignar(mv, o, 8192);
+    CHECK(o && getNumerico(o) == 8);
+    CHECK(mv->memoria_usada >= base + 8192);
+    o = latM_reasignar(mv, o, sizeof(*o));
+    CHECK(o && getNumerico(o) == 8);
+    latO_destruir(mv, o);
+    CHECK(mv->memoria_usada == base);
+    o = latC_crear_numerico(mv, 16);
+    CHECK(latM_reasignar(mv, o, 0) == NULL);
+    CHECK(mv->memoria_usada == base);
+}
 static void clonar_mixto(lat_mv *mv) {
     lat_objeto *dic = latC_crear_dic(mv, latH_crear(mv));
     lat_objeto numero = {0}; setNumerico(&numero, 8);
@@ -119,6 +136,7 @@ int main(int argc, char **argv) {
     else if (!strcmp(modo, "ciclo_lista")) latO_destruir(mv, ciclo(mv, 0));
     else if (!strcmp(modo, "ciclo_mixto")) latO_destruir(mv, ciclo(mv, 1));
     else if (!strcmp(modo, "extraer")) extraer(mv);
+    else if (!strcmp(modo, "reasignar")) reasignar(mv);
     else if (!strcmp(modo, "clonar_mixto")) clonar_mixto(mv);
     else if (!strcmp(modo, "error")) {
         ejecutar(mv, "datos = [8,16]\np02f_fallar(\"texto\")\n", LAT_ERRRUN, 200);
