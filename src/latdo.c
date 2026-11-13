@@ -169,21 +169,10 @@ static bool encontrar_vararg(ast *nodo) {
 }
 
 static int encontrar_load_vararg(ast *nodo) {
-  int i = 0;
-  if (nodo) {
-    ast *tmp;
-    tmp = nodo;
-    while (tmp->der != NULL && tmp->der->tipo != NODO_LOAD_VAR_ARGS) {
-      if (tmp->der != NULL && tmp->der->tipo == NODO_LOAD_VAR_ARGS) {
-        i++;
-      }
-      tmp = tmp->der;
-    }
-    if (tmp->izq != NULL && tmp->izq->tipo == NODO_LOAD_VAR_ARGS) {
-      i++;
-    }
-  }
-  return i;
+  int cantidad = 0;
+  for (ast *p = nodo; p; p = p->der)
+    if (p->izq && p->izq->tipo == NODO_LOAD_VAR_ARGS) ++cantidad;
+  return cantidad;
 }
 
 static bool jumpLoop_buscar_NODO_SI(ast *nodo, int NODO_JUMP) {
@@ -628,7 +617,7 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
     // nombre fun
     pn(mv, nodo->izq);
     int num_args = contar_num_parargs(nodo->der, NODO_FUNCION_ARGUMENTOS);
-    dbc(CALL_FUNCTION, num_args, 0, NULL, mv->nlin, mv->ncol,
+    dbc(CALL_FUNCTION, num_args, encontrar_load_vararg(nodo->der), NULL, mv->nlin, mv->ncol,
         mv->nombre_archivo);
   } break;
   case NODO_RETORNO: {
@@ -702,7 +691,7 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
     if (nodo->izq) {
       if (nodo->izq->tipo == NODO_VAR_ARGS) {
         int num_params = contar_num_parargs(nodo, NODO_FUNCION_PARAMETROS);
-        dbc(OP_VAR_ARGS, (num_params - 1), 0, NULL, mv->nlin, mv->ncol,
+        dbc(OP_VAR_ARGS, (num_params - 1), LAT_VARARGS_MARCO, NULL, mv->nlin, mv->ncol,
             mv->nombre_archivo);
       } else {
         lat_objeto *o = latO_retener_constante(mv, latC_crear_cadena(mv, nodo->izq->valor->val.cadena));

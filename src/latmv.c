@@ -866,7 +866,12 @@ void latMV_set_symbol(lat_mv *mv, lat_objeto *name, lat_objeto *val)
     {
       latC_error(mv, "Intento de reasignar valor a la funcion '%s'", str_name);
     }
-    ctx = global_ctx;
+    if (ctx != global_ctx)
+    {
+      /* Preserve global updates while keeping this frame's cloned binding
+         consistent with subsequent reads in the same frame. */
+      latO_asignar_ctx(mv, global_ctx, str_name, val);
+    }
   }
 
   latO_asignar_ctx(mv, ctx, str_name, val);
@@ -895,6 +900,23 @@ void latMV_set_label(lat_mv *mv, lat_objeto *name, lat_objeto *val)
   latO_asignar_ctx(mv, ctx, str_name, val);
 }
 
+static int latMV_cantidad_operandos(lat_mv *mv, lat_bytecode cur)
+{
+  unsigned disponibles = (unsigned)mv->ptrpila;
+  if (cur.b <= cur.a && cur.a - cur.b <= disponibles) {
+    unsigned fijos = cur.a - cur.b;
+    if (!cur.b) return (int)fijos;
+    lat_objeto *args = latO_obtener_contexto(mv, obtener_contexto(mv), "varargs");
+    if (args) {
+      unsigned cantidad = (unsigned)latL_longitud(latC_checar_lista(mv, args));
+      if (cantidad <= (disponibles - fijos) / cur.b)
+        return (int)(fijos + cur.b * cantidad);
+    }
+  }
+  latC_error(mv, "Operandos insuficientes o argumentos variables fuera de su marco");
+  return 0;
+}
+
 static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
                                 lat_bytecode next)
 {
@@ -907,7 +929,7 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
   printf("latMV_call_function.fun: %p\n", fun);
 #endif
   setobj2obj(fun, latC_desapilar(mv));
-  int num_args = cur.a;
+  int num_args = latMV_cantidad_operandos(mv, cur);
   // Si es una clase, crear instancia y ejecutar su constructor
   if (fun->es_clase || fun->tipo == T_CLASS)
   {
@@ -978,26 +1000,25 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
   }
 
   int nparams = fun->nparams;
-  while (mv->ptrpila < nparams)
+  while (mv->ptrpila < nparams && !fun->es_vararg)
   {
     latC_apilar(mv, latO_nulo);
     num_args++;
   }
-  if (nparams == FUNCION_VAR_ARGS)
+  if (fun->tipo == T_FUN && fun->es_vararg)
+  {
+    /* nparams incluye el marcador ... del compilador. Los argumentos
+       fijos faltantes se completan dentro de este marco. */
+    while (num_args < nparams - 1)
+    {
+      latC_apilar(mv, latO_nulo);
+      num_args++;
+    }
+  }
+  else if (nparams == FUNCION_VAR_ARGS)
   {
     // T_CFUN y varargs
     fun->es_vararg = true;
-    lat_objeto *ctx = obtener_contexto(mv);
-    lat_objeto *varargs =
-        (lat_objeto *)latO_obtener_contexto(mv, ctx, "varargs");
-    if (varargs)
-    {
-      lista *lst = latC_checar_lista(mv, varargs);
-      if (latL_longitud(lst))
-      {
-        num_args = (num_args - 1) + latL_longitud(lst);
-      }
-    }
     latC_apilar_double(mv, (double)num_args);
   }
   else if (num_args != nparams && !fun->es_vararg)
@@ -1045,7 +1066,8 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
   if (apilar)
   {
     apilar_contexto(mv, NULL);
-    mv->ptrprevio = (mv->ptrpila);
+    mv->ptrprevio = fun->tipo == T_FUN && fun->es_vararg
+        ? mv->ptrpila - num_args : mv->ptrpila;
   }
   else
   {
@@ -1077,27 +1099,9 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
 
 static void latMV_build_list(lat_mv *mv, lat_bytecode cur)
 {
-  int num_elem = 0;
-  if (cur.b)
-  {
-    lat_objeto *ctx = obtener_contexto(mv);
-    lat_objeto *varargs =
-        (lat_objeto *)latO_obtener_contexto(mv, ctx, "varargs");
-    if (!varargs)
-    {
-      latC_error(mv, "varargs (...) no existe en este contexto");
-    }
-    lista *lst = latC_checar_lista(mv, varargs);
-    num_elem = (cur.a - cur.b) + (cur.b * latL_longitud(lst));
-  }
-  else
-  {
-    num_elem = cur.a;
-  }
-  if (mv->prev_args)
-  {
-    num_elem += mv->prev_args - 1;
-  }
+  int num_elem = latMV_cantidad_operandos(mv, cur);
+  /* Los resultados de llamadas anteriores no cambian los operandos que
+     esta instruccion de lista declaro. Las expansiones se cuentan arriba. */
 #if DEPURAR_MV
   printf("%i\t%i\t", cur.a, cur.b);
 #endif
@@ -1370,12 +1374,17 @@ static void latMV_store_attr(lat_mv *mv, lat_bytecode cur)
 
 static void latMV_op_var_args(lat_mv *mv, lat_bytecode cur)
 {
-  int num_elem = cur.a;
+  int base = cur.b == LAT_VARARGS_MARCO ? mv->ptrprevio : 0;
+  if (base < 0 || base > mv->ptrpila || cur.a > (unsigned)(mv->ptrpila - base)) {
+    latC_error(mv, "Pila incoherente para argumentos variables");
+    return;
+  }
+  int num_elem = base + (int)cur.a;
   lat_objeto *obj = latC_crear_lista(mv, latL_crear(mv));
   while (num_elem < mv->ptrpila)
   {
     lat_objeto *tmp = latO_clonar(mv, latC_desapilar(mv));
-    if (tmp != NULL && tmp->tipo != T_NULL)
+    if (tmp != NULL && (cur.b == LAT_VARARGS_MARCO || tmp->tipo != T_NULL))
     {
       latL_insertar_inicio(mv, latC_checar_lista(mv, obj), tmp);
     }
@@ -1396,7 +1405,7 @@ static void latMV_load_var_args(lat_mv *mv)
   LIST_FOREACH(list, primero, siguiente, cur)
   {
     lat_objeto *tmp = (lat_objeto *)cur->valor;
-    if (tmp != NULL && tmp->tipo != T_NULL)
+    if (tmp != NULL)
     {
       latC_apilar(mv, tmp);
     }

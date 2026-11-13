@@ -26,3 +26,19 @@ poner(z)
 x, y = 4, 5, 6
 poner(x)
 poner(y)
+
+funcion contar(a, ...)
+    argumentos = [...]
+    retorno lista.longitud(argumentos)
+fin
+poner(100 + contar(1, 2, 3))
+poner(contar(1))
+poner(contar(1, nulo))
+
+global indice = 10
+funcion leer_despues_de_asignar()
+    indice = 0
+    retorno indice
+fin
+poner(leer_despues_de_asignar())
+poner(indice)

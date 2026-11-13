@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "latino.h"
 #include "latlex.h"
 #include "latmem.h"
+#include <limits.h>
 #include <string.h>
 
 int yyparse(ast **root, yyscan_t scanner);
@@ -382,7 +383,12 @@ ast *latA_analizar_exp(char *expr, int *status) {
   yyscan_t scanner;
   YY_BUFFER_STATE state;
   lex_state scan_state = {.insert = 0};
-  yylex_init_extra(&scan_state, &scanner);
+  *status = 1;
+  /* Flex convierte strlen a int y suma dos bytes de terminacion. */
+  if (expr == NULL || strlen(expr) > INT_MAX - 2 ||
+      yylex_init_extra(&scan_state, &scanner) != 0) {
+    return NULL;
+  }
   state = yy_scan_string(expr, scanner);
   *status = yyparse(&nodo, scanner);
   yy_delete_buffer(state, scanner);
@@ -395,6 +401,7 @@ ast *latA_analizar_exp(char *expr, int *status) {
  *de un archivo REM: liberar el nodo cuando se deje de ocupar
  **/
 ast *latA_analizar_arch(char *infile, int *status) {
+  *status = 1;
   if (infile == NULL) {
     printf("Especifique un archivo\n");
     return NULL;
@@ -425,18 +432,31 @@ if (strcmp(extension, "mict") != 0 &&
     printf("No se pudo abrir el archivo: %s\n", infile);
     return NULL;
   }
-  fseek(file, 0, SEEK_END);
-  int fsize = ftell(file);
-  fseek(file, 0, SEEK_SET);
-  char *buffer = malloc(fsize + 1);
-  size_t newSize = fread(buffer, sizeof(char), fsize, file);
-  if (buffer == NULL) {
-    printf("No se pudo asignar %d bytes de memoria\n", fsize);
+  if (fseek(file, 0, SEEK_END) != 0) {
+    fclose(file);
     return NULL;
   }
-  if (file != NULL) {
+  long longitud = ftell(file);
+  if (longitud < 0 || longitud > INT_MAX - 2 ||
+      fseek(file, 0, SEEK_SET) != 0) {
     fclose(file);
+    printf("No se pudo determinar un tamano valido para: %s\n", infile);
+    return NULL;
   }
+  size_t fsize = (size_t)longitud;
+  char *buffer = malloc(fsize + 1);
+  if (buffer == NULL) {
+    fclose(file);
+    printf("No se pudo asignar %zu bytes de memoria\n", fsize + 1);
+    return NULL;
+  }
+  size_t newSize = fread(buffer, 1, fsize, file);
+  if (ferror(file)) {
+    free(buffer);
+    fclose(file);
+    return NULL;
+  }
+  fclose(file);
   buffer[newSize] = '\0';
   filename = infile;
   ast *nodo = latA_analizar_exp(buffer, status);

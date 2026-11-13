@@ -79,6 +79,13 @@ add_test(NAME mictlan_cli_expresion_larga COMMAND "${CMAKE_COMMAND}"
   "-DMICTLAN_EJECUTABLE=$<TARGET_FILE:latino>"
   -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verificar_expresion_larga.cmake")
 set_tests_properties(mictlan_cli_expresion_larga PROPERTIES TIMEOUT 20)
+add_executable(mictlan_test_generativo tests/p02g_generativo.c)
+target_include_directories(mictlan_test_generativo PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_generativo PRIVATE liblatino)
+set_target_properties(mictlan_test_generativo PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED YES)
+add_test(NAME mictlan_p02g_generativo COMMAND mictlan_test_generativo)
+set_tests_properties(mictlan_p02g_generativo PROPERTIES TIMEOUT 60 LABELS "p02g;parser;bytecode;memoria"
+  FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
 # Recuperacion real de pila/FFI tras longjmp. Ningun fallo se invierte ni omite.
 add_executable(mictlan_test_stack_recovery tests/stack_recovery_regression.c)
 target_include_directories(mictlan_test_stack_recovery PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
