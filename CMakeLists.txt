@@ -73,8 +73,21 @@ foreach(caso IN ITEMS directa anidada prefijo anidada_prefijo prestados reentrad
         FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
 endforeach()
 
-#se comentan los test que requieren entrada de datos leer()
-add_test(NAME coverage COMMAND latino ejemplos/coverage.lat)
+# Programa de cobertura restaurado del historial de Latino. Comprobar valores
+# ademas del estado de salida, incluida la recursion de Fibonacci.
+foreach(caso IN ITEMS coverage mictlan_marcos_funcion)
+  if(caso STREQUAL "coverage")
+    set(programa "${CMAKE_CURRENT_SOURCE_DIR}/ejemplos/coverage.lat")
+  else()
+    set(programa "${CMAKE_CURRENT_SOURCE_DIR}/tests/marcos_funcion.lat")
+  endif()
+  add_test(NAME ${caso} COMMAND "${CMAKE_COMMAND}"
+    "-DMICTLAN_EJECUTABLE=$<TARGET_FILE:latino>"
+    "-DMICTLAN_PROGRAMA=${programa}"
+    "-DMICTLAN_ESPERADO=${CMAKE_CURRENT_SOURCE_DIR}/tests/${caso}.out"
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verificar_programa.cmake")
+  set_tests_properties(${caso} PROPERTIES TIMEOUT 30)
+endforeach()
 
 # Regresion: listas compartidas y reasignacion.
 

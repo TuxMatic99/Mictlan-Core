@@ -692,7 +692,7 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
         lat_objeto *o = latO_retener_constante(mv, latC_crear_cadena(mv, nodo->izq->valor->val.cadena));
         o->marca = 0;
         o->esconst = nodo->izq->valor->esconst;
-        dbc(STORE_NAME, 0, 0, o, nodo->izq->nlin, nodo->izq->ncol,
+        dbc(STORE_NAME, 1, 0, o, nodo->izq->nlin, nodo->izq->ncol,
             mv->nombre_archivo);
       }
     }

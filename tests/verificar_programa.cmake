@@ -1,0 +1,13 @@
+if(NOT EXISTS "${MICTLAN_PROGRAMA}" OR NOT EXISTS "${MICTLAN_ESPERADO}")
+  message(FATAL_ERROR "FAIL_CONFIGURATION: entrada o salida esperada ausente")
+endif()
+execute_process(COMMAND "${MICTLAN_EJECUTABLE}" "${MICTLAN_PROGRAMA}"
+  RESULT_VARIABLE codigo OUTPUT_VARIABLE salida ERROR_VARIABLE diagnostico)
+if(NOT codigo STREQUAL "0" OR NOT diagnostico STREQUAL "")
+  message(FATAL_ERROR "Programa termino con ${codigo}\n${salida}\n${diagnostico}")
+endif()
+file(READ "${MICTLAN_ESPERADO}" esperado)
+if(NOT salida STREQUAL esperado)
+  message(FATAL_ERROR "Salida distinta de la esperada\n${salida}")
+endif()
+message("${salida}")

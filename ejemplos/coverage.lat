@@ -1,0 +1,165 @@
+/* Programa de cobertura de Latino, revision 2800fe11e11811b0cc37d76ac72a9be217789880.
+   Licencia y procedencia en docs/p02g_coverage.md. */
+a = 10
+b = falso
+c = nulo
+d = "hola mundo"
+
+si b
+	poner("v")
+sino
+	poner("f")
+fin
+
+b = verdadero
+si b
+	poner("v")
+sino
+	poner("f")
+fin
+
+elegir(a)
+	caso 1:
+		poner("a vale 1")
+	caso 10:
+		poner("a vale 10")
+	defecto:
+		poner("a NO vale ni 1 ni 10")
+fin
+
+a = 15
+elegir(a)
+	caso 1:
+		poner("a vale 1")
+	caso 10:
+		poner("a vale 10")
+	defecto:
+		poner("a NO vale ni 1 ni 10")
+fin
+
+mientras a > 0
+	poner(a)
+	a--
+fin
+
+global i = 0
+repetir
+    poner(i)
+    i++
+hasta (i >= 10)
+
+a=10
+desde(i=0; i < a; i++)
+	poner(i)
+fin
+
+funcion operacion(op, a, b)
+	elegir(op)
+	caso "+":
+		retorno a+b
+	caso "-":
+		retorno a-b
+	caso "*":
+		retorno a*b
+	caso "/":
+		retorno a/b
+	caso "%":
+		retorno a%b
+	caso ">":
+		retorno a>b
+	caso ">=":
+		retorno a>=b
+	caso "<":
+		retorno a<b
+	caso "<=":
+		retorno a<=b
+	caso "==":
+		retorno a==b
+	caso "!=":
+		retorno a!=b
+	caso "~=":
+		retorno a~=b
+	caso "&&":
+		retorno a&&b
+	caso "||":
+		retorno a||b
+	caso "!":
+		retorno !a
+	caso "..":
+		retorno a..b
+	fin
+fin
+
+poner(operacion("+", 1, 2))
+poner(operacion("-", 1, 2))
+poner(operacion("*", 1, 2))
+poner(operacion("/", 1, 2))
+poner(operacion("%", 1, 2))
+poner(operacion(">", 1, 2))
+poner(operacion(">=", 1, 2))
+poner(operacion("<", 1, 2))
+poner(operacion("<=", 1, 2))
+poner(operacion("==", 1, 2))
+poner(operacion("==", 2, "2"))
+poner(operacion("!=", 1, 2))
+poner(operacion("!=", 2, "2"))
+poner(operacion("!=", "1", "2"))
+poner(operacion("~=", "hola mundo", "^hola"))
+poner(operacion("&&", 1, 1))
+poner(operacion("||", 1, 0))
+poner(operacion("!", 1))
+poner(operacion("..", "hola", "mundo"))
+
+funcion fibo_rec(n)
+    si ( n < 2 )
+        retorno n
+    fin
+    retorno fibo_rec(n-1) + fibo_rec(n-2)
+fin
+
+poner(fibo_rec(10))
+
+e = [1, 2, 3]
+f = {"uno" :  1, "dos" : 2, "tres" : 3, "cinco" : "5", "seis": [1,2,3,4,5,6]}
+g = -(a)
+poner(g)
+
+e[0] = "a"
+
+h = lista.invertir(e)
+lista.agregar(e, 4)
+lista.extender(e, h)
+lista.eliminar_indice(e, 0)
+poner(lista.longitud(e))
+j = lista.indice(e, 1)
+
+poner(lista.comparar(h, e))
+poner(lista.comparar(e, e))
+poner(lista.comparar(e, h))
+
+lista.insertar(e, 0, 0)
+lista.eliminar(e, 0)
+lista.eliminar(e, e[lista.longitud(e)-1])
+poner(lista.contiene(e, 3))
+poner(lista.contiene(e, 99))
+
+poner(e)
+poner(h)
+poner(h[0])
+
+k = []
+lista.agregar(k, 1)
+lista.agregar(k, "hola")
+lista.insertar(k, "mundo", 2)
+lista.insertar(k, "-", 1)
+lista.eliminar_indice(e, 4)
+
+f.uno = 10
+poner(f.cuatro)
+poner(dic.longitud(f))
+poner(f.seis[0])
+
+str = "hola mundo"
+poner(str[0])
+
+imprimirf("%s %s\n", "hola", "mundo")

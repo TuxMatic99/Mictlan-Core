@@ -864,6 +864,19 @@ void latMV_set_symbol(lat_mv *mv, lat_objeto *name, lat_objeto *val)
   latMV_cache_invalidate(mv);
 }
 
+static void latMV_store_name(lat_mv *mv, lat_bytecode cur, lat_objeto *val)
+{
+  lat_objeto *name = cur.meta;
+  if (cur.a == 1) {
+    /* Vincular el parametro al marco de la llamada, incluso si existe un
+       nombre igual en el contexto global. */
+    latO_asignar_ctx(mv, obtener_contexto(mv), latC_checar_cadena(mv, name), val);
+    latMV_cache_invalidate(mv);
+  } else {
+    latMV_set_symbol(mv, name, val);
+  }
+}
+
 void latMV_set_label(lat_mv *mv, lat_objeto *name, lat_objeto *val)
 {
   char *str_name = latC_checar_cadena(mv, name);
@@ -1014,7 +1027,8 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
     latC_error(mv, "Llamadas a funciones recursivas excedido en '%s'",
                fun->nombre);
   }
-  bool apilar = next.ins == STORE_NAME || !strcmp(fun->nombre, "incluir") ||
+  bool apilar = fun->tipo == T_FUN || next.ins == STORE_NAME ||
+                (fun->nombre != NULL && !strcmp(fun->nombre, "incluir")) ||
                 (fun->nombre != NULL && func->nombre != NULL &&
                  strcmp(func->nombre, fun->nombre));
   if (apilar)
@@ -1735,8 +1749,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
   op_STORE_NAME:
   {
     lat_objeto *val = (mv->ptrpila == 0) ? latO_nulo : latC_desapilar(mv);
-    lat_objeto *name = (lat_objeto *)cur.meta;
-    latMV_set_symbol(mv, name, val);
+    latMV_store_name(mv, cur, val);
     pc++;
     cur = inslist[pc];
     DISPATCH();
@@ -2124,7 +2137,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
           int t = val ? val->tipo : -1;
           printf("[VM] STORE_NAME name='%s' tipo=%d ptrpila=%d\n", n, t, mv->ptrpila);
         }
-        latMV_set_symbol(mv, name, val);
+        latMV_store_name(mv, cur, val);
 #if DEPURAR_MV
         latO_imprimir(mv, name, false);
         printf("\t");

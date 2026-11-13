@@ -1,0 +1,14 @@
+a = 10
+funcion sumar(a, b)
+    retorno a + b
+fin
+poner(sumar(1, 2))
+poner(a)
+
+funcion fibo(n)
+    si n < 2
+        retorno n
+    fin
+    retorno fibo(n - 1) + fibo(n - 2)
+fin
+poner(fibo(10))
