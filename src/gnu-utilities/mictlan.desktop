@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Mictlán
+Comment=Intérprete de Mictlán en la terminal
+Exec=mictlan %f
+Icon=/usr/share/latino/Latino-logo.png
+Terminal=true
+Type=Application
+Categories=Development;Utility;
+MimeType=text/x-mictlan;

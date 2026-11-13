@@ -1,0 +1,7 @@
+escribir("listo")
+x = )
+error("fallo recuperable")
+funcion doble(x) \
+    retorno x * 2 \
+fin
+escribir(doble(21))

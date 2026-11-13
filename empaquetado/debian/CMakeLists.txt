@@ -1,15 +1,14 @@
 
 cmake_minimum_required(VERSION 3.20)
 
-# Proyecto independiente para empaquetar Mictlán.
-project(MictlanPaquete VERSION 0.1.0 LANGUAGES NONE)
-
 # Localizar Core y el directorio general del proyecto.
 get_filename_component(
     MICTLAN_CORE
     "${CMAKE_CURRENT_LIST_DIR}/../.."
     ABSOLUTE
 )
+include("${MICTLAN_CORE}/cmake/Modules/MictlanVersion.cmake")
+project(MictlanPaquete VERSION "${MICTLAN_VERSION_NUMERICA}" LANGUAGES NONE)
 
 get_filename_component(
     MICTLAN_PROYECTO
@@ -21,12 +20,18 @@ get_filename_component(
 set(
     MICTLAN_EJECUTABLE
     "${MICTLAN_PROYECTO}/build-core-release/mictlan"
+    CACHE FILEPATH "Ejecutable Release que se empaquetará"
 )
 
 if(NOT EXISTS "${MICTLAN_EJECUTABLE}")
     message(FATAL_ERROR
         "Falta el ejecutable Release de Mictlán."
     )
+endif()
+execute_process(COMMAND "${MICTLAN_EJECUTABLE}" --version
+    RESULT_VARIABLE resultado OUTPUT_VARIABLE identidad OUTPUT_STRIP_TRAILING_WHITESPACE)
+if(NOT resultado EQUAL 0 OR NOT identidad STREQUAL "Mictlán ${MICTLAN_VERSION}")
+    message(FATAL_ERROR "El ejecutable Release no corresponde a ${MICTLAN_VERSION}")
 endif()
 
 # Archivos que contendrá el paquete Debian.
@@ -69,6 +74,8 @@ install(
     FILES "${MICTLAN_CORE}/ejemplos/hola_mictlan.lat"
     DESTINATION share/mictlan/ejemplos
 )
+install(FILES "${MICTLAN_CORE}/ejemplos/hola_mictlan.lat"
+    DESTINATION share/mictlan/ejemplos RENAME hola_mictlan.mict)
 
 install(
     FILES "${MICTLAN_CORE}/LICENSE"
@@ -85,10 +92,8 @@ install(
 # Configuración específica de nuestro paquete.
 set(CPACK_GENERATOR "DEB")
 set(CPACK_PACKAGE_NAME "mictlan")
-set(CPACK_PACKAGE_VERSION "0.1.0")
-
-# Revisión preliminar anterior al lanzamiento estable.
-set(CPACK_DEBIAN_PACKAGE_RELEASE "0~alpha1")
+set(CPACK_PACKAGE_VERSION "${MICTLAN_VERSION}")
+set(CPACK_DEBIAN_PACKAGE_VERSION "${MICTLAN_VERSION_DEBIAN}")
 
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
     "Interprete de programacion Mictlan en espanol"
@@ -139,6 +144,7 @@ set(CPACK_INSTALL_DEFAULT_DIRECTORY_PERMISSIONS
 # Generar una pagina de manual comprimida.
 
 find_program(MICTLAN_GZIP NAMES gzip REQUIRED)
+configure_file(mictlan.1 "${CMAKE_CURRENT_BINARY_DIR}/mictlan.1" @ONLY)
 
 set(
     MICTLAN_MANUAL_COMPRIMIDO
@@ -149,7 +155,7 @@ execute_process(
     COMMAND
         "${MICTLAN_GZIP}"
         -9 -n -c
-        "${CMAKE_CURRENT_SOURCE_DIR}/mictlan.1"
+        "${CMAKE_CURRENT_BINARY_DIR}/mictlan.1"
 
     OUTPUT_FILE "${MICTLAN_MANUAL_COMPRIMIDO}"
     RESULT_VARIABLE MICTLAN_GZIP_RESULT

@@ -1,0 +1,74 @@
+#operadores logicos en Latino
+v = verdadero
+f = falso
+
+#&& y (and) logico
+poner("&& y (and) logico")
+poner("falso y falso: " .. f && f)
+poner("verdadero y falso: " .. v && f)
+poner("falso y verdadero: " .. f && v)
+poner("verdadero y verdadero: " .. v && v)
+
+#|| o (or) logico
+poner("=============================")
+poner("|| o (or) logico")
+poner("falso o falso: " .. f || f)
+poner("verdadero o falso: " .. v || f)
+poner("falso o verdadero: " .. f || v)
+poner("verdadero o verdadero: " .. v || v)
+
+#! negacion
+poner("=============================")
+poner("! negacion")
+poner("no falso: " .. !f)
+poner("no verdadero: " .. !v)
+
+
+#operadores logicos por corto circuito
+poner("----- y logico (&&)")
+x = verdadero && "str"
+poner("x: " .. x)   #str
+
+x = "1" && ""
+poner("x: " .. x)   #
+
+x = falso && "str"
+poner("x: " .. x)   #falso
+
+x = falso && ""
+poner("x: " .. x)   #falso
+
+poner("----- o logico (||)")
+x = verdadero || "str"
+poner("x: " .. x)   #verdadero
+
+x = "1" || ""
+poner("x: " .. x)   #1
+
+x = falso || "str"
+poner("x: " .. x)   #str
+
+x = falso || ""
+poner("x: " .. x)   #
+
+poner("cambio de tipos de dato a booleanos")
+#cambio de tipos de dato a booleanos
+#x=0 #0 y 0..0 es considerado falso cualquier otro valor numerico es verdadero
+#x = -2  #-2 es verdadero
+#x = "2"  #se convierte la cadena "2" a numerico quedando 2  y es verdadero
+#x="" #la cadena vacia "" o "0" o "falso" o "false" es considerada falso cualquier otro valor es verdadero
+x = []  #una lista vacia es considerada falso
+poner("x: " .. x)
+si(x)
+    poner("es verdadero")
+sino
+    poner("es falso")
+fin
+
+//regex
+str = "Hola mundo"
+si str ~= "^hola" || str ~= "mundo$"
+  poner("empieza con 'hola' ó termina con 'mundo'")
+sino
+  poner("NO empieza con 'hola'")
+fin

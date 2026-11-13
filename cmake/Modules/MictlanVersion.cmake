@@ -1,0 +1,15 @@
+# El encabezado también lo consumen las compilaciones directas en C.
+set(_mictlan_version_header "${CMAKE_CURRENT_LIST_DIR}/../../include/mictlan_version.h")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${_mictlan_version_header}")
+file(STRINGS "${_mictlan_version_header}" _mictlan_version_line
+     REGEX "^#define MICTLAN_VERSION ")
+if(NOT _mictlan_version_line MATCHES "^#define MICTLAN_VERSION \"(([0-9]+)\\.([0-9]+)\\.([0-9]+))(-([a-zA-Z0-9.]+))?\"$")
+    message(FATAL_ERROR "Versión de Mictlán inválida en mictlan_version.h")
+endif()
+set(MICTLAN_VERSION_NUMERICA "${CMAKE_MATCH_1}")
+set(MICTLAN_VERSION_COMAS "${CMAKE_MATCH_2},${CMAKE_MATCH_3},${CMAKE_MATCH_4},0")
+set(MICTLAN_VERSION "${CMAKE_MATCH_1}${CMAKE_MATCH_5}")
+set(MICTLAN_VERSION_DEBIAN "${CMAKE_MATCH_1}")
+if(CMAKE_MATCH_6)
+    string(APPEND MICTLAN_VERSION_DEBIAN "~${CMAKE_MATCH_6}")
+endif()

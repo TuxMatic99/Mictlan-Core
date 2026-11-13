@@ -9,7 +9,6 @@ core="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 proyecto="$(dirname "$core")"
 
 compilacion="$proyecto/build-core-release"
-nombre="mictlan-0.1.0-alpha-linux-x86_64"
 
 # Preparar carpetas nuevas, sin sobrescribir paquetes previos.
 mkdir -p "$proyecto/artefactos"
@@ -26,6 +25,10 @@ echo "===== 2. COMPILAR ====="
 
 cmake --build "$compilacion" \
     --target latino --parallel 2
+identidad=$("$compilacion/mictlan" --version)
+version=${identidad#Mictlán }
+[[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$ ]]
+nombre="mictlan-$version-linux-x86_64"
 
 echo "===== 3. INSTALAR COMPONENTE PORTABLE ====="
 
@@ -54,7 +57,7 @@ mkdir -p "$temporal/verificacion"
 tar -xzf "$archivo" -C "$temporal/verificacion"
 
 ejecutable="$temporal/verificacion/$nombre/bin/mictlan"
-ejemplo="$temporal/verificacion/$nombre/share/mictlan/ejemplos/hola_mictlan.lat"
+ejemplo="$temporal/verificacion/$nombre/share/mictlan/ejemplos/hola_mictlan.mict"
 
 resultado="$(env -u LD_LIBRARY_PATH "$ejecutable" "$ejemplo")"
 

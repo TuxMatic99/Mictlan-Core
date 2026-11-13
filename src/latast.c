@@ -118,19 +118,8 @@ ast *latA_var(const char *s, int nlin, int ncol, bool esconst) {
 }
 
 ast *latA_asign(ast *val, ast *sim) {
-  ast *a = (ast *)malloc(sizeof(ast));
-  a->tipo = NODO_ASIGNACION;
-  a->izq = val;
-  a->der = sim;
-  a->valor = NULL;
-  /* debug eliminado: latA_asign tipos y posiciones */
-  if (sim && sim->valor) {
-    nodo_valor *v = (nodo_valor *)sim->valor;
-    if (v->tipo == VALOR_CADENA) {
-      /* debug eliminado: latA_asign LHS nombre */
-    }
-  }
-  return a;
+  return latA_nodo(NODO_ASIGNACION, val, sim, sim ? sim->nlin : 0,
+                   sim ? sim->ncol : 0);
 }
 
 ast *latA_asign_le(ast *exp, ast *id, ast *pos) {
@@ -152,87 +141,57 @@ ast *latA_si(ast *cond, ast *th, ast *el) {
 }
 
 ast *latA_mientras(ast *cond, ast *stmts) {
-  ast *a = (ast *)malloc(sizeof(ast));
-  a->tipo = NODO_MIENTRAS;
-  a->izq = cond;
-  a->der = stmts;
-  a->valor = NULL;
-  return a;
+  return latA_nodo(NODO_MIENTRAS, cond, stmts, cond->nlin, cond->ncol);
 }
 
 ast *latA_hacer(ast *cond, ast *stmts) {
-  ast *a = (ast *)malloc(sizeof(ast));
-  a->tipo = NODO_REPETIR;
-  a->izq = cond;
-  a->der = stmts;
-  a->valor = NULL;
-  return a;
+  return latA_nodo(NODO_REPETIR, cond, stmts, cond->nlin, cond->ncol);
 }
 
 ast *latA_desde(ast *dec, ast *cond, ast *inc, ast *stmts) {
-  ast *a = (ast *)malloc(sizeof(ast));
   ast *tmp = stmts;
   while (tmp->der != NULL) {
     tmp = tmp->der;
   }
-  tmp->der = inc;
-  a->tipo = NODO_BLOQUE;
-  a->izq = dec;
-  a->der = latA_mientras(cond, stmts);
-  a->valor = NULL;
-  return a;
+  tmp->der = latA_nodo(NODO_BLOQUE, inc, NULL, inc->nlin, inc->ncol);
+  return latA_nodo(NODO_BLOQUE, dec, latA_mientras(cond, stmts),
+                   dec->nlin, dec->ncol);
+}
+
+static bool rango_literal(const ast *nodo, double *numero) {
+  bool negativo = nodo->tipo == NODO_MENOS_UNARIO;
+  if (negativo || nodo->tipo == NODO_MAS_UNARIO) nodo = nodo->izq;
+  if (!nodo || nodo->tipo != NODO_VALOR || nodo->valor->tipo != VALOR_NUMERICO)
+    return false;
+  *numero = negativo ? -nodo->valor->val.numerico : nodo->valor->val.numerico;
+  return isfinite(*numero);
 }
 
 ast *latA_para(ast *identificador, ast *inicio, ast *fin, ast *incremento,
                ast *sentencias) {
-  if (inicio == NULL) {
-    inicio = latA_numerico(0, identificador->nlin, identificador->ncol);
+  double primero = 0, ultimo = 0, paso = 1;
+  bool valido = (!inicio || rango_literal(inicio, &primero)) &&
+                rango_literal(fin, &ultimo) &&
+                (!incremento || rango_literal(incremento, &paso)) && paso != 0;
+  latA_destruir(inicio);
+  latA_destruir(fin);
+  latA_destruir(incremento);
+  if (!valido) {
+    latA_destruir(identificador);
+    latA_destruir(sentencias);
+    return NULL;
   }
-  if (incremento == NULL) {
-    incremento = latA_numerico(1, identificador->nlin, identificador->ncol);
-  }
-  if (inicio->tipo == NODO_MENOS_UNARIO) {
-    inicio = latA_numerico(-(inicio->izq->valor->val.numerico),
-                           identificador->nlin, identificador->ncol);
-  }
-  if (fin->tipo == NODO_MENOS_UNARIO) {
-    fin = latA_numerico(-(fin->izq->valor->val.numerico), identificador->nlin,
-                        identificador->ncol);
-  }
-  ast *a = (ast *)malloc(sizeof(ast));
-  /* asign -> (i = 3) */
-  ast *asign = latA_asign(inicio, identificador);
-  /* i  < 10 */
-  ast *cond = NULL;
-  if (incremento->tipo == NODO_MENOS_UNARIO) {
-    // cuando es decremento
-    if (inicio->valor->val.numerico > fin->valor->val.numerico) {
-      cond = latA_nodo(NODO_MAYOR_QUE, identificador, fin, identificador->nlin,
-                       identificador->ncol);
-      incremento = latA_numerico(-(incremento->izq->valor->val.numerico),
-                                 identificador->nlin, identificador->ncol);
-    }
-  } else {
-    if (inicio->valor->val.numerico < fin->valor->val.numerico) {
-      cond = latA_nodo(NODO_MENOR_QUE, identificador, fin, identificador->nlin,
-                       identificador->ncol);
-    }
-  }
-  /* suma -> (i + inc) */
-  ast *suma = latA_nodo(NODO_SUMA, identificador, incremento,
-                        identificador->nlin, identificador->ncol);
-  /*inc -> (i = suma) -> i = i + 3 */
-  ast *inc = latA_asign(suma, identificador);
-  ast *tmp = sentencias;
-  while (tmp->der != NULL) {
-    tmp = tmp->der;
-  }
-  tmp->der = inc;
-  a->tipo = NODO_BLOQUE;
-  a->izq = asign;
-  a->der = latA_mientras(cond, sentencias);
-  a->valor = NULL;
-  return a;
+  int linea = identificador->nlin, columna = identificador->ncol;
+  const char *nombre = identificador->valor->val.cadena;
+  bool constante = identificador->valor->esconst;
+  ast *asign = latA_asign(latA_numerico(primero, linea, columna), identificador);
+  ast *cond = latA_nodo(paso > 0 ? NODO_MENOR_QUE : NODO_MAYOR_QUE,
+                       latA_var(nombre, linea, columna, constante),
+                       latA_numerico(ultimo, linea, columna), linea, columna);
+  ast *suma = latA_nodo(NODO_SUMA, latA_var(nombre, linea, columna, constante),
+                       latA_numerico(paso, linea, columna), linea, columna);
+  ast *inc = latA_asign(suma, latA_var(nombre, linea, columna, constante));
+  return latA_desde(asign, cond, inc, sentencias);
 }
 
 ast *latA_funcion(ast *nombre, ast *params, ast *stmts, int nlin, int ncol) {
@@ -252,6 +211,8 @@ ast *latA_clase(ast *nombre, ast *base, ast *stmts, int nlin, int ncol) {
   a->nombre = nombre;
   a->base = base;
   a->stmts = stmts;
+  a->nlin = nlin;
+  a->ncol = ncol;
   return (ast *)a;
 }
 
@@ -327,7 +288,6 @@ ast *latA_super(ast *args, int nlin, int ncol) {
 
 void latA_destruir(ast *a) {
   if (a) {
-    if (a->tipo < 51) { // a->tipo <= 50
       switch (a->tipo) {
       case NODO_SI: {
         nodo_si *nsi = (nodo_si *)a;
@@ -353,6 +313,19 @@ void latA_destruir(ast *a) {
         latA_destruir(nelem->pos);
         break;
       }
+      case NODO_CLASE: {
+        nodo_clase *clase = (nodo_clase *)a;
+        latA_destruir(clase->nombre);
+        latA_destruir(clase->base);
+        latA_destruir(clase->stmts);
+        break;
+      }
+      case NODO_NUEVA: {
+        nodo_nueva *instancia = (nodo_nueva *)a;
+        latA_destruir(instancia->nombre);
+        latA_destruir(instancia->args);
+        break;
+      }
       case NODO_IDENTIFICADOR:
       case NODO_VALOR:
         if (a->valor) {
@@ -362,7 +335,16 @@ void latA_destruir(ast *a) {
           free(a->valor);
         }
         break;
-      // TODO: liberar nuevo nodo rango
+      case NODO_ASIGNACION: {
+        /* Las asignaciones compuestas comparten el destino con su operación. */
+        ast *operacion = a->izq;
+        bool compuesto = operacion &&
+            ((operacion->tipo >= NODO_SUMA && operacion->tipo <= NODO_MODULO) ||
+             operacion->tipo == NODO_CONCATENAR) && operacion->izq == a->der;
+        latA_destruir(operacion);
+        if (!compuesto) latA_destruir(a->der);
+        break;
+      }
       default:
         if (a->izq)
           latA_destruir(a->izq);
@@ -370,7 +352,6 @@ void latA_destruir(ast *a) {
           latA_destruir(a->der);
       }
       free(a);
-    }
   }
 }
 
@@ -403,63 +384,56 @@ ast *latA_analizar_exp(char *expr, int *status) {
 ast *latA_analizar_arch(char *infile, int *status) {
   *status = 1;
   if (infile == NULL) {
-    printf("Especifique un archivo\n");
+    fputs("mictlan: especifique un archivo.\n", stderr);
     return NULL;
   }
-  char *dot = strrchr(infile, '.');
-  char *extension;
-if (dot == NULL) {
-    extension = "";
-} else {
-    extension = dot + 1;
-}
-/*
- * Mictlan utiliza .mict como extension principal.
- * Conservamos .lat por compatibilidad.
- */
-if (strcmp(extension, "mict") != 0 &&
-    strcmp(extension, "lat") != 0) {
-
-    printf(
-        "El archivo '%s' debe tener extension .mict o .lat\n",
-        infile
-    );
-
+  const char *extension = strrchr(infile, '.');
+  if (!extension || (strcmp(extension, ".mict") && strcmp(extension, ".lat"))) {
+    fprintf(stderr, "mictlan: El archivo '%s' debe tener extension .mict o .lat\n", infile);
     return NULL;
-}
+  }
   FILE *file = fopen(infile, "r");
   if (file == NULL) {
-    printf("No se pudo abrir el archivo: %s\n", infile);
+    fprintf(stderr, "mictlan: No se pudo abrir el archivo: %s\n", infile);
     return NULL;
   }
   if (fseek(file, 0, SEEK_END) != 0) {
     fclose(file);
+    fprintf(stderr, "mictlan: no se pudo leer '%s' como archivo de programa.\n", infile);
     return NULL;
   }
   long longitud = ftell(file);
   if (longitud < 0 || longitud > INT_MAX - 2 ||
       fseek(file, 0, SEEK_SET) != 0) {
     fclose(file);
-    printf("No se pudo determinar un tamano valido para: %s\n", infile);
+    fprintf(stderr, "mictlan: no se pudo determinar un tamaño válido para '%s'.\n", infile);
     return NULL;
   }
   size_t fsize = (size_t)longitud;
   char *buffer = malloc(fsize + 1);
   if (buffer == NULL) {
     fclose(file);
-    printf("No se pudo asignar %zu bytes de memoria\n", fsize + 1);
+    fprintf(stderr, "mictlan: no se pudieron reservar %zu bytes para '%s'.\n", fsize + 1, infile);
     return NULL;
   }
   size_t newSize = fread(buffer, 1, fsize, file);
   if (ferror(file)) {
     free(buffer);
     fclose(file);
+    fprintf(stderr, "mictlan: error al leer '%s'.\n", infile);
     return NULL;
   }
   fclose(file);
+  if (memchr(buffer, '\0', newSize)) {
+    free(buffer);
+    fprintf(stderr, "mictlan: '%s' contiene un byte nulo. Usa un archivo de texto.\n", infile);
+    return NULL;
+  }
   buffer[newSize] = '\0';
+  char *archivo_previo = filename;
   filename = infile;
   ast *nodo = latA_analizar_exp(buffer, status);
+  filename = archivo_previo;
   free(buffer);
   return nodo;
 }

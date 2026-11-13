@@ -107,8 +107,9 @@ if(WIN32)
     include_directories(latino-regex/src)
     add_subdirectory(latino-regex/src)
     # Incluir recursos de Windows (icono de la aplicación)
-    # Esto compila src/vs_resources/latino.rc y embebe el icono en latino.exe
-    add_executable(${PROJECT_NAME} ${SRC_LIB} vs_resources/latino.rc)
+    configure_file(vs_resources/latino.rc "${CMAKE_CURRENT_BINARY_DIR}/mictlan.rc" @ONLY)
+    add_executable(${PROJECT_NAME} ${SRC_LIB} "${CMAKE_CURRENT_BINARY_DIR}/mictlan.rc")
+    target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/vs_resources")
     # Compatibilidad heredada: esta opcion pertenece al enlazador de MinGW.
     if(MINGW)
         target_link_options(${PROJECT_NAME} PRIVATE -Wl,--allow-multiple-definition)
@@ -193,7 +194,7 @@ endif()
 if(UNIX)
     install(FILES       man/latino.1.gz                 DESTINATION     ${INSTALL_SHARE}/man/man1           )
     install(FILES       gnu-utilities/latino.nanorc     DESTINATION     ${INSTALL_SHARE}/nano               )
-    install(FILES       gnu-utilities/latino.desktop    DESTINATION     ${INSTALL_SHARE}/applications       )
+    install(FILES       gnu-utilities/mictlan.desktop   DESTINATION     ${INSTALL_SHARE}/applications       )
 endif()
 
 install(FILES       ../logo/Latino-logo.png         DESTINATION     ${INSTALL_SHARE}/latino             )
@@ -211,6 +212,7 @@ install(FILES       ../include/latlex.h             DESTINATION     ${INSTALL_IN
 install(FILES       ../include/latlist.h            DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latmem.h             DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latmemoria.h         DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
+install(FILES       ../include/mictlan_version.h    DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latmv.h              DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latclass.h           DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latparse.h           DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
@@ -225,18 +227,19 @@ install(FILES       ../include/latobj.h             DESTINATION     ${INSTALL_IN
 # crear paquete .deb https://cmake.org/Wiki/CMake/CPack/Examples/Linux/DEB
 # ejecutar en terminal
 # make package
+set(CPACK_PACKAGE_NAME "mictlan")
+set(CPACK_PACKAGE_VENDOR "Proyecto Mictlán")
+set(CPACK_PACKAGE_VERSION "${MICTLAN_VERSION}")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Mictlán, lenguaje de programación en español")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
+
 if (WIN32)
     # Generador de instalador para Windows (NSIS)
     set(CPACK_GENERATOR "NSIS")
-    set(CPACK_PACKAGE_NAME "Latino")
-    set(CPACK_PACKAGE_VENDOR "Lenguaje-Latino")
-    set(CPACK_PACKAGE_VERSION "${LATINO_VERSION}")
-    set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Lenguaje de programación en español")
     # Nombre visible del directorio de instalación (más corto)
     # Ajuste del nombre (quitando último .0 si existe)
-    string(REGEX REPLACE "\\.0$" "" LATINO_VERSION_SHORT "${LATINO_VERSION}")
     # Directorio de instalación corto para evitar problemas al agregar al PATH
-    set(CPACK_PACKAGE_INSTALL_DIRECTORY "Latino")
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY "Mictlan")
  set(CPACK_RESOURCE_FILE_LICENSE      "${CMAKE_SOURCE_DIR}/LICENSE")
  # Mostrar página de Información como en 1.4.4
  set(CPACK_RESOURCE_FILE_README       "${CMAKE_SOURCE_DIR}/README.md")
@@ -251,7 +254,7 @@ if (WIN32)
  # Mostrar la casilla de PATH (UI como 1.4.4); la lógica real se
  # implementa en CPackOptions.cmake.in para evitar el aviso de PATH largo
  set(CPACK_NSIS_MODIFY_PATH ON)
-    set(CPACK_PACKAGE_EXECUTABLES       "latino" "Latino")
+    set(CPACK_PACKAGE_EXECUTABLES       "mictlan" "Mictlán")
 
     # Asegurar nombre del desinstalador para accesos directos
     set(CPACK_NSIS_UNINSTALL_NAME "Uninstall")
@@ -266,9 +269,9 @@ if (WIN32)
     # Imagen de marca dentro del instalador (bienvenida/finalización)
  set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/logo/Latino-logo.png")
     # Icono del acceso directo instalado (menú inicio)
- set(CPACK_NSIS_INSTALLED_ICON_NAME "bin/latino.exe")
+ set(CPACK_NSIS_INSTALLED_ICON_NAME "bin/mictlan.exe")
  # Página final con opción "Ejecutar Latino"
- set(CPACK_NSIS_MUI_FINISHPAGE_RUN   "$INSTDIR/bin/latino.exe")
+ set(CPACK_NSIS_MUI_FINISHPAGE_RUN   "$INSTDIR/bin/mictlan.exe")
 
     # Asociar archivos .lat con Latino y establecer icono
     # (se ejecuta al instalar y se elimina al desinstalar)
@@ -279,39 +282,42 @@ if (WIN32)
     configure_file("${CMAKE_SOURCE_DIR}/cmake/CPackOptions.cmake.in" "${CPACK_PROJECT_CONFIG_FILE}" @ONLY)
 
     # Nombre del archivo del instalador (quitar último .0)
-    set(CPACK_PACKAGE_FILE_NAME "Latino-${LATINO_VERSION_SHORT}-win32")
+    set(CPACK_PACKAGE_FILE_NAME "mictlan-${MICTLAN_VERSION}-win32")
 
 elseif(APPLE)
     # Configuración para macOS
     set(CPACK_GENERATOR "DragNDrop;TGZ")
-    set(CPACK_PACKAGE_FILE_NAME "Latino-${LATINO_VERSION}-Darwin")
-    set(CPACK_DMG_VOLUME_NAME "Latino ${LATINO_VERSION}")
+    set(CPACK_PACKAGE_FILE_NAME "mictlan-${MICTLAN_VERSION}-Darwin")
+    set(CPACK_DMG_VOLUME_NAME "Mictlán ${MICTLAN_VERSION}")
     set(CPACK_DMG_FORMAT "UDBZ") # Comprimido
     # set(CPACK_DMG_DS_STORE "${CMAKE_SOURCE_DIR}/cmake/MacOSX/DS_Store") # Opcional si se tiene
 
 else()
     # Configuración para Linux (Debian/Ubuntu, RHEL/Fedora)
     set(CPACK_GENERATOR "DEB;RPM;TGZ")
-    set(CPACK_PACKAGE_FILE_NAME "latino-${LATINO_VERSION}-Linux")
+    set(CPACK_PACKAGE_FILE_NAME "mictlan-${MICTLAN_VERSION}-Linux")
     
     # Configuración común Linux
     set(CPACK_SET_DESTDIR ON)
     set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")
 
     # Configuración DEB
-    set(CPACK_DEBIAN_PACKAGE_NAME "latino")
+    set(CPACK_DEBIAN_PACKAGE_NAME "mictlan")
+    set(CPACK_DEBIAN_PACKAGE_VERSION "${MICTLAN_VERSION_DEBIAN}")
     set(CPACK_DEBIAN_PACKAGE_MAINTAINER "primitivo.roman.montero@gmail.com")
     set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Lenguaje de programación de código abierto para latinos y de habla hispana.")
-    set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://lenguajelatino.org/")
+    set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/TuxMatic99/Mictlan-Core")
     set(CPACK_DEBIAN_PACKAGE_SECTION "devel")
     set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON) # Auto-detectar dependencias
     set(CPACK_DEBIAN_PACKAGE_CONTROL_STRICT_PERMISSION ON)
 
     # Configuración RPM
-    set(CPACK_RPM_PACKAGE_NAME "latino")
+    set(CPACK_RPM_PACKAGE_NAME "mictlan")
+    set(CPACK_RPM_PACKAGE_VERSION "${MICTLAN_VERSION_NUMERICA}")
+    set(CPACK_RPM_PACKAGE_RELEASE "0")
     set(CPACK_RPM_PACKAGE_LICENSE "MIT")
     set(CPACK_RPM_PACKAGE_GROUP "Development/Languages")
-    set(CPACK_RPM_PACKAGE_URL "https://lenguajelatino.org/")
+    set(CPACK_RPM_PACKAGE_URL "https://github.com/TuxMatic99/Mictlan-Core")
     set(CPACK_RPM_PACKAGE_AUTOREQPROV ON) # Auto-detectar dependencias
 endif()
 
@@ -339,6 +345,9 @@ install(FILES
     COMPONENT MictlanPortable
     EXCLUDE_FROM_ALL
 )
+install(FILES "${CMAKE_SOURCE_DIR}/ejemplos/hola_mictlan.lat"
+    DESTINATION share/mictlan/ejemplos RENAME hola_mictlan.mict
+    COMPONENT MictlanPortable EXCLUDE_FROM_ALL)
 
 
 # Licencia del nucleo para distribucion portable.

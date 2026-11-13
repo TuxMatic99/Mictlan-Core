@@ -4,11 +4,11 @@ set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS [[
 WriteRegStr HKCR ".lat" "" "Latino.File"
 WriteRegStr HKCR "Latino.File" "" "Archivo LAT de Latino"
 WriteRegStr HKCR "Latino.File\\DefaultIcon" "" "$INSTDIR\resources\icons\latino_archivo_Win.ico, 1"
-WriteRegStr HKCR "Latino.File\\shell\\open\\command" "" '"$INSTDIR\bin\latino.exe" "%1"'
+WriteRegStr HKCR "Latino.File\\shell\\open\\command" "" '"$INSTDIR\bin\mictlan.exe" "%1"'
 System::Call 'shell32::SHChangeNotify(i 0x08000000, i 0x0000, p 0, p 0)'
 StrCmp $INSTALL_DESKTOP "1" CreateDesktopShortcut skipDesktop
 CreateDesktopShortcut:
-  CreateShortCut "$DESKTOP\Latino.lnk" "$INSTDIR\bin\latino.exe" "" "$INSTDIR\bin\latino.ico" 0
+  CreateShortCut "$DESKTOP\Mictlan.lnk" "$INSTDIR\bin\mictlan.exe" "" "$INSTDIR\bin\latino.ico" 0
 skipDesktop:
 StrCpy $DO_NOT_ADD_TO_PATH "1"
 StrCmp $ADD_TO_PATH_ALL_USERS "1" AddPathAllUsers checkCurrent

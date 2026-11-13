@@ -12,11 +12,14 @@ Las demás plataformas todavía no están verificadas.
 
 Después de instalar el paquete, ejecutar:
 
-    mictlan /usr/share/mictlan/ejemplos/hola_mictlan.lat
+    mictlan /usr/share/mictlan/ejemplos/hola_mictlan.mict
 
 Para ejecutar un programa propio:
 
-    mictlan /ruta/al/programa.lat
+    mictlan /ruta/al/programa.mict
+
+La extensión `.lat` también funciona. El paquete de consola ZIP del SDK
+incluye el ejecutor científico y herramientas del editor.
 
 ## Dependencias
 

@@ -25,7 +25,6 @@ THE SOFTWARE.
 */
 
 /* bison -y -oparse.c parse.y */
-#define YYERROR_VERBOSE 1
 #define YYDEBUG 1
 #define YYENABLE_NLS 1
 #define YYLEX_PARAM &yylval, &yylloc
@@ -58,6 +57,7 @@ int yylex (YYSTYPE * yylval_param,YYLTYPE * yylloc_param ,yyscan_t yyscanner);
 %lex-param {void *scanner}
 %parse-param {ast **root}
 %parse-param {void *scanner}
+%initial-action { @$.file_name = filename; }
 
 /* declare tokens */
 %token <node> NUMERICO
@@ -125,6 +125,9 @@ int yylex (YYSTYPE * yylval_param,YYLTYPE * yylloc_param ,yyscan_t yyscanner);
 %type <node> program statement_list statement incdec_statement
 %type <node> clase_propiedad clase_propiedades clase_funcion clase_funciones
 %type <node> clase_constructor clase_metodo_estatico clase_sentencia clase_sentencias clase_declaracion
+
+/* Al descartar símbolos por un error, liberar el subárbol que poseían. */
+%destructor { latA_destruir($$); } <node>
 
 /* Soporte para clases */
 %token
@@ -277,9 +280,9 @@ expression
 
 program
     : { /* empty */
-        *root = NULL;
+        $$ = *root = NULL;
     }
-    | statement_list { *root = $1; }
+    | statement_list { *root = $1; $$ = NULL; }
     ;
 
 statement_list
@@ -293,7 +296,6 @@ statement_list
           $$ = latA_nodo(NODO_BLOQUE, $1, NULL, @1.first_line, @1.first_column);
         }
     }
-    | error statement_list { yyerrok; yyclearin;}
     ;
 
 statement
@@ -427,14 +429,17 @@ iteration_statement
     | PARA IDENTIFICADOR EN RANGO '(' expression ')'
         statement_list FIN {
         $$ = latA_para($2, NULL, $6, NULL, $8);
+        if (!$$) { yyerror(&@2, scanner, root, "rango requiere literales finitos y un paso distinto de cero"); YYABORT; }
         }
     | PARA IDENTIFICADOR EN RANGO '(' expression ',' expression ')'
         statement_list FIN {
         $$ = latA_para($2, $6, $8, NULL, $10);
+        if (!$$) { yyerror(&@2, scanner, root, "rango requiere literales finitos y un paso distinto de cero"); YYABORT; }
         }
     | PARA IDENTIFICADOR EN RANGO '(' expression ',' expression ',' expression ')'
         statement_list FIN {
         $$ = latA_para($2, $6, $8, $10, $12);
+        if (!$$) { yyerror(&@2, scanner, root, "rango requiere literales finitos y un paso distinto de cero"); YYABORT; }
         }
     ;
 
@@ -473,10 +478,6 @@ argument_expression_list
     : /* empty */ { $$ = NULL; }
     | expression { $$ = latA_nodo(NODO_FUNCION_ARGUMENTOS, $1, NULL, @1.first_line, @1.first_column); }
     | expression ',' argument_expression_list {
-        if($1->tipo == NODO_VAR_ARGS){
-            printf(LAT_ERROR_FMT, filename, @1.first_line, @1.first_column, "Parametro VAR_ARGS (...) debe de ser el ultimo parametro");
-            YYABORT;
-        }
         $$ = latA_nodo(NODO_FUNCION_ARGUMENTOS, $1, $3, @1.first_line, @1.first_column);
     }
     ;
@@ -487,11 +488,21 @@ parameter_list
     | VAR_ARGS { $$ = latA_nodo(NODO_FUNCION_PARAMETROS, $1, NULL, 0, 0); }
     | parameter_list ',' IDENTIFICADOR {
         if($1->izq->tipo == NODO_VAR_ARGS){
-            printf(LAT_ERROR_FMT, @3.file_name, @3.first_line, @3.first_column, "Parametro VAR_ARGS (...) debe de ser el ultimo parametro");
+            yyerror(&@3, scanner, root, "El parámetro ... debe ser el último");
+            latA_destruir($1);
+            latA_destruir($3);
             YYABORT;
         }
         $$ = latA_nodo(NODO_FUNCION_PARAMETROS, $3, $1, @3.first_line, @3.first_column); }
-    | parameter_list ',' VAR_ARGS { $$ = latA_nodo(NODO_FUNCION_PARAMETROS, $3, $1, 0, 0); }
+    | parameter_list ',' VAR_ARGS {
+        if ($1->izq->tipo == NODO_VAR_ARGS) {
+            yyerror(&@3, scanner, root, "El parámetro ... debe aparecer una sola vez");
+            latA_destruir($1);
+            latA_destruir($3);
+            YYABORT;
+        }
+        $$ = latA_nodo(NODO_FUNCION_PARAMETROS, $3, $1, @3.first_line, @3.first_column);
+    }
     ;
 
 list_new
@@ -503,7 +514,9 @@ list_items
     | expression { $$ = latA_nodo(NODO_LISTA_AGREGAR_ELEMENTO, $1, NULL, @1.first_line, @1.first_column); }
     | expression ',' list_items {
         if($1->tipo == NODO_LOAD_VAR_ARGS){
-            printf(LAT_ERROR_FMT, filename, @1.first_line, @1.first_column, "Parametro VAR_ARGS (...) debe de ser el ultimo parametro");
+            yyerror(&@1, scanner, root, "La expansión ... debe cerrar la lista");
+            latA_destruir($1);
+            latA_destruir($3);
             YYABORT;
         }
         $$ = latA_nodo(NODO_LISTA_AGREGAR_ELEMENTO, $1, $3, @3.first_line, @3.first_column);
@@ -549,7 +562,6 @@ clase_propiedades
           $$ = latA_nodo(NODO_BLOQUE, $1, NULL, @1.first_line, @1.first_column);
         }
     }
-    | error statement_list { yyerrok; yyclearin;}
     ;
 
 clase_funcion
@@ -569,7 +581,6 @@ clase_funciones
           $$ = latA_nodo(NODO_BLOQUE, $1, NULL, @1.first_line, @1.first_column);
         }
     }
-    | error statement_list { yyerrok; yyclearin;}
     ;
 
 clase_constructor
@@ -611,7 +622,6 @@ clase_sentencias
           $$ = latA_nodo(NODO_BLOQUE, $1, NULL, @1.first_line, @1.first_column);
         }
     }
-    | error statement_list { yyerrok; yyclearin;}
     ;
 
 clase_declaracion
@@ -628,9 +638,12 @@ clase_declaracion
 //se define para analisis sintactico (bison)
 int yyerror(struct YYLTYPE *yylloc_param, void *scanner, struct ast **root,
 const char *s) {
-  if(!parse_silent) {
-      fprintf(stderr, LAT_ERROR_FMT, yylloc_param->file_name,
-        yylloc_param->first_line, yylloc_param->first_column,  s);
+  if (!parse_silent) {
+      const char *mensaje = !strcmp(s, "syntax error") ? "Error de sintaxis" : s;
+      fprintf(stderr, LAT_ERROR_FMT, filename ? filename : "<entrada>",
+              yylloc_param->first_line > 0 ? yylloc_param->first_line : 1,
+              yylloc_param->first_column > 0 ? yylloc_param->first_column : 1,
+              mensaje);
   }
   return 0;
 }

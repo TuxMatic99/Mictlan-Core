@@ -1,0 +1,7 @@
+#ifndef MICTLAN_VERSION_H
+#define MICTLAN_VERSION_H
+
+#define MICTLAN_VERSION "0.1.0-alpha"
+#define MICTLAN_IDENTIDAD "Mictlán " MICTLAN_VERSION
+
+#endif
