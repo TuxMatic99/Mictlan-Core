@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include "latmem.h"
 #include "latmv.h"
 #include "latrepl.h"
+#include "mictlan_version.h"
 
 /*
 Para depurar en visual studio:
@@ -40,44 +41,19 @@ extern int yydebug = 1; /* 1 para debuguear analizador lexico/sintactico */
 int parse_silent = 0;
 char *filename = NULL;
 
-void str_ejecutar(lat_mv *mv);
-
-/**
- * Muestra solo la version de latino
- */
-static void lat_version_simple() { printf("%s\n", LAT_VERSION); }
-
-/**
- * Muestra la version de latino y los derechos en la consola
- */
-static void lat_version() { printf("%s\n", LAT_DERECHOS); }
-
-/**
- * Para crear el logo en ascii
- */
-static void lat_logo() { printf("%s\n", LAT_LOGO); }
-
-/**
- * Muestra la ayuda en la consola
- */
-static void lat_ayuda() {
-    lat_logo();
-    lat_version();
-    printf("%s\n", "-Uso de latino: latino [opcion] [archivo]");
-    printf("\n");
-    printf("%s\n", "Opciones:");
-    printf("%s\n", "-a | --ayuda     : Muestra la ayuda de Latino");
-    printf("%s\n", "-v | --version   : Muestra la version de Latino");
-    printf("%s\n", "-e               : Ejecuta una cadena de codigo");
-    printf("%s\n", "archivo          : Nombre del archivo con extension .lat");
-    printf("%s\n", "Ctrl + C         : Para cerrar");
-    printf("\n");
-    printf("%s\n", "Variables de entorno:");
-    printf("%s\n", "_____________________");
-    printf("%s%s\n", "LATINO_PATH      : ", getenv("LATINO_PATH"));
-    printf("%s%s\n", "LATINO_LIB       : ", getenv("LATINO_LIB"));
-    printf("%s%s\n", "LATINO_LIBC      : ", getenv("LATINO_LIBC"));
-    printf("%s%s\n", "HOME             : ", getenv("HOME"));
+static void mostrar_ayuda(void) {
+    puts(MICTLAN_IDENTIDAD "\n"
+         "Lenguaje de programación en español derivado de Latino (MIT).\n"
+         "\n"
+         "Uso: mictlan [--] archivo.mict [argumentos...]\n"
+         "     mictlan -e 'código'\n"
+         "     mictlan\n"
+         "\n"
+         ".mict es la extensión principal. También se admite .lat.\n"
+         "Sin argumentos abre la consola interactiva. Ctrl+D finaliza la entrada.\n"
+         "-h, -a, --help, --ayuda   Mostrar esta ayuda\n"
+         "-v, --version            Mostrar la versión\n"
+         "LATINO_LIB               Directorio de bibliotecas de código fuente");
 }
 
 int main(int argc, char *argv[]) {
@@ -96,77 +72,71 @@ int main(int argc, char *argv[]) {
         }
     }
     setlocale(LC_NUMERIC, "C");
-    int i;
-    char *infile = NULL;
-    int pe = false;
-    int pf = false;
+    const char *opcion = argc > 1 ? argv[1] : "";
+    bool expresion = !strcmp(opcion, "-e");
+    int archivo = !strcmp(opcion, "--") ? 2 : 1;
     int codigo_salida = EXIT_SUCCESS;
-    /* procesa params de latino */
-    for (i = 1; i < argc; i++) {
-        if (strstr(argv[1], ".lat") || argv[1][0] != '-') {
-            pf = true;
-            break;
+    if (!strcmp(opcion, "-v") || !strcmp(opcion, "--version")) {
+        puts(MICTLAN_IDENTIDAD);
+        return EXIT_SUCCESS;
+    }
+    if (!strcmp(opcion, "-h") || !strcmp(opcion, "-a") ||
+        !strcmp(opcion, "--ayuda") || !strcmp(opcion, "--help")) {
+        mostrar_ayuda();
+        return EXIT_SUCCESS;
+    }
+    if (expresion) {
+        if (argc != 3) {
+            fputs("mictlan: -e requiere una cadena de código. Consulta --help.\n", stderr);
+            return EXIT_FAILURE;
         }
-        if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--version")) {
-            lat_version_simple();
-            return EXIT_SUCCESS;
-        } else if (!strcmp(argv[i], "-a") || !strcmp(argv[i], "--ayuda") ||
-                   !strcmp(argv[i], "--help")) {
-            lat_ayuda();
-            return EXIT_SUCCESS;
-        } else if (!strcmp(argv[i], "-e")) {
-            pe = true;
-        }
+    } else if (archivo == 2 && argc == 2) {
+        fputs("mictlan: falta el archivo después de --. Consulta --help.\n", stderr);
+        return EXIT_FAILURE;
+    } else if (archivo == 1 && opcion[0] == '-') {
+        fprintf(stderr, "mictlan: opción desconocida '%s'. Consulta --help.\n", opcion);
+        return EXIT_FAILURE;
     }
     lat_mv *mv = latC_crear_mv();
     if (!mv) {
         fputs("No se pudo crear la VM.\n", stderr);
         return EXIT_FAILURE;
     }
-    /* debug eliminado: MV creada */
-    if (pe) {
-        /* Ejecuta una cadena de codigo */
-        if (argc != 3) {
-            printf("Error: Se requiere una cadena para ejecución.\n");
-            latC_destruir_mv(mv);
-            return EXIT_FAILURE;
-        }
-        latC_apilar_string(mv, argv[2]);
-        /* debug eliminado: Ejecutando cadena -e */
-        str_ejecutar(mv);
-        /* debug eliminado: Cadena ejecutada */
-    } else if (argc > 1 && pf) {
-        /* Ejecuta un archivo de codigo */
-        infile = argv[1];
-        /* debug eliminado: Archivo de entrada */
-        mv->nombre_archivo = infile;
+    if (expresion || argc > 1) {
+        mv->nombre_archivo = expresion ? "<-e>" : argv[archivo];
         mv->global->REPL = false;
-        mv->global->argc = argc - 1;
-        for (int j = 1; j < argc; j++) {
-            latL_agregar(mv, latC_checar_lista(mv, mv->global->argv),
-                         latC_crear_cadena(mv, argv[j]));
+        if (!expresion) {
+            mv->global->argc = argc - archivo;
+            for (int j = archivo; j < argc; j++) {
+                latL_agregar(mv, latC_checar_lista(mv, mv->global->argv),
+                             latC_crear_cadena(mv, argv[j]));
+            }
         }
         int status = EXIT_FAILURE;
-        /* debug eliminado: Iniciando parseo */
-        ast *nodo = latA_analizar_arch(infile, &status);
-        /* debug eliminado: Parseo terminado */
+        ast *nodo;
+        if (expresion) {
+            filename = mv->nombre_archivo;
+            nodo = latA_analizar_exp(argv[2], &status);
+            if (status == 0 && nodo == NULL)
+                fputs("mictlan: <-e>: la entrada no contiene instrucciones.\n", stderr);
+        } else {
+            nodo = latA_analizar_arch(argv[archivo], &status);
+        }
         if (status == 0 && nodo != NULL) {
-            /* debug eliminado: Analizando AST a bytecode */
             lat_objeto *main_func = latC_analizar(mv, nodo);
-            /* debug eliminado: Función principal creada */
-            if (mv->global->menu) {
+            if (!expresion && mv->global->menu) {
                 // inicio instrucciones para llamar a menu
                 lat_funcion *fval = (lat_funcion *)main_func->val.gc;
                 lat_bytecode *codigo = (lat_bytecode *)fval->codigo;
                 int ninst = main_func->ninst;
                 lat_bytecode *bc = (lat_bytecode *)latM_asignar(
-                    NULL, sizeof(lat_bytecode) * (ninst + 2));
-                memcpy(bc, codigo, latM_tamanio(bc));
+                    mv, sizeof(lat_bytecode) * (ninst + 2));
+                memcpy(bc, codigo, sizeof(*bc) * (ninst - 1));
 #if DEPURAR_MEM
                 printf("main.bc: %p\n", bc);
 #endif
                 bc[ninst - 1] = latMV_bytecode_crear(
-                    LOAD_NAME, 0, 0, latC_crear_cadena(mv, "menu"), 0, 0,
+                    LOAD_NAME, 0, 0, latO_retener_constante(mv, latC_crear_cadena(mv, "menu")), 0, 0,
                     mv->nombre_archivo);
                 bc[ninst] = latMV_bytecode_crear(CALL_FUNCTION, 2, 0, NULL, 0,
                                                  0, mv->nombre_archivo);
@@ -198,8 +168,7 @@ int main(int argc, char *argv[]) {
 
         latA_destruir(nodo);
     } else {
-        lat_version();
-        /* debug eliminado: Iniciando REPL */
+        puts(MICTLAN_IDENTIDAD " · derivado de Latino (MIT)");
         latR_REPL(mv);
     }
     latC_destruir_mv(mv);

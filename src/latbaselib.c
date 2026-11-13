@@ -32,6 +32,8 @@ THE SOFTWARE.
 #endif
 
 #include "latino.h"
+#include "latdo.h"
+#include "latmem.h"
 
 #define LIB_BASE_NAME ""
 
@@ -97,106 +99,92 @@ void base_imprimirf(lat_mv *mv) {
     latO_imprimir(mv, str, true);
 }
 
-int ultima_pos(char *base, char *str);
-char *subcadena(const char *str, int beg, int n);
+static bool incluir_fuente(lat_mv *mv, const char *prefijo, const char *nombre,
+                            const char *extension) {
+    char ruta[MAX_PATH_LENGTH];
+    int n = snprintf(ruta, sizeof(ruta), "%s%s%s", prefijo, nombre, extension);
+    if (n < 0 || (size_t)n >= sizeof(ruta))
+        latC_error(mv, "Ruta de módulo demasiado larga");
+    if (!eslegible(ruta)) return false;
+
+    /* El nombre queda en la VM porque lo usa el bytecode de las funciones
+       del módulo incluso después de liberar su árbol. */
+    lat_objeto *temporal = latC_crear_cadena(mv, ruta);
+    char *archivo = latC_checar_cadena(mv, temporal);
+    latM_liberar(mv, temporal);
+    int estado;
+    ast *nodo = latA_analizar_arch(archivo, &estado);
+    if (estado != 0 || !nodo) {
+        latA_destruir(nodo);
+        latC_error(mv, "No se pudo analizar el módulo '%s'", ruta);
+    }
+    char *anterior = mv->nombre_archivo;
+    mv->nombre_archivo = archivo;
+    lat_objeto *programa = latC_analizar(mv, nodo);
+    estado = latC_llamar_funcion(mv, programa);
+    latO_destruir(mv, programa);
+    latA_destruir(nodo);
+    mv->nombre_archivo = anterior;
+    if (estado != 0) latD_lanzar(mv, estado);
+    return true;
+}
 
 static void base_incluir(lat_mv *mv) {
-    lat_objeto *o = latC_desapilar(mv);
-    char *libname = latC_checar_cadena(mv, o);
-    int status;
-    char dir_actual[MAX_PATH_LENGTH];
-    getcwd(dir_actual, sizeof(dir_actual));
-    strcat(dir_actual, PATH_SEP);
-    char archivo_ext[MAX_STR_INTERN] = {0};
-    strcat(archivo_ext, libname);
-    strcat(archivo_ext, ".lat");
-    archivo_ext[strlen(archivo_ext)] = '\0';
-    // buscar en ruta actual
-    lat_objeto *mod = latC_crear_cadena(mv, strcat(dir_actual, archivo_ext));
-    char *tmp_name = mv->nombre_archivo;
-    if (eslegible(latC_checar_cadena(mv, mod))) {
-        mv->nombre_archivo = latC_checar_cadena(mv, mod);
-        ast *nodo = latA_analizar_arch(latC_checar_cadena(mv, mod), &status);
-        if (status == 0 && nodo != NULL) {
-            // FIXME: Liberar la memoria de fun_mod
-            lat_objeto *fun_mod = latC_analizar(mv, nodo);
-            status = latC_llamar_funcion(mv, fun_mod);
-            mv->nombre_archivo = tmp_name;
-            latA_destruir(nodo);
-            return;
-        }
+    const char *nombre = latC_checar_cadena(mv, latC_desapilar(mv));
+    const char *sufijo = strrchr(nombre, '.');
+    bool explicito = sufijo && (!strcmp(sufijo, ".mict") || !strcmp(sufijo, ".lat"));
+    if (strlen(nombre) >= MAX_PATH_LENGTH)
+        latC_error(mv, "Nombre de módulo demasiado largo");
+
+    const char *archivo = mv->nombre_archivo ? mv->nombre_archivo : "";
+    const char *sep = strrchr(archivo, PATH_SEP[0]);
+    char directorio[MAX_PATH_LENGTH] = "";
+    if (sep) {
+        size_t longitud = (size_t)(sep - archivo) + 1;
+        if (longitud >= sizeof(directorio))
+            latC_error(mv, "Directorio del programa demasiado largo");
+        memcpy(directorio, archivo, longitud);
+        directorio[longitud] = '\0';
     }
-    // busca en ruta del archivo que incluye
-    int pos = ultima_pos(mv->nombre_archivo, PATH_SEP);
-    if (pos > -1) {
-        char *prepath = calloc(1, MAX_PATH_LENGTH);
-        strcat(prepath, subcadena(mv->nombre_archivo, 0, pos + 1));
-        lat_objeto *modcurr =
-            latC_crear_cadena(mv, strcat(prepath, archivo_ext));
-        tmp_name = mv->nombre_archivo;
-        if (eslegible(latC_checar_cadena(mv, modcurr))) {
-            mv->nombre_archivo = latC_checar_cadena(mv, modcurr);
-            ast *nodo =
-                latA_analizar_arch(latC_checar_cadena(mv, modcurr), &status);
-            if (status == 0 && nodo != NULL) {
-                // FIXME: Liberar la memoria de fun_mod
-                lat_objeto *fun_mod = latC_analizar(mv, nodo);
-                status = latC_llamar_funcion(mv, fun_mod);
-                mv->nombre_archivo = tmp_name;
-                latA_destruir(nodo);
-                return;
-            }
-        }
+    const char *lib = getenv("LATINO_LIB");
+    char dir_lib[MAX_PATH_LENGTH] = "";
+    if (lib && *lib) {
+        int longitud = snprintf(dir_lib, sizeof(dir_lib), "%s%s", lib, PATH_SEP);
+        if (longitud < 0 || (size_t)longitud >= sizeof(dir_lib))
+            latC_error(mv, "LATINO_LIB demasiado largo");
     }
-    // buscar en $LATINO_LIB
-    char *latino_lib = getenv("LATINO_LIB");
-    if (latino_lib != NULL) {
-        char lib_path[MAX_PATH_LENGTH] = {0};
-        strcpy(lib_path, latino_lib);
-        strcat(lib_path, PATH_SEP);
-        strcat(lib_path, archivo_ext);
-        lat_objeto *mod_lib = latC_crear_cadena(mv, lib_path);
-        if (eslegible(latC_checar_cadena(mv, mod_lib))) {
-            mv->nombre_archivo = latC_checar_cadena(mv, mod_lib);
-            ast *nodo =
-                latA_analizar_arch(latC_checar_cadena(mv, mod_lib), &status);
-            if (status == 0 && nodo != NULL) {
-                // FIXME: Liberar la memoria de fun_mod_lib
-                lat_objeto *fun_mod_lib = latC_analizar(mv, nodo);
-                status = latC_llamar_funcion(mv, fun_mod_lib);
-                mv->nombre_archivo = tmp_name;
-                latA_destruir(nodo);
-                return;
-            }
-        }
+    const char *directorios[] = {"", directorio, dir_lib};
+    /* Agotar las ubicaciones heredadas de .lat antes de buscar .mict. */
+    const char *extensiones[] = {explicito ? "" : ".lat", ".mict"};
+    for (size_t e = 0; e < (explicito ? 1u : 2u); ++e) {
+        if (incluir_fuente(mv, "", nombre, extensiones[e])) return;
+        bool absoluta = nombre[0] == '/' || nombre[0] == PATH_SEP[0];
+#ifdef _WIN32
+        absoluta |= nombre[0] != '\0' && nombre[1] == ':';
+#endif
+        if (absoluta) continue;
+        for (size_t i = 1; i < sizeof(directorios) / sizeof(*directorios); ++i)
+            if (*directorios[i] && incluir_fuente(mv, directorios[i], nombre, extensiones[e])) return;
     }
-    // buscamos libreria dinamica
-    char libpath[MAX_PATH_LENGTH] = {0};
-    char funcname[MAX_ID_LENGTH] = {0};
+    if (explicito) latC_error(mv, "No se encontró el módulo '%s'", nombre);
+
+    char libpath[MAX_PATH_LENGTH];
+    char funcname[MAX_ID_LENGTH];
 #if defined(_WIN32)
-    strcat(libpath, "latino-");
+    const char *prefijo = "latino-", *extension = ".dll";
 #elif defined(__MSYS__)
-    strcat(libpath, "msys-latino-");
-#else
-    strcat(libpath, "liblatino-");
-#endif
-
-    strcat(libpath, libname);
-
-#if defined(_WIN32) || defined(__MSYS__)
-    strcat(libpath, ".dll");
+    const char *prefijo = "msys-latino-", *extension = ".dll";
 #elif __APPLE__
-    strcat(libpath, ".dylib");
+    const char *prefijo = "liblatino-", *extension = ".dylib";
 #else
-    strcat(libpath, ".so");
+    const char *prefijo = "liblatino-", *extension = ".so";
 #endif
-    strcat(funcname, "latC_abrir_liblatino_");
-    strcat(funcname, libname);
-    int stat = latC_cargarlib(mv, libpath, funcname);
-    // int stat = latC_cargarlib(mv, "msys-latino-gtk.dll", funcname);
-    if (stat != 0) {
+    int n = snprintf(libpath, sizeof(libpath), "%s%s%s", prefijo, nombre, extension);
+    int m = snprintf(funcname, sizeof(funcname), "latC_abrir_liblatino_%s", nombre);
+    if (n < 0 || (size_t)n >= sizeof(libpath) || m < 0 || (size_t)m >= sizeof(funcname))
+        latC_error(mv, "Nombre de módulo nativo demasiado largo");
+    if (latC_cargarlib(mv, libpath, funcname) != 0)
         latC_error(mv, "Error al cargar libreria dinamica '%s'", libpath);
-    }
 }
 
 static void base_leer(lat_mv *mv) {

@@ -26,9 +26,7 @@ THE SOFTWARE.
 #include "latino.h"
 
 bool inicia_con(const char *base, const char *str);
-char *reemplazar(char *str, const char *orig, const char *rep);
-
-// void base_poner(lat_mv *mv);
+extern char *filename;
 
 static void completion(const char *buf, linenoiseCompletions *lc) {
     if (inicia_con(buf, "pon")) {
@@ -37,63 +35,60 @@ static void completion(const char *buf, linenoiseCompletions *lc) {
 }
 
 int leer_linea(char *buffer) {
-    char *prompt = "latino> ";
-    char *input;
-    char *tmp = malloc(MAX_INPUT_SIZE);
-REP:
-    input = linenoise(prompt);
-    if (input == NULL) {
-        return -1;
-    }
+    const char *prompt = "mictlan> ";
+    size_t usados = 0;
+    buffer[0] = '\0';
     for (;;) {
-        int len = strlen(input);
-        memcpy(tmp, input, len);
-        tmp[len] = '\0';
-        int estatus;
-        ast *nodo = latA_analizar_exp(tmp, &estatus);
-        if (estatus == 1) {
-            tmp = strcat(tmp, "\n");
-            prompt = "    >>> ";
-            goto REP;
-        } else {
-            prompt = "latino> ";
-            strcpy(buffer, tmp);
-            free(tmp);
-            latA_destruir(nodo);
+        char *input = linenoise(prompt);
+        if (!input) return -1;
+        size_t n = strlen(input);
+        if (n > MAX_INPUT_SIZE - 1 - usados) {
+            free(input);
+            fputs("mictlan: entrada interactiva demasiado larga. Usa un archivo .mict.\n", stderr);
+            buffer[0] = '\0';
             return 0;
         }
+        memcpy(buffer + usados, input, n + 1);
+        free(input);
+        usados += n;
+        if (usados == 0 || buffer[usados - 1] != '\\') return 0;
+        /* Continuación explícita para recuperar tras una línea inválida. */
+        buffer[usados - 1] = '\n';
+        prompt = "    >>> ";
     }
 }
 
 void latR_REPL(lat_mv *mv) {
-    parse_silent = 1;
+    int silencio_previo = parse_silent;
+    char *archivo_previo = filename;
+    parse_silent = 0;
     mv->global->REPL = true;
-    mv->nombre_archivo = "REPL";
-    char *buf = malloc(MAX_INPUT_SIZE);
-    char *dir_history = getenv("HOME");
-    if (!dir_history || dir_history == NULL) {
-        dir_history = HISTORY_FILE;
-    } else {
-        strcat(dir_history, "/");
-        strcat(dir_history, HISTORY_FILE);
-    }
-    ast *nodo = NULL;
-    int status;
-    linenoiseHistoryLoad(dir_history);
+    mv->nombre_archivo = "<consola>";
+    filename = mv->nombre_archivo;
+    char buf[MAX_INPUT_SIZE];
+    char historial[MAX_PATH_LENGTH];
+    const char *usuario = getenv("HOME");
+    int longitud = usuario && *usuario
+        ? snprintf(historial, sizeof(historial), "%s/%s", usuario, HISTORY_FILE)
+        : snprintf(historial, sizeof(historial), "%s", HISTORY_FILE);
+    bool guardar = longitud > 0 && (size_t)longitud < sizeof(historial);
+    if (guardar) linenoiseHistoryLoad(historial);
     linenoiseSetCompletionCallback(completion);
     while (leer_linea(buf) != -1) {
-        nodo = latA_analizar_exp(buf, &status);
+        int status;
+        ast *nodo = latA_analizar_exp(buf, &status);
         if (status == 0 && nodo != NULL) {
             lat_objeto *curexpr = latC_analizar(mv, nodo);
             status = latC_llamar_funcion(mv, curexpr);
             latO_destruir(mv, curexpr);
         }
         latA_destruir(nodo);
-        // se guarda el comando al historial aunque haya error
-        char *tmp = reemplazar(buf, "\n", "");
-        linenoiseHistoryAdd(tmp);
-        linenoiseHistorySave(dir_history);
-        free(tmp);
+        if (guardar && *buf) {
+            linenoiseHistoryAdd(buf);
+            linenoiseHistorySave(historial);
+        }
     }
-    free(buf);
+    linenoiseHistoryFree();
+    filename = archivo_previo;
+    parse_silent = silencio_previo;
 }

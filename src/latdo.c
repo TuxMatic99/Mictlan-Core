@@ -221,11 +221,7 @@ static bool encontrar_romper(ast *nodo) {
   bool rep = false;
   if (nodo) {
     ast *tmp = nodo;
-    if (tmp->izq->tipo == NODO_ROMPER) {
-      rep = true;
-      return rep;
-    }
-    while (tmp->izq != NULL) {
+    while (tmp && tmp->tipo == NODO_BLOQUE && tmp->izq != NULL) {
       if (tmp->izq->tipo == NODO_ROMPER) {
         rep = true;
         return rep;
@@ -1115,7 +1111,7 @@ LATINO_API void latC_error(lat_mv *mv, const char *fmt, ...)
     va_list args;
 
     if (mv == NULL) {
-        fputs("Latino-Core: error sin maquina virtual\n", stderr);
+    fputs("Mictlán: error sin máquina virtual\n", stderr);
         abort();
     }
 

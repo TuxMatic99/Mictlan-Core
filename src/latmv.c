@@ -1202,6 +1202,29 @@ static void latMV_load_attr(lat_mv *mv, lat_bytecode cur, lat_bytecode next)
   latC_apilar(mv, val);
 }
 
+static void asignar_clave_convertida(lat_mv *mv, hash_map *dic,
+                                    lat_objeto *clave, lat_objeto *valor)
+{
+  if (clave->tipo == T_STR || clave->tipo == T_LABEL)
+  {
+    latH_asignar(mv, dic, latC_checar_cadena(mv, clave), valor);
+    return;
+  }
+  char *texto = latC_astring(mv, clave);
+  size_t longitud = strlen(texto);
+  char copia[sizeof(((hash_val *)0)->llave)];
+  if (longitud >= sizeof copia)
+  {
+    free(texto);
+    latC_error(mv, "Clave de diccionario demasiado larga (maximo 63 bytes)");
+    return;
+  }
+  memcpy(copia, texto, longitud + 1);
+  free(texto);
+  /* La tabla copia la clave. Puede lanzar un error durante la inserción. */
+  latH_asignar(mv, dic, copia, valor);
+}
+
 static void latMV_store_subscr(lat_mv *mv)
 {
   lat_objeto *pos = latC_desapilar(mv);
@@ -1213,7 +1236,7 @@ static void latMV_store_subscr(lat_mv *mv)
   }
   if (obj->tipo == T_DIC)
   {
-    latH_asignar(mv, latC_checar_dic(mv, obj), latC_astring(mv, pos), exp);
+    asignar_clave_convertida(mv, latC_checar_dic(mv, obj), pos, exp);
     return;
   }
   int ipos = latC_checar_numerico(mv, pos);
@@ -1298,14 +1321,11 @@ static void binary_subscr(lat_mv *mv)
   if (obj->tipo == T_NUMERIC)
   {
     char *sobj = latC_astring(mv, obj);
-    if (ipos < 0 || ipos >= strlen(sobj))
-    {
-      o = latO_nulo;
-      latC_apilar(mv, o);
-      return;
-    }
-    char c[2] = {sobj[ipos], '\0'};
-    o = latC_crear_cadena(mv, c);
+    char c[2] = {0};
+    bool valido = ipos >= 0 && (size_t)ipos < strlen(sobj);
+    if (valido) c[0] = sobj[ipos];
+    free(sobj);
+    o = valido ? latC_crear_cadena(mv, c) : latO_nulo;
   }
   if (obj->tipo == T_STR)
   {
@@ -1336,16 +1356,15 @@ static void latMV_store_map(lat_mv *mv)
   {
     latC_error(mv, "Referencia circular detectada");
   }
-  char *_k = NULL;
+  hash_map *mapa = latC_checar_dic(mv, dic);
   if (key->tipo == T_NUMERIC)
   {
-    _k = latC_astring(mv, key);
+    asignar_clave_convertida(mv, mapa, key, val);
   }
   else
   {
-    _k = latC_checar_cadena(mv, key);
+    latH_asignar(mv, mapa, latC_checar_cadena(mv, key), val);
   }
-  latH_asignar(mv, latC_checar_dic(mv, dic), _k, val);
 }
 
 static void latMV_store_attr(lat_mv *mv, lat_bytecode cur)

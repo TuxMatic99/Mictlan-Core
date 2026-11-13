@@ -1,0 +1,12 @@
+# Resume tres mediciones vectoriales desde el ejecutor mictlan-ciencia.
+muestras = [[3, 4], [5, 12], [8, 15]]
+resumen = {cantidad: lista.longitud(muestras), total: 0}
+indice = 0
+mientras indice < resumen.cantidad
+    vector = muestras[indice]
+    resumen.total += ciencia.longitud2(vector[0], vector[1])
+    indice++
+fin
+escribir("Mediciones: " .. resumen.cantidad)
+escribir("Longitud total: " .. resumen.total)
+escribir("Promedio: " .. (resumen.total / resumen.cantidad))

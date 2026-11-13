@@ -135,4 +135,7 @@ static const lat_CReg libdic[] = {{"longitud", dic_longitud, 1},
 
 void latC_abrir_liblatino_diclib(lat_mv *mv) {
   latC_abrir_liblatino(mv, LIB_DIC_NAME, libdic);
+  /* Alias histórico de Latino. Las dos entradas comparten la misma tabla. */
+  hash_map *ctx = getCtx(mv->contexto_actual);
+  latH_asignar(mv, ctx, "diccionario", latH_obtener(ctx, LIB_DIC_NAME));
 }

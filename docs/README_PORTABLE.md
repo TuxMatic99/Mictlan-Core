@@ -1,4 +1,4 @@
-# Mictlán 0.1.0 Alfa
+# Mictlán Alpha de consola
 
 **Distribución experimental de consola para Linux x86_64**
 
@@ -20,14 +20,17 @@ Abre una terminal dentro de la carpeta extraída.
 Para ejecutar el programa de ejemplo:
 
 ```bash
-./bin/mictlan ./share/mictlan/ejemplos/hola_mictlan.lat
+./bin/mictlan --version
+./bin/mictlan ./share/mictlan/ejemplos/hola_mictlan.mict
 ```
 
 Para ejecutar tu propio programa:
 
 ```bash
-./bin/mictlan /ruta/al/programa.lat
+./bin/mictlan /ruta/al/programa.mict
 ```
+
+Los programas heredados con extensión `.lat` se ejecutan con el mismo intérprete.
 
 ## Desinstalación
 

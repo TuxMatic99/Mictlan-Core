@@ -10,10 +10,10 @@
 # CMAKE configuraciones
 cmake_minimum_required(VERSION 3.13)
 
-set(latCore TRUE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules/")
 
-project(latino)
+include(MictlanVersion)
+project(latino VERSION "${MICTLAN_VERSION_NUMERICA}")
 
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build [Debug]" FORCE) # Default to a Debug build
@@ -28,21 +28,9 @@ set(program_files "$ENV{ProgramFiles}")
 
 #
 # Mensajes de construcion
-include(LatLogo)
-message(STATUS ".............................................." )
-message(STATUS ">>>>>>   Latino ")
-message(STATUS ".............................................." )
+message(STATUS "Mictlán ${MICTLAN_VERSION} · derivado de Latino")
 message(STATUS "Generador .............. ${CMAKE_GENERATOR}"    )
 message(STATUS "Tipo de Build .......... ${CMAKE_BUILD_TYPE}"   )
-
-include(GetLatVersion)
-message(STATUS "Latino Version ......... ${LATINO_VERSION}"     )
-
-# Los recursos .rc pertenecen al ejecutable de Windows.
-# En Linux no necesitamos actualizar ese archivo.
-if(WIN32)
-    include(ResourceUpdate)
-endif()
 
 include(BuildLatOptions)
 
@@ -60,6 +48,24 @@ add_subdirectory(src)
 #ENDIF(UNIX)
 
 enable_testing()
+include(tests/alpha/registrar.cmake)
+add_executable(mictlan_test_recompilacion tests/alpha/recompilacion.c)
+target_link_libraries(mictlan_test_recompilacion PRIVATE liblatino)
+target_include_directories(mictlan_test_recompilacion PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+add_test(NAME mictlan_alpha_recompilacion COMMAND mictlan_test_recompilacion)
+set_tests_properties(mictlan_alpha_recompilacion PROPERTIES TIMEOUT 60 LABELS "alpha;memoria"
+  FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+
+# La inyección afecta al binario de prueba y su biblioteca estática.
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+  add_executable(mictlan_test_agotamiento tests/alpha/agotamiento.c)
+  target_link_libraries(mictlan_test_agotamiento PRIVATE liblatino_static)
+  target_include_directories(mictlan_test_agotamiento PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+  target_link_options(mictlan_test_agotamiento PRIVATE -Wl,--wrap=calloc -Wl,--wrap=realloc)
+  add_test(NAME mictlan_alpha_agotamiento COMMAND mictlan_test_agotamiento)
+  set_tests_properties(mictlan_alpha_agotamiento PROPERTIES TIMEOUT 20 LABELS "alpha;memoria"
+    FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+endif()
 add_executable(mictlan_test_recoleccion tests/p02g_recoleccion.c)
 target_include_directories(mictlan_test_recoleccion PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(mictlan_test_recoleccion PRIVATE liblatino)

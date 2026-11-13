@@ -1,0 +1,41 @@
+nombre = "Mictlán"
+escribir("Hola desde " .. nombre)
+
+numeros = [8, 16]
+alias = numeros
+alias[0] += 1
+tabla = {vector: numeros}
+numeros = [0]
+escribir(tabla.vector[0] + alias[1])
+
+funcion cuadrado(n)
+    retorno n ** 2
+fin
+escribir(cuadrado(3) + 2 * 4)
+escribir((verdadero && !falso) ? "sí" : "no")
+escribir(anumero("12.5"))
+escribir(anumero("0"))
+escribir(dic.longitud(tabla))
+escribir(diccionario.longitud(tabla))
+
+claves = {42: "literal"}
+claves[8] = "asignación"
+claves[verdadero] = "lógica"
+escribir(claves["42"])
+escribir(claves["8"])
+escribir(claves["verdadero"])
+numero = 123
+escribir(numero[1])
+escribir(numero[40])
+
+total = 0
+para indice en rango(1, 4)
+    total += indice
+fin
+para indice en rango(3, 0, -1)
+    total += indice
+fin
+para indice en rango(0)
+    total += 100
+fin
+escribir(total)
