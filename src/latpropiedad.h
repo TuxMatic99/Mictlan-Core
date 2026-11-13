@@ -7,7 +7,8 @@
 #else
 #define LAT_P_INTERNO
 #endif
-typedef enum { LAT_P_OBJETO, LAT_P_LISTA, LAT_P_MAPA, LAT_P_TIPOS } lat_propiedad_tipo;
+typedef enum { LAT_P_OBJETO, LAT_P_LISTA, LAT_P_MAPA, LAT_P_CADENA,
+               LAT_P_TIPOS } lat_propiedad_tipo;
 LAT_P_INTERNO void latP_iniciar(lat_mv *mv);
 LAT_P_INTERNO void latP_registrar(lat_mv *mv, void *ptr, lat_propiedad_tipo tipo);
 LAT_P_INTERNO void latP_olvidar(lat_mv *mv, void *ptr);
@@ -27,6 +28,10 @@ LAT_P_INTERNO void latP_inhibir(lat_mv *mv);
 LAT_P_INTERNO unsigned latP_profundidad(lat_mv *mv);
 LAT_P_INTERNO void latP_restaurar_profundidad(lat_mv *mv, unsigned nivel);
 LAT_P_INTERNO void latP_llamada_nativa(lat_mv *mv, lat_CFuncion funcion);
+LAT_P_INTERNO void latP_registrar_cadena(lat_mv *mv, lat_cadena *cadena);
+LAT_P_INTERNO void latP_fuente_compilada(lat_mv *mv);
+LAT_P_INTERNO lat_bytecode *latP_reducir_codigo(lat_mv *mv, lat_bytecode *codigo,
+                                               int celdas);
 LAT_P_INTERNO lat_objeto *latP_funcion_compilada(lat_mv *mv, lat_bytecode *codigo,
                                                 int ninst);
 LAT_P_INTERNO void latP_registrar_funcion_compilada(lat_mv *mv, lat_funcion *fun);

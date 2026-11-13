@@ -646,7 +646,7 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
   // } break;
   case NODO_ETIQUETA: {
     lat_objeto *o = latO_retener_constante(mv, latC_crear_cadena(mv, nodo->izq->valor->val.cadena));
-    o->nombre = nodo->izq->valor->val.cadena;
+    o->nombre = getstr(getCadena(o));
     o->tipo = T_LABEL;
     o->jump_label = i; // hacia qué instruccion vamos a saltar
     // dbc(STORE_LABEL, 0, 0, o, nodo->nlin, nodo->ncol,
@@ -664,7 +664,7 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
   case NODO_IR: {
     // if (si no encuentra etiqueta) {}
     lat_objeto *o = latO_retener_constante(mv, latC_crear_cadena(mv, nodo->izq->valor->val.cadena));
-    o->nombre = nodo->izq->valor->val.cadena;
+    o->nombre = getstr(getCadena(o));
     dbc(JUMP_LABEL, 0, 0, o, nodo->nlin, nodo->ncol, mv->nombre_archivo);
   } break;
   case NODO_FUNCION_ARGUMENTOS: {
@@ -719,6 +719,9 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
     fpn(mv, fun->stmts);
     fdbc(RETURN_VALUE, 0, 0, latO_nulo, fun->nombre->nlin, fun->nombre->ncol,
          mv->nombre_archivo);
+    /* El intérprete también consulta la instrucción siguiente al retorno. */
+    if (fi < MAX_BYTECODE_FUNCTION)
+      funcion_codigo = latP_reducir_codigo(mv, funcion_codigo, fi + 1);
     lat_objeto *f = latO_retener_constante(mv, latP_funcion_compilada(mv, funcion_codigo, fi + 1));
     f->marca = 0;
     f->es_vararg = es_vararg;
@@ -872,6 +875,8 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
     dbc(LOAD_NAME, 0, 0, dict_var, nodo->nlin, nodo->ncol, mv->nombre_archivo);
     fdbc(RETURN_VALUE, 1, 0, dict_var, fun->nombre->nlin, fun->nombre->ncol,
          mv->nombre_archivo);
+    if (fi < MAX_BYTECODE_FUNCTION)
+      funcion_codigo = latP_reducir_codigo(mv, funcion_codigo, fi + 1);
     lat_objeto *f = latO_retener_constante(mv, latP_funcion_compilada(mv, funcion_codigo, fi + 1));
     f->marca = 0;
     f->es_vararg = es_vararg;
@@ -1186,6 +1191,7 @@ LATINO_API int latC_llamar_funcion(lat_mv *mv, lat_objeto *func) {
 }
 
 LATINO_API lat_objeto *latC_analizar(lat_mv *mv, ast *nodo) {
+  latP_fuente_compilada(mv);
   lat_bytecode *codigo =
       latM_asignar(mv, sizeof(lat_bytecode) * MAX_BYTECODE_FUNCTION);
 #if DEPURAR_MEM
@@ -1198,14 +1204,8 @@ LATINO_API lat_objeto *latC_analizar(lat_mv *mv, ast *nodo) {
 #if DEPURAR_AST
   /* debug deshabilitado: dump de bytecode */
 #endif
-  lat_bytecode *nuevo_codigo = latM_asignar(mv, sizeof(lat_bytecode) * (i + 1));
-  memcpy(nuevo_codigo, codigo, sizeof(lat_bytecode) * (i + 1));
-#if DEPURAR_MEM
-  printf("latC_analizar.nuevo_codigo: %p\n", nuevo_codigo);
-#endif
-  /* debug eliminado: latC_analizar nuevo_codigo */
-  latM_liberar(mv, codigo);
-  lat_objeto *fun = latP_funcion_compilada(mv, nuevo_codigo, i);
+  codigo = latP_reducir_codigo(mv, codigo, i + 1);
+  lat_objeto *fun = latP_funcion_compilada(mv, codigo, i);
   fun->marca = 0;
   fun->nombre = "dummy";
   /* debug eliminado: latC_analizar función creada */

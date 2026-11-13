@@ -609,6 +609,7 @@ LATINO_API void latC_destruir_mv(lat_mv *mv)
   latO_liberar_constantes(mv);
   latP_liberar_objetos(mv);
   latS_liberar_cadenas(mv);
+  latP_cerrar(mv);
   latM_liberar(mv, mv->global->strt.hash);
   latM_liberar(mv, mv->global);
 #if DEPURAR_MEM

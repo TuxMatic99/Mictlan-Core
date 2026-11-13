@@ -54,7 +54,7 @@ typedef struct latG_nativa {
 struct lat_constante_registro {
     size_t capacidad, cantidad;
     bool general;
-    bool habilitada, opaca;
+    bool habilitada, opaca, cadenas, ejecutada;
     unsigned profundidad;
     size_t bytes_registrados, fijados, pico_bytes_vm;
     size_t reservas_recuperadas, bytes_recuperados;
@@ -271,9 +271,36 @@ void latM_liberar(lat_mv *mv, void *ptr) {
     }
 }
 
+lat_bytecode *latP_reducir_codigo(lat_mv *mv, lat_bytecode *codigo, int celdas) {
+    /* El buffer todavía no pertenece a una función. La compactación es
+       opcional y el bloque original sigue siendo válido si realloc falla. */
+    size_t anterior = latM_tamanio(codigo);
+    lat_bytecode *compacto = realloc(codigo, (size_t)celdas * sizeof(*codigo));
+    if (!compacto) return codigo;
+    mv->memoria_usada = mv->memoria_usada - anterior + latM_tamanio(compacto);
+    return compacto;
+}
+
 static struct lat_constante_registro *region(lat_mv *mv) {
     struct lat_constante_registro *r = mv ? mv->constantes_propias : NULL;
     return r && r->general ? r : NULL;
+}
+
+void latP_registrar_cadena(lat_mv *mv, lat_cadena *cadena) {
+    struct lat_constante_registro *r = region(mv);
+    if (r && r->cadenas) registrar(mv, cadena, LAT_P_CADENA, false);
+}
+
+void latP_fuente_compilada(lat_mv *mv) {
+    struct lat_constante_registro *r = region(mv);
+    if (!r || !r->cadenas || !mv->nombre_archivo) return;
+    /* El bytecode puede conservar una ruta usada por incluir() mucho
+       después de que la cadena de entrada salga de la pila. */
+    lat_objeto *ruta = latC_crear_cadena(mv, mv->nombre_archivo);
+    lat_cadena *cadena = getCadena(ruta);
+    registrar(mv, cadena, LAT_P_CADENA, true);
+    mv->nombre_archivo = getstr(cadena);
+    latM_liberar(mv, ruta);
 }
 
 void latP_lista_datos(lat_mv *mv, lista *l) {
@@ -317,7 +344,10 @@ unsigned latP_profundidad(lat_mv *mv) {
 
 void latP_restaurar_profundidad(lat_mv *mv, unsigned nivel) {
     struct lat_constante_registro *r = region(mv);
-    if (r) r->profundidad = nivel;
+    if (r) {
+        r->profundidad = nivel;
+        if (nivel) r->ejecutada = true;
+    }
 }
 
 void latP_llamada_nativa(lat_mv *mv, lat_CFuncion funcion) {
@@ -334,6 +364,21 @@ LATINO_API latG_estado latG_habilitar(lat_mv *mv) {
     if (r->profundidad || mv->error) return LAT_G_OCUPADO;
     if (r->opaca) return LAT_G_OPACO;
     r->habilitada = true;
+    return LAT_G_OK;
+}
+
+LATINO_API latG_estado latG_habilitar_cadenas(lat_mv *mv) {
+    struct lat_constante_registro *r = region(mv);
+    if (!r || !r->habilitada) return LAT_G_INACTIVO;
+    if (r->profundidad || mv->error) return LAT_G_OCUPADO;
+    if (r->opaca) return LAT_G_OPACO;
+    if (r->cadenas) return LAT_G_OK;
+    if (r->ejecutada || mv->funciones_propias) return LAT_G_OCUPADO;
+    r->cadenas = true;
+    stringtable *tb = &mv->global->strt;
+    for (int i = 0; i < tb->size; ++i)
+        for (lat_gcobjeto *p = tb->hash[i]; p; p = p->gch.next)
+            latP_registrar_cadena(mv, &p->cadena);
     return LAT_G_OK;
 }
 
@@ -421,8 +466,11 @@ static void marcar_valor(latG_trazado *t, const lat_objeto *o) {
     case T_FUN:
         if (!latP_funcion_registrada(t->mv, getFun(o))) t->estado = LAT_G_REFERENCIA;
         break;
-    case T_NULL: case T_BOOL: case T_NUMERIC: case T_STR:
-    case T_CFUN: case T_INTEGER: case T_CHAR: case T_LABEL:
+    case T_STR: case T_LABEL:
+        if (t->mv->constantes_propias->cadenas) marcar(t, getCadena(o), LAT_P_CADENA);
+        break;
+    case T_NULL: case T_BOOL: case T_NUMERIC:
+    case T_CFUN: case T_INTEGER: case T_CHAR:
         break; /* Escalares o contenidos conservados hasta el cierre. */
     case T_CPTR: case T_CLASS: case T_INSTANCE:
         t->estado = LAT_G_OPACO;
@@ -462,6 +510,7 @@ static latG_estado trazar(lat_mv *mv, struct lat_constante_registro *r) {
     if (mv->ptrpila < 0 || mv->ptrpila > MAX_STACK_SIZE ||
         mv->ptrctx < 0 || (size_t)mv->ptrctx >= sizeof(mv->contexto) / sizeof(mv->contexto[0]) ||
         mv->tope != mv->pila + mv->ptrpila) return LAT_G_REFERENCIA;
+    if (mv->actfun || mv->dbg_target_ctor) return LAT_G_OPACO;
     marcar(&t, mv->global->argv, LAT_P_OBJETO);
     marcar(&t, mv->label_ctx, LAT_P_OBJETO);
     marcar(&t, mv->contexto_actual, LAT_P_OBJETO);
@@ -479,6 +528,7 @@ static latG_estado trazar(lat_mv *mv, struct lat_constante_registro *r) {
             LIST_FOREACH(l, primero, siguiente, n) marcar(&t, n->valor, LAT_P_OBJETO);
             break;
         }
+        case LAT_P_CADENA: break;
         default: return LAT_G_REFERENCIA;
         }
     }
@@ -501,6 +551,24 @@ static void barrer(lat_mv *mv, struct lat_constante_registro *r, lat_propiedad_t
     }
 }
 
+static void barrer_cadenas(lat_mv *mv) {
+    stringtable *tb = &mv->global->strt;
+    for (int i = 0; i < tb->size; ++i) {
+        lat_gcobjeto **lugar = &tb->hash[i];
+        while (*lugar) {
+            lat_gcobjeto *p = *lugar;
+            lat_propiedad_entrada *e = buscar(mv, &p->cadena);
+            if (e && !e->marcada) {
+                *lugar = p->gch.next;
+                --tb->nuse;
+                latM_liberar(mv, p);
+            } else {
+                lugar = &p->gch.next;
+            }
+        }
+    }
+}
+
 LATINO_API latG_estado latG_recolectar(lat_mv *mv) {
     struct lat_constante_registro *r = region(mv);
     if (!r || !r->habilitada) return LAT_G_INACTIVO;
@@ -514,6 +582,7 @@ LATINO_API latG_estado latG_recolectar(lat_mv *mv) {
     barrer(mv, r, LAT_P_MAPA);
     barrer(mv, r, LAT_P_LISTA);
     barrer(mv, r, LAT_P_OBJETO);
+    if (r->cadenas) barrer_cadenas(mv);
     r->reservas_recuperadas = cantidad - r->cantidad;
     r->bytes_recuperados = bytes - mv->memoria_usada;
     return LAT_G_OK;

@@ -62,6 +62,12 @@ target_link_libraries(mictlan_test_p11_pila PRIVATE liblatino)
 add_test(NAME mictlan_p11_pila COMMAND mictlan_test_p11_pila)
 set_tests_properties(mictlan_p11_pila PROPERTIES TIMEOUT 30 LABELS "p11;pila"
   FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+add_executable(mictlan_test_p11_cadenas tests/p11_gc_cadenas.c)
+target_include_directories(mictlan_test_p11_cadenas PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_p11_cadenas PRIVATE liblatino)
+add_test(NAME mictlan_p11_gc_cadenas COMMAND mictlan_test_p11_cadenas)
+set_tests_properties(mictlan_p11_gc_cadenas PROPERTIES TIMEOUT 30 LABELS "p11;memoria"
+  FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
 
 # La inyección afecta al binario de prueba y su biblioteca estática.
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
