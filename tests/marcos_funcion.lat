@@ -1,0 +1,44 @@
+a = 10
+funcion sumar(a, b)
+    retorno a + b
+fin
+poner(sumar(1, 2))
+poner(a)
+
+funcion fibo(n)
+    si n < 2
+        retorno n
+    fin
+    retorno fibo(n - 1) + fibo(n - 2)
+fin
+poner(fibo(10))
+
+funcion par()
+    retorno 7, 9
+fin
+x, y = par()
+poner(x)
+poner(y)
+x, y, z = 1, 2
+poner(x)
+poner(y)
+poner(z)
+x, y = 4, 5, 6
+poner(x)
+poner(y)
+
+funcion contar(a, ...)
+    argumentos = [...]
+    retorno lista.longitud(argumentos)
+fin
+poner(100 + contar(1, 2, 3))
+poner(contar(1))
+poner(contar(1, nulo))
+
+global indice = 10
+funcion leer_despues_de_asignar()
+    indice = 0
+    retorno indice
+fin
+poner(leer_despues_de_asignar())
+poner(indice)

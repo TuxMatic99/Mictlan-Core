@@ -25,6 +25,8 @@ THE SOFTWARE.
 #include "latino.h"
 #include "latgc.h"
 #include "latmem.h"
+#include "latpropiedad.h"
+#include <limits.h>
 
 #define LIB_CADENA_NAME "cadena"
 
@@ -694,12 +696,15 @@ void str_ejecutar(lat_mv *mv) {
     char *tmp_name = mv->nombre_archivo;
     mv->nombre_archivo = "CADENA";
     ast *nodo = latA_analizar_exp(codigo, &status);
-    lat_objeto *func = latC_analizar(mv, nodo);
     if (status == 0 && nodo != NULL) {
+        lat_objeto *func = latC_analizar(mv, nodo);
         status = latC_llamar_funcion(mv, func);
         latO_destruir(mv, func);
     } else {
+        latA_destruir(nodo);
+        mv->nombre_archivo = tmp_name;
         latC_error(mv, "Error al ejecutar cadena");
+        return;
     }
     mv->nombre_archivo = tmp_name;
     latA_destruir(nodo);
@@ -840,85 +845,121 @@ void str_match(lat_mv *mv) {
 
 void imprimir_pila(lat_mv *mv);
 
-void str_formato(lat_mv *mv) {
-    lat_objeto *o = latC_desapilar(mv);
-    double top = latC_checar_numerico(mv, o);
-    int arg = 1;
-    int i = 0;
-    lista *params = latL_crear(mv);
-    while (i < top) {
-        latL_insertar_inicio(mv, params, latO_clonar(mv, latC_desapilar(mv)));
-        i++;
+static bool formato_agregar(char **texto, size_t *longitud, size_t *capacidad,
+                            const char *parte, size_t n, const char **error) {
+    if (n > (size_t)MAX_STR_LENGTH - 1 - *longitud) {
+        *error = "Resultado de formato demasiado largo";
+        return false;
     }
-    lat_objeto *ofmt = latL_extraer_inicio(mv, params);
-    if (ofmt == NULL) {
+    size_t necesaria = *longitud + n + 1;
+    if (necesaria > *capacidad) {
+        size_t nueva = *capacidad ? *capacidad : 128;
+        while (nueva < necesaria) nueva *= 2;
+        char *ampliada = realloc(*texto, nueva);
+        if (!ampliada) {
+            *error = "Memoria agotada al dar formato";
+            return false;
+        }
+        *texto = ampliada;
+        *capacidad = nueva;
+    }
+    memcpy(*texto + *longitud, parte, n);
+    *longitud += n;
+    (*texto)[*longitud] = '\0';
+    return true;
+}
+
+static bool formato_numerico(char *destino, size_t capacidad, char opcion,
+                             lat_mv *mv, lat_objeto *o, const char **error) {
+    /* latC_adouble puede lanzar para los tipos que no se enumeran aqui. */
+    switch (o->tipo) {
+        case T_NULL: case T_BOOL: case T_NUMERIC: case T_STR: case T_LIST: case T_DIC:
+            break;
+        default:
+            *error = "Conversion de tipo de dato incompatible";
+            return false;
+    }
+    double valor = latC_adouble(mv, o);
+    if (opcion == 'c' || opcion == 'i' || opcion == 'o' || opcion == 'x') {
+        if (!isfinite(valor) || valor < INT_MIN || valor > INT_MAX) {
+            *error = "Numero fuera de rango para el formato";
+            return false;
+        }
+        int entero = (int)valor;
+        if (opcion == 'c') snprintf(destino, capacidad, "%c", entero);
+        if (opcion == 'i') snprintf(destino, capacidad, "%i", entero);
+        if (opcion == 'o') snprintf(destino, capacidad, "%o", (unsigned)entero);
+        if (opcion == 'x') snprintf(destino, capacidad, "%x", (unsigned)entero);
+    } else if (opcion == 'f') {
+        snprintf(destino, capacidad, "%f", valor);
+    } else if (opcion == 'd') {
+        snprintf(destino, capacidad, LAT_NUMERIC_FMT, valor);
+    } else {
+        snprintf(destino, capacidad, "%e", valor);
+    }
+    return true;
+}
+
+void str_formato(lat_mv *mv) {
+    double cantidad = latC_checar_numerico(mv, latC_desapilar(mv));
+    if (!isfinite(cantidad) || cantidad < 0 || cantidad > mv->ptrpila ||
+        cantidad != floor(cantidad)) {
+        latC_error(mv, "Numero de argumentos invalido para el formato");
+        return;
+    }
+    if (cantidad == 0) {
         latC_apilar(mv, latO_nulo);
         return;
     }
-    char *strfrmt = latC_checar_cadena(mv, ofmt);
-    char *strfrmt_end = strfrmt + strlen(strfrmt);
-    char *b = calloc(1, 1024);
-    while (strfrmt < strfrmt_end) {
-        if (*strfrmt != '%') {
-            size_t blen = strlen(b);
-            b[blen] = *strfrmt++;
-            b[blen + 1] = '\0';
-        } else if (*++strfrmt == '%') {
-            size_t blen = strlen(b);
-            b[blen] = *strfrmt++;
-            b[blen + 1] = '\0';
+    int total = (int)cantidad;
+    lat_objeto *argumentos = mv->tope - total;
+    const char *formato = latC_checar_cadena(mv, argumentos);
+    char *texto = NULL;
+    size_t longitud = 0, capacidad = 0;
+    const char *error = NULL;
+    int siguiente = 1;
+    for (const char *p = formato; *p && !error; ++p) {
+        if (*p != '%') {
+            formato_agregar(&texto, &longitud, &capacidad, p, 1, &error);
+            continue;
+        }
+        ++p;
+        if (*p == '%') {
+            formato_agregar(&texto, &longitud, &capacidad, p, 1, &error);
+            continue;
+        }
+        if (!*p || !strchr("cifdoxes", *p)) {
+            error = "Opcion de formato invalida";
+            break;
+        }
+        if (siguiente == total) {
+            error = "Numero de argumentos invalido para el formato";
+            break;
+        }
+        lat_objeto *valor = &argumentos[siguiente++];
+        if (*p == 's') {
+            char *parte = latP_texto(valor, &error);
+            if (parte) {
+                formato_agregar(&texto, &longitud, &capacidad, parte, strlen(parte), &error);
+                free(parte);
+            }
         } else {
-#ifdef _WIN32
-            char buff[MAX_BUFFERSIZE];
-#else
-            char buff[MAX_STR_LENGTH];
-#endif
-            if (++arg > top) {
-                latC_error(mv, "Numero de argumentos invalido para el formato");
-            }
-            switch (*strfrmt++) {
-                case 'c': { // chacater
-                    lat_objeto *cr = latL_extraer_inicio(mv, params);
-                    sprintf(buff, "%c", (int)latC_adouble(mv, cr));
-                } break;
-                case 'i': { // integer
-                    lat_objeto *ent = latL_extraer_inicio(mv, params);
-                    sprintf(buff, "%i", (int)latC_adouble(mv, ent));
-                } break;
-                case 'f': { // float
-                    lat_objeto *dec = latL_extraer_inicio(mv, params);
-                    sprintf(buff, "%f", (float)latC_adouble(mv, dec));
-                } break;
-                case 'd': { // decimal
-                    lat_objeto *dec = latL_extraer_inicio(mv, params);
-                    sprintf(buff, LAT_NUMERIC_FMT, latC_adouble(mv, dec));
-                } break;
-                case 'o': { // octal
-                    lat_objeto *oct = latL_extraer_inicio(mv, params);
-                    sprintf(buff, "%o", (int)latC_adouble(mv, oct));
-                } break;
-                case 'x': { // hex
-                    lat_objeto *hex = latL_extraer_inicio(mv, params);
-                    sprintf(buff, "%x", (int)latC_adouble(mv, hex));
-                } break;
-                case 'e': { // sci
-                    lat_objeto *sci = latL_extraer_inicio(mv, params);
-                    sprintf(buff, "%e", latC_adouble(mv, sci));
-                } break;
-                case 's': { // string
-                    lat_objeto *str = latL_extraer_inicio(mv, params);
-                    sprintf(buff, "%s", latC_astring(mv, str));
-                } break;
-                default: {
-                    latC_error(mv, "Opcion de formato invalida");
-                }
-            }
-            strcat(b, buff);
+            /* El maximo decimal finito de double ocupa menos de 330 bytes. */
+            char parte[384];
+            if (formato_numerico(parte, sizeof(parte), *p, mv, valor, &error))
+                formato_agregar(&texto, &longitud, &capacidad, parte, strlen(parte), &error);
         }
     }
-    latC_apilar_string(mv, b);
-    latL_limpiar_destruir(mv, params);
-    free(b);
+    if (error) {
+        free(texto);
+        latC_error(mv, "%s", error);
+        return;
+    }
+    /* Los argumentos siguen en celdas activas durante el formato. */
+    mv->ptrpila -= total;
+    mv->tope = argumentos;
+    latC_apilar_string(mv, texto ? texto : "");
+    free(texto);
 }
 
 void str_char(lat_mv *mv) {

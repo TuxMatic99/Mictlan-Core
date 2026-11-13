@@ -268,7 +268,7 @@ expression
     | function_anonymous
     | ternary_expression
     | incdec_statement
-    | VAR_ARGS { $$ = latA_nodo(NODO_LOAD_VAR_ARGS , NULL, NULL, 0, 0); }
+    | VAR_ARGS { $$ = $1; $$->tipo = NODO_LOAD_VAR_ARGS; }
     | SUPER '(' argument_expression_list ')' { $$ = latA_super($3, @1.first_line, @1.first_column); }
     | SUPER '(' ')' { $$ = latA_super(NULL, @1.first_line, @1.first_column); }
     | NUEVA IDENTIFICADOR '(' argument_expression_list ')' { $$ = latA_nodo(NODO_FUNCION_LLAMADA, $2, $4, @1.first_line, @1.first_column); }

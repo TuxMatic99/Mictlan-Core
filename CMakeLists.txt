@@ -60,6 +60,32 @@ add_subdirectory(src)
 #ENDIF(UNIX)
 
 enable_testing()
+add_executable(mictlan_test_recoleccion tests/p02g_recoleccion.c)
+target_include_directories(mictlan_test_recoleccion PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_recoleccion PRIVATE liblatino)
+set_target_properties(mictlan_test_recoleccion PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED YES)
+foreach(caso IN ITEMS ciclos raices errores opacos)
+  add_test(NAME mictlan_p02g_${caso} COMMAND mictlan_test_recoleccion ${caso})
+  set_tests_properties(mictlan_p02g_${caso} PROPERTIES TIMEOUT 20 LABELS "p02g;memoria"
+    FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+endforeach()
+add_executable(mictlan_test_formato tests/p02g_formato.c)
+target_include_directories(mictlan_test_formato PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_formato PRIVATE liblatino)
+add_test(NAME mictlan_formato COMMAND mictlan_test_formato)
+set_tests_properties(mictlan_formato PROPERTIES TIMEOUT 20
+  FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+add_test(NAME mictlan_cli_expresion_larga COMMAND "${CMAKE_COMMAND}"
+  "-DMICTLAN_EJECUTABLE=$<TARGET_FILE:latino>"
+  -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verificar_expresion_larga.cmake")
+set_tests_properties(mictlan_cli_expresion_larga PROPERTIES TIMEOUT 20)
+add_executable(mictlan_test_generativo tests/p02g_generativo.c)
+target_include_directories(mictlan_test_generativo PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_generativo PRIVATE liblatino)
+set_target_properties(mictlan_test_generativo PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED YES)
+add_test(NAME mictlan_p02g_generativo COMMAND mictlan_test_generativo)
+set_tests_properties(mictlan_p02g_generativo PROPERTIES TIMEOUT 60 LABELS "p02g;parser;bytecode;memoria"
+  FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
 # Recuperacion real de pila/FFI tras longjmp. Ningun fallo se invierte ni omite.
 add_executable(mictlan_test_stack_recovery tests/stack_recovery_regression.c)
 target_include_directories(mictlan_test_stack_recovery PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -73,8 +99,21 @@ foreach(caso IN ITEMS directa anidada prefijo anidada_prefijo prestados reentrad
         FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
 endforeach()
 
-#se comentan los test que requieren entrada de datos leer()
-add_test(NAME coverage COMMAND latino ejemplos/coverage.lat)
+# Programa de cobertura restaurado del historial de Latino. Comprobar valores
+# ademas del estado de salida, incluida la recursion de Fibonacci.
+foreach(caso IN ITEMS coverage mictlan_marcos_funcion)
+  if(caso STREQUAL "coverage")
+    set(programa "${CMAKE_CURRENT_SOURCE_DIR}/ejemplos/coverage.lat")
+  else()
+    set(programa "${CMAKE_CURRENT_SOURCE_DIR}/tests/marcos_funcion.lat")
+  endif()
+  add_test(NAME ${caso} COMMAND "${CMAKE_COMMAND}"
+    "-DMICTLAN_EJECUTABLE=$<TARGET_FILE:latino>"
+    "-DMICTLAN_PROGRAMA=${programa}"
+    "-DMICTLAN_ESPERADO=${CMAKE_CURRENT_SOURCE_DIR}/tests/${caso}.out"
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verificar_programa.cmake")
+  set_tests_properties(${caso} PROPERTIES TIMEOUT 30)
+endforeach()
 
 # Regresion: listas compartidas y reasignacion.
 

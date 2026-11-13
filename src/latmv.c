@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include <string.h>
 
 #include "latcompat.h"
+#include "latbytecode.h"
 #include "latdo.h"
 #include "latgc.h"
 #include "latlist.h"
@@ -514,7 +515,8 @@ LATINO_API void latC_abrir_liblatino(lat_mv *mv, const char *nombre_lib,
 
 LATINO_API lat_mv *latC_crear_mv()
 {
-  lat_mv *mv = (lat_mv *)malloc(sizeof(lat_mv));
+  lat_mv *mv = calloc(1, sizeof(*mv));
+  if (!mv) return NULL;
   mv->memoria_usada = 0;
   mv->funciones_propias = NULL;
   mv->modulos_propios = NULL;
@@ -542,6 +544,10 @@ LATINO_API lat_mv *latC_crear_mv()
   mv->global->strt.hash = NULL;
   latS_resize(mv, MIN_STRTABLE_SIZE);
   mv->pila = calloc(MAX_STACK_SIZE, sizeof(lat_objeto));
+  if (!mv->pila) {
+    latC_destruir_mv(mv);
+    return NULL;
+  }
   mv->ptrpila = 0;
   mv->tope = mv->pila;
   mv->ptrprevio = 1;
@@ -708,8 +714,7 @@ LATINO_API lat_objeto *latC_desapilar(lat_mv *mv)
 
 LATINO_API lat_objeto *latC_tope(lat_mv *mv)
 {
-  lat_objeto *p = (lat_objeto *)&mv->pila[mv->ptrpila - 1];
-  return p;
+  return mv->ptrpila > 0 ? &mv->pila[mv->ptrpila - 1] : NULL;
 }
 
 LATINO_API void latC_apilar_double(lat_mv *mv, double num)
@@ -748,6 +753,12 @@ LATINO_API void latC_apilar_string(lat_mv *mv, const char *str)
 LATINO_API lat_objeto *latC_crear_funcion(lat_mv *mv, lat_bytecode *inslist,
                                           int ninst)
 {
+  latP_inhibir(mv);
+  return latP_funcion_compilada(mv, inslist, ninst);
+}
+
+lat_objeto *latP_funcion_compilada(lat_mv *mv, lat_bytecode *inslist, int ninst)
+{
   lat_objeto *ret = latO_crear_funcion(mv);
   lat_funcion *fval = (lat_funcion *)latM_asignar(mv, sizeof(lat_funcion));
 #if DEPURAR_MEM
@@ -755,7 +766,7 @@ LATINO_API lat_objeto *latC_crear_funcion(lat_mv *mv, lat_bytecode *inslist,
 #endif
   fval->codigo = inslist;
   fval->ninst = ninst;
-  latO_registrar_funcion(mv, fval);
+  latP_registrar_funcion_compilada(mv, fval);
   setFun(ret, fval);
   ret->ninst = ninst;
   return ret;
@@ -855,7 +866,12 @@ void latMV_set_symbol(lat_mv *mv, lat_objeto *name, lat_objeto *val)
     {
       latC_error(mv, "Intento de reasignar valor a la funcion '%s'", str_name);
     }
-    ctx = global_ctx;
+    if (ctx != global_ctx)
+    {
+      /* Preserve global updates while keeping this frame's cloned binding
+         consistent with subsequent reads in the same frame. */
+      latO_asignar_ctx(mv, global_ctx, str_name, val);
+    }
   }
 
   latO_asignar_ctx(mv, ctx, str_name, val);
@@ -864,11 +880,41 @@ void latMV_set_symbol(lat_mv *mv, lat_objeto *name, lat_objeto *val)
   latMV_cache_invalidate(mv);
 }
 
+static void latMV_store_name(lat_mv *mv, lat_bytecode cur, lat_objeto *val)
+{
+  lat_objeto *name = cur.meta;
+  if (cur.a == 1) {
+    /* Vincular el parametro al marco de la llamada, incluso si existe un
+       nombre igual en el contexto global. */
+    latO_asignar_ctx(mv, obtener_contexto(mv), latC_checar_cadena(mv, name), val);
+    latMV_cache_invalidate(mv);
+  } else {
+    latMV_set_symbol(mv, name, val);
+  }
+}
+
 void latMV_set_label(lat_mv *mv, lat_objeto *name, lat_objeto *val)
 {
   char *str_name = latC_checar_cadena(mv, name);
   lat_objeto *ctx = mv->label_ctx;
   latO_asignar_ctx(mv, ctx, str_name, val);
+}
+
+static int latMV_cantidad_operandos(lat_mv *mv, lat_bytecode cur)
+{
+  unsigned disponibles = (unsigned)mv->ptrpila;
+  if (cur.b <= cur.a && cur.a - cur.b <= disponibles) {
+    unsigned fijos = cur.a - cur.b;
+    if (!cur.b) return (int)fijos;
+    lat_objeto *args = latO_obtener_contexto(mv, obtener_contexto(mv), "varargs");
+    if (args) {
+      unsigned cantidad = (unsigned)latL_longitud(latC_checar_lista(mv, args));
+      if (cantidad <= (disponibles - fijos) / cur.b)
+        return (int)(fijos + cur.b * cantidad);
+    }
+  }
+  latC_error(mv, "Operandos insuficientes o argumentos variables fuera de su marco");
+  return 0;
 }
 
 static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
@@ -883,7 +929,7 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
   printf("latMV_call_function.fun: %p\n", fun);
 #endif
   setobj2obj(fun, latC_desapilar(mv));
-  int num_args = cur.a;
+  int num_args = latMV_cantidad_operandos(mv, cur);
   // Si es una clase, crear instancia y ejecutar su constructor
   if (fun->es_clase || fun->tipo == T_CLASS)
   {
@@ -954,26 +1000,25 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
   }
 
   int nparams = fun->nparams;
-  while (mv->ptrpila < nparams)
+  while (mv->ptrpila < nparams && !fun->es_vararg)
   {
     latC_apilar(mv, latO_nulo);
     num_args++;
   }
-  if (nparams == FUNCION_VAR_ARGS)
+  if (fun->tipo == T_FUN && fun->es_vararg)
+  {
+    /* nparams incluye el marcador ... del compilador. Los argumentos
+       fijos faltantes se completan dentro de este marco. */
+    while (num_args < nparams - 1)
+    {
+      latC_apilar(mv, latO_nulo);
+      num_args++;
+    }
+  }
+  else if (nparams == FUNCION_VAR_ARGS)
   {
     // T_CFUN y varargs
     fun->es_vararg = true;
-    lat_objeto *ctx = obtener_contexto(mv);
-    lat_objeto *varargs =
-        (lat_objeto *)latO_obtener_contexto(mv, ctx, "varargs");
-    if (varargs)
-    {
-      lista *lst = latC_checar_lista(mv, varargs);
-      if (latL_longitud(lst))
-      {
-        num_args = (num_args - 1) + latL_longitud(lst);
-      }
-    }
     latC_apilar_double(mv, (double)num_args);
   }
   else if (num_args != nparams && !fun->es_vararg)
@@ -1014,13 +1059,15 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
     latC_error(mv, "Llamadas a funciones recursivas excedido en '%s'",
                fun->nombre);
   }
-  bool apilar = next.ins == STORE_NAME || !strcmp(fun->nombre, "incluir") ||
+  bool apilar = fun->tipo == T_FUN || next.ins == STORE_NAME ||
+                (fun->nombre != NULL && !strcmp(fun->nombre, "incluir")) ||
                 (fun->nombre != NULL && func->nombre != NULL &&
                  strcmp(func->nombre, fun->nombre));
   if (apilar)
   {
     apilar_contexto(mv, NULL);
-    mv->ptrprevio = (mv->ptrpila);
+    mv->ptrprevio = fun->tipo == T_FUN && fun->es_vararg
+        ? mv->ptrpila - num_args : mv->ptrpila;
   }
   else
   {
@@ -1028,7 +1075,8 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
   }
   mv->prev_args = latMV_funcion_correr(mv, fun);
   mv->numejec--;
-  if (fun->tipo != T_CFUN && mv->prev_args == 0 && next.ins == ADJUST_STACK)
+  if (fun->tipo != T_CFUN && mv->prev_args == 0 && next.ins == ADJUST_STACK &&
+      next.b == LAT_AJUSTE_ANTERIOR)
   {
     latC_error(mv,
                "La funcion '%s' no "
@@ -1051,27 +1099,9 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
 
 static void latMV_build_list(lat_mv *mv, lat_bytecode cur)
 {
-  int num_elem = 0;
-  if (cur.b)
-  {
-    lat_objeto *ctx = obtener_contexto(mv);
-    lat_objeto *varargs =
-        (lat_objeto *)latO_obtener_contexto(mv, ctx, "varargs");
-    if (!varargs)
-    {
-      latC_error(mv, "varargs (...) no existe en este contexto");
-    }
-    lista *lst = latC_checar_lista(mv, varargs);
-    num_elem = (cur.a - cur.b) + (cur.b * latL_longitud(lst));
-  }
-  else
-  {
-    num_elem = cur.a;
-  }
-  if (mv->prev_args)
-  {
-    num_elem += mv->prev_args - 1;
-  }
+  int num_elem = latMV_cantidad_operandos(mv, cur);
+  /* Los resultados de llamadas anteriores no cambian los operandos que
+     esta instruccion de lista declaro. Las expansiones se cuentan arriba. */
 #if DEPURAR_MV
   printf("%i\t%i\t", cur.a, cur.b);
 #endif
@@ -1344,12 +1374,17 @@ static void latMV_store_attr(lat_mv *mv, lat_bytecode cur)
 
 static void latMV_op_var_args(lat_mv *mv, lat_bytecode cur)
 {
-  int num_elem = cur.a;
+  int base = cur.b == LAT_VARARGS_MARCO ? mv->ptrprevio : 0;
+  if (base < 0 || base > mv->ptrpila || cur.a > (unsigned)(mv->ptrpila - base)) {
+    latC_error(mv, "Pila incoherente para argumentos variables");
+    return;
+  }
+  int num_elem = base + (int)cur.a;
   lat_objeto *obj = latC_crear_lista(mv, latL_crear(mv));
   while (num_elem < mv->ptrpila)
   {
     lat_objeto *tmp = latO_clonar(mv, latC_desapilar(mv));
-    if (tmp != NULL && tmp->tipo != T_NULL)
+    if (tmp != NULL && (cur.b == LAT_VARARGS_MARCO || tmp->tipo != T_NULL))
     {
       latL_insertar_inicio(mv, latC_checar_lista(mv, obj), tmp);
     }
@@ -1370,7 +1405,7 @@ static void latMV_load_var_args(lat_mv *mv)
   LIST_FOREACH(list, primero, siguiente, cur)
   {
     lat_objeto *tmp = (lat_objeto *)cur->valor;
-    if (tmp != NULL && tmp->tipo != T_NULL)
+    if (tmp != NULL)
     {
       latC_apilar(mv, tmp);
     }
@@ -1481,7 +1516,37 @@ static void dbg_super_log_stack(lat_mv *mv, lat_objeto *func,
 }
 #endif
 
-int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
+static void ajustar_pila(lat_mv *mv, lat_bytecode cur, int *inicio_asignacion)
+{
+  if (cur.b == LAT_AJUSTE_INICIO) {
+    *inicio_asignacion = mv->ptrpila;
+    return;
+  }
+  if (cur.b == LAT_AJUSTE_ASIGNACION) {
+    if (*inicio_asignacion < 0 || *inicio_asignacion >= MAX_STACK_SIZE ||
+        mv->ptrpila < *inicio_asignacion ||
+        cur.a >= (unsigned)(MAX_STACK_SIZE - *inicio_asignacion)) {
+      latC_error(mv, "Pila incoherente en asignacion multiple");
+      return;
+    }
+    int fin = *inicio_asignacion + (int)cur.a;
+    while (mv->ptrpila > fin) latC_desapilar(mv);
+    while (mv->ptrpila < fin) latC_apilar(mv, latO_nulo);
+    *inicio_asignacion = -1;
+    mv->prev_args = 0;
+    return;
+  }
+  if (cur.a >= MAX_STACK_SIZE || mv->ptrprevio < 0 || mv->ptrprevio >= MAX_STACK_SIZE) {
+    latC_error(mv, "Ajuste de pila fuera de rango");
+    return;
+  }
+  int cantidad = (int)cur.a;
+  while (cantidad > mv->ptrpila) latC_apilar(mv, latO_nulo);
+  int limite = mv->ptrprevio + cantidad;
+  while (mv->ptrpila > 0 && mv->ptrpila >= limite) latC_desapilar(mv);
+}
+
+static int ejecutar_funcion(lat_mv *mv, lat_objeto *func)
 {
   if (func->tipo == T_FUN)
   {
@@ -1496,6 +1561,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
     lat_bytecode *inslist = getFun(func)->codigo;
     lat_bytecode cur;
     int pc = 0;
+    int inicio_asignacion = -1;
 
 #if USE_COMPUTED_GOTO
     // OPTIMIZACIÓN: Tabla de etiquetas para despacho rápido
@@ -1735,8 +1801,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
   op_STORE_NAME:
   {
     lat_objeto *val = (mv->ptrpila == 0) ? latO_nulo : latC_desapilar(mv);
-    lat_objeto *name = (lat_objeto *)cur.meta;
-    latMV_set_symbol(mv, name, val);
+    latMV_store_name(mv, cur, val);
     pc++;
     cur = inslist[pc];
     DISPATCH();
@@ -1919,14 +1984,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
   }
   op_ADJUST_STACK:
   {
-    while (cur.a > mv->ptrpila)
-    {
-      latC_apilar(mv, latO_nulo);
-    }
-    while (mv->ptrpila >= (mv->ptrprevio + cur.a))
-    {
-      latC_desapilar(mv);
-    }
+    ajustar_pila(mv, cur, &inicio_asignacion);
     pc++;
     cur = inslist[pc];
     DISPATCH();
@@ -2124,7 +2182,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
           int t = val ? val->tipo : -1;
           printf("[VM] STORE_NAME name='%s' tipo=%d ptrpila=%d\n", n, t, mv->ptrpila);
         }
-        latMV_set_symbol(mv, name, val);
+        latMV_store_name(mv, cur, val);
 #if DEPURAR_MV
         latO_imprimir(mv, name, false);
         printf("\t");
@@ -2395,17 +2453,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
       break;
       case ADJUST_STACK:
       {
-#if DEPURAR_MV
-        printf("%i\t", cur.a);
-#endif
-        while (cur.a > mv->ptrpila)
-        {
-          latC_apilar(mv, latO_nulo);
-        }
-        while (mv->ptrpila >= (mv->ptrprevio + cur.a))
-        {
-          latC_desapilar(mv);
-        }
+        ajustar_pila(mv, cur, &inicio_asignacion);
       }
       break;
       case LOAD_PROPERTY:
@@ -2676,6 +2724,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
     else if (func->tipo == T_CFUN)
     {
       lat_CFuncion f = getCfun(func);
+      latP_llamada_nativa(mv, f);
       (f)(mv);
       return 0;
     }
@@ -2685,3 +2734,12 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
     }
     return 0;
   }
+
+int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
+{
+  unsigned nivel = latP_profundidad(mv);
+  latP_restaurar_profundidad(mv, nivel + 1);
+  int retorno = ejecutar_funcion(mv, func);
+  latP_restaurar_profundidad(mv, nivel);
+  return retorno;
+}

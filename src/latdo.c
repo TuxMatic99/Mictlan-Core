@@ -24,10 +24,12 @@ THE SOFTWARE.
 
 #include "latdo.h"
 #include "latast.h"
+#include "latbytecode.h"
 #include "latino.h"
 #include "latmem.h"
 #include "latmv.h"
 #include "latobj.h"
+#include "latpropiedad.h"
 
 #ifndef DEPURAR_AST
 #define DEPURAR_AST 1
@@ -167,21 +169,10 @@ static bool encontrar_vararg(ast *nodo) {
 }
 
 static int encontrar_load_vararg(ast *nodo) {
-  int i = 0;
-  if (nodo) {
-    ast *tmp;
-    tmp = nodo;
-    while (tmp->der != NULL && tmp->der->tipo != NODO_LOAD_VAR_ARGS) {
-      if (tmp->der != NULL && tmp->der->tipo == NODO_LOAD_VAR_ARGS) {
-        i++;
-      }
-      tmp = tmp->der;
-    }
-    if (tmp->izq != NULL && tmp->izq->tipo == NODO_LOAD_VAR_ARGS) {
-      i++;
-    }
-  }
-  return i;
+  int cantidad = 0;
+  for (ast *p = nodo; p; p = p->der)
+    if (p->izq && p->izq->tipo == NODO_LOAD_VAR_ARGS) ++cantidad;
+  return cantidad;
 }
 
 static bool jumpLoop_buscar_NODO_SI(ast *nodo, int NODO_JUMP) {
@@ -337,10 +328,24 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
       /* debug eliminado: asign LHS nombre */
     }
     // Para asignación simple: evaluar RHS y almacenar en el nombre LHS
-    if (nodo->izq->tipo == NODO_FUNCION_PARAMETROS) {
-      /* debug eliminado: RHS FUNCION_PARAMETROS antes de pn */
+    if (nodo->der && nodo->der->tipo == NODO_FUNCION_PARAMETROS) {
+      int cantidad = contar_num_parargs(nodo->der, NODO_FUNCION_PARAMETROS);
+      dbc(ADJUST_STACK, 0, LAT_AJUSTE_INICIO, NULL, mv->nlin, mv->ncol,
+          mv->nombre_archivo);
       pn(mv, nodo->izq);
-      /* debug eliminado: despues de pn RHS FUNCION_PARAMETROS */
+      dbc(ADJUST_STACK, cantidad, LAT_AJUSTE_ASIGNACION, NULL, mv->nlin, mv->ncol,
+          mv->nombre_archivo);
+      /* La lista de destinos esta en el orden de desapilado. */
+      for (ast *destino = nodo->der; destino; destino = destino->der) {
+        ast *id = destino->izq;
+        if (!id || id->tipo != NODO_IDENTIFICADOR) {
+          latC_error(mv, "Destino invalido en asignacion multiple");
+          return i;
+        }
+        lat_objeto *nombre = latO_retener_constante(mv, latC_crear_cadena(mv, id->valor->val.cadena));
+        nombre->esconst = id->valor->esconst;
+        dbc(STORE_NAME, 0, 0, nombre, id->nlin, id->ncol, mv->nombre_archivo);
+      }
     } else if (nodo->der->tipo == NODO_ATRIBUTO) {
       /* debug eliminado: LHS ATRIBUTO antes de pn */
       pn(mv, nodo->izq);
@@ -612,7 +617,7 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
     // nombre fun
     pn(mv, nodo->izq);
     int num_args = contar_num_parargs(nodo->der, NODO_FUNCION_ARGUMENTOS);
-    dbc(CALL_FUNCTION, num_args, 0, NULL, mv->nlin, mv->ncol,
+    dbc(CALL_FUNCTION, num_args, encontrar_load_vararg(nodo->der), NULL, mv->nlin, mv->ncol,
         mv->nombre_archivo);
   } break;
   case NODO_RETORNO: {
@@ -686,13 +691,13 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
     if (nodo->izq) {
       if (nodo->izq->tipo == NODO_VAR_ARGS) {
         int num_params = contar_num_parargs(nodo, NODO_FUNCION_PARAMETROS);
-        dbc(OP_VAR_ARGS, (num_params - 1), 0, NULL, mv->nlin, mv->ncol,
+        dbc(OP_VAR_ARGS, (num_params - 1), LAT_VARARGS_MARCO, NULL, mv->nlin, mv->ncol,
             mv->nombre_archivo);
       } else {
         lat_objeto *o = latO_retener_constante(mv, latC_crear_cadena(mv, nodo->izq->valor->val.cadena));
         o->marca = 0;
         o->esconst = nodo->izq->valor->esconst;
-        dbc(STORE_NAME, 0, 0, o, nodo->izq->nlin, nodo->izq->ncol,
+        dbc(STORE_NAME, 1, 0, o, nodo->izq->nlin, nodo->izq->ncol,
             mv->nombre_archivo);
       }
     }
@@ -718,7 +723,7 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
     fpn(mv, fun->stmts);
     fdbc(RETURN_VALUE, 0, 0, latO_nulo, fun->nombre->nlin, fun->nombre->ncol,
          mv->nombre_archivo);
-    lat_objeto *f = latO_retener_constante(mv, latC_crear_funcion(mv, funcion_codigo, fi + 1));
+    lat_objeto *f = latO_retener_constante(mv, latP_funcion_compilada(mv, funcion_codigo, fi + 1));
     f->marca = 0;
     f->es_vararg = es_vararg;
     dbc(MAKE_FUNCTION, fi + 1, 0, f, fun->nombre->nlin, fun->nombre->ncol,
@@ -864,7 +869,7 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
     dbc(LOAD_NAME, 0, 0, dict_var, nodo->nlin, nodo->ncol, mv->nombre_archivo);
     fdbc(RETURN_VALUE, 1, 0, dict_var, fun->nombre->nlin, fun->nombre->ncol,
          mv->nombre_archivo);
-    lat_objeto *f = latO_retener_constante(mv, latC_crear_funcion(mv, funcion_codigo, fi + 1));
+    lat_objeto *f = latO_retener_constante(mv, latP_funcion_compilada(mv, funcion_codigo, fi + 1));
     f->marca = 0;
     f->es_vararg = es_vararg;
     /* Attach class name and optional base name via meta */
@@ -1150,11 +1155,13 @@ LATINO_API int latC_llamar_funcion(lat_mv *mv, lat_objeto *func) {
   const int pila_inicial = mv->ptrpila;
   const int previo_inicial = mv->ptrprevio;
   const int argumentos_previos = mv->prev_args;
+  const unsigned profundidad_ejecucion = latP_profundidad(mv);
   struct lat_longjmp lj;
   lj.status = 0;
   lj.previo = mv->error;
   mv->error = &lj;
   LAT_TRY(mv, &lj, latMV_funcion_correr(mv, func););
+  latP_restaurar_profundidad(mv, profundidad_ejecucion);
   mv->error = lj.previo;
   if (lj.status != 0) {
     latMV_recuperar_contextos(mv, profundidad_inicial);
@@ -1195,7 +1202,7 @@ LATINO_API lat_objeto *latC_analizar(lat_mv *mv, ast *nodo) {
 #endif
   /* debug eliminado: latC_analizar nuevo_codigo */
   latM_liberar(mv, codigo);
-  lat_objeto *fun = latC_crear_funcion(mv, nuevo_codigo, i);
+  lat_objeto *fun = latP_funcion_compilada(mv, nuevo_codigo, i);
   fun->marca = 0;
   fun->nombre = "dummy";
   /* debug eliminado: latC_analizar función creada */

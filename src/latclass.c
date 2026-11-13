@@ -27,9 +27,11 @@ THE SOFTWARE.
 #include "latino.h"
 #include "latmem.h"
 #include "latmv.h"
+#include "latpropiedad.h"
 #include <string.h>
 
 lat_class *latC_crear_clase(lat_mv *mv, const char *nombre, lat_class *padre) {
+  latP_inhibir(mv);
   lat_class *clase = (lat_class *)latM_asignar(mv, sizeof(lat_class));
   if (!clase) {
     return NULL;
@@ -49,6 +51,7 @@ lat_objeto *latC_crear_instancia(lat_mv *mv, lat_class *clase) {
   if (!clase) {
     return NULL;
   }
+  latP_inhibir(mv);
 
   lat_instancia *inst =
       (lat_instancia *)latM_asignar(mv, sizeof(lat_instancia));

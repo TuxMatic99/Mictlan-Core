@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include <sys/stat.h>
 
 #include "latino.h"
+#include "latpropiedad.h"
 
 #define LIB_PAQ_NAME "paquete"
 
@@ -42,7 +43,7 @@ static void throw_error(lat_mv *mv) {
     if (FormatMessageA(FORMAT_MESSAGE_IGNORE_INSERTS |
                            FORMAT_MESSAGE_FROM_SYSTEM,
                        NULL, error, 0, buffer, sizeof(buffer), NULL))
-        latC_error(mv, buffer);
+        latC_error(mv, "%s", buffer);
     else {
         latC_error(mv, "error del sistema");
     }
@@ -72,7 +73,7 @@ static void *lat_load(lat_mv *mv, const char *path) {
     void *lib = dlopen(path, RTLD_NOW);
     if (lib == NULL) {
         // printf("dlerror(): %s\n", dlerror());
-        latC_error(mv, dlerror());
+        latC_error(mv, "%s", dlerror());
     }
     return lib;
 }
@@ -80,13 +81,14 @@ static void *lat_load(lat_mv *mv, const char *path) {
 static lat_CFuncion lat_sym(lat_mv *mv, void *lib, const char *sym) {
     lat_CFuncion f = (lat_CFuncion)dlsym(lib, sym);
     if (f == NULL) {
-        latC_error(mv, dlerror());
+        latC_error(mv, "%s", dlerror());
     }
     return f;
 }
 #endif //  WIN32
 
 LATINO_API int latC_cargarlib(lat_mv *mv, const char *path, const char *sym) {
+    latP_inhibir(mv);
     // printf("latC_cargarlib: %s: %s\n", path, sym);
     void *handle = lat_load(mv, path);
     if (handle == NULL) {
