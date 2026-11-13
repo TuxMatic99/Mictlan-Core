@@ -98,7 +98,6 @@ void latP_liberar_objetos(lat_mv *mv) {
   while ((ptr = latP_primero(mv, LAT_P_MAPA))) latH_limpiar(mv, ptr);
   while ((ptr = latP_primero(mv, LAT_P_LISTA))) latL_destruir(mv, ptr);
   while ((ptr = latP_primero(mv, LAT_P_OBJETO))) latM_liberar(mv, ptr);
-  latP_cerrar(mv);
 }
 
 void latS_liberar_cadenas(lat_mv *mv) {
@@ -201,6 +200,7 @@ static lat_cadena *nuevaCad(lat_mv *mv, const char *str, size_t l,
   ts->tsv.next = tb->hash[h];
   tb->hash[h] = (lat_gcobjeto *)ts;
   tb->nuse++;
+  latP_registrar_cadena(mv, ts);
   if (tb->nuse > tb->size && tb->size <= INT_MAX / 2) {
     latS_resize(mv, tb->size * 2);
   }

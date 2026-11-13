@@ -609,6 +609,7 @@ LATINO_API void latC_destruir_mv(lat_mv *mv)
   latO_liberar_constantes(mv);
   latP_liberar_objetos(mv);
   latS_liberar_cadenas(mv);
+  latP_cerrar(mv);
   latM_liberar(mv, mv->global->strt.hash);
   latM_liberar(mv, mv->global);
 #if DEPURAR_MEM
@@ -1541,11 +1542,11 @@ static void ajustar_pila(lat_mv *mv, lat_bytecode cur, int *inicio_asignacion)
     *inicio_asignacion = mv->ptrpila;
     return;
   }
-  if (cur.b == LAT_AJUSTE_ASIGNACION) {
+  if (cur.b == LAT_AJUSTE_ASIGNACION || cur.b == LAT_AJUSTE_DESCARTAR) {
     if (*inicio_asignacion < 0 || *inicio_asignacion >= MAX_STACK_SIZE ||
         mv->ptrpila < *inicio_asignacion ||
         cur.a >= (unsigned)(MAX_STACK_SIZE - *inicio_asignacion)) {
-      latC_error(mv, "Pila incoherente en asignacion multiple");
+      latC_error(mv, "Pila incoherente al ajustar resultados");
       return;
     }
     int fin = *inicio_asignacion + (int)cur.a;

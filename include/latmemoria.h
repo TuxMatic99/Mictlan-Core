@@ -25,10 +25,16 @@ typedef struct {
 /* Activar antes de ejecutar la carga. El anfitrion conserva explicitamente
    todo puntero a objetos, listas o tablas que use despues de recolectar. */
 LATINO_API latG_estado latG_habilitar(lat_mv *mv);
+/* Activa también el barrido de cadenas internadas. Llamar después de
+   latG_habilitar y antes de compilar o ejecutar. Los punteros prestados a
+   texto sobreviven a una recolección solo con una raíz o fijación. */
+#define LAT_G_CADENAS_EXPLICITAS 1
+LATINO_API latG_estado latG_habilitar_cadenas(lat_mv *mv);
 /* Una funcion autorizada respeta el contrato de raices y usa esta VM en
    forma sincronica. Autorizar antes de la primera llamada. */
 LATINO_API latG_estado latG_autorizar(lat_mv *mv, lat_CFuncion funcion);
 /* Fijar una direccion registrada de esta VM. Cada exito requiere soltar.
+   En modo cadenas puede fijar getCadena(objeto), nunca getstr(...).
    Las celdas de pila y los contextos de llamada no son fijables. */
 LATINO_API latG_estado latG_retener(lat_mv *mv, const void *reserva);
 LATINO_API latG_estado latG_soltar(lat_mv *mv, const void *reserva);
