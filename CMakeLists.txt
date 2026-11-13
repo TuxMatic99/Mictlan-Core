@@ -60,6 +60,15 @@ add_subdirectory(src)
 #ENDIF(UNIX)
 
 enable_testing()
+add_executable(mictlan_test_recoleccion tests/p02g_recoleccion.c)
+target_include_directories(mictlan_test_recoleccion PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_recoleccion PRIVATE liblatino)
+set_target_properties(mictlan_test_recoleccion PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED YES)
+foreach(caso IN ITEMS ciclos raices errores opacos)
+  add_test(NAME mictlan_p02g_${caso} COMMAND mictlan_test_recoleccion ${caso})
+  set_tests_properties(mictlan_p02g_${caso} PROPERTIES TIMEOUT 20 LABELS "p02g;memoria"
+    FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+endforeach()
 # Recuperacion real de pila/FFI tras longjmp. Ningun fallo se invierte ni omite.
 add_executable(mictlan_test_stack_recovery tests/stack_recovery_regression.c)
 target_include_directories(mictlan_test_stack_recovery PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")

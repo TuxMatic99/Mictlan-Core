@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include <sys/stat.h>
 
 #include "latino.h"
+#include "latpropiedad.h"
 
 #define LIB_PAQ_NAME "paquete"
 
@@ -87,6 +88,7 @@ static lat_CFuncion lat_sym(lat_mv *mv, void *lib, const char *sym) {
 #endif //  WIN32
 
 LATINO_API int latC_cargarlib(lat_mv *mv, const char *path, const char *sym) {
+    latP_inhibir(mv);
     // printf("latC_cargarlib: %s: %s\n", path, sym);
     void *handle = lat_load(mv, path);
     if (handle == NULL) {

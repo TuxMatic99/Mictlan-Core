@@ -514,7 +514,8 @@ LATINO_API void latC_abrir_liblatino(lat_mv *mv, const char *nombre_lib,
 
 LATINO_API lat_mv *latC_crear_mv()
 {
-  lat_mv *mv = (lat_mv *)malloc(sizeof(lat_mv));
+  lat_mv *mv = calloc(1, sizeof(*mv));
+  if (!mv) return NULL;
   mv->memoria_usada = 0;
   mv->funciones_propias = NULL;
   mv->modulos_propios = NULL;
@@ -708,8 +709,7 @@ LATINO_API lat_objeto *latC_desapilar(lat_mv *mv)
 
 LATINO_API lat_objeto *latC_tope(lat_mv *mv)
 {
-  lat_objeto *p = (lat_objeto *)&mv->pila[mv->ptrpila - 1];
-  return p;
+  return mv->ptrpila > 0 ? &mv->pila[mv->ptrpila - 1] : NULL;
 }
 
 LATINO_API void latC_apilar_double(lat_mv *mv, double num)
@@ -748,6 +748,12 @@ LATINO_API void latC_apilar_string(lat_mv *mv, const char *str)
 LATINO_API lat_objeto *latC_crear_funcion(lat_mv *mv, lat_bytecode *inslist,
                                           int ninst)
 {
+  latP_inhibir(mv);
+  return latP_funcion_compilada(mv, inslist, ninst);
+}
+
+lat_objeto *latP_funcion_compilada(lat_mv *mv, lat_bytecode *inslist, int ninst)
+{
   lat_objeto *ret = latO_crear_funcion(mv);
   lat_funcion *fval = (lat_funcion *)latM_asignar(mv, sizeof(lat_funcion));
 #if DEPURAR_MEM
@@ -755,7 +761,7 @@ LATINO_API lat_objeto *latC_crear_funcion(lat_mv *mv, lat_bytecode *inslist,
 #endif
   fval->codigo = inslist;
   fval->ninst = ninst;
-  latO_registrar_funcion(mv, fval);
+  latP_registrar_funcion_compilada(mv, fval);
   setFun(ret, fval);
   ret->ninst = ninst;
   return ret;
@@ -1495,7 +1501,7 @@ static void dbg_super_log_stack(lat_mv *mv, lat_objeto *func,
 }
 #endif
 
-int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
+static int ejecutar_funcion(lat_mv *mv, lat_objeto *func)
 {
   if (func->tipo == T_FUN)
   {
@@ -2689,6 +2695,7 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
     else if (func->tipo == T_CFUN)
     {
       lat_CFuncion f = getCfun(func);
+      latP_llamada_nativa(mv, f);
       (f)(mv);
       return 0;
     }
@@ -2698,3 +2705,12 @@ int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
     }
     return 0;
   }
+
+int latMV_funcion_correr(lat_mv *mv, lat_objeto *func)
+{
+  unsigned nivel = latP_profundidad(mv);
+  latP_restaurar_profundidad(mv, nivel + 1);
+  int retorno = ejecutar_funcion(mv, func);
+  latP_restaurar_profundidad(mv, nivel);
+  return retorno;
+}

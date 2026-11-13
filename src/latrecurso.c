@@ -1,6 +1,7 @@
 
 #include "latrecurso.h"
 #include "latmem.h"
+#include "latpropiedad.h"
 
 #include <stdint.h>
 
@@ -20,6 +21,7 @@ lat_recurso *latR_crear(
         return NULL;
     }
 
+    latP_inhibir(mv);
     lat_recurso *r = latM_asignar(mv, sizeof(*r));
 
     r->propietarios = 1;

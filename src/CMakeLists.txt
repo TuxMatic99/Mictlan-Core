@@ -210,6 +210,7 @@ install(FILES       ../include/latino.h             DESTINATION     ${INSTALL_IN
 install(FILES       ../include/latlex.h             DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latlist.h            DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latmem.h             DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
+install(FILES       ../include/latmemoria.h         DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latmv.h              DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latobj.h             DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )
 install(FILES       ../include/latparse.h           DESTINATION     ${INSTALL_INCLUDE} COMPONENT Header )

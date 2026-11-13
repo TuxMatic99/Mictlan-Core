@@ -42,7 +42,7 @@ struct lat_funcion_registro {
   struct lat_funcion_registro *siguiente;
 };
 
-static bool funcion_registrada(lat_mv *mv, lat_funcion *fun) {
+bool latP_funcion_registrada(lat_mv *mv, const lat_funcion *fun) {
   if (!mv) return false;
   for (struct lat_funcion_registro *r = mv->funciones_propias; r; r = r->siguiente)
     if (r->funcion == fun) return true;
@@ -50,7 +50,13 @@ static bool funcion_registrada(lat_mv *mv, lat_funcion *fun) {
 }
 
 void latO_registrar_funcion(lat_mv *mv, lat_funcion *fun) {
-  if (!mv || !fun || funcion_registrada(mv, fun)) return;
+  if (!mv || !fun || latP_funcion_registrada(mv, fun)) return;
+  latP_inhibir(mv);
+  latP_registrar_funcion_compilada(mv, fun);
+}
+
+void latP_registrar_funcion_compilada(lat_mv *mv, lat_funcion *fun) {
+  if (!mv || !fun || latP_funcion_registrada(mv, fun)) return;
   struct lat_funcion_registro *r = latM_asignar(mv, sizeof(*r));
   r->funcion = fun;
   r->siguiente = mv->funciones_propias;
@@ -168,6 +174,7 @@ lat_objeto *latO_contexto_crear(lat_mv *mv) {
   ret->tipo = T_CONTEXT;
   ret->tam += sizeof(hash_map);
   setCtx(ret, latH_crear(mv));
+  latP_contexto(mv, getCtx(ret));
   return ret;
 }
 
@@ -281,7 +288,7 @@ void latO_destruir(lat_mv *mv, lat_objeto *o) {
   } break;
   case T_FUN: {
     lat_funcion *fun = getFun(o);
-    if (!funcion_registrada(mv, fun)) {
+    if (!latP_funcion_registrada(mv, fun)) {
       /* Compatibilidad con payloads externos no registrados. */
       latM_liberar(mv, fun->codigo);
       latM_liberar(mv, fun);
@@ -350,6 +357,7 @@ static lat_objeto *clonar_objeto(lat_mv *mv, lat_objeto *obj,
     ret->tipo = T_CONTEXT;
     ret->tam = sizeof(hash_map *);
     setCtx(ret, latH_clonar(mv, getCtx(obj)));
+    latP_contexto(mv, getCtx(ret));
     break;
   case T_LIST: {
     lista *origen = latC_checar_lista(mv, obj);
@@ -760,6 +768,7 @@ LATINO_API lat_objeto *latC_crear_lista(lat_mv *mv, lista *l) {
 #endif
   ret->tam += sizeof(lista);
   setLista(ret, l);
+  latP_lista_datos(mv, l);
   return ret;
 }
 
@@ -774,6 +783,7 @@ LATINO_API lat_objeto *latC_crear_dic(lat_mv *mv, hash_map *dic) {
 }
 
 LATINO_API lat_objeto *latC_crear_cdato(lat_mv *mv, void *ptr) {
+  latP_inhibir(mv);
   lat_objeto *ret = latO_crear(mv);
 #if DEPURAR_MEM
   printf("latC_crear_cdato: %p\n", ret);
