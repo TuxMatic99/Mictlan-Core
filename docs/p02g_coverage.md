@@ -12,6 +12,8 @@ En la concatenación, el bucle leía una copia desactualizada de `i` en el marco
 
 La primera matriz remota registró 11 bytes perdidos en dos conversiones `%s` de `imprimirf`. Se conserva esa ejecución como evidencia. El formato procesa argumentos desde sus celdas activas y libera sus buffers antes de propagar errores. La regresión cubre cadenas de más de 1024 bytes, porcentajes literales, formatos incompletos y conversión fuera de rango.
 
+Al incluir el caso histórico de argumentos variables, LSan detectó 80 bytes perdidos en `coverage` y 40 en `mictlan_marcos_funcion`. El analizador léxico creaba un nodo por token `...`. La regla de expresión creaba otro nodo y perdía el primero. La regla ahora reutiliza el nodo del token, conserva su ubicación y cambia su tipo. El cambio está en la gramática fuente y en su versión generada.
+
 ## Licencia del programa restaurado
 
 Fuente del aviso: [LICENSE.txt de Latino](https://github.com/lenguaje-latino/latino/blob/2800fe11e11811b0cc37d76ac72a9be217789880/LICENSE.txt).

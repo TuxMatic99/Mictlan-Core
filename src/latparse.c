@@ -2013,7 +2013,7 @@ yyreduce:
 
   case 48: /* expression: VAR_ARGS  */
 #line 271 "latparse.y"
-               { (yyval.node) = latA_nodo(NODO_LOAD_VAR_ARGS , NULL, NULL, 0, 0); }
+               { (yyval.node) = (yyvsp[0].node); (yyval.node)->tipo = NODO_LOAD_VAR_ARGS; }
 #line 2018 "latparse.c"
     break;
 
