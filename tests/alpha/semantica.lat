@@ -18,6 +18,16 @@ escribir(anumero("0"))
 escribir(dic.longitud(tabla))
 escribir(diccionario.longitud(tabla))
 
+claves = {42: "literal"}
+claves[8] = "asignación"
+claves[verdadero] = "lógica"
+escribir(claves["42"])
+escribir(claves["8"])
+escribir(claves["verdadero"])
+numero = 123
+escribir(numero[1])
+escribir(numero[40])
+
 total = 0
 para indice en rango(1, 4)
     total += indice
