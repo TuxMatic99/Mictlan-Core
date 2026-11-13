@@ -69,6 +69,16 @@ foreach(caso IN ITEMS ciclos raices errores opacos)
   set_tests_properties(mictlan_p02g_${caso} PROPERTIES TIMEOUT 20 LABELS "p02g;memoria"
     FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
 endforeach()
+add_executable(mictlan_test_formato tests/p02g_formato.c)
+target_include_directories(mictlan_test_formato PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_formato PRIVATE liblatino)
+add_test(NAME mictlan_formato COMMAND mictlan_test_formato)
+set_tests_properties(mictlan_formato PROPERTIES TIMEOUT 20
+  FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+add_test(NAME mictlan_cli_expresion_larga COMMAND "${CMAKE_COMMAND}"
+  "-DMICTLAN_EJECUTABLE=$<TARGET_FILE:latino>"
+  -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/verificar_expresion_larga.cmake")
+set_tests_properties(mictlan_cli_expresion_larga PROPERTIES TIMEOUT 20)
 # Recuperacion real de pila/FFI tras longjmp. Ningun fallo se invierte ni omite.
 add_executable(mictlan_test_stack_recovery tests/stack_recovery_regression.c)
 target_include_directories(mictlan_test_stack_recovery PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")

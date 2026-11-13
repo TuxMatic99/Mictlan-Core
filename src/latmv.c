@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include <string.h>
 
 #include "latcompat.h"
+#include "latbytecode.h"
 #include "latdo.h"
 #include "latgc.h"
 #include "latlist.h"
@@ -543,6 +544,10 @@ LATINO_API lat_mv *latC_crear_mv()
   mv->global->strt.hash = NULL;
   latS_resize(mv, MIN_STRTABLE_SIZE);
   mv->pila = calloc(MAX_STACK_SIZE, sizeof(lat_objeto));
+  if (!mv->pila) {
+    latC_destruir_mv(mv);
+    return NULL;
+  }
   mv->ptrpila = 0;
   mv->tope = mv->pila;
   mv->ptrprevio = 1;
@@ -1048,7 +1053,8 @@ static void latMV_call_function(lat_mv *mv, lat_objeto *func, lat_bytecode cur,
   }
   mv->prev_args = latMV_funcion_correr(mv, fun);
   mv->numejec--;
-  if (fun->tipo != T_CFUN && mv->prev_args == 0 && next.ins == ADJUST_STACK)
+  if (fun->tipo != T_CFUN && mv->prev_args == 0 && next.ins == ADJUST_STACK &&
+      next.b == LAT_AJUSTE_ANTERIOR)
   {
     latC_error(mv,
                "La funcion '%s' no "
@@ -1501,6 +1507,36 @@ static void dbg_super_log_stack(lat_mv *mv, lat_objeto *func,
 }
 #endif
 
+static void ajustar_pila(lat_mv *mv, lat_bytecode cur, int *inicio_asignacion)
+{
+  if (cur.b == LAT_AJUSTE_INICIO) {
+    *inicio_asignacion = mv->ptrpila;
+    return;
+  }
+  if (cur.b == LAT_AJUSTE_ASIGNACION) {
+    if (*inicio_asignacion < 0 || *inicio_asignacion >= MAX_STACK_SIZE ||
+        mv->ptrpila < *inicio_asignacion ||
+        cur.a >= (unsigned)(MAX_STACK_SIZE - *inicio_asignacion)) {
+      latC_error(mv, "Pila incoherente en asignacion multiple");
+      return;
+    }
+    int fin = *inicio_asignacion + (int)cur.a;
+    while (mv->ptrpila > fin) latC_desapilar(mv);
+    while (mv->ptrpila < fin) latC_apilar(mv, latO_nulo);
+    *inicio_asignacion = -1;
+    mv->prev_args = 0;
+    return;
+  }
+  if (cur.a >= MAX_STACK_SIZE || mv->ptrprevio < 0 || mv->ptrprevio >= MAX_STACK_SIZE) {
+    latC_error(mv, "Ajuste de pila fuera de rango");
+    return;
+  }
+  int cantidad = (int)cur.a;
+  while (cantidad > mv->ptrpila) latC_apilar(mv, latO_nulo);
+  int limite = mv->ptrprevio + cantidad;
+  while (mv->ptrpila > 0 && mv->ptrpila >= limite) latC_desapilar(mv);
+}
+
 static int ejecutar_funcion(lat_mv *mv, lat_objeto *func)
 {
   if (func->tipo == T_FUN)
@@ -1516,6 +1552,7 @@ static int ejecutar_funcion(lat_mv *mv, lat_objeto *func)
     lat_bytecode *inslist = getFun(func)->codigo;
     lat_bytecode cur;
     int pc = 0;
+    int inicio_asignacion = -1;
 
 #if USE_COMPUTED_GOTO
     // OPTIMIZACIÓN: Tabla de etiquetas para despacho rápido
@@ -1938,14 +1975,7 @@ static int ejecutar_funcion(lat_mv *mv, lat_objeto *func)
   }
   op_ADJUST_STACK:
   {
-    while (cur.a > mv->ptrpila)
-    {
-      latC_apilar(mv, latO_nulo);
-    }
-    while (mv->ptrpila >= (mv->ptrprevio + cur.a))
-    {
-      latC_desapilar(mv);
-    }
+    ajustar_pila(mv, cur, &inicio_asignacion);
     pc++;
     cur = inslist[pc];
     DISPATCH();
@@ -2414,17 +2444,7 @@ static int ejecutar_funcion(lat_mv *mv, lat_objeto *func)
       break;
       case ADJUST_STACK:
       {
-#if DEPURAR_MV
-        printf("%i\t", cur.a);
-#endif
-        while (cur.a > mv->ptrpila)
-        {
-          latC_apilar(mv, latO_nulo);
-        }
-        while (mv->ptrpila >= (mv->ptrprevio + cur.a))
-        {
-          latC_desapilar(mv);
-        }
+        ajustar_pila(mv, cur, &inicio_asignacion);
       }
       break;
       case LOAD_PROPERTY:

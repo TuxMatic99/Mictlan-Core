@@ -1,0 +1,7 @@
+#ifndef LAT_BYTECODE_INTERNO_H
+#define LAT_BYTECODE_INTERNO_H
+
+/* Modos de ADJUST_STACK. El modo cero conserva bytecode existente. */
+enum { LAT_AJUSTE_ANTERIOR, LAT_AJUSTE_INICIO, LAT_AJUSTE_ASIGNACION };
+
+#endif

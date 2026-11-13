@@ -12,3 +12,17 @@ funcion fibo(n)
     retorno fibo(n - 1) + fibo(n - 2)
 fin
 poner(fibo(10))
+
+funcion par()
+    retorno 7, 9
+fin
+x, y = par()
+poner(x)
+poner(y)
+x, y, z = 1, 2
+poner(x)
+poner(y)
+poner(z)
+x, y = 4, 5, 6
+poner(x)
+poner(y)

@@ -24,6 +24,7 @@ THE SOFTWARE.
 
 #include "latdo.h"
 #include "latast.h"
+#include "latbytecode.h"
 #include "latino.h"
 #include "latmem.h"
 #include "latmv.h"
@@ -338,10 +339,24 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
       /* debug eliminado: asign LHS nombre */
     }
     // Para asignación simple: evaluar RHS y almacenar en el nombre LHS
-    if (nodo->izq->tipo == NODO_FUNCION_PARAMETROS) {
-      /* debug eliminado: RHS FUNCION_PARAMETROS antes de pn */
+    if (nodo->der && nodo->der->tipo == NODO_FUNCION_PARAMETROS) {
+      int cantidad = contar_num_parargs(nodo->der, NODO_FUNCION_PARAMETROS);
+      dbc(ADJUST_STACK, 0, LAT_AJUSTE_INICIO, NULL, mv->nlin, mv->ncol,
+          mv->nombre_archivo);
       pn(mv, nodo->izq);
-      /* debug eliminado: despues de pn RHS FUNCION_PARAMETROS */
+      dbc(ADJUST_STACK, cantidad, LAT_AJUSTE_ASIGNACION, NULL, mv->nlin, mv->ncol,
+          mv->nombre_archivo);
+      /* La lista de destinos esta en el orden de desapilado. */
+      for (ast *destino = nodo->der; destino; destino = destino->der) {
+        ast *id = destino->izq;
+        if (!id || id->tipo != NODO_IDENTIFICADOR) {
+          latC_error(mv, "Destino invalido en asignacion multiple");
+          return i;
+        }
+        lat_objeto *nombre = latO_retener_constante(mv, latC_crear_cadena(mv, id->valor->val.cadena));
+        nombre->esconst = id->valor->esconst;
+        dbc(STORE_NAME, 0, 0, nombre, id->nlin, id->ncol, mv->nombre_archivo);
+      }
     } else if (nodo->der->tipo == NODO_ATRIBUTO) {
       /* debug eliminado: LHS ATRIBUTO antes de pn */
       pn(mv, nodo->izq);

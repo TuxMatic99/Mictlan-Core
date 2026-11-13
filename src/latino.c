@@ -119,20 +119,22 @@ int main(int argc, char *argv[]) {
         }
     }
     lat_mv *mv = latC_crear_mv();
+    if (!mv) {
+        fputs("No se pudo crear la VM.\n", stderr);
+        return EXIT_FAILURE;
+    }
     /* debug eliminado: MV creada */
     if (pe) {
         /* Ejecuta una cadena de codigo */
         if (argc != 3) {
             printf("Error: Se requiere una cadena para ejecución.\n");
+            latC_destruir_mv(mv);
             return EXIT_FAILURE;
         }
-        char *cmd = malloc(MAX_INPUT_SIZE);
-        strcpy(cmd, argv[2]);
-        latC_apilar(mv, latC_crear_cadena(mv, cmd));
+        latC_apilar_string(mv, argv[2]);
         /* debug eliminado: Ejecutando cadena -e */
         str_ejecutar(mv);
         /* debug eliminado: Cadena ejecutada */
-        free(cmd);
     } else if (argc > 1 && pf) {
         /* Ejecuta un archivo de codigo */
         infile = argv[1];

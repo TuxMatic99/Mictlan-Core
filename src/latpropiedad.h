@@ -31,4 +31,7 @@ LAT_P_INTERNO lat_objeto *latP_funcion_compilada(lat_mv *mv, lat_bytecode *codig
                                                 int ninst);
 LAT_P_INTERNO void latP_registrar_funcion_compilada(lat_mv *mv, lat_funcion *fun);
 LAT_P_INTERNO bool latP_funcion_registrada(lat_mv *mv, const lat_funcion *fun);
+/* El resultado pertenece al llamador. Si falla, devuelve NULL y un mensaje
+   estatico, de modo que el llamador pueda limpiar antes de lanzar el error. */
+LAT_P_INTERNO char *latP_texto(const lat_objeto *o, const char **error);
 #endif

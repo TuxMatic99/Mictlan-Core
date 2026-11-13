@@ -592,14 +592,21 @@ static bool texto_objeto(lat_texto_objeto *t, const lat_objeto *o, bool citar) {
   return texto_literal(t, o->tipo == T_LIST ? "]" : "}");
 }
 
-static char *objeto_a_texto(lat_mv *mv, const lat_objeto *o) {
+char *latP_texto(const lat_objeto *o, const char **error) {
   lat_texto_objeto t = {0};
   if (!texto_objeto(&t, o, false)) {
     free(t.datos);
-    latC_error(mv, "%s", t.error ? t.error : "Error al representar objeto");
+    *error = t.error ? t.error : "Error al representar objeto";
     return NULL;
   }
   return t.datos;
+}
+
+static char *objeto_a_texto(lat_mv *mv, const lat_objeto *o) {
+  const char *error = NULL;
+  char *texto = latP_texto(o, &error);
+  if (!texto) latC_error(mv, "%s", error);
+  return texto;
 }
 
 char *latL_acadena(lat_mv *mv, lista *list) {
