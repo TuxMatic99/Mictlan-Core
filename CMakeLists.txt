@@ -56,6 +56,13 @@ add_test(NAME mictlan_alpha_recompilacion COMMAND mictlan_test_recompilacion)
 set_tests_properties(mictlan_alpha_recompilacion PROPERTIES TIMEOUT 60 LABELS "alpha;memoria"
   FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
 
+add_executable(mictlan_test_p11_pila tests/p11_pila.c)
+target_include_directories(mictlan_test_p11_pila PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_p11_pila PRIVATE liblatino)
+add_test(NAME mictlan_p11_pila COMMAND mictlan_test_p11_pila)
+set_tests_properties(mictlan_p11_pila PROPERTIES TIMEOUT 30 LABELS "p11;pila"
+  FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+
 # La inyección afecta al binario de prueba y su biblioteca estática.
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
   add_executable(mictlan_test_agotamiento tests/alpha/agotamiento.c)

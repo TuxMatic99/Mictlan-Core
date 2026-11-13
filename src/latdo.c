@@ -824,7 +824,14 @@ static int ast_analizar(lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i) {
   } break;
   case NODO_BLOQUE: {
     if (nodo->izq) {
+      bool llamada_suelta = nodo->izq->tipo == NODO_FUNCION_LLAMADA;
+      if (llamada_suelta)
+        dbc(ADJUST_STACK, 0, LAT_AJUSTE_INICIO, NULL, nodo->nlin, nodo->ncol,
+            mv->nombre_archivo);
       pn(mv, nodo->izq);
+      if (llamada_suelta)
+        dbc(ADJUST_STACK, 0, LAT_AJUSTE_DESCARTAR, NULL, nodo->nlin, nodo->ncol,
+            mv->nombre_archivo);
     }
     if (nodo->der) {
       pn(mv, nodo->der);
