@@ -32,7 +32,9 @@ with tempfile.TemporaryDirectory(prefix='mictlan-b4a-') as tmp:
         d=pathlib.Path(tmp)
         for nombre,contenido in spec.get('inicial',{}).items():
             q=d/nombre;q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes(contenido.encode())
-        programa=d/('programa.'+a.extension);programa.write_text(spec['programa'])
+        programa=d/('programa.'+a.extension);fuente=pathlib.Path(__file__).with_name('ejemplos')/(a.caso+'.'+a.extension)
+        assert fuente.read_text()==spec['programa'], 'Ejemplo desincronizado'
+        programa.write_bytes(fuente.read_bytes())
         r=correr([a.cli,str(programa)],env,tmp)
         # Comprobar disco incluso si la ejecución o el diagnóstico son incorrectos.
         actual={str(q.relative_to(d)):q.read_bytes() for q in d.rglob('*') if q.is_file() and q!=programa}

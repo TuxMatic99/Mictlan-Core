@@ -12,11 +12,11 @@ int parse_silent=0;char *filename=NULL;
 enum fallo {BIEN,ABRIR_ORIGEN,ABRIR_DESTINO,LEER_ERROR,LEER_EINTR,LEER_CORTO,
  ESCRIBIR_ERROR,ESCRIBIR_EINTR,ESCRIBIR_CORTO,ESCRIBIR_CERO,CERRAR_ORIGEN,
  CERRAR_DESTINO,SYNC_ARCHIVO,SYNC_DIRECTORIO,RENOMBRAR,RESERVA,REDIMENSION,
- PUBLICAR,LISTA,COMPILAR};
+ PUBLICAR,LISTA,COMPILAR,TEMPORAL,CIERRE_DIR,SEGUNDA_RESERVA,EOF_PREMATURO,LEER_PARCIAL_EINTR,ESCRIBIR_PARCIAL_EINTR};
 static enum fallo fallo;
 static FILE *flujos[32],*fuente,*salida;
 static int fds[32],nfds,lecturas,escrituras,error_lectura,error_escritura;
-static void *reservas[4096];static size_t vivos;static int activado;
+static void *reservas[4096];static size_t vivos;static int activado,reservas_intentadas;
 static FILE *abrir(const char *p,const char *modo){
  if((fallo==ABRIR_ORIGEN&&strchr(modo,'r'))||(fallo==ABRIR_DESTINO&&!strchr(modo,'r'))){activado=1;errno=EACCES;return NULL;}
  FILE *f=fopen(p,modo);if(f){int i;for(i=0;i<32&&flujos[i];++i);if(i==32)abort();flujos[i]=f;if(strchr(modo,'r'))fuente=f;else salida=f;}return f;
@@ -28,7 +28,9 @@ static int cerrar(FILE *f){
  if((fallo==CERRAR_ORIGEN&&es_fuente)||(fallo==CERRAR_DESTINO&&es_salida)){activado=1;errno=EIO;return EOF;}return r;
 }
 static size_t leer(void *p,size_t t,size_t n,FILE *f){
- if(f==fuente){++lecturas;if(fallo==LEER_EINTR&&lecturas==1){activado=1;error_lectura=1;errno=EINTR;return 0;}
+ if(f==fuente){++lecturas;
+  if(fallo==EOF_PREMATURO){activado=1;return 0;}
+  if(fallo==LEER_PARCIAL_EINTR&&lecturas==1){size_t r=fread(p,t,1,f);activado=1;error_lectura=1;errno=EINTR;return r;}if(fallo==LEER_EINTR&&lecturas==1){activado=1;error_lectura=1;errno=EINTR;return 0;}
   if(fallo==LEER_ERROR){activado=1;error_lectura=1;errno=EIO;return 0;}
   if(fallo==LEER_CORTO&&n>1){activado=1;n=1;}}
  return fread(p,t,n,f);
@@ -42,6 +44,7 @@ static int error_flujo(FILE *f){return (f==fuente&&error_lectura)||(f==salida&&e
 static void limpiar_error(FILE *f){if(f==fuente)error_lectura=0;if(f==salida)error_escritura=0;clearerr(f);}
 static size_t escribir(const void *p,size_t t,size_t n,FILE *f){
  ++escrituras;
+ if(fallo==ESCRIBIR_PARCIAL_EINTR&&escrituras==1){size_t r=fwrite(p,t,1,f);activado=1;error_escritura=1;errno=EINTR;return r;}
  if(fallo==ESCRIBIR_ERROR){activado=1;error_escritura=1;errno=EIO;return 0;}
  if(fallo==ESCRIBIR_EINTR&&escrituras==1){activado=1;error_escritura=1;errno=EINTR;return 0;}
  if(fallo==ESCRIBIR_CERO){activado=1;return 0;}
@@ -54,7 +57,8 @@ static int poner_caracter(int c,FILE *f){
  if(fallo==ESCRIBIR_EINTR&&escrituras==1){activado=1;error_escritura=1;errno=EINTR;return EOF;}
  if(fallo==ESCRIBIR_ERROR||fallo==ESCRIBIR_CERO){activado=1;error_escritura=1;errno=EIO;return EOF;}return fputc(c,f);}
 static void *reservar(size_t n){
- if(fallo==RESERVA){activado=1;return NULL;}void *p=malloc(n);if(p){size_t i=0;while(i<4096&&reservas[i])++i;if(i==4096)abort();reservas[i]=p;++vivos;}return p;
+ ++reservas_intentadas;
+ if(fallo==RESERVA||(fallo==SEGUNDA_RESERVA&&reservas_intentadas==2)){activado=1;return NULL;}void *p=malloc(n);if(p){size_t i=0;while(i<4096&&reservas[i])++i;if(i==4096)abort();reservas[i]=p;++vivos;}return p;
 }
 static void liberar(void *p){for(size_t i=0;i<4096;++i)if(p&&reservas[i]==p){reservas[i]=NULL;--vivos;break;}free(p);}
 static void *redimensionar(void *p,size_t n){
@@ -65,11 +69,11 @@ static int abrir_fd(const char *p,int flags,...){
  if(fallo==ABRIR_DESTINO){activado=1;errno=EACCES;return -1;}
  int fd=open(p,flags);if(fd>=0){if(nfds==32)abort();fds[nfds++]=fd;}return fd;
 }
-static int crear_temporal_inyectado(char *p,int flags){int fd=mkostemp(p,flags);if(fd>=0){if(nfds==32)abort();fds[nfds++]=fd;}return fd;}
+static int crear_temporal_inyectado(char *p,int flags){if(fallo==TEMPORAL){activado=1;errno=EACCES;return -1;}int fd=mkostemp(p,flags);if(fd>=0){if(nfds==32)abort();fds[nfds++]=fd;}return fd;}
 static int cerrar_fd(int fd){
  struct stat st;int regular=fstat(fd,&st)==0&&S_ISREG(st.st_mode);
  for(int i=0;i<nfds;++i)if(fds[i]==fd)fds[i]=-1;
- int r=close(fd);if(fallo==CERRAR_DESTINO&&regular){activado=1;errno=EIO;return -1;}return r;
+ int r=close(fd);if((fallo==CERRAR_DESTINO&&regular)||(fallo==CIERRE_DIR&&!regular)){activado=1;errno=EIO;return -1;}return r;
 }
 static ssize_t escribir_fd(int fd,const void *p,size_t n){
  ++escrituras;if(fallo==ESCRIBIR_ERROR){activado=1;errno=EIO;return -1;}
@@ -145,17 +149,19 @@ int main(int argc,char **argv){
  int nflujo=0,nfd=0;for(int i=0;i<32;++i)if(flujos[i])++nflujo;for(int i=0;i<nfds;++i)if(fds[i]>=0)++nfd;
  int bien=activado&&nflujo==0&&nfd==0&&vivos==0&&temporales()==0&&contenido("ajeno","INTACTO");
  if(!strcmp(op,"copia")){
-  int exito=seleccionado==LEER_EINTR||seleccionado==LEER_CORTO||seleccionado==ESCRIBIR_EINTR||seleccionado==ESCRIBIR_CORTO||seleccionado==SYNC_DIRECTORIO;
+  int exito=seleccionado==LEER_EINTR||seleccionado==LEER_CORTO||seleccionado==ESCRIBIR_EINTR||seleccionado==ESCRIBIR_CORTO||seleccionado==SYNC_DIRECTORIO||seleccionado==CIERRE_DIR||seleccionado==LEER_PARCIAL_EINTR;
   bien&=estado==(exito?0:LAT_ERRRUN);bien&=contenido("destino",exito?"ORIGEN ñ\n":"ANTERIOR");
  } else if(!strcmp(op,"escribir")){
-  int exito=seleccionado==ESCRIBIR_EINTR||seleccionado==ESCRIBIR_CORTO;
+  int exito=seleccionado==ESCRIBIR_EINTR||seleccionado==ESCRIBIR_CORTO||seleccionado==ESCRIBIR_PARCIAL_EINTR;
   bien&=estado==0&&mv->ptrpila==2;
   if(mv->ptrpila==2){lat_objeto *o=latC_desapilar(mv);bien&=o->tipo==T_BOOL&&!!getLogico(o)==exito;}
   if(exito)bien&=contenido("destino","NUEVO");
  } else if(!strcmp(op,"ejecutar")){
-  bien&=estado==LAT_ERRRUN&&!strcmp(mv->nombre_archivo,"padre.mict")&&mv->global->REPL&&access("marca",F_OK)!=0;
+  int exito=seleccionado==LEER_EINTR||seleccionado==LEER_CORTO||seleccionado==LEER_PARCIAL_EINTR;
+  bien&=estado==(exito?0:LAT_ERRRUN)&&!strcmp(mv->nombre_archivo,"padre.mict")&&mv->global->REPL;
+  bien&=exito?contenido("marca","42"):access("marca",F_OK)!=0;
  } else {
-  int exito=seleccionado==LEER_EINTR||seleccionado==LEER_CORTO;
+  int exito=seleccionado==LEER_EINTR||seleccionado==LEER_CORTO||seleccionado==LEER_PARCIAL_EINTR;
   int salto=seleccionado==PUBLICAR||seleccionado==LISTA||!strcmp(op,"lineas");
   bien&=estado==(!exito&&salto?LAT_ERRRUN:0);
   if(estado==0&&mv->ptrpila==2){lat_objeto *o=latC_desapilar(mv);bien&=exito?o->tipo==T_STR:o->tipo==T_BOOL&&!getLogico(o);if(exito&&o->tipo==T_STR)bien&=!strcmp(latC_checar_cadena(mv,o),"ORIGEN ñ\n");}

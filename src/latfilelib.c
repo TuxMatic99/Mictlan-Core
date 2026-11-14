@@ -392,12 +392,22 @@ static void file_duplicar(lat_mv *mv) {
         return;
     }
 #ifdef __linux__
+    struct stat st;
+    /* En el contrato de rutas estables, rechazar FIFO/dispositivo antes de
+       fopen evita esperar a un escritor. Volver a comprobar el descriptor. */
+    if (stat(origen, &st) != 0) {
+        latC_error(mv, "No se pudo abrir el archivo '%s'", origen);
+        return;
+    }
+    if (!S_ISREG(st.st_mode)) {
+        latC_error(mv, "No se pudo copiar el archivo regular '%s'", origen);
+        return;
+    }
     FILE *fp = fopen(origen, "rb");
     if (!fp) {
         latC_error(mv, "No se pudo abrir el archivo '%s'", origen);
         return;
     }
-    struct stat st;
     if (fstat(fileno(fp), &st) != 0 || !S_ISREG(st.st_mode)) {
         (void)fclose(fp);
         latC_error(mv, "No se pudo copiar el archivo regular '%s'", origen);

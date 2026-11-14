@@ -1,0 +1,2 @@
+poner(archivo.intentar_escribir("nota", "bien"))
+poner(archivo.intentar_escribir("no-existe/nota", "x"))

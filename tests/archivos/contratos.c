@@ -19,6 +19,7 @@ static int copia(const char *caso){
  else if(!strcmp(caso,"misma_ruta")){C(guardar("origen","ORIGEN",6));C(dos("duplicar","origen","origen")==LAT_ERRRUN);C(contenido("origen","ORIGEN",6));}
  else if(!strcmp(caso,"mismo_inode")){C(guardar("origen","ORIGEN",6));C(link("origen","alias")==0);C(dos("duplicar","origen","alias")==LAT_ERRRUN);C(contenido("origen","ORIGEN",6));C(contenido("alias","ORIGEN",6));}
  else if(!strcmp(caso,"enlace_destino")){C(guardar("origen","ORIGEN",6));C(symlink("ajeno","destino")==0);C(dos("duplicar","origen","destino")==LAT_ERRRUN);}
+ else if(!strcmp(caso,"origen_fifo")){C(mkfifo("origen",0600)==0);C(guardar("destino","ANTERIOR",8));C(dos("duplicar","origen","destino")==LAT_ERRRUN);C(contenido("destino","ANTERIOR",8));}
  else if(!strcmp(caso,"origen_directorio")){C(mkdir("directorio",0700)==0);C(guardar("destino","ANTERIOR",8));C(dos("duplicar","directorio","destino")==LAT_ERRRUN);C(contenido("destino","ANTERIOR",8));}
  else if(!strcmp(caso,"destino_invalido")){C(guardar("origen","ORIGEN",6));C(dos("duplicar","origen","no-existe/destino")==LAT_ERRRUN);C(contenido("origen","ORIGEN",6));}
  else if(!strcmp(caso,"vacio")){C(guardar("origen","",0));C(guardar("destino","ANTERIOR",8));C(dos("duplicar","origen","destino")==0);C(contenido("destino","",0));}
@@ -32,6 +33,13 @@ static int ejecutar(const char *caso){
  int error=0;if(strstr(caso,"error")){programa="archivo.escribir(3,\"fallo\")\n";error=1;}
  if(strstr(caso,"sintaxis")){programa="fin\n";error=1;}
  if(strstr(caso,"vacio")){programa="";error=1;}
+ if(strstr(caso,"ausente")){C(uno("ejecutar",ruta)==LAT_ERRRUN);return 0;}
+ if(strstr(caso,"binario")){C(guardar(ruta,"a\0b",3));C(uno("ejecutar",ruta)==LAT_ERRRUN);return 0;}
+ if(strstr(caso,"anidado")){
+  const char *nieto=strstr(caso,"error")?"archivo.escribir(3, \"fallo\")\n":"archivo.escribir(\"marca\",\"42\")\n";
+  C(guardar("nieto.lat",nieto,strlen(nieto)));
+  programa="archivo.ejecutar(\"nieto.lat\")\n";
+ }
  C(guardar(ruta,programa,strlen(programa)));
  char *anterior=mv->nombre_archivo;mv->global->REPL=true;mv->nlin=17;mv->ncol=23;
  C(uno("ejecutar",ruta)==(error?LAT_ERRRUN:0));
@@ -64,9 +72,37 @@ static int auxiliares(void){
  C(dos("renombrar","nuevo","renombrado")==0);C(!strcmp(latC_checar_cadena(mv,latC_desapilar(mv)),"renombrado"));C(access("nuevo",F_OK)!=0);C(contenido("renombrado","NO BORRAR",9));
  C(uno("eliminar","renombrado")==0);C(getLogico(latC_desapilar(mv)));C(uno("borrar","renombrado")==0);C(!getLogico(latC_desapilar(mv)));return 0;
 }
+static int tipos(void) {
+ const char *nombres[]={"leer","intentar_leer","leer_texto_seguro","lineas","ejecutar","crear","eliminar","borrar","escribir","anexar","duplicar","renombrar","intentar_escribir","escribir_atomico"};
+ C(guardar("ajeno","INTACTO",7));
+ for(int i=0;i<14;++i) {
+  for(int arg=0;arg<(i<8?1:2);++arg) {
+   latC_apilar_double(mv,3);
+   if(i>=8){if(arg){latC_desapilar(mv);latC_apilar_string(mv,"ajeno");latC_apilar_double(mv,3);}else latC_apilar_string(mv,"ajeno");}
+   C(latC_llamar_funcion(mv,f(nombres[i]))==LAT_ERRRUN);
+   C(mv->ptrpila==1&&getNumerico(latC_tope(mv))==777&&mv->ptrctx==0&&mv->numejec==0&&!mv->error);
+   C(contenido("ajeno","INTACTO",7));
+   C(dos("intentar_escribir","recuperado","bien")==0);C(getLogico(latC_desapilar(mv)));C(contenido("recuperado","bien",4));
+  }
+ }
+ return 0;
+}
+static int grande(void) {
+ size_t n=9u*1024u*1024u+17;unsigned char *b=malloc(n);C(b);
+ for(size_t i=0;i<n;++i)b[i]=(unsigned char)(i*17u);
+ C(guardar("origen",b,n));C(dos("duplicar","origen","destino")==0);C(contenido("origen",b,n));C(contenido("destino",b,n));free(b);
+ struct stat st;C(stat("destino",&st)==0&&(st.st_mode&0777)==0600);return 0;
+}
+static int repetidas(void) {
+ C(guardar("origen","DATOS",5));C(guardar("destino","ANTERIOR",8));
+ /* Calentar las cadenas internadas antes de medir la memoria administrada. */
+ C(dos("duplicar","origen","destino")==0);size_t antes=mv->memoria_usada;
+ for(int i=0;i<50;++i){C(dos("duplicar","origen","destino")==0);C(contenido("destino","DATOS",5));C(mv->ptrpila==1);}
+ C(mv->memoria_usada==antes);printf("50 copias: memoria VM antes=%zu despues=%zu\n",antes,mv->memoria_usada);return 0;
+}
 int main(int argc,char **argv){
  if(argc!=2)return 2;char cwd[4096];const char *raiz=getenv("MICTLAN_ARCHIVOS_TMP");if(!raiz||!getcwd(cwd,sizeof cwd)||strcmp(cwd,raiz))return 2;
  mv=latC_crear_mv();mv->nombre_archivo="padre.mict";latC_apilar_double(mv,777);int r;
- if(!strncmp(argv[1],"ejecutar_",9))r=ejecutar(argv[1]);else if(!strcmp(argv[1],"lectura"))r=lectura();else if(!strcmp(argv[1],"limites"))r=limites();else if(!strcmp(argv[1],"auxiliares"))r=auxiliares();else r=copia(argv[1]);
+ if(!strncmp(argv[1],"ejecutar_",9))r=ejecutar(argv[1]);else if(!strcmp(argv[1],"lectura"))r=lectura();else if(!strcmp(argv[1],"limites"))r=limites();else if(!strcmp(argv[1],"auxiliares"))r=auxiliares();else if(!strcmp(argv[1],"tipos"))r=tipos();else if(!strcmp(argv[1],"grande"))r=grande();else if(!strcmp(argv[1],"repetidas"))r=repetidas();else r=copia(argv[1]);
  latC_destruir_mv(mv);return r;
 }

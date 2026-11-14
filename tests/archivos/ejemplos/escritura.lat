@@ -1,0 +1,4 @@
+archivo.escribir("texto","a")
+archivo.anexar("texto","ñ")
+poner(archivo.intentar_escribir("no-existe/texto","x"))
+poner(archivo.leer("texto"))

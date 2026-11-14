@@ -1,0 +1,143 @@
+Test project /workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug
+      Start 321: mictlan_p12b4a_doc_leer_lat
+ 1/29 Test #321: mictlan_p12b4a_doc_leer_lat .................   Passed    0.06 sec
+      Start 322: mictlan_p12b4a_doc_leer_mict
+ 2/29 Test #322: mictlan_p12b4a_doc_leer_mict ................   Passed    0.08 sec
+      Start 323: mictlan_p12b4a_doc_intentar_leer_lat
+ 3/29 Test #323: mictlan_p12b4a_doc_intentar_leer_lat ........   Passed    0.06 sec
+      Start 324: mictlan_p12b4a_doc_intentar_leer_mict
+ 4/29 Test #324: mictlan_p12b4a_doc_intentar_leer_mict .......   Passed    0.06 sec
+      Start 325: mictlan_p12b4a_doc_leer_texto_seguro_lat
+ 5/29 Test #325: mictlan_p12b4a_doc_leer_texto_seguro_lat ....   Passed    0.05 sec
+      Start 326: mictlan_p12b4a_doc_leer_texto_seguro_mict
+ 6/29 Test #326: mictlan_p12b4a_doc_leer_texto_seguro_mict ...   Passed    0.07 sec
+      Start 327: mictlan_p12b4a_doc_lineas_lat
+ 7/29 Test #327: mictlan_p12b4a_doc_lineas_lat ...............   Passed    0.05 sec
+      Start 328: mictlan_p12b4a_doc_lineas_mict
+ 8/29 Test #328: mictlan_p12b4a_doc_lineas_mict ..............   Passed    0.05 sec
+      Start 329: mictlan_p12b4a_doc_escribir_lat
+ 9/29 Test #329: mictlan_p12b4a_doc_escribir_lat .............***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 43, in <module>
+    assert r.returncode==spec.get('codigo',0),(r.returncode,r.stdout,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, '', '\x1b[1;31m/tmp/mictlan-b4a-0ksyv5c0/programa.lat:1:1:\x1b[0m Operandos insuficientes o argumentos variables fuera de su marco\n')
+
+      Start 330: mictlan_p12b4a_doc_escribir_mict
+10/29 Test #330: mictlan_p12b4a_doc_escribir_mict ............***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 43, in <module>
+    assert r.returncode==spec.get('codigo',0),(r.returncode,r.stdout,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, '', '\x1b[1;31m/tmp/mictlan-b4a-t81xfz49/programa.mict:1:1:\x1b[0m Operandos insuficientes o argumentos variables fuera de su marco\n')
+
+      Start 331: mictlan_p12b4a_doc_anexar_lat
+11/29 Test #331: mictlan_p12b4a_doc_anexar_lat ...............***Failed    0.05 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 43, in <module>
+    assert r.returncode==spec.get('codigo',0),(r.returncode,r.stdout,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, '', '\x1b[1;31m/tmp/mictlan-b4a-mvq3_lle/programa.lat:2:1:\x1b[0m Operandos insuficientes o argumentos variables fuera de su marco\n')
+
+      Start 332: mictlan_p12b4a_doc_anexar_mict
+12/29 Test #332: mictlan_p12b4a_doc_anexar_mict ..............***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 43, in <module>
+    assert r.returncode==spec.get('codigo',0),(r.returncode,r.stdout,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, '', '\x1b[1;31m/tmp/mictlan-b4a-42n7e4y9/programa.mict:2:1:\x1b[0m Operandos insuficientes o argumentos variables fuera de su marco\n')
+
+      Start 333: mictlan_p12b4a_doc_intentar_escribir_lat
+13/29 Test #333: mictlan_p12b4a_doc_intentar_escribir_lat ....   Passed    0.05 sec
+      Start 334: mictlan_p12b4a_doc_intentar_escribir_mict
+14/29 Test #334: mictlan_p12b4a_doc_intentar_escribir_mict ...   Passed    0.05 sec
+      Start 335: mictlan_p12b4a_doc_escribir_atomico_lat
+15/29 Test #335: mictlan_p12b4a_doc_escribir_atomico_lat .....   Passed    0.05 sec
+      Start 336: mictlan_p12b4a_doc_escribir_atomico_mict
+16/29 Test #336: mictlan_p12b4a_doc_escribir_atomico_mict ....   Passed    0.05 sec
+      Start 337: mictlan_p12b4a_doc_duplicar_lat
+17/29 Test #337: mictlan_p12b4a_doc_duplicar_lat .............***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 43, in <module>
+    assert r.returncode==spec.get('codigo',0),(r.returncode,r.stdout,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, '', '\x1b[1;31m/tmp/mictlan-b4a-noif_3_1/programa.lat:3:1:\x1b[0m Operandos insuficientes o argumentos variables fuera de su marco\n')
+
+      Start 338: mictlan_p12b4a_doc_duplicar_mict
+18/29 Test #338: mictlan_p12b4a_doc_duplicar_mict ............***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 43, in <module>
+    assert r.returncode==spec.get('codigo',0),(r.returncode,r.stdout,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, '', '\x1b[1;31m/tmp/mictlan-b4a-637n2ihs/programa.mict:3:1:\x1b[0m Operandos insuficientes o argumentos variables fuera de su marco\n')
+
+      Start 339: mictlan_p12b4a_doc_ejecutar_lat
+19/29 Test #339: mictlan_p12b4a_doc_ejecutar_lat .............***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 43, in <module>
+    assert r.returncode==spec.get('codigo',0),(r.returncode,r.stdout,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, '', '\x1b[1;31m/tmp/mictlan-b4a-dexebvyh/programa.lat:2:1:\x1b[0m Operandos insuficientes o argumentos variables fuera de su marco\n')
+
+      Start 340: mictlan_p12b4a_doc_ejecutar_mict
+20/29 Test #340: mictlan_p12b4a_doc_ejecutar_mict ............***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 43, in <module>
+    assert r.returncode==spec.get('codigo',0),(r.returncode,r.stdout,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (1, '', '\x1b[1;31m/tmp/mictlan-b4a-f8oql0hu/programa.mict:2:1:\x1b[0m Operandos insuficientes o argumentos variables fuera de su marco\n')
+
+      Start 341: mictlan_p12b4a_doc_crear_lat
+21/29 Test #341: mictlan_p12b4a_doc_crear_lat ................   Passed    0.06 sec
+      Start 342: mictlan_p12b4a_doc_crear_mict
+22/29 Test #342: mictlan_p12b4a_doc_crear_mict ...............   Passed    0.06 sec
+      Start 343: mictlan_p12b4a_doc_eliminar_lat
+23/29 Test #343: mictlan_p12b4a_doc_eliminar_lat .............   Passed    0.06 sec
+      Start 344: mictlan_p12b4a_doc_eliminar_mict
+24/29 Test #344: mictlan_p12b4a_doc_eliminar_mict ............   Passed    0.07 sec
+      Start 345: mictlan_p12b4a_doc_borrar_lat
+25/29 Test #345: mictlan_p12b4a_doc_borrar_lat ...............   Passed    0.05 sec
+      Start 346: mictlan_p12b4a_doc_borrar_mict
+26/29 Test #346: mictlan_p12b4a_doc_borrar_mict ..............   Passed    0.05 sec
+      Start 347: mictlan_p12b4a_doc_renombrar_lat
+27/29 Test #347: mictlan_p12b4a_doc_renombrar_lat ............   Passed    0.05 sec
+      Start 348: mictlan_p12b4a_doc_renombrar_mict
+28/29 Test #348: mictlan_p12b4a_doc_renombrar_mict ...........   Passed    0.05 sec
+      Start 349: mictlan_p12b4a_documentacion
+29/29 Test #349: mictlan_p12b4a_documentacion ................   Passed    0.03 sec
+
+72% tests passed, 8 tests failed out of 29
+
+Label Time Summary:
+archivos         =   1.65 sec*proc (29 tests)
+documentacion    =   0.03 sec*proc (1 test)
+p12b4a           =   1.65 sec*proc (29 tests)
+
+Total Test time (real) =   1.69 sec
+
+The following tests FAILED:
+	329 - mictlan_p12b4a_doc_escribir_lat (Failed)          archivos p12b4a
+	330 - mictlan_p12b4a_doc_escribir_mict (Failed)         archivos p12b4a
+	331 - mictlan_p12b4a_doc_anexar_lat (Failed)            archivos p12b4a
+	332 - mictlan_p12b4a_doc_anexar_mict (Failed)           archivos p12b4a
+	337 - mictlan_p12b4a_doc_duplicar_lat (Failed)          archivos p12b4a
+	338 - mictlan_p12b4a_doc_duplicar_mict (Failed)         archivos p12b4a
+	339 - mictlan_p12b4a_doc_ejecutar_lat (Failed)          archivos p12b4a
+	340 - mictlan_p12b4a_doc_ejecutar_mict (Failed)         archivos p12b4a
+Errors while running CTest

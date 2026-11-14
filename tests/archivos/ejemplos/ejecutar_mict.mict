@@ -1,0 +1,2 @@
+archivo.ejecutar("hijo.mict")
+poner(archivo.leer("marca"))
