@@ -1,9 +1,8 @@
 # Repetir P1.2-B3 en Debian 13
 
 Trabaje en una copia nueva; los comandos detienen el proceso si falla un paso.
-No hace falta instalar Core en el sistema ni modificar main. La revisión se fija
-al resolver la PR y se registra antes de compilar; para una revisión independiente
-inmutable use el SHA completo publicado en el informe de la PR #10.
+No hace falta instalar Core en el sistema ni modificar main. La revisión fija siguiente contiene el código, los 71 tests B3 y sus ejemplos;
+los commits documentales posteriores sólo registran resultados de cierre.
 
 ## Preparación
 
@@ -17,7 +16,7 @@ sudo localedef -i fr_FR -f UTF-8 fr_FR.UTF-8
 git clone https://github.com/TuxMatic99/Mictlan-Core.git mictlan-core-p12b3
 cd mictlan-core-p12b3
 git fetch origin investigacion/p12b3-matematicas
-revision="$(git rev-parse FETCH_HEAD)"
+revision=239401f3e21eadf51bc1b2da0c899989a1091757
 git switch --detach "$revision"
 test "$(git rev-parse HEAD)" = "$revision"
 git merge-base --is-ancestor 3125a0016e1adcfa0ac68c2c37ba40108a033cc9 HEAD

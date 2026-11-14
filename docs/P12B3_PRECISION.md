@@ -79,6 +79,8 @@ Incluso un intervalo de un solo valor consume una palabra. Los errores de
 argumentos se producen antes de avanzar el estado.
 
 `aleatorio`/`alt` conservan rand y el módulo histórico para entradas válidas.
+La comprobación de negatividad del único extremo se hace después de truncar:
+por ejemplo, -0.5 se trunca a cero y sigue admitido.
 No ofrecen una secuencia portable, no reciben una nueva semilla automáticamente
 y conservan sesgo. Cuando la amplitud supera RAND_MAX+1, su rango alcanzable no
 cubre todo el intervalo. Se documenta esta limitación y se recomienda la función

@@ -56,3 +56,9 @@ la base se recompiló en un worktree separado en 3125a001 y se enlazó el mismo
 benchmark contra ella. Se usó `-O3` y el mismo GCC 14.2. Las rutas extraídas de
 readline indicadas arriba se añadieron también a la compilación manual inicial,
 que sin ellas falló (no se contó como medición). Los CSV Debug son complementarios.
+
+
+`ci-final-{debug,release,asan}.extracto.log` conserva configuración, pruebas B3,
+ABI y recuento de la [CI completa 43642854265](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43642854265),
+SHA `239401f3e21eadf51bc1b2da0c899989a1091757`: 251/251, 251/251 y 267/267,
+respectivamente, sin omitidas. La guía Debian queda fijada a esa revisión.

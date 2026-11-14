@@ -16,7 +16,9 @@ no estaba publicado se dejó en su worktree; no se incorporó a esta misión.
 3. **Después se publicó** `00c3a91542521b47476b3de612afd29eca7ff787`: correcciones
    y diez nombres nuevos del lenguaje (nueve en mate y una conversión global).
 4. Se añadieron ejemplos documentados automatizados, comprobaciones de locale y
-   el informe de cierre. El código de producción sigue siendo el del punto 3.
+   el informe de cierre. El código de producción sigue siendo el del punto 3. La revisión completa de
+   referencia es `239401f3e21eadf51bc1b2da0c899989a1091757`; los commits posteriores
+   sólo registran resultados y fijan esa revisión en la guía de Debian.
 
 La [decisión inicial y su revisión](P12B3_DECISIONES.md) distinguen errores de
 implementación de contratos heredados. `anumero(0)` y `anumero("0")` **siguen
@@ -100,10 +102,18 @@ float-cast-overflow; LSan integrado con detect_leaks=1 y salida 23 en caso de er
 | Implementación 00c3a915, local | ASan/UBSan/LSan | 3 auxiliares | 0 clasificadas como funcionales | 258 bloqueadas | CTest las marca fallidas; todos los bloques muestran LSan/ptrace. Las tres aprobadas son dos generadores Python y nm, no ejecución instrumentada de Core |
 | Con ejemplos y locales, local | Debug | 251 | 0 | 0 | 180+71; locales instalados, sin omitidas |
 | Con ejemplos y locales, local | Release | 251 | 0 | 0 | 180+71 |
+| Revisión completa 239401f3, CI | Debug | 251 | 0 | 0 | 180+71, sin omitidas |
+| Revisión completa 239401f3, CI | Release | 251 | 0 | 0 | 180+71, sin omitidas |
+| Revisión completa 239401f3, CI | ASan/UBSan/LSan | 267 | 0 | 0 | 196+71, sin omitidas ni detectores desactivados |
 
 CI inicial: [43641329286](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43641329286).
 CI de implementación: [43641793526](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43641793526),
 con [instrumentación](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43641793526/job/132590763466).
+CI completa: [43642854265](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43642854265),
+con [Debug](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43642854265/job/132594027016),
+[Release](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43642854265/job/132594026904) e
+[instrumentación](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43642854265/job/132594027123).
+Se consultaron los logs de cada job y su recuento exacto, no sólo el indicador verde.
 Los logs/extractos locales y de CI se conservan en [evidencias](evidencias/p12b3/README.md).
 El límite ptrace no se elude desactivando detectores; la aprobación instrumentada
 proviene de GitHub, donde la suite completa sí se ejecuta.

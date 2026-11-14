@@ -9,7 +9,7 @@ El [manual histórico](https://manual.lenguajelatino.org/es/stable/librerias/Mat
 es una referencia: `frexp` realmente devuelve sólo la fracción y `porc` una razón,
 no un porcentaje multiplicado por 100. Se conservan ambos contratos.
 
-| Área | Contrato conservado | Corrección o alternativa acordada antes de editar src |
+| Área | Contrato conservado | Decisión vigente (revisión de anumero explicada al final) |
 |---|---|---|
 | max/min | uno o más números; NaN se omite cuando hay números; primer empate, incluido signo del cero | retirar centinelas ±999999999999999; infinitos ordenados; sólo NaN produce NaN; recorrido sin listas temporales |
 | aleatorio/alt | 0 argumentos: entero 0 o 1; 1: [0,trunc(n)]; 2: extremos truncados y ordenados, inclusivos; generador C rand | validar finitud e intervalo de int antes del cast; calcular diferencias en 64 bits; rechazar un límite único negativo; mantener secuencia y sesgo histórico para entradas válidas |
