@@ -73,7 +73,10 @@ No se modifica la estructura pública de la VM ni se añade otro recolector.
   conserva el estado 2. El temporal puede persistir si el sistema impide unlink;
   no se garantiza limpieza frente a pérdida de permisos o caída del proceso.
 * `ejecutar` deja de omitir .mict y de ocultar errores de ejecución de .lat;
-  restaura el archivo activo/REPL/ubicación, incluidos casos anidados. Sus efectos
+  restaura el archivo activo/REPL/ubicación, incluidos casos anidados.
+  El reconocimiento por sufijo coincide con el cargador: el nombre literal
+  `.lat`, antes omitido por no tener prefijo, también se reconoce; `.mict` sigue
+  el mismo criterio. Sus efectos
   ya realizados sobre archivos o variables no se revierten.
 * **Sin retorno no significa nulo:** las cuatro nativas sin valor no apilan
   resultado. Anidarlas en `poner(...)` falla por operandos insuficientes. Las

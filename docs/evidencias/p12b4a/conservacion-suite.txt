@@ -1,0 +1,4 @@
+Base P1.2-B3: 251 pruebas.
+B4-A Debug/Release: 391 pruebas.
+Nuevas: 140.
+Anteriores ausentes: [].

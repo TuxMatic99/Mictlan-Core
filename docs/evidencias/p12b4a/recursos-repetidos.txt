@@ -1,0 +1,29 @@
+UpdateCTestConfiguration  from :/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/DartConfiguration.tcl
+Test project /workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 222
+    Start 222: mictlan_p12b4a_repetidas_c
+
+222: Test command: /usr/bin/python3.13 "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py" "--biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so" "--sonda=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/mictlan_sonda_archivos" "/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/mictlan_test_archivos" "repetidas"
+222: Working Directory: /workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug
+222: Test timeout computed to be: 50
+222: ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+222: Biblioteca SHA256=6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+222: 50 copias: memoria VM antes=81136 despues=81136
+1/1 Test #222: mictlan_p12b4a_repetidas_c .......   Passed    0.19 sec
+
+The following tests passed:
+	mictlan_p12b4a_repetidas_c
+
+100% tests passed out of 1
+
+Label Time Summary:
+archivos    =   0.19 sec*proc (1 test)
+p12b4a      =   0.19 sec*proc (1 test)
+
+Total Test time (real) =   0.20 sec
