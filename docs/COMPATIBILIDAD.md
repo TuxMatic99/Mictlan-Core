@@ -24,3 +24,16 @@ La asociación MIME de Linux declara solo `.mict`. En VS Code se puede asignar `
 ## Alcance del recolector
 
 El recolector se habilita explícitamente en programas anfitriones que cumplen el [contrato de memoria](p02g_contrato_memoria.md). La consola y el SDK de distribución conservan el ciclo de vida F de forma predeterminada. La compilación repetida y las cadenas internadas conservan memoria hasta cerrar la VM. Los ensayos de agotamiento inyectan un fallo en una reserva y una reasignación protegidas. La inicialización, el parser y las mutaciones parciales de contenedores tienen rutas que requieren pruebas propias.
+
+## Precisión semántica P1.2-A
+
+Se corrigen dos resultados demostrados: `<=` aplica la misma conversión
+numérica que las otras relaciones cuando alguno de los operandos es numérico,
+y los literales decimales usan punto también al compilar desde un anfitrión
+con coma decimal. Se conservan las precedencias, las coerciones de igualdad
+y los marcos heredados. [Decisiones anteriores al parche](P12A_DECISIONES.md),
+[reglas verificadas](SEMANTICA_P12A.md) y [pruebas](../tests/conformidad/README.md).
+El `.l` enumera dos aliases de retorno que las tablas distribuidas no reservan:
+`regresar` y `devolver` siguen siendo identificadores. La acción decimal se
+actualiza en ambos archivos sin regenerar las tablas, para preservar programas
+válidos con esos nombres.

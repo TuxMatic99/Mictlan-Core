@@ -30,3 +30,14 @@ escribir(sumar(19, 23))
 escribir(identidad())
 x = sin_valor()
 escribir(x)
+# El escaner distribuido conserva estos identificadores historicos.
+regresar = 7
+devolver = 8
+funcion alias_largo()
+    retornar regresar + devolver
+fin
+funcion alias_corto()
+    ret 6
+fin
+escribir(alias_largo())
+escribir(alias_corto())

@@ -20,3 +20,8 @@ escribir(a)
 escribir(b)
 x = "otro tipo"
 escribir(x)
+contador = 4
+contador++
+escribir(contador)
+contador--
+escribir(contador)

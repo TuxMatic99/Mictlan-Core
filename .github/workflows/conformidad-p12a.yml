@@ -1,0 +1,68 @@
+name: Conformidad P1.2-A
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'investigacion/p12a-*'
+
+permissions:
+  contents: read
+
+jobs:
+  conformidad:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - perfil: Debug
+            tipo: Debug
+            sanitizar: false
+          - perfil: Release
+            tipo: Release
+            sanitizar: false
+          - perfil: ASan-UBSan-LSan
+            tipo: Debug
+            sanitizar: true
+    env:
+      ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+      UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+      LSAN_OPTIONS: exitcode=23
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar compilador y locales de coma decimal
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libreadline-dev locales
+          sudo locale-gen es_ES.UTF-8 fr_FR.UTF-8
+          python3 - <<'PY'
+          import locale
+          for nombre in ('es_ES.UTF-8', 'fr_FR.UTF-8'):
+              locale.setlocale(locale.LC_NUMERIC, nombre)
+              assert locale.localeconv()['decimal_point'] == ',', nombre
+          PY
+      - name: Configurar
+        shell: bash
+        run: |
+          args=(-S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.tipo }})
+          if [[ '${{ matrix.sanitizar }}' == 'true' ]]; then
+            args+=("-DCMAKE_C_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+                   "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+                   "-DCMAKE_SHARED_LINKER_FLAGS=-fsanitize=address,undefined")
+          fi
+          cmake "${args[@]}" 2>&1 | tee configure.log
+      - name: Compilar
+        run: cmake --build build --parallel 2 2>&1 | tee build.log
+      - name: Ejecutar todas las pruebas existentes y nuevas
+        run: ctest --test-dir build --output-on-failure --output-junit resultados.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: p12a-${{ matrix.perfil }}
+          path: |
+            configure.log
+            build.log
+            build/Testing/
+            build/resultados.xml
+            build/conformidad/

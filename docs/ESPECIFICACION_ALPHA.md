@@ -2,6 +2,10 @@
 
 **Edición Alpha 0.1 · 13 de noviembre de 2026.** Describe la sintaxis reconocida y el comportamiento comprobado de esta propuesta. La gramática fuente está en [latparse.y](../tools/parser/latparse.y) y el analizador léxico en [latlex.l](../tools/parser/latlex.l). Las características señaladas como experimentales requieren pruebas adicionales para formar parte del contrato de estabilidad.
 
+La [especificación semántica P1.2-A](SEMANTICA_P12A.md) precisa operadores,
+retornos y ámbitos con pruebas en las dos extensiones. Consulta también
+[primeros pasos](P12A_PRIMEROS_PASOS.md).
+
 ## Archivos y palabras
 
 El intérprete lee programas de texto con extensión `.mict` o `.lat`. La entrada habitual es UTF-8. Los identificadores usan letras ASCII, dígitos y guion bajo, con una letra o guion bajo inicial. Los nombres distinguen mayúsculas. La regla de constantes reconoce las secuencias de letras mayúsculas y guiones bajos. La tabla de símbolos admite hasta 63 bytes por nombre o clave. Los comentarios empiezan con `#` o `//` y terminan al final de la línea. También se admiten comentarios `/* ... */`. Los saltos de línea actúan como espacio en la gramática del archivo.
@@ -11,7 +15,7 @@ El intérprete lee programas de texto con extensión `.mict` o `.lat`. La entrad
 | Literales | `verdadero`, `cierto`, `falso`, `nulo` |
 | Selección | `si`, `osi`, `sino`, `fin`, `elegir`, `caso`, `otro`, `defecto` |
 | Iteración | `mientras`, `repetir`, `hasta`, `desde`, `para`, `en`, `rango`, `romper`, `continuar` |
-| Funciones y alcance | `funcion`, `fun`, `retorno`, `retornar`, `regresar`, `devolver`, `ret`, `global` |
+| Funciones y alcance | `funcion`, `fun`, `retorno`, `retornar`, `ret`, `global` |
 | Etiquetas y objetos | `ir`, `clase`, `constructor`, `hereda`, `super`, `mi`, `estatico`, `nueva` |
 
 `escribir`, `incluir` y `error` son funciones de la biblioteca base. El escáner heredado puede ignorar caracteres ajenos al léxico. Evita identificadores Unicode mientras se define su contrato.
@@ -68,7 +72,7 @@ La asignación múltiple vincula los valores en orden, completa con `nulo` los d
 | Diccionario | `{vector: [8, 16]}` o `{"vector": [8, 16]}`. Acceso mediante `d.vector` o `d["vector"]`. |
 | Función | Valor interpretable o función registrada por C. Los enteros y caracteres de la interfaz C conservan su representación heredada. |
 
-`+ - * / %` realizan las operaciones aritméticas, y `^` y `**` son formas de potencia. `== != < <= > >=` comparan y `~=` aplica una expresión regular según el motor disponible. `!`, `&&` y `||` convierten operandos a lógico. Usa paréntesis cuando importen el orden o los efectos de las llamadas. La precedencia heredada de `&&` y `||` es la misma. `condición ? a : b` elige un resultado. `+= -= *= /= %= ..=` actualizan el destino y `++ --` incrementan o decrementan variables.
+`+ - * / %` realizan las operaciones aritméticas, y `^` y `**` son formas de potencia. `== != < <= > >=` comparan y `~=` aplica una expresión regular según el motor disponible. `!` convierte a lógico. `&&` y `||` evalúan ambos operandos y conservan el valor elegido según la veracidad del izquierdo. Usa paréntesis cuando importen el orden o los efectos de las llamadas. La precedencia heredada de `&&` y `||` es la misma. `condición ? a : b` elige un resultado. `+= -= *= /= %= ..=` actualizan el destino y `++ --` incrementan o decrementan variables.
 
 `alogico` considera falsos `nulo`, 0, cadenas vacías, `"0"`, `"falso"` y `"false"` sin distinguir mayúsculas en esas dos palabras, y colecciones vacías. `anumero` conserva coerciones históricas. Una conversión cuyo valor numérico sea cero devuelve `nulo`, incluso para `"0"`. Para comprobar entradas en ciencia usa el contrato de cada función, que exige valores numéricos finitos. `acadena` produce una representación textual. El orden de impresión de diccionarios queda fuera del contrato.
 
