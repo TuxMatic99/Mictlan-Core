@@ -28,6 +28,7 @@ La distribución de referencia de esta Alpha es Debian 13 x86_64. El SDK gráfic
 
 ## Semántica P1.2-A
 
+[Informe de resultados](docs/P12A_INFORME.md) ·
 [Operadores y precedencia](docs/SEMANTICA_P12A.md) ·
 [Guía para estudiantes](docs/P12A_PRIMEROS_PASOS.md) ·
 [Pruebas de conformidad](tests/conformidad/README.md) ·

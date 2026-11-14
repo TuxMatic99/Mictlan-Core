@@ -1,0 +1,162 @@
+Run: https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43551747982
+Commit: e1f511ed5a91b6d097579971192c12b67a89a033
+Job: 132315552243
+Ubuntu 24.04 / GCC 13.3.0
+
+2026-11-14T03:28:41.5398742Z Test project <repositorio>/build
+2026-11-14T03:28:41.6875042Z       Start  1: mictlan_alpha_identidad
+2026-11-14T03:28:41.7303040Z  1/67 Test  #1: mictlan_alpha_identidad ...............   Passed    0.03 sec
+2026-11-14T03:28:41.7303680Z       Start  2: mictlan_alpha_extensiones
+2026-11-14T03:28:41.7436105Z  2/67 Test  #2: mictlan_alpha_extensiones .............   Passed    0.01 sec
+2026-11-14T03:28:41.7436645Z       Start  3: mictlan_alpha_latino_valores
+2026-11-14T03:28:41.7653125Z  3/67 Test  #3: mictlan_alpha_latino_valores ..........   Passed    0.02 sec
+2026-11-14T03:28:41.7653582Z       Start  4: mictlan_alpha_latino_control
+2026-11-14T03:28:41.7845453Z  4/67 Test  #4: mictlan_alpha_latino_control ..........   Passed    0.02 sec
+2026-11-14T03:28:41.7845969Z       Start  5: mictlan_alpha_latino_colecciones
+2026-11-14T03:28:41.8059923Z  5/67 Test  #5: mictlan_alpha_latino_colecciones ......   Passed    0.02 sec
+2026-11-14T03:28:41.8060453Z       Start  6: mictlan_alpha_diagnosticos
+2026-11-14T03:28:41.8262631Z  6/67 Test  #6: mictlan_alpha_diagnosticos ............   Passed    0.02 sec
+2026-11-14T03:28:41.8263125Z       Start  7: mictlan_alpha_repl
+2026-11-14T03:28:41.8328488Z  7/67 Test  #7: mictlan_alpha_repl ....................   Passed    0.01 sec
+2026-11-14T03:28:41.8328999Z       Start  8: mictlan_alpha_modulos
+2026-11-14T03:28:41.8418367Z  8/67 Test  #8: mictlan_alpha_modulos .................   Passed    0.01 sec
+2026-11-14T03:28:41.8418862Z       Start  9: mictlan_p12a_numeros_lat
+2026-11-14T03:28:41.8459638Z  9/67 Test  #9: mictlan_p12a_numeros_lat ..............   Passed    0.00 sec
+2026-11-14T03:28:41.8460127Z       Start 10: mictlan_p12a_numeros_mict
+2026-11-14T03:28:41.8501053Z 10/67 Test #10: mictlan_p12a_numeros_mict .............   Passed    0.00 sec
+2026-11-14T03:28:41.8501654Z       Start 11: mictlan_p12a_precedencia_lat
+2026-11-14T03:28:41.8543440Z 11/67 Test #11: mictlan_p12a_precedencia_lat ..........   Passed    0.00 sec
+2026-11-14T03:28:41.8543931Z       Start 12: mictlan_p12a_precedencia_mict
+2026-11-14T03:28:41.8585611Z 12/67 Test #12: mictlan_p12a_precedencia_mict .........   Passed    0.00 sec
+2026-11-14T03:28:41.8586089Z       Start 13: mictlan_p12a_logica_lat
+2026-11-14T03:28:41.8629527Z 13/67 Test #13: mictlan_p12a_logica_lat ...............   Passed    0.00 sec
+2026-11-14T03:28:41.8630002Z       Start 14: mictlan_p12a_logica_mict
+2026-11-14T03:28:41.8673371Z 14/67 Test #14: mictlan_p12a_logica_mict ..............   Passed    0.00 sec
+2026-11-14T03:28:41.8673867Z       Start 15: mictlan_p12a_comparaciones_lat
+2026-11-14T03:28:41.8716530Z 15/67 Test #15: mictlan_p12a_comparaciones_lat ........   Passed    0.00 sec
+2026-11-14T03:28:41.8717026Z       Start 16: mictlan_p12a_comparaciones_mict
+2026-11-14T03:28:41.8759366Z 16/67 Test #16: mictlan_p12a_comparaciones_mict .......   Passed    0.00 sec
+2026-11-14T03:28:41.8759852Z       Start 17: mictlan_p12a_funciones_lat
+2026-11-14T03:28:41.8858452Z 17/67 Test #17: mictlan_p12a_funciones_lat ............   Passed    0.01 sec
+2026-11-14T03:28:41.8858953Z       Start 18: mictlan_p12a_funciones_mict
+2026-11-14T03:28:41.8958122Z 18/67 Test #18: mictlan_p12a_funciones_mict ...........   Passed    0.01 sec
+2026-11-14T03:28:41.8958636Z       Start 19: mictlan_p12a_recursion_lat
+2026-11-14T03:28:41.9067826Z 19/67 Test #19: mictlan_p12a_recursion_lat ............   Passed    0.01 sec
+2026-11-14T03:28:41.9068332Z       Start 20: mictlan_p12a_recursion_mict
+2026-11-14T03:28:41.9174263Z 20/67 Test #20: mictlan_p12a_recursion_mict ...........   Passed    0.01 sec
+2026-11-14T03:28:41.9174743Z       Start 21: mictlan_p12a_ambitos_lat
+2026-11-14T03:28:41.9219789Z 21/67 Test #21: mictlan_p12a_ambitos_lat ..............   Passed    0.00 sec
+2026-11-14T03:28:41.9220260Z       Start 22: mictlan_p12a_ambitos_mict
+2026-11-14T03:28:41.9264426Z 22/67 Test #22: mictlan_p12a_ambitos_mict .............   Passed    0.00 sec
+2026-11-14T03:28:41.9264908Z       Start 23: mictlan_p12a_asignaciones_lat
+2026-11-14T03:28:41.9306361Z 23/67 Test #23: mictlan_p12a_asignaciones_lat .........   Passed    0.00 sec
+2026-11-14T03:28:41.9306835Z       Start 24: mictlan_p12a_asignaciones_mict
+2026-11-14T03:28:41.9349680Z 24/67 Test #24: mictlan_p12a_asignaciones_mict ........   Passed    0.00 sec
+2026-11-14T03:28:41.9350213Z       Start 25: mictlan_p12a_condicional_lat
+2026-11-14T03:28:41.9391493Z 25/67 Test #25: mictlan_p12a_condicional_lat ..........   Passed    0.00 sec
+2026-11-14T03:28:41.9392011Z       Start 26: mictlan_p12a_condicional_mict
+2026-11-14T03:28:41.9433298Z 26/67 Test #26: mictlan_p12a_condicional_mict .........   Passed    0.00 sec
+2026-11-14T03:28:41.9433811Z       Start 27: mictlan_p12a_local_inaccesible_lat
+2026-11-14T03:28:41.9474032Z 27/67 Test #27: mictlan_p12a_local_inaccesible_lat ....   Passed    0.00 sec
+2026-11-14T03:28:41.9474534Z       Start 28: mictlan_p12a_local_inaccesible_mict
+2026-11-14T03:28:41.9515054Z 28/67 Test #28: mictlan_p12a_local_inaccesible_mict ...   Passed    0.00 sec
+2026-11-14T03:28:41.9515548Z       Start 29: mictlan_p12a_argumentos_exceso_lat
+2026-11-14T03:28:41.9554811Z 29/67 Test #29: mictlan_p12a_argumentos_exceso_lat ....   Passed    0.00 sec
+2026-11-14T03:28:41.9555320Z       Start 30: mictlan_p12a_argumentos_exceso_mict
+2026-11-14T03:28:41.9595027Z 30/67 Test #30: mictlan_p12a_argumentos_exceso_mict ...   Passed    0.00 sec
+2026-11-14T03:28:41.9595612Z       Start 31: mictlan_p12a_locale_C
+2026-11-14T03:28:41.9609407Z 31/67 Test #31: mictlan_p12a_locale_C .................   Passed    0.00 sec
+2026-11-14T03:28:41.9609894Z       Start 32: mictlan_p12a_locale_es_ES_UTF-8
+2026-11-14T03:28:41.9623548Z 32/67 Test #32: mictlan_p12a_locale_es_ES_UTF-8 .......   Passed    0.00 sec
+2026-11-14T03:28:41.9624010Z       Start 33: mictlan_p12a_locale_fr_FR_UTF-8
+2026-11-14T03:28:41.9637494Z 33/67 Test #33: mictlan_p12a_locale_fr_FR_UTF-8 .......   Passed    0.00 sec
+2026-11-14T03:28:41.9637946Z       Start 34: mictlan_alpha_recompilacion
+2026-11-14T03:28:41.9857106Z 34/67 Test #34: mictlan_alpha_recompilacion ...........   Passed    0.02 sec
+2026-11-14T03:28:41.9857604Z       Start 35: mictlan_p11_pila
+2026-11-14T03:28:42.0041166Z 35/67 Test #35: mictlan_p11_pila ......................   Passed    0.02 sec
+2026-11-14T03:28:42.0208263Z       Start 36: mictlan_p11_gc_cadenas
+2026-11-14T03:28:42.0248557Z 36/67 Test #36: mictlan_p11_gc_cadenas ................   Passed    0.00 sec
+2026-11-14T03:28:42.0249069Z       Start 37: mictlan_alpha_agotamiento
+2026-11-14T03:28:42.0263010Z 37/67 Test #37: mictlan_alpha_agotamiento .............   Passed    0.00 sec
+2026-11-14T03:28:42.0263466Z       Start 38: mictlan_p02g_ciclos
+2026-11-14T03:28:42.0277042Z 38/67 Test #38: mictlan_p02g_ciclos ...................   Passed    0.00 sec
+2026-11-14T03:28:42.0277470Z       Start 39: mictlan_p02g_raices
+2026-11-14T03:28:42.0293045Z 39/67 Test #39: mictlan_p02g_raices ...................   Passed    0.00 sec
+2026-11-14T03:28:42.0293471Z       Start 40: mictlan_p02g_errores
+2026-11-14T03:28:42.0311300Z 40/67 Test #40: mictlan_p02g_errores ..................   Passed    0.00 sec
+2026-11-14T03:28:42.0311747Z       Start 41: mictlan_p02g_opacos
+2026-11-14T03:28:42.0326755Z 41/67 Test #41: mictlan_p02g_opacos ...................   Passed    0.00 sec
+2026-11-14T03:28:42.0327187Z       Start 42: mictlan_formato
+2026-11-14T03:28:42.0342475Z 42/67 Test #42: mictlan_formato .......................   Passed    0.00 sec
+2026-11-14T03:28:42.0342932Z       Start 43: mictlan_cli_expresion_larga
+2026-11-14T03:28:42.0383013Z 43/67 Test #43: mictlan_cli_expresion_larga ...........   Passed    0.00 sec
+2026-11-14T03:28:42.0383498Z       Start 44: mictlan_p02g_generativo
+2026-11-14T03:28:42.0523128Z 44/67 Test #44: mictlan_p02g_generativo ...............   Passed    0.01 sec
+2026-11-14T03:28:42.0523584Z       Start 45: mictlan_pila_directa
+2026-11-14T03:28:42.0629477Z 45/67 Test #45: mictlan_pila_directa ..................   Passed    0.01 sec
+2026-11-14T03:28:42.0629973Z       Start 46: mictlan_pila_anidada
+2026-11-14T03:28:42.0801126Z 46/67 Test #46: mictlan_pila_anidada ..................   Passed    0.02 sec
+2026-11-14T03:28:42.0801685Z       Start 47: mictlan_pila_prefijo
+2026-11-14T03:28:42.0919476Z 47/67 Test #47: mictlan_pila_prefijo ..................   Passed    0.01 sec
+2026-11-14T03:28:42.0919942Z       Start 48: mictlan_pila_anidada_prefijo
+2026-11-14T03:28:42.1090984Z 48/67 Test #48: mictlan_pila_anidada_prefijo ..........   Passed    0.02 sec
+2026-11-14T03:28:42.1091642Z       Start 49: mictlan_pila_prestados
+2026-11-14T03:28:42.1197026Z 49/67 Test #49: mictlan_pila_prestados ................   Passed    0.01 sec
+2026-11-14T03:28:42.1197505Z       Start 50: mictlan_pila_reentrada
+2026-11-14T03:28:42.1441646Z 50/67 Test #50: mictlan_pila_reentrada ................   Passed    0.02 sec
+2026-11-14T03:28:42.1442116Z       Start 51: mictlan_pila_propagar
+2026-11-14T03:28:42.1685542Z 51/67 Test #51: mictlan_pila_propagar .................   Passed    0.02 sec
+2026-11-14T03:28:42.1686018Z       Start 52: mictlan_pila_consumido
+2026-11-14T03:28:42.1780585Z 52/67 Test #52: mictlan_pila_consumido ................   Passed    0.01 sec
+2026-11-14T03:28:42.1780979Z       Start 53: mictlan_pila_exito
+2026-11-14T03:28:42.1853324Z 53/67 Test #53: mictlan_pila_exito ....................   Passed    0.01 sec
+2026-11-14T03:28:42.1853794Z       Start 54: coverage
+2026-11-14T03:28:42.1951694Z 54/67 Test #54: coverage ..............................   Passed    0.01 sec
+2026-11-14T03:28:42.1952070Z       Start 55: mictlan_marcos_funcion
+2026-11-14T03:28:42.2020308Z 55/67 Test #55: mictlan_marcos_funcion ................   Passed    0.01 sec
+2026-11-14T03:28:42.2020823Z       Start 56: mictlan_memoria_listas_referencias
+2026-11-14T03:28:42.2060075Z 56/67 Test #56: mictlan_memoria_listas_referencias ....   Passed    0.00 sec
+2026-11-14T03:28:42.2060448Z       Start 57: mictlan_p02f_compartidos
+2026-11-14T03:28:42.2074379Z 57/67 Test #57: mictlan_p02f_compartidos ..............   Passed    0.00 sec
+2026-11-14T03:28:42.2074952Z       Start 58: mictlan_p02f_anidados
+2026-11-14T03:28:42.2088041Z 58/67 Test #58: mictlan_p02f_anidados .................   Passed    0.00 sec
+2026-11-14T03:28:42.2088525Z       Start 59: mictlan_p02f_diccionarios
+2026-11-14T03:28:42.2101365Z 59/67 Test #59: mictlan_p02f_diccionarios .............   Passed    0.00 sec
+2026-11-14T03:28:42.2101804Z       Start 60: mictlan_p02f_ciclo_lista
+2026-11-14T03:28:42.2114314Z 60/67 Test #60: mictlan_p02f_ciclo_lista ..............   Passed    0.00 sec
+2026-11-14T03:28:42.2115037Z       Start 61: mictlan_p02f_ciclo_mixto
+2026-11-14T03:28:42.2127314Z 61/67 Test #61: mictlan_p02f_ciclo_mixto ..............   Passed    0.00 sec
+2026-11-14T03:28:42.2127703Z       Start 62: mictlan_p02f_extraer
+2026-11-14T03:28:42.2140228Z 62/67 Test #62: mictlan_p02f_extraer ..................   Passed    0.00 sec
+2026-11-14T03:28:42.2140698Z       Start 63: mictlan_p02f_reasignar
+2026-11-14T03:28:42.2153299Z 63/67 Test #63: mictlan_p02f_reasignar ................   Passed    0.00 sec
+2026-11-14T03:28:42.2153694Z       Start 64: mictlan_p02f_clonar_mixto
+2026-11-14T03:28:42.2166132Z 64/67 Test #64: mictlan_p02f_clonar_mixto .............   Passed    0.00 sec
+2026-11-14T03:28:42.2166613Z       Start 65: mictlan_p02f_error
+2026-11-14T03:28:42.2222410Z 65/67 Test #65: mictlan_p02f_error ....................   Passed    0.01 sec
+2026-11-14T03:28:42.2223085Z       Start 66: mictlan_p02f_ffi
+2026-11-14T03:28:42.2280252Z 66/67 Test #66: mictlan_p02f_ffi ......................   Passed    0.01 sec
+2026-11-14T03:28:42.2280734Z       Start 67: mictlan_p02f_clonar_ciclo
+2026-11-14T03:28:42.2304817Z 67/67 Test #67: mictlan_p02f_clonar_ciclo .............   Passed    0.00 sec
+2026-11-14T03:28:42.2307188Z 
+2026-11-14T03:28:42.2307327Z 100% tests passed, 0 tests failed out of 67
+2026-11-14T03:28:42.2307618Z 
+2026-11-14T03:28:42.2307779Z Label Time Summary:
+2026-11-14T03:28:42.2308065Z alpha             =   0.16 sec*proc (10 tests)
+2026-11-14T03:28:42.2308415Z bytecode          =   0.01 sec*proc (1 test)
+2026-11-14T03:28:42.2308768Z compatibilidad    =   0.25 sec*proc (30 tests)
+2026-11-14T03:28:42.2309117Z conformidad       =   0.12 sec*proc (25 tests)
+2026-11-14T03:28:42.2309364Z contrato          =   0.02 sec*proc (11 tests)
+2026-11-14T03:28:42.2309603Z locale            =   0.00 sec*proc (3 tests)
+2026-11-14T03:28:42.2309845Z memoria           =   0.07 sec*proc (19 tests)
+2026-11-14T03:28:42.2310087Z p02e              =   0.13 sec*proc (9 tests)
+2026-11-14T03:28:42.2310318Z p02f              =   0.02 sec*proc (11 tests)
+2026-11-14T03:28:42.2310533Z p02g              =   0.02 sec*proc (5 tests)
+2026-11-14T03:28:42.2310745Z p11               =   0.02 sec*proc (2 tests)
+2026-11-14T03:28:42.2310976Z p12a              =   0.12 sec*proc (25 tests)
+2026-11-14T03:28:42.2311359Z parser            =   0.01 sec*proc (1 test)
+2026-11-14T03:28:42.2311650Z pila              =   0.15 sec*proc (10 tests)
+2026-11-14T03:28:42.2311885Z recuperacion      =   0.13 sec*proc (9 tests)
+2026-11-14T03:28:42.2312041Z 
+2026-11-14T03:28:42.2312120Z Total Test time (real) =   0.69 sec
+
