@@ -1,0 +1,1 @@
+cadena.subcadena("abc", 1e99, 1)

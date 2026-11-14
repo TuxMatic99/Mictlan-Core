@@ -1,0 +1,21 @@
+sub_inicio_negativo	Indice de cadena fuera de rango
+sub_cantidad_negativa	Longitud de cadena fuera de rango
+sub_inicio_exceso	Indice de cadena fuera de rango
+insertar_negativo	Indice de cadena fuera de rango
+indice_infinito	Numero fuera de rango para cadena
+indice_enorme	Numero fuera de rango para cadena
+relleno_negativo	Longitud de cadena fuera de rango
+reemplazo_vacio	Patron de reemplazo vacio
+tipo_texto	El parametro debe de ser una cadena
+tipo_indice	El parametro debe de ser un decimal
+unicode_invalido	UTF-8 invalido
+unicode_truncado	UTF-8 invalido
+unicode_sustituto	UTF-8 invalido
+unicode_sobrelimite	UTF-8 invalido
+unicode_sobrelargo	UTF-8 invalido
+unicode_fraccion	Indice Unicode debe ser entero no negativo
+unicode_inicio	Indice de cadena fuera de rango
+separador_vacio	Separador de texto vacio
+regex_tipo	El parametro debe de ser una cadena
+regex_patron	Error al compilar regex
+char_rango	Numero fuera de rango para cadena

@@ -1,0 +1,535 @@
+Test project /workspace/scratch/1de5cf9cbaa6/build-base-debug
+      Start 34: mictlan_p12b1_herencia_lat
+ 1/51 Test #34: mictlan_p12b1_herencia_lat .................   Passed    0.01 sec
+      Start 35: mictlan_p12b1_herencia_mict
+ 2/51 Test #35: mictlan_p12b1_herencia_mict ................   Passed    0.01 sec
+      Start 36: mictlan_p12b1_limites_validos_lat
+ 3/51 Test #36: mictlan_p12b1_limites_validos_lat ..........   Passed    0.01 sec
+      Start 37: mictlan_p12b1_limites_validos_mict
+ 4/51 Test #37: mictlan_p12b1_limites_validos_mict .........   Passed    0.01 sec
+      Start 38: mictlan_p12b1_unicode_lat
+ 5/51 Test #38: mictlan_p12b1_unicode_lat ..................***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 1; esperado 0.
+
+
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode-lat/programa.lat:1:17:[0m
+  No se encontro la fun 'longitud_bytes'
+
+
+
+
+      Start 39: mictlan_p12b1_unicode_mict
+ 6/51 Test #39: mictlan_p12b1_unicode_mict .................***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 1; esperado 0.
+
+
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode-mict/programa.mict:1:17:[0m
+  No se encontro la fun 'longitud_bytes'
+
+
+
+
+      Start 40: mictlan_p12b1_separacion_explicita_lat
+ 7/51 Test #40: mictlan_p12b1_separacion_explicita_lat .....***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 1; esperado 0.
+
+
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/separacion_explicita-lat/programa.lat:1:17:[0m
+  No se encontro la fun 'separar_texto'
+
+
+
+
+      Start 41: mictlan_p12b1_separacion_explicita_mict
+ 8/51 Test #41: mictlan_p12b1_separacion_explicita_mict ....***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 1; esperado 0.
+
+
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/separacion_explicita-mict/programa.mict:1:17:[0m
+  No se encontro la fun 'separar_texto'
+
+
+
+
+      Start 42: mictlan_p12b1_sub_inicio_negativo_lat
+ 9/51 Test #42: mictlan_p12b1_sub_inicio_negativo_lat ......***Failed    0.00 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 43: mictlan_p12b1_sub_inicio_negativo_mict
+10/51 Test #43: mictlan_p12b1_sub_inicio_negativo_mict .....***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 44: mictlan_p12b1_sub_cantidad_negativa_lat
+11/51 Test #44: mictlan_p12b1_sub_cantidad_negativa_lat ....***Failed    0.00 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Segmentation fault; esperado 1.
+
+
+
+
+
+
+      Start 45: mictlan_p12b1_sub_cantidad_negativa_mict
+12/51 Test #45: mictlan_p12b1_sub_cantidad_negativa_mict ...***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Segmentation fault; esperado 1.
+
+
+
+
+
+
+      Start 46: mictlan_p12b1_sub_inicio_exceso_lat
+13/51 Test #46: mictlan_p12b1_sub_inicio_exceso_lat ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 47: mictlan_p12b1_sub_inicio_exceso_mict
+14/51 Test #47: mictlan_p12b1_sub_inicio_exceso_mict .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 48: mictlan_p12b1_insertar_negativo_lat
+15/51 Test #48: mictlan_p12b1_insertar_negativo_lat ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Subprocess aborted; esperado 1.
+
+
+
+  malloc(): corrupted top size
+
+
+
+
+      Start 49: mictlan_p12b1_insertar_negativo_mict
+16/51 Test #49: mictlan_p12b1_insertar_negativo_mict .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Subprocess aborted; esperado 1.
+
+
+
+  malloc(): corrupted top size
+
+
+
+
+      Start 50: mictlan_p12b1_indice_infinito_lat
+17/51 Test #50: mictlan_p12b1_indice_infinito_lat ..........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Segmentation fault; esperado 1.
+
+
+
+
+
+
+      Start 51: mictlan_p12b1_indice_infinito_mict
+18/51 Test #51: mictlan_p12b1_indice_infinito_mict .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Segmentation fault; esperado 1.
+
+
+
+
+
+
+      Start 52: mictlan_p12b1_indice_enorme_lat
+19/51 Test #52: mictlan_p12b1_indice_enorme_lat ............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Segmentation fault; esperado 1.
+
+
+
+
+
+
+      Start 53: mictlan_p12b1_indice_enorme_mict
+20/51 Test #53: mictlan_p12b1_indice_enorme_mict ...........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Segmentation fault; esperado 1.
+
+
+
+
+
+
+      Start 54: mictlan_p12b1_relleno_negativo_lat
+21/51 Test #54: mictlan_p12b1_relleno_negativo_lat .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 55: mictlan_p12b1_relleno_negativo_mict
+22/51 Test #55: mictlan_p12b1_relleno_negativo_mict ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 56: mictlan_p12b1_reemplazo_vacio_lat
+23/51 Test #56: mictlan_p12b1_reemplazo_vacio_lat ..........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Segmentation fault; esperado 1.
+
+
+
+
+
+
+      Start 57: mictlan_p12b1_reemplazo_vacio_mict
+24/51 Test #57: mictlan_p12b1_reemplazo_vacio_mict .........***Failed    0.00 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Segmentation fault; esperado 1.
+
+
+
+
+
+
+      Start 58: mictlan_p12b1_tipo_texto_lat
+25/51 Test #58: mictlan_p12b1_tipo_texto_lat ...............   Passed    0.01 sec
+      Start 59: mictlan_p12b1_tipo_texto_mict
+26/51 Test #59: mictlan_p12b1_tipo_texto_mict ..............   Passed    0.01 sec
+      Start 60: mictlan_p12b1_tipo_indice_lat
+27/51 Test #60: mictlan_p12b1_tipo_indice_lat ..............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: El parametro debe de ser numerico
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/tipo_indice-lat/programa.lat:1:1:[0m
+  El parametro debe de ser un decimal
+
+
+
+
+      Start 61: mictlan_p12b1_tipo_indice_mict
+28/51 Test #61: mictlan_p12b1_tipo_indice_mict .............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: El parametro debe de ser numerico
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/tipo_indice-mict/programa.mict:1:1:[0m
+  El parametro debe de ser un decimal
+
+
+
+
+      Start 62: mictlan_p12b1_unicode_invalido_lat
+29/51 Test #62: mictlan_p12b1_unicode_invalido_lat .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_invalido-lat/programa.lat:1:8:[0m
+  No se encontro la fun 'longitud_unicode'
+
+
+
+
+      Start 63: mictlan_p12b1_unicode_invalido_mict
+30/51 Test #63: mictlan_p12b1_unicode_invalido_mict ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_invalido-mict/programa.mict:1:8:[0m
+  No se encontro la fun 'longitud_unicode'
+
+
+
+
+      Start 64: mictlan_p12b1_unicode_truncado_lat
+31/51 Test #64: mictlan_p12b1_unicode_truncado_lat .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_truncado-lat/programa.lat:1:8:[0m
+  No se encontro la fun 'invertir_unicode'
+
+
+
+
+      Start 65: mictlan_p12b1_unicode_truncado_mict
+32/51 Test #65: mictlan_p12b1_unicode_truncado_mict ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_truncado-mict/programa.mict:1:8:[0m
+  No se encontro la fun 'invertir_unicode'
+
+
+
+
+      Start 66: mictlan_p12b1_unicode_sustituto_lat
+33/51 Test #66: mictlan_p12b1_unicode_sustituto_lat ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_sustituto-lat/programa.lat:1:8:[0m
+  No se encontro la fun 'longitud_unicode'
+
+
+
+
+      Start 67: mictlan_p12b1_unicode_sustituto_mict
+34/51 Test #67: mictlan_p12b1_unicode_sustituto_mict .......***Failed    0.00 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_sustituto-mict/programa.mict:1:8:[0m
+  No se encontro la fun 'longitud_unicode'
+
+
+
+
+      Start 68: mictlan_p12b1_unicode_sobrelimite_lat
+35/51 Test #68: mictlan_p12b1_unicode_sobrelimite_lat ......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_sobrelimite-lat/programa.lat:1:8:[0m
+  No se encontro la fun 'longitud_unicode'
+
+
+
+
+      Start 69: mictlan_p12b1_unicode_sobrelimite_mict
+36/51 Test #69: mictlan_p12b1_unicode_sobrelimite_mict .....***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_sobrelimite-mict/programa.mict:1:8:[0m
+  No se encontro la fun 'longitud_unicode'
+
+
+
+
+      Start 70: mictlan_p12b1_unicode_sobrelargo_lat
+37/51 Test #70: mictlan_p12b1_unicode_sobrelargo_lat .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_sobrelargo-lat/programa.lat:1:8:[0m
+  No se encontro la fun 'longitud_unicode'
+
+
+
+
+      Start 71: mictlan_p12b1_unicode_sobrelargo_mict
+38/51 Test #71: mictlan_p12b1_unicode_sobrelargo_mict ......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: UTF-8 invalido
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_sobrelargo-mict/programa.mict:1:8:[0m
+  No se encontro la fun 'longitud_unicode'
+
+
+
+
+      Start 72: mictlan_p12b1_unicode_fraccion_lat
+39/51 Test #72: mictlan_p12b1_unicode_fraccion_lat .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Indice Unicode debe ser entero no negativo
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_fraccion-lat/programa.lat:1:8:[0m
+  No se encontro la fun 'subcadena_unicode'
+
+
+
+
+      Start 73: mictlan_p12b1_unicode_fraccion_mict
+40/51 Test #73: mictlan_p12b1_unicode_fraccion_mict ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Indice Unicode debe ser entero no negativo
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_fraccion-mict/programa.mict:1:8:[0m
+  No se encontro la fun 'subcadena_unicode'
+
+
+
+
+      Start 74: mictlan_p12b1_unicode_inicio_lat
+41/51 Test #74: mictlan_p12b1_unicode_inicio_lat ...........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Indice de cadena fuera de rango
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_inicio-lat/programa.lat:1:8:[0m
+  No se encontro la fun 'subcadena_unicode'
+
+
+
+
+      Start 75: mictlan_p12b1_unicode_inicio_mict
+42/51 Test #75: mictlan_p12b1_unicode_inicio_mict ..........***Failed    0.00 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Indice de cadena fuera de rango
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/unicode_inicio-mict/programa.mict:1:8:[0m
+  No se encontro la fun 'subcadena_unicode'
+
+
+
+
+      Start 76: mictlan_p12b1_separador_vacio_lat
+43/51 Test #76: mictlan_p12b1_separador_vacio_lat ..........***Failed    0.00 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Separador de texto vacio
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/separador_vacio-lat/programa.lat:1:8:[0m
+  No se encontro la fun 'separar_texto'
+
+
+
+
+      Start 77: mictlan_p12b1_separador_vacio_mict
+44/51 Test #77: mictlan_p12b1_separador_vacio_mict .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Separador de texto vacio
+
+  
+  [1;31m/workspace/scratch/1de5cf9cbaa6/build-base-debug/cadenas/separador_vacio-mict/programa.mict:1:8:[0m
+  No se encontro la fun 'separar_texto'
+
+
+
+
+      Start 78: mictlan_p12b1_regex_tipo_lat
+45/51 Test #78: mictlan_p12b1_regex_tipo_lat ...............   Passed    0.01 sec
+      Start 79: mictlan_p12b1_regex_tipo_mict
+46/51 Test #79: mictlan_p12b1_regex_tipo_mict ..............   Passed    0.01 sec
+      Start 80: mictlan_p12b1_regex_patron_lat
+47/51 Test #80: mictlan_p12b1_regex_patron_lat .............   Passed    0.01 sec
+      Start 81: mictlan_p12b1_regex_patron_mict
+48/51 Test #81: mictlan_p12b1_regex_patron_mict ............   Passed    0.01 sec
+      Start 82: mictlan_p12b1_char_rango_lat
+49/51 Test #82: mictlan_p12b1_char_rango_lat ...............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 83: mictlan_p12b1_char_rango_mict
+50/51 Test #83: mictlan_p12b1_char_rango_mict ..............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 84: mictlan_p12b1_temporales
+51/51 Test #84: mictlan_p12b1_temporales ...................***Failed    0.00 sec
+Buffers C sin liberar: 100
+
+
+20% tests passed, 41 tests failed out of 51
+
+Label Time Summary:
+cadenas           =   0.28 sec*proc (51 tests)
+compatibilidad    =   0.28 sec*proc (50 tests)
+memoria           =   0.00 sec*proc (1 test)
+p12b1             =   0.28 sec*proc (51 tests)
+
+Total Test time (real) =   0.30 sec
+
+The following tests FAILED:
+	 38 - mictlan_p12b1_unicode_lat (Failed)                cadenas compatibilidad p12b1
+	 39 - mictlan_p12b1_unicode_mict (Failed)               cadenas compatibilidad p12b1
+	 40 - mictlan_p12b1_separacion_explicita_lat (Failed)   cadenas compatibilidad p12b1
+	 41 - mictlan_p12b1_separacion_explicita_mict (Failed)  cadenas compatibilidad p12b1
+	 42 - mictlan_p12b1_sub_inicio_negativo_lat (Failed)    cadenas compatibilidad p12b1
+	 43 - mictlan_p12b1_sub_inicio_negativo_mict (Failed)   cadenas compatibilidad p12b1
+	 44 - mictlan_p12b1_sub_cantidad_negativa_lat (Failed)  cadenas compatibilidad p12b1
+	 45 - mictlan_p12b1_sub_cantidad_negativa_mict (Failed) cadenas compatibilidad p12b1
+	 46 - mictlan_p12b1_sub_inicio_exceso_lat (Failed)      cadenas compatibilidad p12b1
+	 47 - mictlan_p12b1_sub_inicio_exceso_mict (Failed)     cadenas compatibilidad p12b1
+	 48 - mictlan_p12b1_insertar_negativo_lat (Failed)      cadenas compatibilidad p12b1
+	 49 - mictlan_p12b1_insertar_negativo_mict (Failed)     cadenas compatibilidad p12b1
+	 50 - mictlan_p12b1_indice_infinito_lat (Failed)        cadenas compatibilidad p12b1
+	 51 - mictlan_p12b1_indice_infinito_mict (Failed)       cadenas compatibilidad p12b1
+	 52 - mictlan_p12b1_indice_enorme_lat (Failed)          cadenas compatibilidad p12b1
+	 53 - mictlan_p12b1_indice_enorme_mict (Failed)         cadenas compatibilidad p12b1
+	 54 - mictlan_p12b1_relleno_negativo_lat (Failed)       cadenas compatibilidad p12b1
+	 55 - mictlan_p12b1_relleno_negativo_mict (Failed)      cadenas compatibilidad p12b1
+	 56 - mictlan_p12b1_reemplazo_vacio_lat (Failed)        cadenas compatibilidad p12b1
+	 57 - mictlan_p12b1_reemplazo_vacio_mict (Failed)       cadenas compatibilidad p12b1
+	 60 - mictlan_p12b1_tipo_indice_lat (Failed)            cadenas compatibilidad p12b1
+	 61 - mictlan_p12b1_tipo_indice_mict (Failed)           cadenas compatibilidad p12b1
+	 62 - mictlan_p12b1_unicode_invalido_lat (Failed)       cadenas compatibilidad p12b1
+	 63 - mictlan_p12b1_unicode_invalido_mict (Failed)      cadenas compatibilidad p12b1
+	 64 - mictlan_p12b1_unicode_truncado_lat (Failed)       cadenas compatibilidad p12b1
+	 65 - mictlan_p12b1_unicode_truncado_mict (Failed)      cadenas compatibilidad p12b1
+	 66 - mictlan_p12b1_unicode_sustituto_lat (Failed)      cadenas compatibilidad p12b1
+	 67 - mictlan_p12b1_unicode_sustituto_mict (Failed)     cadenas compatibilidad p12b1
+	 68 - mictlan_p12b1_unicode_sobrelimite_lat (Failed)    cadenas compatibilidad p12b1
+	 69 - mictlan_p12b1_unicode_sobrelimite_mict (Failed)   cadenas compatibilidad p12b1
+	 70 - mictlan_p12b1_unicode_sobrelargo_lat (Failed)     cadenas compatibilidad p12b1
+	 71 - mictlan_p12b1_unicode_sobrelargo_mict (Failed)    cadenas compatibilidad p12b1
+	 72 - mictlan_p12b1_unicode_fraccion_lat (Failed)       cadenas compatibilidad p12b1
+	 73 - mictlan_p12b1_unicode_fraccion_mict (Failed)      cadenas compatibilidad p12b1
+	 74 - mictlan_p12b1_unicode_inicio_lat (Failed)         cadenas compatibilidad p12b1
+	 75 - mictlan_p12b1_unicode_inicio_mict (Failed)        cadenas compatibilidad p12b1
+	 76 - mictlan_p12b1_separador_vacio_lat (Failed)        cadenas compatibilidad p12b1
+	 77 - mictlan_p12b1_separador_vacio_mict (Failed)       cadenas compatibilidad p12b1
+	 82 - mictlan_p12b1_char_rango_lat (Failed)             cadenas compatibilidad p12b1
+	 83 - mictlan_p12b1_char_rango_mict (Failed)            cadenas compatibilidad p12b1
+	 84 - mictlan_p12b1_temporales (Failed)                 cadenas memoria p12b1
+Errors while running CTest

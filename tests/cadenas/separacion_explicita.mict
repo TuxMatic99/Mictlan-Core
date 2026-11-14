@@ -1,0 +1,8 @@
+escribir(cadena.separar_texto("a::b:c::", "::"))
+escribir(cadena.separar_texto("::a::::", "::"))
+escribir(cadena.separar_texto("", "::"))
+escribir(cadena.separar_texto("mañanañtarde", "ñ"))
+escribir(cadena.separar_texto("a👩‍💻b👩‍💻", "👩‍💻"))
+escribir(cadena.separar_delimitadores("a,,b;c,", ",;"))
+escribir(cadena.mayusculas_ascii("mañana áñ abc"))
+escribir(cadena.minusculas_ascii("MAÑANA ÁÑ ABC"))

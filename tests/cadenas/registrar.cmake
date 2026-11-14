@@ -1,0 +1,36 @@
+set(cadena_raiz "${CMAKE_CURRENT_LIST_DIR}")
+function(cadena_caso caso codigo diagnostico)
+  set(fuente "${cadena_raiz}/${caso}.mict")
+  if(caso STREQUAL "herencia")
+    set(fuente "${cadena_raiz}/${caso}.lat")
+  endif()
+  foreach(extension IN ITEMS lat mict)
+    add_test(NAME mictlan_p12b1_${caso}_${extension} COMMAND "${CMAKE_COMMAND}"
+      "-DMICTLAN_EJECUTABLE=$<TARGET_FILE:latino>" "-DFUENTE=${fuente}"
+      "-DESPERADO=${cadena_raiz}/${caso}.out"
+      "-DTRABAJO=${CMAKE_CURRENT_BINARY_DIR}/cadenas/${caso}-${extension}"
+      "-DEXTENSION=${extension}" "-DCODIGO=${codigo}" "-DDIAGNOSTICO=${diagnostico}"
+      -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/conformidad/verificar.cmake")
+    set_tests_properties(mictlan_p12b1_${caso}_${extension} PROPERTIES
+      TIMEOUT 25 LABELS "p12b1;cadenas;compatibilidad")
+  endforeach()
+endfunction()
+foreach(caso IN ITEMS herencia limites_validos unicode separacion_explicita)
+  cadena_caso("${caso}" 0 "")
+endforeach()
+file(STRINGS "${cadena_raiz}/negativos.tsv" negativos ENCODING UTF-8)
+foreach(fila IN LISTS negativos)
+  string(REPLACE "\t" ";" columnas "${fila}")
+  list(GET columnas 0 caso)
+  list(GET columnas 1 diagnostico)
+  cadena_caso("${caso}" 1 "${diagnostico}")
+endforeach()
+add_executable(mictlan_test_cadenas_temporales "${cadena_raiz}/temporales.c")
+target_include_directories(mictlan_test_cadenas_temporales PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include" "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_link_libraries(mictlan_test_cadenas_temporales PRIVATE liblatino_static)
+if(UNIX)
+  target_link_libraries(mictlan_test_cadenas_temporales PRIVATE m)
+endif()
+add_test(NAME mictlan_p12b1_temporales COMMAND mictlan_test_cadenas_temporales)
+set_tests_properties(mictlan_p12b1_temporales PROPERTIES TIMEOUT 30 LABELS "p12b1;cadenas;memoria"
+  FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")

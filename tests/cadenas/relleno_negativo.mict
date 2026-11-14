@@ -1,0 +1,1 @@
+cadena.rellenar_derecha("abc", "x", -1)

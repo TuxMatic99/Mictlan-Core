@@ -1,0 +1,6 @@
+escribir(cadena.rellenar_izquierda("a", "ññ", 3))
+escribir(cadena.rellenar_derecha("a", "XX", 3))
+escribir(cadena.rellenar_derecha("abc", "x", 1))
+escribir(cadena.insertar("", "ñ", 0))
+escribir("[" .. cadena.subcadena("", 0, 9) .. "]")
+escribir(cadena.reemplazar("abc", "x", "largo"))

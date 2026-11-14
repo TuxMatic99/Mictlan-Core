@@ -1,0 +1,1 @@
+cadena.subcadena_unicode("hola", 1.5, 1)
