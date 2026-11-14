@@ -1,0 +1,19 @@
+Test project $WORKSPACE/build-base-debug
+    Start 138: mictlan_p12b2_union_publicacion
+1/1 Test #138: mictlan_p12b2_union_publicacion ...***Failed    0.00 sec
+union-b2:0:0: Fallo inyectado al publicar union
+Temporal: vivos=1, estado=2
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+colecciones    =   0.00 sec*proc (1 test)
+memoria        =   0.00 sec*proc (1 test)
+p12b2          =   0.00 sec*proc (1 test)
+
+Total Test time (real) =   0.01 sec
+
+The following tests FAILED:
+	138 - mictlan_p12b2_union_publicacion (Failed)          colecciones memoria p12b2
+Errors while running CTest
