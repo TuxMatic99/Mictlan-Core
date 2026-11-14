@@ -1,0 +1,3 @@
+escribir(lista.unir(["niño", 42], " / "))
+escribir(lista.unir([]))
+escribir(lista.unir([nulo, "x"], ":"))

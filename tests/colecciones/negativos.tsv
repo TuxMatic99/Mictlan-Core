@@ -1,0 +1,11 @@
+dic_tipo_vacio	El parametro debe de ser una cadena
+indice_infinito	Numero fuera de rango para lista
+insertar_nan	Numero fuera de rango para lista
+crear_infinito	Numero fuera de rango para lista
+crear_enorme	Numero fuera de rango para lista
+eliminar_negativo	Indice fuera de rango
+insertar_negativo	Indice fuera de rango
+insertar_exceso	Indice fuera de rango
+comparar_nan	NaN no comparable en listas
+union_tipo_lista	El parametro debe de ser una lista
+union_tipo_separador	El parametro debe de ser una cadena

@@ -1,0 +1,25 @@
+a = [[1], 2]
+b = a
+c = lista.concatenar(a, [])
+r = lista.invertir(a)
+b[1] = 5
+escribir(a[1])
+escribir(c[1])
+a[0][0] = 9
+escribir(c[0][0])
+escribir(r[1][0])
+escribir(a)
+escribir(r)
+d = {"dato": [7]}
+e = d
+v = dic.valores(d)
+e.dato[0] = 8
+escribir(v[0][0])
+dic.eliminar(d, "dato")
+escribir(dic.longitud(e))
+escribir(v[0][0])
+x = []
+lista.agregar(x, a)
+a[0][0] = 10
+escribir(x[0][0][0])
+escribir(a[0][0])
