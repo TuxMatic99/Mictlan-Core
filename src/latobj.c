@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "latdic.h"
 #include "latgc.h"
 #include "latino.h"
+#include "latnumerico.h"
 #include "latlist.h"
 #include "latmem.h"
 #include "latobj.h"
@@ -974,7 +975,7 @@ LATINO_API int latC_aint(lat_mv *mv, lat_objeto *o) {
     double ret;
     ret = latC_strtod_c(latC_checar_cadena(mv, o), &ptr);
     if (!strcmp(ptr, "")) {
-      return ret;
+      return latN_entero(mv, ret, "Conversion a entero fuera de rango");
     } else {
       ret = (int)(latC_checar_cadena(mv, o)[0]);
       return ret;
@@ -1016,7 +1017,7 @@ LATINO_API char latC_achar(lat_mv *mv, lat_objeto *o) {
     double ret;
     ret = latC_strtod_c(latC_checar_cadena(mv, o), &ptr);
     if (!strcmp(ptr, "")) {
-      return ret;
+      return latN_caracter(mv, ret);
     } else {
       ret = (int)(latC_checar_cadena(mv, o)[0]);
       return ret;

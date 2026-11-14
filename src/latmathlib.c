@@ -23,6 +23,9 @@ THE SOFTWARE.
  */
 
 #include "latino.h"
+#include "latpropiedad.h"
+#include "latnumerico.h"
+#include <stdint.h>
 
 #undef PI
 #define PI 3.141592653589793
@@ -33,340 +36,301 @@ THE SOFTWARE.
 #undef Eu
 #define Eu 2.718281828459045
 
-#define INF_NEV -999999999999999
-#define INF_POV 999999999999999
 
 #define LIB_MATE_NAME "mate"
 
 static void mate_abs(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, fabs(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, fabs(latC_checar_numerico(mv, a)));
 }
 
 static void mate_acos(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, acos(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, acos(latC_checar_numerico(mv, a)));
 }
 
 static void mate_acosh(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, acosh(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, acosh(latC_checar_numerico(mv, a)));
 }
 
 static void mate_asin(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, asin(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, asin(latC_checar_numerico(mv, a)));
 }
 
 static void mate_asinh(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, asinh(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, asinh(latC_checar_numerico(mv, a)));
 }
 
 static void mate_atan(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, atan(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, atan(latC_checar_numerico(mv, a)));
 }
 
 static void mate_atanh(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, atanh(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, atanh(latC_checar_numerico(mv, a)));
 }
 
 static void mate_atan2(lat_mv *mv) {
     lat_objeto *b = latC_desapilar(mv);
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_numerico(
-        mv, atan2(latC_checar_numerico(mv, a), latC_checar_numerico(mv, b)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, atan2(latC_checar_numerico(mv, a), latC_checar_numerico(mv, b)));
 }
 
 static void mate_cos(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_numerico(mv, cos(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, cos(latC_checar_numerico(mv, a)));
 }
 
 static void mate_cosh(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, cosh(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, cosh(latC_checar_numerico(mv, a)));
 }
 
 static void mate_cbrt(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, cbrt(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, cbrt(latC_checar_numerico(mv, a)));
 }
 
 static void mate_sin(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_numerico(mv, sin(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, sin(latC_checar_numerico(mv, a)));
 }
 
 static void mate_sinh(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, sinh(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, sinh(latC_checar_numerico(mv, a)));
 }
 
 static void mate_tan(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_numerico(mv, tan(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, tan(latC_checar_numerico(mv, a)));
 }
 
 static void mate_tanh(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, tanh(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, tanh(latC_checar_numerico(mv, a)));
 }
 
 static void mate_exp(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_numerico(mv, exp(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, exp(latC_checar_numerico(mv, a)));
 }
 
 static void mate_log(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_numerico(mv, log(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, log(latC_checar_numerico(mv, a)));
 }
 
 static void mate_log10(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, log10(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, log10(latC_checar_numerico(mv, a)));
 }
 
 static void mate_sqrt(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, sqrt(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, sqrt(latC_checar_numerico(mv, a)));
 }
 
 static void mate_ceil(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, ceil(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, ceil(latC_checar_numerico(mv, a)));
 }
 
 static void mate_floor(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, floor(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, floor(latC_checar_numerico(mv, a)));
 }
 
 static void mate_pow(lat_mv *mv) {
     lat_objeto *b = latC_desapilar(mv);
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_numerico(
-        mv, pow(latC_checar_numerico(mv, a), latC_checar_numerico(mv, b)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, pow(latC_checar_numerico(mv, a), latC_checar_numerico(mv, b)));
 }
 
 static void mate_frexp(lat_mv *mv) {
     lat_objeto *b = latC_desapilar(mv);
     lat_objeto *a = latC_desapilar(mv);
-    int e = (int)latC_checar_numerico(mv, b);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, frexp(latC_checar_numerico(mv, a), &e));
-    latC_apilar(mv, tmp);
+    (void)latC_checar_numerico(mv, b); /* Argumento historico ignorado. */
+    int e;
+    latC_apilar_double(mv, frexp(latC_checar_numerico(mv, a), &e));
 }
 
 static void mate_ldexp(lat_mv *mv) {
     lat_objeto *b = latC_desapilar(mv);
     lat_objeto *a = latC_desapilar(mv);
-    int e = (int)latC_checar_numerico(mv, b);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, ldexp(latC_checar_numerico(mv, a), e));
-    latC_apilar(mv, tmp);
+    int e = latN_entero(mv, latC_checar_numerico(mv, b),
+                       "Exponente fuera de rango");
+    latC_apilar_double(mv, ldexp(latC_checar_numerico(mv, a), e));
 }
 
-// NOTA: Antigua funcion para numeros aleatorios (Obsoleta)
-//
-// static void mate_random(lat_mv *mv) {
-//     lat_objeto *secundario = latC_desapilar(mv);
-//     lat_objeto *primario = latC_desapilar(mv);
-//     int resultado, min, max;
-//     min = (int)latC_checar_numerico(mv, primario);
-//     max = (int)latC_checar_numerico(mv, secundario);
-//     if (min <= max) {
-//         max = max + 1;
-//     } else {
-//         min = (int)latC_checar_numerico(mv, secundario);
-//         max = (int)latC_checar_numerico(mv, primario) + 1;
-//     }
-//     srand(time(NULL));
-//     resultado = (rand() % (max - min)) + min;
-//     lat_objeto *tmp = latC_crear_numerico(mv, resultado);
-//     latC_apilar(mv, tmp);
-// }
+/* Consumir todo el marco antes de validar tipos: un error no deja argumentos
+   sobre el prefijo del llamador C. Los descriptores siguen en celdas prestadas
+   hasta publicar el resultado; no hay reservas ni llamadas que los sobrescriban. */
+static lat_objeto *mate_argumentos(lat_mv *mv, int *cantidad) {
+    double n = latC_checar_numerico(mv, latC_desapilar(mv));
+    if (!isfinite(n) || n < 0 || n > mv->ptrpila || n != trunc(n))
+        latC_error(mv, "Numero invalido de argumentos");
+    *cantidad = (int)n;
+    lat_objeto *args = mv->tope - *cantidad;
+    for (int i = 0; i < *cantidad; ++i) (void)latC_desapilar(mv);
+    return args;
+}
 
 static void mate_random(lat_mv *mv) {
-    lat_objeto *o = latC_desapilar(mv);
-    int res=0, vlmx=0, cant = (int)latC_checar_numerico(mv, o);
-    if (cant <= 0) {
-        res = (rand() % 2);
-    } else if (cant == 1) {
-        vlmx = (int)latC_checar_numerico(mv, latC_desapilar(mv));
-        res = (rand() % (vlmx + 1));
-    } else if (cant == 2) {
-        int vlmn = (int)latC_checar_numerico(mv, latC_desapilar(mv));
-        vlmx = (int)latC_checar_numerico(mv, latC_desapilar(mv));
-        if (vlmn <= vlmx) {
-            vlmx = vlmx + 1;
-        } else {
-            // Se intercambian los valores
-            vlmn = vlmn - vlmx;
-            vlmx = vlmn + vlmx;
-            vlmn = vlmx - vlmn;
-            vlmx = vlmx + 1;
+    int cantidad;
+    lat_objeto *args = mate_argumentos(mv, &cantidad);
+    if (cantidad > 2) latC_error(mv, "Numero invalido de argumentos");
+    int64_t minimo = 0, maximo = 1;
+    if (cantidad) {
+        maximo = latN_entero(mv, latC_checar_numerico(mv, args),
+                            "Limite aleatorio fuera de rango");
+        if (cantidad == 1 && maximo < 0)
+            latC_error(mv, "Limite aleatorio fuera de rango");
+        if (cantidad == 2) {
+            minimo = latN_entero(mv, latC_checar_numerico(mv, args + 1),
+                                "Limite aleatorio fuera de rango");
+            if (minimo > maximo) {
+                int64_t temporal = minimo; minimo = maximo; maximo = temporal;
+            }
         }
-        res = (rand() % (vlmx - vlmn)) + vlmn;
-    } else {
-        latC_error(mv, "Numero invalido de argumentos");
     }
-    lat_objeto *tmp = latC_crear_numerico(mv, res);
-    latC_apilar(mv, tmp);
+    uint64_t amplitud = (uint64_t)(maximo - minimo) + 1;
+    /* Conservar rand y su secuencia/sesgo historicos. Para uniformidad y
+       reproducibilidad entre plataformas usar aleatorio_entero. */
+    int64_t resultado = minimo + (int64_t)((uint64_t)rand() % amplitud);
+    latC_apilar_double(mv, (double)resultado);
 }
 
 static void mate_pi(lat_mv *mv) {
-    double pi = PI;
-    lat_objeto *ret = latO_crear(mv);
-    ret->tam += sizeof(double);
-    setNumerico(ret, pi);
-    latC_apilar(mv, ret);
+    latC_apilar_double(mv, PI);
 }
 
 static void mate_tau(lat_mv *mv) {
-    double tau = TAU;
-    lat_objeto *ret = latO_crear(mv);
-    ret->tam += sizeof(double);
-    setNumerico(ret, tau);
-    latC_apilar(mv, ret);
+    latC_apilar_double(mv, TAU);
 }
 
 static void mate_e(lat_mv *mv) {
-    double eu = Eu;
-    lat_objeto *ret = latO_crear(mv);
-    ret->tam += sizeof(double);
-    setNumerico(ret, eu);
-    latC_apilar(mv, ret);
+    latC_apilar_double(mv, Eu);
 }
 
 static void mate_base(lat_mv *mv) {
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *bp =
-        latC_crear_numerico(mv, (latC_checar_numerico(mv, b) / 100));
-    lat_objeto *tmp = latC_crear_numerico(
-        mv, (latC_checar_numerico(mv, a) / latC_checar_numerico(mv, bp)));
-    latC_apilar(mv, tmp);
+    lat_objeto *ob = latC_desapilar(mv);
+    lat_objeto *oa = latC_desapilar(mv);
+    double a = latC_checar_numerico(mv, oa), b = latC_checar_numerico(mv, ob);
+    latC_apilar_double(mv, a / (b / 100));
 }
 
 static void mate_parte(lat_mv *mv) {
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *ap =
-        latC_crear_numerico(mv, (latC_checar_numerico(mv, a) / 100));
-    lat_objeto *tmp = latC_crear_numerico(
-        mv, (latC_checar_numerico(mv, ap) * latC_checar_numerico(mv, b)));
-    latC_apilar(mv, tmp);
+    lat_objeto *ob = latC_desapilar(mv);
+    lat_objeto *oa = latC_desapilar(mv);
+    double a = latC_checar_numerico(mv, oa), b = latC_checar_numerico(mv, ob);
+    latC_apilar_double(mv, (a / 100) * b);
 }
 
 static void mate_porc(lat_mv *mv) {
     lat_objeto *b = latC_desapilar(mv);
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_numerico(
-        mv, (latC_checar_numerico(mv, a) / latC_checar_numerico(mv, b)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, (latC_checar_numerico(mv, a) / latC_checar_numerico(mv, b)));
 }
 
 static void mate_trunc(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, trunc(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, trunc(latC_checar_numerico(mv, a)));
 }
 
 static void mate_round(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, round(latC_checar_numerico(mv, a)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, round(latC_checar_numerico(mv, a)));
 }
 
-static void mate_max(lat_mv *mv) {
-    lat_objeto *o = latC_desapilar(mv);
-    int i = 0, cant = (int)latC_checar_numerico(mv, o);
-    if (cant <= 0) {
-        latC_error(mv, "Numero invalido de argumentos");
+static void mate_extremo(lat_mv *mv, bool maximo) {
+    int cantidad;
+    lat_objeto *args = mate_argumentos(mv, &cantidad);
+    if (!cantidad) latC_error(mv, "Numero invalido de argumentos");
+    double valor = NAN;
+    for (int i = 0; i < cantidad; ++i) {
+        double x = latC_checar_numerico(mv, args + i);
+        if (!isnan(x) && (isnan(valor) || (maximo ? x > valor : x < valor)))
+            valor = x;
     }
-    double e = 0, vl = INF_NEV;
-    lista *valores = latL_crear(mv);
-    while (i < cant) {
-        latL_insertar_inicio(mv, valores, latO_clonar(mv, latC_desapilar(mv)));
-        i++;
-    }
-    for (i = 0; i < cant; i++) {
-        e = latC_checar_numerico(mv, latL_extraer_inicio(mv, valores));
-        if (e > vl) {
-            vl = e;
-        }
-    }
-    latL_destruir(mv, valores);
-    lat_objeto *tmp = latO_crear(mv);
-    setNumerico(tmp, vl);
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, valor);
 }
+static void mate_max(lat_mv *mv) { mate_extremo(mv, true); }
+static void mate_min(lat_mv *mv) { mate_extremo(mv, false); }
 
-static void mate_min(lat_mv *mv) {
-    lat_objeto *o = latC_desapilar(mv);
-    int i = 0, cant = (int)latC_checar_numerico(mv, o);
-    if (cant <= 0) {
-        latC_error(mv, "Numero invalido de argumentos");
-    }
-    double e = 0, vl = INF_POV;
-    lista *valores = latL_crear(mv);
-    while (i < cant) {
-        latL_insertar_inicio(mv, valores, latO_clonar(mv, latC_desapilar(mv)));
-        i++;
-    }
-    for (i = 0; i < cant; i++) {
-        e = latC_checar_numerico(mv, latL_extraer_inicio(mv, valores));
-        if (e < vl) {
-            vl = e;
-        }
-    }
-    latL_destruir(mv, valores);
-    lat_objeto *tmp = latO_crear(mv);
-    setNumerico(tmp, vl);
-    latC_apilar(mv, tmp);
+static double mate_finito(lat_mv *mv, lat_objeto *o) {
+    double x = latC_checar_numerico(mv, o);
+    if (!isfinite(x)) latC_error(mv, "Se requiere un numero finito");
+    return x;
+}
+static void mate_descomponer_binario(lat_mv *mv) {
+    double x = mate_finito(mv, latC_desapilar(mv));
+    int exponente = 0;
+    double fraccion = frexp(x, &exponente);
+    lista *partes = latL_crear(mv);
+    latL_agregar(mv, partes, latC_crear_numerico(mv, fraccion));
+    latL_agregar(mv, partes, latC_crear_numerico(mv, exponente));
+    latC_apilar(mv, latC_crear_lista(mv, partes));
+}
+static void mate_es_finito(lat_mv *mv) {
+    double x = latC_checar_numerico(mv, latC_desapilar(mv));
+    latC_apilar(mv, isfinite(x) ? latO_verdadero : latO_falso);
+}
+static void mate_es_infinito(lat_mv *mv) {
+    double x = latC_checar_numerico(mv, latC_desapilar(mv));
+    latC_apilar(mv, isinf(x) ? latO_verdadero : latO_falso);
+}
+static void mate_es_nan(lat_mv *mv) {
+    double x = latC_checar_numerico(mv, latC_desapilar(mv));
+    latC_apilar(mv, isnan(x) ? latO_verdadero : latO_falso);
+}
+#define MATE_ENTERO_EXACTO 9007199254740991.0
+static int64_t mate_entero_exacto(lat_mv *mv, lat_objeto *o, double minimo) {
+    double x = latC_checar_numerico(mv, o);
+    if (!isfinite(x) || x < minimo || x > MATE_ENTERO_EXACTO || x != trunc(x))
+        latC_error(mv, "Se requiere un entero exacto dentro del rango permitido");
+    return (int64_t)x;
+}
+static void mate_semilla_aleatoria(lat_mv *mv) {
+    uint64_t s = (uint64_t)mate_entero_exacto(mv, latC_desapilar(mv), 0);
+    latP_semilla_aleatoria(mv, s);
+    latC_apilar(mv, latO_nulo);
+}
+static void mate_aleatorio_entero(lat_mv *mv) {
+    lat_objeto *ob = latC_desapilar(mv), *oa = latC_desapilar(mv);
+    int64_t a = mate_entero_exacto(mv, oa, -MATE_ENTERO_EXACTO);
+    int64_t b = mate_entero_exacto(mv, ob, -MATE_ENTERO_EXACTO);
+    if (a > b) latC_error(mv, "Intervalo aleatorio invertido");
+    uint64_t amplitud = (uint64_t)(b - a) + 1;
+    /* 2^64 mod amplitud; se descarta el prefijo incompleto. El intervalo
+       restante contiene exactamente el mismo numero de residuos de cada clase. */
+    uint64_t umbral = (uint64_t)(-amplitud) % amplitud, x;
+    do { x = latP_aleatorio64(mv); } while (x < umbral);
+    latC_apilar_double(mv, (double)(a + (int64_t)(x % amplitud)));
+}
+static void mate_raiz_segura(lat_mv *mv) {
+    double x = mate_finito(mv, latC_desapilar(mv));
+    if (x < 0) latC_error(mv, "Dominio invalido para raiz_segura");
+    latC_apilar_double(mv, sqrt(x));
+}
+static void mate_log_seguro(lat_mv *mv) {
+    double x = mate_finito(mv, latC_desapilar(mv));
+    if (x <= 0) latC_error(mv, "Dominio invalido para log_seguro");
+    latC_apilar_double(mv, log(x));
+}
+static void mate_potencia_segura(lat_mv *mv) {
+    lat_objeto *ob = latC_desapilar(mv), *oa = latC_desapilar(mv);
+    double a = mate_finito(mv, oa), b = mate_finito(mv, ob);
+    if ((a < 0 && b != trunc(b)) || (a == 0 && b <= 0))
+        latC_error(mv, "Dominio invalido para potencia_segura");
+    double r = pow(a, b);
+    if (!isfinite(r) || (r == 0 && a != 0))
+        latC_error(mv, "Resultado fuera de rango");
+    latC_apilar_double(mv, r);
 }
 
 static const lat_CReg libmate_[] = {
@@ -409,6 +373,15 @@ static const lat_CReg libmate_[] = {
     {"porciento", mate_porc, 2},
     {"porcentaje", mate_porc, 2},
     {"porc", mate_porc, 2},
+    {"descomponer_binario", mate_descomponer_binario, 1},
+    {"es_finito", mate_es_finito, 1},
+    {"es_infinito", mate_es_infinito, 1},
+    {"es_nan", mate_es_nan, 1},
+    {"semilla_aleatoria", mate_semilla_aleatoria, 1},
+    {"aleatorio_entero", mate_aleatorio_entero, 2},
+    {"raiz_segura", mate_raiz_segura, 1},
+    {"log_seguro", mate_log_seguro, 1},
+    {"potencia_segura", mate_potencia_segura, 2},
     {NULL, NULL, 0}};
 
 void latC_abrir_liblatino_mathlib(lat_mv *mv) {

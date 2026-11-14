@@ -53,6 +53,7 @@ typedef struct latG_nativa {
    para conservar constantes y objetos de la region, sin tocar la ABI. */
 struct lat_constante_registro {
     size_t capacidad, cantidad;
+    uint64_t estado_aleatorio;
     bool general;
     bool habilitada, opaca, cadenas, ejecutada;
     unsigned profundidad;
@@ -92,6 +93,7 @@ static void vincular_hash(struct lat_constante_registro *r, lat_propiedad_entrad
 static void iniciar(lat_mv *mv, bool general) {
     if (!mv || mv->constantes_propias) return;
     struct lat_constante_registro *r = latM_asignar(mv, sizeof(*r));
+    r->estado_aleatorio = 0;
     r->capacidad = 64;
     r->cubetas = latM_asignar(mv, r->capacidad * sizeof(*r->cubetas));
     r->general = general;
@@ -100,6 +102,25 @@ static void iniciar(lat_mv *mv, bool general) {
 }
 
 void latP_iniciar(lat_mv *mv) { iniciar(mv, true); }
+
+void latP_semilla_aleatoria(lat_mv *mv, uint64_t semilla) {
+    iniciar(mv, true);
+    mv->constantes_propias->estado_aleatorio = semilla;
+}
+/* SplitMix64, written in 2015 by Sebastiano Vigna (vigna@acm.org).
+   To the extent possible under law, the author has dedicated all copyright
+   and related and neighboring rights to this software to the public domain
+   worldwide. This software is distributed without any warranty.
+   See http://creativecommons.org/publicdomain/zero/1.0/.
+   Reference: https://prng.di.unimi.it/splitmix64.c
+   Adaptation: independent state per VM; no cryptographic guarantees. */
+uint64_t latP_aleatorio64(lat_mv *mv) {
+    iniciar(mv, true);
+    uint64_t z = (mv->constantes_propias->estado_aleatorio += UINT64_C(0x9e3779b97f4a7c15));
+    z = (z ^ (z >> 30)) * UINT64_C(0xbf58476d1ce4e5b9);
+    z = (z ^ (z >> 27)) * UINT64_C(0x94d049bb133111eb);
+    return z ^ (z >> 31);
+}
 
 static void registrar(lat_mv *mv, void *ptr, lat_propiedad_tipo tipo, bool constante) {
     if (!mv || !ptr) return;

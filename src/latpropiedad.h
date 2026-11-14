@@ -2,6 +2,7 @@
 #ifndef LAT_PROPIEDAD_H
 #define LAT_PROPIEDAD_H
 #include "latino.h"
+#include <stdint.h>
 #if defined(__GNUC__) && !defined(_WIN32)
 #define LAT_P_INTERNO __attribute__((visibility("hidden")))
 #else
@@ -9,6 +10,8 @@
 #endif
 typedef enum { LAT_P_OBJETO, LAT_P_LISTA, LAT_P_MAPA, LAT_P_CADENA,
                LAT_P_TIPOS } lat_propiedad_tipo;
+LAT_P_INTERNO void latP_semilla_aleatoria(lat_mv *mv, uint64_t semilla);
+LAT_P_INTERNO uint64_t latP_aleatorio64(lat_mv *mv);
 LAT_P_INTERNO void latP_iniciar(lat_mv *mv);
 LAT_P_INTERNO void latP_registrar(lat_mv *mv, void *ptr, lat_propiedad_tipo tipo);
 LAT_P_INTERNO void latP_olvidar(lat_mv *mv, void *ptr);

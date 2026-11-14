@@ -41,8 +41,9 @@ static int extremos(void) {
     return fallo;
 }
 static int conversion(void) {
-    C(uno("anumero",0)==0); C(signbit(uno("anumero",-0.)));
-    int e;C(texto("anumero","0",&e)==0&&e==0);C(signbit(texto("anumero","-0",&e))&&e==0);
+    double cero=0;lat_objeto r=llamar(vm,"anumero",&cero,1);C(r.tipo==T_NULL);
+    C(uno("anumero_estricto",0)==0); C(signbit(uno("anumero_estricto",-0.)));
+    int e;C(texto("anumero_estricto","0",&e)==0&&e==0);C(signbit(texto("anumero_estricto","-0",&e))&&e==0);
     C(texto("anumero","abc",&e)==97);C(texto("anumero","12x",&e)==49);C(texto("anumero"," 0 ",&e)==32);
     C(isinf(uno("anumero",INFINITY)));C(isnan(uno("anumero",NAN)));return fallo;
 }
@@ -68,6 +69,23 @@ static int precision(void) {
     C(uno("raiz",DBL_MAX)>1e154);C(uno("raiz",DBL_TRUE_MIN)>0);
     volatile double a=.1,b=.2;C(a+b!=.3);C(cerca(a+b,.3,DBL_EPSILON));
     C(uno("abs",9007199254740992.)+1==9007199254740992.);return fallo;
+}
+static int no_finitos(void) {
+    C(uno("acos",1)==0);C(isnan(uno("acos",2)));C(uno("acosh",1)==0);C(isnan(uno("acosh",0)));
+    C(signbit(uno("asen",-0.)));C(isnan(uno("asen",2)));C(uno("asenh",-INFINITY)==-INFINITY);
+    C(cerca(uno("atan",INFINITY),1.5707963267948966,DBL_EPSILON));C(uno("atanh",1)==INFINITY);C(isnan(uno("atanh",2)));
+    C(signbit(dos("atan2",-0.,1)));C(isnan(uno("cos",INFINITY)));C(uno("cosh",-INFINITY)==INFINITY);
+    C(signbit(uno("sen",-0.)));C(isnan(uno("sen",INFINITY)));C(uno("senh",-INFINITY)==-INFINITY);
+    C(signbit(uno("tan",-0.)));C(isnan(uno("tan",INFINITY)));C(uno("tanh",-INFINITY)==-1);
+    C(uno("exp",-INFINITY)==0);C(uno("exp",INFINITY)==INFINITY);C(uno("log",INFINITY)==INFINITY);
+    C(isnan(uno("log10",-1)));C(uno("log10",0)==-INFINITY);C(uno("raizc",-8)==-2);
+    C(uno("raizc",-INFINITY)==-INFINITY);C(signbit(uno("raizc",-0.)));
+    const char *fs[]={"abs","acos","acosh","asen","asenh","atan","atanh","cos","cosh","sen","senh","tan","tanh","exp","log","log10","raiz","raizc","techo","piso","trunc","redondear"};
+    for(size_t i=0;i<sizeof fs/sizeof *fs;++i)C(isnan(uno(fs[i],NAN)));
+    C(uno("redondear",INFINITY)==INFINITY);C(signbit(uno("redondear",-.25)));
+    C(dos("ldexp",1,1024)==INFINITY);C(dos("ldexp",1,-1074)==DBL_TRUE_MIN);C(dos("ldexp",1,-1075)==0);
+    C(dos("frexp",INFINITY,0)==INFINITY);C(isnan(dos("frexp",NAN,0)));
+    C(dos("pot",NAN,0)==1);C(isnan(dos("pot",-1,.5)));return fallo;
 }
 static int binario(void) {
     const double xs[]={0.,-0.,1.,-1.,.125,123.45,DBL_MAX,DBL_MIN,DBL_TRUE_MIN};
@@ -142,6 +160,6 @@ static int temporales(void) {
 int main(int argc,char **argv) {
     if(argc!=2)return 2;vm=latC_crear_mv();vm->nombre_archivo="contratos-p12b3";int r=2;
 #define CASO(x) if(!strcmp(argv[1],#x)) r=x();
-    CASO(extremos) CASO(conversion) CASO(herencia) CASO(precision) CASO(binario) CASO(azar) CASO(estricto) CASO(dominio) CASO(recuperacion) CASO(sdk) CASO(temporales)
+    CASO(no_finitos) CASO(extremos) CASO(conversion) CASO(herencia) CASO(precision) CASO(binario) CASO(azar) CASO(estricto) CASO(dominio) CASO(recuperacion) CASO(sdk) CASO(temporales)
     latC_destruir_mv(vm);return r||fallo;
 }

@@ -15,11 +15,11 @@ no un porcentaje multiplicado por 100. Se conservan ambos contratos.
 | aleatorio/alt | 0 argumentos: entero 0 o 1; 1: [0,trunc(n)]; 2: extremos truncados y ordenados, inclusivos; generador C rand | validar finitud e intervalo de int antes del cast; calcular diferencias en 64 bits; rechazar un límite único negativo; mantener secuencia y sesgo histórico para entradas válidas |
 | frexp(x, extra) | dos argumentos numéricos, devuelve sólo fracción | comprobar tipo de extra sin convertirlo a int: su valor se descarta; no cambiar firma |
 | ldexp(x,e) | e finito se trunca hacia cero; libm conserva desbordamiento/subnormales | validar exponente truncado en [INT_MIN,INT_MAX] antes del cast |
-| anumero | conversiones laxas de cadenas inválidas al primer byte; false/nulo/colecciones vacías a nulo | corregir únicamente cero numérico o cadena numérica completa no vacía: devolver número, preservando -0; no modificar latC_adouble ni conversiones implícitas |
+| anumero | cero a nulo, conversiones laxas de cadenas inválidas al primer byte; false/nulo/colecciones vacías a nulo | conservar todo el contrato; separar cero y error mediante anumero_estricto (revisión de la propuesta inicial tras comprobar la suite alpha) |
 | ayudantes C | contratos existentes de latC_aint/latC_achar y truncamiento de cadenas numéricas válidas | controlar NaN, infinitos y rango de int/char antes de convertir cadenas; no rediseñar etiquetas T_INTEGER/T_NUMERIC ni conversiones globales |
 | libm heredada | dominios, NaN, infinitos, cero negativo, round con mitades alejadas de cero | eliminar reservas de descriptores para resultados escalares; no modificar fórmulas ni orden de operaciones |
 
-Efectos de compatibilidad explícitos: `anumero(0)`/`anumero("0")` dejan de ser nulo;
+Efectos de compatibilidad explícitos: `anumero(0)`/`anumero("0")` siguen siendo nulo;
 un único límite negativo de aleatorio pasa a error (antes -1 dividía por cero y
 otros negativos daban positivos fuera del intervalo pretendido); all-NaN de max/min
 pasa de centinela artificial a NaN. Las conversiones fuera del rango de C no tenían
@@ -63,3 +63,15 @@ subnormales, NaN, pila y memoria administrada sin depender del formateo decimal.
 Pendientes deliberados: rediseñar el conjunto de etiquetas numéricas C, decimal
 exacto, números arbitrarios, biblioteca aleatoria criptográfica, concurrencia de
 locale/rand heredados y verificación Windows/macOS. No se cambia parser ni VM global.
+
+## Revisión de la hipótesis sobre anumero, previa a publicar implementación
+
+El primer commit de pruebas proponía corregir el cero dentro de `anumero`.
+Al contrastarlo con **toda** la suite anterior apareció evidencia adicional:
+`tests/alpha/semantica.lat:17` y su `.out` fijan expresamente `nulo` para "0".
+Por la prioridad de compatibilidad, se rechaza esa propuesta: ninguna prueba
+anterior cambia. Los casos nuevos `cero` y `conversion` aplican el resultado cero
+a `anumero_estricto` y comprueban también el nulo heredado. El primer commit y
+sus resultados quedan conservados; estos tres tests revisan el contrato propuesto,
+no demuestran una corrección del `anumero` histórico. La ambigüedad heredada se
+resuelve con una API explícita, como pide la misión.
