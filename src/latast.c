@@ -416,14 +416,25 @@ ast *latA_analizar_arch(char *infile, int *status) {
     fprintf(stderr, "mictlan: no se pudieron reservar %zu bytes para '%s'.\n", fsize + 1, infile);
     return NULL;
   }
-  size_t newSize = fread(buffer, 1, fsize, file);
-  if (ferror(file)) {
+  size_t newSize = 0;
+  bool completo = true;
+  while (newSize < fsize) {
+    errno = 0;
+    size_t n = fread(buffer + newSize, 1, fsize - newSize, file);
+    newSize += n;
+    if (ferror(file)) {
+      if (errno == EINTR) { clearerr(file); continue; }
+      completo = false;
+      break;
+    }
+    if (!n) { completo = false; break; }
+  }
+  if (fclose(file) != 0) completo = false;
+  if (!completo) {
     free(buffer);
-    fclose(file);
-    fprintf(stderr, "mictlan: error al leer '%s'.\n", infile);
+    fprintf(stderr, "mictlan: error al leer/cerrar '%s'.\n", infile);
     return NULL;
   }
-  fclose(file);
   if (memchr(buffer, '\0', newSize)) {
     free(buffer);
     fprintf(stderr, "mictlan: '%s' contiene un byte nulo. Usa un archivo de texto.\n", infile);
