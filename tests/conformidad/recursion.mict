@@ -1,0 +1,31 @@
+# F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2).
+funcion fibonacci(n)
+    si n < 2
+        retorno n
+    fin
+    retorno fibonacci(n - 1) + fibonacci(n - 2)
+fin
+funcion factorial(n)
+    si n <= 1
+        retorno 1
+    fin
+    retorno n * factorial(n - 1)
+fin
+funcion es_par(n)
+    si n == 0
+        retorno verdadero
+    fin
+    retorno es_impar(n - 1)
+fin
+funcion es_impar(n)
+    si n == 0
+        retorno falso
+    fin
+    retorno es_par(n - 1)
+fin
+escribir(fibonacci(0))
+escribir(fibonacci(1))
+escribir(fibonacci(12))
+escribir(factorial(6))
+escribir(es_par(8))
+escribir(es_impar(8))

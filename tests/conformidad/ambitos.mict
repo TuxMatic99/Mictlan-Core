@@ -1,0 +1,42 @@
+dato_global = 10
+funcion parametro(dato_global)
+    retorno dato_global
+fin
+escribir(parametro(3))
+escribir(dato_global)
+funcion actualizar()
+    dato_global = 20
+    retorno dato_global
+fin
+escribir(actualizar())
+escribir(dato_global)
+funcion interior()
+    retorno local_llamante
+fin
+funcion exterior()
+    local_llamante = 8
+    retorno interior()
+fin
+escribir(exterior())
+# La asignacion a un parametro que coincide con un global lo actualiza.
+funcion reasignar(dato_global)
+    dato_global = dato_global + 1
+    retorno dato_global
+fin
+escribir(reasignar(3))
+escribir(dato_global)
+funcion publicar()
+    global publicado = 42
+fin
+publicar()
+escribir(publicado)
+# Las copias de marcos anteriores no se sincronizan al cambiar un global.
+funcion cambiar_global()
+    global dato_global = 99
+fin
+funcion instantanea()
+    cambiar_global()
+    retorno dato_global
+fin
+escribir(instantanea())
+escribir(dato_global)

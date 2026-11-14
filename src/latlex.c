@@ -650,6 +650,7 @@ static const flex_int32_t yy_rule_can_match_eol[82] =
 #include <string.h>
 #include <stdlib.h>
 
+#include "latcompat.h"
 #include "latast.h"
 #include "latparse.h"
 
@@ -1337,7 +1338,7 @@ YY_RULE_SETUP
 case 72:
 YY_RULE_SETUP
 #line 150 "latlex.l"
-{ yylval->node = latA_numerico(strtod(yytext, NULL), yylloc->first_line, yylloc->first_column); return NUMERICO; }
+{ yylval->node = latA_numerico(latC_strtod_c(yytext, NULL), yylloc->first_line, yylloc->first_column); return NUMERICO; }
 	YY_BREAK
 case 73:
 /* rule 73 can match eol */

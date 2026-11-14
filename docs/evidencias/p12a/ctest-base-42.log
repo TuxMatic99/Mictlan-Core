@@ -1,0 +1,103 @@
+Test project <trabajo>/build-base-debug
+      Start  1: mictlan_alpha_identidad
+ 1/42 Test  #1: mictlan_alpha_identidad ..............   Passed    0.04 sec
+      Start  2: mictlan_alpha_extensiones
+ 2/42 Test  #2: mictlan_alpha_extensiones ............   Passed    0.02 sec
+      Start  3: mictlan_alpha_latino_valores
+ 3/42 Test  #3: mictlan_alpha_latino_valores .........   Passed    0.05 sec
+      Start  4: mictlan_alpha_latino_control
+ 4/42 Test  #4: mictlan_alpha_latino_control .........   Passed    0.04 sec
+      Start  5: mictlan_alpha_latino_colecciones
+ 5/42 Test  #5: mictlan_alpha_latino_colecciones .....   Passed    0.03 sec
+      Start  6: mictlan_alpha_diagnosticos
+ 6/42 Test  #6: mictlan_alpha_diagnosticos ...........   Passed    0.03 sec
+      Start  7: mictlan_alpha_repl
+ 7/42 Test  #7: mictlan_alpha_repl ...................   Passed    0.01 sec
+      Start  8: mictlan_alpha_modulos
+ 8/42 Test  #8: mictlan_alpha_modulos ................   Passed    0.01 sec
+      Start  9: mictlan_alpha_recompilacion
+ 9/42 Test  #9: mictlan_alpha_recompilacion ..........   Passed    0.04 sec
+      Start 10: mictlan_p11_pila
+10/42 Test #10: mictlan_p11_pila .....................   Passed    0.02 sec
+      Start 11: mictlan_p11_gc_cadenas
+11/42 Test #11: mictlan_p11_gc_cadenas ...............   Passed    0.00 sec
+      Start 12: mictlan_alpha_agotamiento
+12/42 Test #12: mictlan_alpha_agotamiento ............   Passed    0.00 sec
+      Start 13: mictlan_p02g_ciclos
+13/42 Test #13: mictlan_p02g_ciclos ..................   Passed    0.00 sec
+      Start 14: mictlan_p02g_raices
+14/42 Test #14: mictlan_p02g_raices ..................   Passed    0.00 sec
+      Start 15: mictlan_p02g_errores
+15/42 Test #15: mictlan_p02g_errores .................   Passed    0.00 sec
+      Start 16: mictlan_p02g_opacos
+16/42 Test #16: mictlan_p02g_opacos ..................   Passed    0.00 sec
+      Start 17: mictlan_formato
+17/42 Test #17: mictlan_formato ......................   Passed    0.00 sec
+      Start 18: mictlan_cli_expresion_larga
+18/42 Test #18: mictlan_cli_expresion_larga ..........   Passed    0.01 sec
+      Start 19: mictlan_p02g_generativo
+19/42 Test #19: mictlan_p02g_generativo ..............   Passed    0.02 sec
+      Start 20: mictlan_pila_directa
+20/42 Test #20: mictlan_pila_directa .................   Passed    0.01 sec
+      Start 21: mictlan_pila_anidada
+21/42 Test #21: mictlan_pila_anidada .................   Passed    0.02 sec
+      Start 22: mictlan_pila_prefijo
+22/42 Test #22: mictlan_pila_prefijo .................   Passed    0.01 sec
+      Start 23: mictlan_pila_anidada_prefijo
+23/42 Test #23: mictlan_pila_anidada_prefijo .........   Passed    0.02 sec
+      Start 24: mictlan_pila_prestados
+24/42 Test #24: mictlan_pila_prestados ...............   Passed    0.01 sec
+      Start 25: mictlan_pila_reentrada
+25/42 Test #25: mictlan_pila_reentrada ...............   Passed    0.03 sec
+      Start 26: mictlan_pila_propagar
+26/42 Test #26: mictlan_pila_propagar ................   Passed    0.03 sec
+      Start 27: mictlan_pila_consumido
+27/42 Test #27: mictlan_pila_consumido ...............   Passed    0.01 sec
+      Start 28: mictlan_pila_exito
+28/42 Test #28: mictlan_pila_exito ...................   Passed    0.01 sec
+      Start 29: coverage
+29/42 Test #29: coverage .............................   Passed    0.01 sec
+      Start 30: mictlan_marcos_funcion
+30/42 Test #30: mictlan_marcos_funcion ...............   Passed    0.01 sec
+      Start 31: mictlan_memoria_listas_referencias
+31/42 Test #31: mictlan_memoria_listas_referencias ...   Passed    0.01 sec
+      Start 32: mictlan_p02f_compartidos
+32/42 Test #32: mictlan_p02f_compartidos .............   Passed    0.00 sec
+      Start 33: mictlan_p02f_anidados
+33/42 Test #33: mictlan_p02f_anidados ................   Passed    0.00 sec
+      Start 34: mictlan_p02f_diccionarios
+34/42 Test #34: mictlan_p02f_diccionarios ............   Passed    0.00 sec
+      Start 35: mictlan_p02f_ciclo_lista
+35/42 Test #35: mictlan_p02f_ciclo_lista .............   Passed    0.00 sec
+      Start 36: mictlan_p02f_ciclo_mixto
+36/42 Test #36: mictlan_p02f_ciclo_mixto .............   Passed    0.00 sec
+      Start 37: mictlan_p02f_extraer
+37/42 Test #37: mictlan_p02f_extraer .................   Passed    0.00 sec
+      Start 38: mictlan_p02f_reasignar
+38/42 Test #38: mictlan_p02f_reasignar ...............   Passed    0.00 sec
+      Start 39: mictlan_p02f_clonar_mixto
+39/42 Test #39: mictlan_p02f_clonar_mixto ............   Passed    0.00 sec
+      Start 40: mictlan_p02f_error
+40/42 Test #40: mictlan_p02f_error ...................   Passed    0.05 sec
+      Start 41: mictlan_p02f_ffi
+41/42 Test #41: mictlan_p02f_ffi .....................   Passed    0.01 sec
+      Start 42: mictlan_p02f_clonar_ciclo
+42/42 Test #42: mictlan_p02f_clonar_ciclo ............   Passed    0.00 sec
+
+100% tests passed out of 42
+
+Label Time Summary:
+alpha             =   0.27 sec*proc (10 tests)
+bytecode          =   0.02 sec*proc (1 test)
+compatibilidad    =   0.23 sec*proc (8 tests)
+contrato          =   0.08 sec*proc (11 tests)
+memoria           =   0.14 sec*proc (19 tests)
+p02e              =   0.16 sec*proc (9 tests)
+p02f              =   0.08 sec*proc (11 tests)
+p02g              =   0.02 sec*proc (5 tests)
+p11               =   0.02 sec*proc (2 tests)
+parser            =   0.02 sec*proc (1 test)
+pila              =   0.18 sec*proc (10 tests)
+recuperacion      =   0.16 sec*proc (9 tests)
+
+Total Test time (real) =   0.60 sec

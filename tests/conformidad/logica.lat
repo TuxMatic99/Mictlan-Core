@@ -1,0 +1,26 @@
+# Tabla de verdad de OR inclusivo y AND.
+escribir(falso || falso)
+escribir(falso || verdadero)
+escribir(verdadero || falso)
+escribir(verdadero || verdadero)
+escribir(falso && falso)
+escribir(falso && verdadero)
+escribir(verdadero && falso)
+escribir(verdadero && verdadero)
+escribir(!verdadero)
+escribir(!falso)
+# Se conserva el valor seleccionado, sin convertirlo en bool.
+escribir(7 || 9)
+escribir(0 || 9)
+escribir(7 && 9)
+escribir(0 && 9)
+# Ambas llamadas se evaluan: no hay cortocircuito.
+funcion marca(n)
+    escribir(n)
+    retorno verdadero
+fin
+escribir(marca(1) || marca(2))
+escribir(falso && marca(3))
+escribir(!nulo)
+escribir(!"falso")
+escribir(!"0")

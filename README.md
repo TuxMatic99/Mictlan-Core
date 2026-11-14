@@ -25,3 +25,11 @@ La matriz del SDK comprueba Core, SDK, compatibilidad y sanitizadores con revisi
 El [contrato de compatibilidad](docs/COMPATIBILIDAD.md) explica el alcance de `.lat`, los nombres históricos y la biblioteca `liblatino.so`. Mictlán conserva las contribuciones y la licencia MIT de Latino y sus colaboradores. Consulta [LICENSE](LICENSE), la [documentación original de Latino Core](docs/historia/README_LATINO_CORE.md) y el [proyecto de origen](https://github.com/lenguaje-latino/latino-Core).
 
 La distribución de referencia de esta Alpha es Debian 13 x86_64. El SDK gráfico tiene validación y distribución propias.
+
+## Semántica P1.2-A
+
+[Informe de resultados](docs/P12A_INFORME.md) ·
+[Operadores y precedencia](docs/SEMANTICA_P12A.md) ·
+[Guía para estudiantes](docs/P12A_PRIMEROS_PASOS.md) ·
+[Pruebas de conformidad](tests/conformidad/README.md) ·
+[Verificación en Debian](docs/P12A_VERIFICAR_DEBIAN.md).

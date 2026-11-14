@@ -1,0 +1,278 @@
+Test project <trabajo>/build-base-debug
+      Start  9: mictlan_p12a_numeros_lat
+ 1/25 Test  #9: mictlan_p12a_numeros_lat ..............   Passed    0.01 sec
+      Start 10: mictlan_p12a_numeros_mict
+ 2/25 Test #10: mictlan_p12a_numeros_mict .............   Passed    0.01 sec
+      Start 11: mictlan_p12a_precedencia_lat
+ 3/25 Test #11: mictlan_p12a_precedencia_lat ..........   Passed    0.01 sec
+      Start 12: mictlan_p12a_precedencia_mict
+ 4/25 Test #12: mictlan_p12a_precedencia_mict .........   Passed    0.01 sec
+      Start 13: mictlan_p12a_logica_lat
+ 5/25 Test #13: mictlan_p12a_logica_lat ...............   Passed    0.01 sec
+      Start 14: mictlan_p12a_logica_mict
+ 6/25 Test #14: mictlan_p12a_logica_mict ..............   Passed    0.01 sec
+      Start 15: mictlan_p12a_comparaciones_lat
+ 7/25 Test #15: mictlan_p12a_comparaciones_lat ........***Failed    0.00 sec
+CMake Error at <trabajo>/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  falso
+
+  falso
+
+  falso
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  falso
+
+  falso
+
+  verdadero
+
+
+
+  Obtenida:
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  falso
+
+  falso
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  falso
+
+  falso
+
+  verdadero
+
+
+
+
+      Start 16: mictlan_p12a_comparaciones_mict
+ 8/25 Test #16: mictlan_p12a_comparaciones_mict .......***Failed    0.00 sec
+CMake Error at <trabajo>/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  falso
+
+  falso
+
+  falso
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  falso
+
+  falso
+
+  verdadero
+
+
+
+  Obtenida:
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  falso
+
+  falso
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  falso
+
+  falso
+
+  verdadero
+
+
+
+
+      Start 17: mictlan_p12a_funciones_lat
+ 9/25 Test #17: mictlan_p12a_funciones_lat ............   Passed    0.01 sec
+      Start 18: mictlan_p12a_funciones_mict
+10/25 Test #18: mictlan_p12a_funciones_mict ...........   Passed    0.01 sec
+      Start 19: mictlan_p12a_recursion_lat
+11/25 Test #19: mictlan_p12a_recursion_lat ............   Passed    0.01 sec
+      Start 20: mictlan_p12a_recursion_mict
+12/25 Test #20: mictlan_p12a_recursion_mict ...........   Passed    0.01 sec
+      Start 21: mictlan_p12a_ambitos_lat
+13/25 Test #21: mictlan_p12a_ambitos_lat ..............   Passed    0.01 sec
+      Start 22: mictlan_p12a_ambitos_mict
+14/25 Test #22: mictlan_p12a_ambitos_mict .............   Passed    0.01 sec
+      Start 23: mictlan_p12a_asignaciones_lat
+15/25 Test #23: mictlan_p12a_asignaciones_lat .........   Passed    0.01 sec
+      Start 24: mictlan_p12a_asignaciones_mict
+16/25 Test #24: mictlan_p12a_asignaciones_mict ........   Passed    0.01 sec
+      Start 25: mictlan_p12a_condicional_lat
+17/25 Test #25: mictlan_p12a_condicional_lat ..........   Passed    0.01 sec
+      Start 26: mictlan_p12a_condicional_mict
+18/25 Test #26: mictlan_p12a_condicional_mict .........   Passed    0.01 sec
+      Start 27: mictlan_p12a_local_inaccesible_lat
+19/25 Test #27: mictlan_p12a_local_inaccesible_lat ....   Passed    0.00 sec
+      Start 28: mictlan_p12a_local_inaccesible_mict
+20/25 Test #28: mictlan_p12a_local_inaccesible_mict ...   Passed    0.00 sec
+      Start 29: mictlan_p12a_argumentos_exceso_lat
+21/25 Test #29: mictlan_p12a_argumentos_exceso_lat ....   Passed    0.00 sec
+      Start 30: mictlan_p12a_argumentos_exceso_mict
+22/25 Test #30: mictlan_p12a_argumentos_exceso_mict ...   Passed    0.01 sec
+      Start 31: mictlan_p12a_locale_C
+23/25 Test #31: mictlan_p12a_locale_C .................   Passed    0.00 sec
+      Start 32: mictlan_p12a_locale_es_ES_UTF-8
+24/25 Test #32: mictlan_p12a_locale_es_ES_UTF-8 .......***Failed    0.00 sec
+decimal_a incorrecto en locale es_ES.UTF-8
+decimal_b incorrecto en locale es_ES.UTF-8
+decimal_c incorrecto en locale es_ES.UTF-8
+decimal_e incorrecto en locale es_ES.UTF-8
+
+      Start 33: mictlan_p12a_locale_fr_FR_UTF-8
+25/25 Test #33: mictlan_p12a_locale_fr_FR_UTF-8 .......***Failed    0.00 sec
+decimal_a incorrecto en locale fr_FR.UTF-8
+decimal_b incorrecto en locale fr_FR.UTF-8
+decimal_c incorrecto en locale fr_FR.UTF-8
+decimal_e incorrecto en locale fr_FR.UTF-8
+
+
+84% tests passed, 4 tests failed out of 25
+
+Label Time Summary:
+compatibilidad    =   0.14 sec*proc (22 tests)
+conformidad       =   0.15 sec*proc (25 tests)
+locale            =   0.00 sec*proc (3 tests)
+p12a              =   0.15 sec*proc (25 tests)
+
+Total Test time (real) =   0.16 sec
+
+The following tests FAILED:
+	 15 - mictlan_p12a_comparaciones_lat (Failed)           compatibilidad conformidad p12a
+	 16 - mictlan_p12a_comparaciones_mict (Failed)          compatibilidad conformidad p12a
+	 32 - mictlan_p12a_locale_es_ES_UTF-8 (Failed)          conformidad locale p12a
+	 33 - mictlan_p12a_locale_fr_FR_UTF-8 (Failed)          conformidad locale p12a
+Errors while running CTest

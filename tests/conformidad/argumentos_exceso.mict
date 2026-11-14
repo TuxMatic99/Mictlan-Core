@@ -1,0 +1,4 @@
+funcion identidad(x)
+    retorno x
+fin
+escribir(identidad(1, 2))

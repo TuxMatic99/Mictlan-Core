@@ -258,7 +258,10 @@ static void menor_igual(lat_mv *mv)
   lat_objeto *r = NULL;
   if (a->tipo == T_NUMERIC || b->tipo == T_NUMERIC)
   {
-    r = (getNumerico(a) <= getNumerico(b)) ? latO_verdadero : latO_falso;
+    /* Aplicar la misma coercion que <, > y >=. El miembro numerico de
+       una cadena o de una coleccion no contiene su valor convertido. */
+    r = (latC_adouble(mv, a) <= latC_adouble(mv, b)) ? latO_verdadero
+                                                     : latO_falso;
     latC_apilar(mv, r);
     return;
   }
