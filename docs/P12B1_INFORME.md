@@ -165,7 +165,7 @@ Evidencias: [Debug local](evidencias/p12b1/debug-128.log),
 [Debug CI](evidencias/p12b1/ci-debug-128.log),
 [Release CI](evidencias/p12b1/ci-release-128.log) y
 [instrumentado CI](evidencias/p12b1/ci-asan-144.log).
-Las rutas de trabajo y colores se normalizan en los logs publicados.
+Las rutas, colores y espacios finales de presentación se normalizan en los logs publicados; no se editan los oráculos ni resultados de los programas.
 
 ## Tiempo y memoria
 

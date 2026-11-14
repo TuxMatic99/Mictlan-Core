@@ -292,9 +292,9 @@ Ubuntu 24.04 / GCC 13.3.0
 2026-11-14T04:33:16.7282796Z 143/144 Test #143: mictlan_p02f_sustitucion_asan ......................   Passed    0.02 sec
 2026-11-14T04:33:16.7283751Z         Start 144: mictlan_p02f_alias_asan
 2026-11-14T04:33:16.7461748Z 144/144 Test #144: mictlan_p02f_alias_asan ............................   Passed    0.02 sec
-2026-11-14T04:33:16.7466980Z 
+2026-11-14T04:33:16.7466980Z
 2026-11-14T04:33:16.7467326Z 100% tests passed, 0 tests failed out of 144
-2026-11-14T04:33:16.7468419Z 
+2026-11-14T04:33:16.7468419Z
 2026-11-14T04:33:16.7468691Z Label Time Summary:
 2026-11-14T04:33:16.7469124Z alpha             =   1.56 sec*proc (10 tests)
 2026-11-14T04:33:16.7469638Z bytecode          =   0.16 sec*proc (1 test)
@@ -317,6 +317,5 @@ Ubuntu 24.04 / GCC 13.3.0
 2026-11-14T04:33:16.7478583Z pila              =   1.33 sec*proc (10 tests)
 2026-11-14T04:33:16.7479078Z recuperacion      =   1.18 sec*proc (9 tests)
 2026-11-14T04:33:16.7479567Z utf8              =   0.02 sec*proc (1 test)
-2026-11-14T04:33:16.7479881Z 
+2026-11-14T04:33:16.7479881Z
 2026-11-14T04:33:16.7480050Z Total Test time (real) =   6.26 sec
-

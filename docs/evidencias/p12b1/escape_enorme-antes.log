@@ -12,4 +12,3 @@ exit=1
     #9 0x7f194a96eca7  (/lib/x86_64-linux-gnu/libc.so.6+0x29ca7) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
     #10 0x7f194a96ed64 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29d64) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
     #11 0x5621ad4eda30 in _start (<trabajo>/build-p12a-asan/mictlan+0x158a30) (BuildId: 2eb122844a3c871dd4fc853550ff8b2051ef1e10)
-

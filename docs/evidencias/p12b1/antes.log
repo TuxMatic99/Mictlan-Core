@@ -14,7 +14,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:2
 
 
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode-lat/programa.lat:1:17:
   No se encontro la fun 'longitud_bytes'
 
@@ -28,7 +28,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:2
 
 
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode-mict/programa.mict:1:17:
   No se encontro la fun 'longitud_bytes'
 
@@ -42,7 +42,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:2
 
 
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/separacion_explicita-lat/programa.lat:1:17:
   No se encontro la fun 'separar_texto'
 
@@ -56,7 +56,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:2
 
 
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/separacion_explicita-mict/programa.mict:1:17:
   No se encontro la fun 'separar_texto'
 
@@ -240,7 +240,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:2
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_invalido-lat/programa.lat:1:8:
   No se encontro la fun 'longitud_unicode'
 
@@ -252,7 +252,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_invalido-mict/programa.mict:1:8:
   No se encontro la fun 'longitud_unicode'
 
@@ -264,7 +264,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_truncado-lat/programa.lat:1:8:
   No se encontro la fun 'invertir_unicode'
 
@@ -276,7 +276,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_truncado-mict/programa.mict:1:8:
   No se encontro la fun 'invertir_unicode'
 
@@ -288,7 +288,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_sustituto-lat/programa.lat:1:8:
   No se encontro la fun 'longitud_unicode'
 
@@ -300,7 +300,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_sustituto-mict/programa.mict:1:8:
   No se encontro la fun 'longitud_unicode'
 
@@ -312,7 +312,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_sobrelimite-lat/programa.lat:1:8:
   No se encontro la fun 'longitud_unicode'
 
@@ -324,7 +324,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_sobrelimite-mict/programa.mict:1:8:
   No se encontro la fun 'longitud_unicode'
 
@@ -336,7 +336,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_sobrelargo-lat/programa.lat:1:8:
   No se encontro la fun 'longitud_unicode'
 
@@ -348,7 +348,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: UTF-8 invalido
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_sobrelargo-mict/programa.mict:1:8:
   No se encontro la fun 'longitud_unicode'
 
@@ -360,7 +360,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: Indice Unicode debe ser entero no negativo
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_fraccion-lat/programa.lat:1:8:
   No se encontro la fun 'subcadena_unicode'
 
@@ -372,7 +372,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: Indice Unicode debe ser entero no negativo
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_fraccion-mict/programa.mict:1:8:
   No se encontro la fun 'subcadena_unicode'
 
@@ -384,7 +384,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: Indice de cadena fuera de rango
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_inicio-lat/programa.lat:1:8:
   No se encontro la fun 'subcadena_unicode'
 
@@ -396,7 +396,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: Indice de cadena fuera de rango
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/unicode_inicio-mict/programa.mict:1:8:
   No se encontro la fun 'subcadena_unicode'
 
@@ -408,7 +408,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: Separador de texto vacio
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/separador_vacio-lat/programa.lat:1:8:
   No se encontro la fun 'separar_texto'
 
@@ -420,7 +420,7 @@ CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:4
 CMake Error at <trabajo>/mictlan-p12b1-antes/tests/conformidad/verificar.cmake:41 (message):
   Diagnostico ausente: Separador de texto vacio
 
-  
+
   <trabajo>/build-p12b1-antes/cadenas/separador_vacio-mict/programa.mict:1:8:
   No se encontro la fun 'separar_texto'
 
