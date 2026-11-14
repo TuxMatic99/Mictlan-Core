@@ -1,0 +1,19 @@
+Test project /workspace/scratch/1de5cf9cbaa6/build-base-debug
+    Start 94: mictlan_p12b1_concat_error
+1/1 Test #94: mictlan_p12b1_concat_error .......***Failed    0.00 sec
+[1;31mconcat-error:0:0:[0m Referencia circular al representar objeto
+Conversion sin liberar tras error: 1
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+cadenas    =   0.00 sec*proc (1 test)
+memoria    =   0.00 sec*proc (1 test)
+p12b1      =   0.00 sec*proc (1 test)
+
+Total Test time (real) =   0.00 sec
+
+The following tests FAILED:
+	 94 - mictlan_p12b1_concat_error (Failed)               cadenas memoria p12b1
+Errors while running CTest

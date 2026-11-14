@@ -33,6 +33,7 @@ int main(int argc,char **argv) {
     for(unsigned i=0;i<=vueltas;++i) {
         if(i==1) {inicio=mv->memoria_usada;rss_inicio=rss();tiempo=reloj();}
         latC_apilar_string(mv,texto);
+        if(!strcmp(caso,"concatenar")) latC_apilar_string(mv,"X");
         if(!strcmp(caso,"insertar")) {latC_apilar_string(mv,"X");latC_apilar_double(mv,1);}
         if(!strcmp(caso,"subcadena")) {latC_apilar_double(mv,0);latC_apilar_double(mv,32);}
         if(!strcmp(caso,"reemplazar")) {latC_apilar_string(mv,"a");latC_apilar_string(mv,"b");latC_apilar_double(mv,1);}

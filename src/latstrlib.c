@@ -363,20 +363,33 @@ static void cadena_publicar(lat_mv *mv, char *buffer) {
     free(buffer);
 }
 
+static const char *cadena_texto_prestado(const lat_objeto *o, char **propio,
+                                         const char **error) {
+    if (o->tipo == T_STR || o->tipo == T_LABEL) return getstr(getCadena(o));
+    *propio = latP_texto(o, error);
+    return *propio;
+}
+
 void str_concatenar(lat_mv *mv) {
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    char *s1 = latC_astring(mv, a);
-    char *s2 = latC_astring(mv, b);
-    int len = strlen(s1) + strlen(s2) + 1;
-    char *s3 = calloc(1, len);
-    strcat(s3, s1);
-    strcat(s3, s2);
-    s3[len - 1] = '\0';
-    latC_apilar_string(mv, s3);
-    free(s1);
-    free(s2);
-    free(s3);
+    lat_objeto *b = latC_desapilar(mv), *a = latC_desapilar(mv);
+    char *propio_a = NULL, *propio_b = NULL;
+    const char *error = NULL;
+    const char *s1 = cadena_texto_prestado(a, &propio_a, &error);
+    const char *s2 = s1 ? cadena_texto_prestado(b, &propio_b, &error) : NULL;
+    if (!s1 || !s2) {
+        free(propio_a); free(propio_b);
+        latC_error(mv, "%s", error ? error : "Error al representar objeto");
+        return;
+    }
+    size_t n1 = strlen(s1), n2 = strlen(s2);
+    if (n2 > SIZE_MAX - n1 - 1) {
+        free(propio_a); free(propio_b);
+        latC_error(mv, "Resultado de concatenacion demasiado largo"); return;
+    }
+    char *ret = malloc(n1 + n2 + 1);
+    if (ret) { memcpy(ret, s1, n1); memcpy(ret + n1, s2, n2 + 1); }
+    free(propio_a); free(propio_b);
+    cadena_publicar(mv, ret);
 }
 
 void str_comparar(lat_mv *mv) {
