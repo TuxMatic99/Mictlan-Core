@@ -7,6 +7,7 @@ on:
       - 'investigacion/p12a-*'
       - 'investigacion/p12b1-*'
       - 'investigacion/p12b2-*'
+      - 'investigacion/p12b3-*'
 
 permissions:
   contents: read
@@ -49,9 +50,9 @@ jobs:
         run: |
           args=(-S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.tipo }})
           if [[ '${{ matrix.sanitizar }}' == 'true' ]]; then
-            args+=("-DCMAKE_C_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
-                   "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
-                   "-DCMAKE_SHARED_LINKER_FLAGS=-fsanitize=address,undefined")
+            args+=("-DCMAKE_C_FLAGS=-fsanitize=address,undefined,float-cast-overflow -fno-omit-frame-pointer"
+                   "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined,float-cast-overflow"
+                   "-DCMAKE_SHARED_LINKER_FLAGS=-fsanitize=address,undefined,float-cast-overflow")
           fi
           cmake "${args[@]}" 2>&1 | tee configure.log
       - name: Compilar
@@ -64,6 +65,9 @@ jobs:
       - name: Medir colecciones en Release
         if: matrix.perfil == 'Release'
         run: python3 tests/colecciones/medir.py ./build/mictlan_bench_colecciones > benchmark-colecciones.csv
+      - name: Medir matematicas en Release
+        if: matrix.perfil == 'Release'
+        run: python3 tests/matematicas/medir.py ./build/mictlan_bench_matematicas > benchmark-matematicas.csv
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -78,3 +82,5 @@ jobs:
             build/colecciones/
             benchmark-cadenas.csv
             benchmark-colecciones.csv
+            benchmark-matematicas.csv
+            build/matematicas/

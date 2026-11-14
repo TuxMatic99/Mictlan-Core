@@ -1,0 +1,92 @@
+2026-11-14T21:15:06.0371544Z   ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+2026-11-14T21:15:06.0372164Z   UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+2026-11-14T21:15:06.0372815Z   LSAN_OPTIONS: exitcode=23
+2026-11-14T21:15:10.7260727Z   ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+2026-11-14T21:15:10.7261063Z   UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+2026-11-14T21:15:10.7261632Z   LSAN_OPTIONS: exitcode=23
+2026-11-14T21:15:47.3976532Z   args+=("-DCMAKE_C_FLAGS=-fsanitize=address,undefined,float-cast-overflow -fno-omit-frame-pointer"
+2026-11-14T21:15:47.3977071Z          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined,float-cast-overflow"
+2026-11-14T21:15:47.3977589Z          "-DCMAKE_SHARED_LINKER_FLAGS=-fsanitize=address,undefined,float-cast-overflow")
+2026-11-14T21:15:47.4005314Z   ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+2026-11-14T21:15:47.4005765Z   UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+2026-11-14T21:15:47.4006063Z   LSAN_OPTIONS: exitcode=23
+2026-11-14T21:15:49.9126529Z -- The C compiler identification is GNU 13.3.0
+2026-11-14T21:15:51.7748294Z   ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+2026-11-14T21:15:51.7748629Z   UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+2026-11-14T21:15:51.7748961Z   LSAN_OPTIONS: exitcode=23
+2026-11-14T21:15:55.4427324Z /usr/bin/cc -fPIC -fsanitize=address,undefined,float-cast-overflow -fno-omit-frame-pointer -D_GNU_SOURCE -Wall -Wextra -std=c11 -rdynamic -fPIC -fsanitize=address,undefined,float-cast-overflow -fno-omit-frame-pointer -D_GNU_SOURCE -Wall -Wextra -std=c11 -rdynamic -fPIC -D_GNU_SOURCE -g -O0 -Wall -Wextra -std=c11 -rdynamic -fPIC -Wl,--dependency-file=CMakeFiles/liblatino.dir/link.d -fsanitize=address,undefined,float-cast-overflow -shared -Wl,-soname,liblatino.so -o ../liblatino.so CMakeFiles/liblatino.dir/latast.o CMakeFiles/liblatino.dir/latclass.o CMakeFiles/liblatino.dir/latdic.o CMakeFiles/liblatino.dir/latdo.o CMakeFiles/liblatino.dir/latgc.o CMakeFiles/liblatino.dir/latlex.o CMakeFiles/liblatino.dir/latlist.o CMakeFiles/liblatino.dir/latmem.o CMakeFiles/liblatino.dir/latrecurso.o CMakeFiles/liblatino.dir/latlista_recursos.o CMakeFiles/liblatino.dir/latmv.o CMakeFiles/liblatino.dir/latobj.o CMakeFiles/liblatino.dir/latparse.o CMakeFiles/liblatino.dir/latlocale.o CMakeFiles/liblatino.dir/latbaselib.o CMakeFiles/liblatino.dir/latdevlib.o CMakeFiles/liblatino.dir/latdiclib.o CMakeFiles/liblatino.dir/latfilelib.o CMakeFiles/liblatino.dir/latlistlib.o CMakeFiles/liblatino.dir/latmathlib.o CMakeFiles/liblatino.dir/latpaqlib.o CMakeFiles/liblatino.dir/latrepl.o CMakeFiles/liblatino.dir/latstrlib.o CMakeFiles/liblatino.dir/latsyslib.o CMakeFiles/liblatino.dir/latino.o CMakeFiles/liblatino.dir/linenoise/utf8.o CMakeFiles/liblatino.dir/linenoise/linenoise.o  -lm -lreadline -ldl
+2026-11-14T21:15:58.6802821Z /usr/bin/cc -fsanitize=address,undefined,float-cast-overflow -fno-omit-frame-pointer -D_GNU_SOURCE -Wall -Wextra -std=c11 -rdynamic -fPIC -fsanitize=address,undefined,float-cast-overflow -fno-omit-frame-pointer -D_GNU_SOURCE -Wall -Wextra -std=c11 -rdynamic -fPIC -D_GNU_SOURCE -g -O0 -Wall -Wextra -std=c11 -rdynamic -fPIC -fsanitize=address,undefined,float-cast-overflow -Wl,--dependency-file=CMakeFiles/latino.dir/link.d CMakeFiles/latino.dir/latast.o CMakeFiles/latino.dir/latclass.o CMakeFiles/latino.dir/latdic.o CMakeFiles/latino.dir/latdo.o CMakeFiles/latino.dir/latgc.o CMakeFiles/latino.dir/latlex.o CMakeFiles/latino.dir/latlist.o CMakeFiles/latino.dir/latmem.o CMakeFiles/latino.dir/latrecurso.o CMakeFiles/latino.dir/latlista_recursos.o CMakeFiles/latino.dir/latmv.o CMakeFiles/latino.dir/latobj.o CMakeFiles/latino.dir/latparse.o CMakeFiles/latino.dir/latlocale.o CMakeFiles/latino.dir/latbaselib.o CMakeFiles/latino.dir/latdevlib.o CMakeFiles/latino.dir/latdiclib.o CMakeFiles/latino.dir/latfilelib.o CMakeFiles/latino.dir/latlistlib.o CMakeFiles/latino.dir/latmathlib.o CMakeFiles/latino.dir/latpaqlib.o CMakeFiles/latino.dir/latrepl.o CMakeFiles/latino.dir/latstrlib.o CMakeFiles/latino.dir/latsyslib.o CMakeFiles/latino.dir/latino.o CMakeFiles/latino.dir/linenoise/utf8.o CMakeFiles/latino.dir/linenoise/linenoise.o -o ../mictlan  -lm -lreadline -ldl
+2026-11-14T21:16:07.2740666Z ##[group]Run ctest --test-dir build --output-on-failure --output-junit resultados.xml
+2026-11-14T21:16:07.2741184Z ctest --test-dir build --output-on-failure --output-junit resultados.xml
+2026-11-14T21:16:07.2768222Z   ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+2026-11-14T21:16:07.2768535Z   UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+2026-11-14T21:16:07.2768845Z   LSAN_OPTIONS: exitcode=23
+2026-11-14T21:16:10.6726827Z 147/261 Test #147: mictlan_p12b3_herencia_lat .........................   Passed    0.02 sec
+2026-11-14T21:16:10.6905746Z 148/261 Test #148: mictlan_p12b3_herencia_mict ........................   Passed    0.02 sec
+2026-11-14T21:16:10.7040431Z 149/261 Test #149: mictlan_p12b3_extremos_lat .........................   Passed    0.01 sec
+2026-11-14T21:16:10.7155998Z 150/261 Test #150: mictlan_p12b3_extremos_mict ........................   Passed    0.01 sec
+2026-11-14T21:16:10.7274590Z 151/261 Test #151: mictlan_p12b3_cero_lat .............................   Passed    0.01 sec
+2026-11-14T21:16:10.7411318Z 152/261 Test #152: mictlan_p12b3_cero_mict ............................   Passed    0.01 sec
+2026-11-14T21:16:10.7540969Z 153/261 Test #153: mictlan_p12b3_moderna_lat ..........................   Passed    0.01 sec
+2026-11-14T21:16:10.7708801Z 154/261 Test #154: mictlan_p12b3_moderna_mict .........................   Passed    0.02 sec
+2026-11-14T21:16:10.7826352Z 155/261 Test #155: mictlan_p12b3_max_vacio_lat ........................   Passed    0.01 sec
+2026-11-14T21:16:10.7936939Z 156/261 Test #156: mictlan_p12b3_max_vacio_mict .......................   Passed    0.01 sec
+2026-11-14T21:16:10.8066004Z 157/261 Test #157: mictlan_p12b3_max_tipo_lat .........................   Passed    0.01 sec
+2026-11-14T21:16:10.8203906Z 158/261 Test #158: mictlan_p12b3_max_tipo_mict ........................   Passed    0.01 sec
+2026-11-14T21:16:10.8319477Z 159/261 Test #159: mictlan_p12b3_azar_negativo_lat ....................   Passed    0.01 sec
+2026-11-14T21:16:10.8432983Z 160/261 Test #160: mictlan_p12b3_azar_negativo_mict ...................   Passed    0.01 sec
+2026-11-14T21:16:10.8557713Z 161/261 Test #161: mictlan_p12b3_azar_no_finito_lat ...................   Passed    0.01 sec
+2026-11-14T21:16:10.8689452Z 162/261 Test #162: mictlan_p12b3_azar_no_finito_mict ..................   Passed    0.01 sec
+2026-11-14T21:16:10.8824209Z 163/261 Test #163: mictlan_p12b3_azar_grande_lat ......................   Passed    0.01 sec
+2026-11-14T21:16:10.8936502Z 164/261 Test #164: mictlan_p12b3_azar_grande_mict .....................   Passed    0.01 sec
+2026-11-14T21:16:10.9056838Z 165/261 Test #165: mictlan_p12b3_azar_aridad_lat ......................   Passed    0.01 sec
+2026-11-14T21:16:10.9186350Z 166/261 Test #166: mictlan_p12b3_azar_aridad_mict .....................   Passed    0.01 sec
+2026-11-14T21:16:10.9318226Z 167/261 Test #167: mictlan_p12b3_ldexp_infinito_lat ...................   Passed    0.01 sec
+2026-11-14T21:16:10.9449946Z 168/261 Test #168: mictlan_p12b3_ldexp_infinito_mict ..................   Passed    0.01 sec
+2026-11-14T21:16:10.9576283Z 169/261 Test #169: mictlan_p12b3_ldexp_grande_lat .....................   Passed    0.01 sec
+2026-11-14T21:16:10.9695114Z 170/261 Test #170: mictlan_p12b3_ldexp_grande_mict ....................   Passed    0.01 sec
+2026-11-14T21:16:10.9809714Z 171/261 Test #171: mictlan_p12b3_estricta_invalida_lat ................   Passed    0.01 sec
+2026-11-14T21:16:10.9926883Z 172/261 Test #172: mictlan_p12b3_estricta_invalida_mict ...............   Passed    0.01 sec
+2026-11-14T21:16:11.0051300Z 173/261 Test #173: mictlan_p12b3_estricta_desborde_lat ................   Passed    0.01 sec
+2026-11-14T21:16:11.0165601Z 174/261 Test #174: mictlan_p12b3_estricta_desborde_mict ...............   Passed    0.01 sec
+2026-11-14T21:16:11.0283624Z 175/261 Test #175: mictlan_p12b3_estricta_subdesborde_lat .............   Passed    0.01 sec
+2026-11-14T21:16:11.0403659Z 176/261 Test #176: mictlan_p12b3_estricta_subdesborde_mict ............   Passed    0.01 sec
+2026-11-14T21:16:11.0524139Z 177/261 Test #177: mictlan_p12b3_estricta_tipo_lat ....................   Passed    0.01 sec
+2026-11-14T21:16:11.0654641Z 178/261 Test #178: mictlan_p12b3_estricta_tipo_mict ...................   Passed    0.01 sec
+2026-11-14T21:16:11.0783657Z 179/261 Test #179: mictlan_p12b3_entero_fraccion_lat ..................   Passed    0.01 sec
+2026-11-14T21:16:11.0910308Z 180/261 Test #180: mictlan_p12b3_entero_fraccion_mict .................   Passed    0.01 sec
+2026-11-14T21:16:11.1037897Z 181/261 Test #181: mictlan_p12b3_entero_orden_lat .....................   Passed    0.01 sec
+2026-11-14T21:16:11.1164690Z 182/261 Test #182: mictlan_p12b3_entero_orden_mict ....................   Passed    0.01 sec
+2026-11-14T21:16:11.1281693Z 183/261 Test #183: mictlan_p12b3_semilla_fraccion_lat .................   Passed    0.01 sec
+2026-11-14T21:16:11.1403086Z 184/261 Test #184: mictlan_p12b3_semilla_fraccion_mict ................   Passed    0.01 sec
+2026-11-14T21:16:11.1526119Z 185/261 Test #185: mictlan_p12b3_binario_infinito_lat .................   Passed    0.01 sec
+2026-11-14T21:16:11.1641967Z 186/261 Test #186: mictlan_p12b3_binario_infinito_mict ................   Passed    0.01 sec
+2026-11-14T21:16:11.1769787Z 187/261 Test #187: mictlan_p12b3_raiz_dominio_lat .....................   Passed    0.01 sec
+2026-11-14T21:16:11.1897975Z 188/261 Test #188: mictlan_p12b3_raiz_dominio_mict ....................   Passed    0.01 sec
+2026-11-14T21:16:11.2027377Z 189/261 Test #189: mictlan_p12b3_log_dominio_lat ......................   Passed    0.01 sec
+2026-11-14T21:16:11.2152056Z 190/261 Test #190: mictlan_p12b3_log_dominio_mict .....................   Passed    0.01 sec
+2026-11-14T21:16:11.2273688Z 191/261 Test #191: mictlan_p12b3_potencia_dominio_lat .................   Passed    0.01 sec
+2026-11-14T21:16:11.2400065Z 192/261 Test #192: mictlan_p12b3_potencia_dominio_mict ................   Passed    0.01 sec
+2026-11-14T21:16:11.2535128Z 193/261 Test #193: mictlan_p12b3_potencia_desborde_lat ................   Passed    0.01 sec
+2026-11-14T21:16:11.2651526Z 194/261 Test #194: mictlan_p12b3_potencia_desborde_mict ...............   Passed    0.01 sec
+2026-11-14T21:16:11.2777442Z 195/261 Test #195: mictlan_p12b3_potencia_subdesborde_lat .............   Passed    0.01 sec
+2026-11-14T21:16:11.2896650Z 196/261 Test #196: mictlan_p12b3_potencia_subdesborde_mict ............   Passed    0.01 sec
+2026-11-14T21:16:11.3016384Z 197/261 Test #197: mictlan_p12b3_predicado_tipo_lat ...................   Passed    0.01 sec
+2026-11-14T21:16:11.3142921Z 198/261 Test #198: mictlan_p12b3_predicado_tipo_mict ..................   Passed    0.01 sec
+2026-11-14T21:16:11.3237690Z 199/261 Test #199: mictlan_p12b3_no_finitos_c .........................   Passed    0.01 sec
+2026-11-14T21:16:11.3331437Z 200/261 Test #200: mictlan_p12b3_extremos_c ...........................   Passed    0.01 sec
+2026-11-14T21:16:11.3417030Z 201/261 Test #201: mictlan_p12b3_conversion_c .........................   Passed    0.01 sec
+2026-11-14T21:16:11.3510591Z 202/261 Test #202: mictlan_p12b3_herencia_c ...........................   Passed    0.01 sec
+2026-11-14T21:16:11.3600441Z 203/261 Test #203: mictlan_p12b3_precision_c ..........................   Passed    0.01 sec
+2026-11-14T21:16:11.3699455Z 204/261 Test #204: mictlan_p12b3_binario_c ............................   Passed    0.01 sec
+2026-11-14T21:16:11.3824718Z 205/261 Test #205: mictlan_p12b3_azar_c ...............................   Passed    0.01 sec
+2026-11-14T21:16:11.3923251Z 206/261 Test #206: mictlan_p12b3_estricto_c ...........................   Passed    0.01 sec
+2026-11-14T21:16:11.4002930Z 207/261 Test #207: mictlan_p12b3_dominio_c ............................   Passed    0.01 sec
+2026-11-14T21:16:11.4094198Z 208/261 Test #208: mictlan_p12b3_recuperacion_c .......................   Passed    0.01 sec
+2026-11-14T21:16:11.4187945Z 209/261 Test #209: mictlan_p12b3_sdk_c ................................   Passed    0.01 sec
+2026-11-14T21:16:11.4306947Z 210/261 Test #210: mictlan_p12b3_temporales_c .........................   Passed    0.01 sec
+2026-11-14T21:16:11.4397738Z 211/261 Test #211: mictlan_p12b3_azar_rechazo .........................   Passed    0.01 sec
+2026-11-14T21:16:13.1525448Z 100% tests passed, 0 tests failed out of 261
+2026-11-14T21:16:13.2088647Z   ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+2026-11-14T21:16:13.2088944Z   UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+2026-11-14T21:16:13.2089262Z   LSAN_OPTIONS: exitcode=23

@@ -1,0 +1,313 @@
+EXTRACTO: intento local completo de 261 tests, commit 00c3a91542521b47476b3de612afd29eca7ff787.
+Se conserva un caso y el resumen; el diagnostico ptrace aparece en 258 bloques fallidos.
+
+ Start   1: mictlan_alpha_identidad
+  1/261 Test   #1: mictlan_alpha_identidad ............................***Failed    0.02 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/alpha/verificar.cmake:14 (message):
+  Código 23, se esperaba 0.
+
+
+
+  ==1270==LeakSanitizer has encountered a fatal error.
+
+  ==1270==HINT: For debugging, try setting environment variable
+  LSAN_OPTIONS=verbosity=1:log_threads=1
+
+  ==1270==HINT: LeakSanitizer does not work under ptrace (strace, gdb, etc)
+
+Call Stack (most recent call first):
+  /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/alpha/verificar.cmake:50 (ejecutar)1% tests passed, 258 tests failed out of 261
+
+Label Time Summary:
+abi               =   0.03 sec*proc (1 test)
+alpha             =   0.46 sec*proc (10 tests)
+azar              =   0.01 sec*proc (1 test)
+bytecode          =   0.11 sec*proc (1 test)
+cadenas           =   0.91 sec*proc (61 tests)
+colecciones       =   0.73 sec*proc (52 tests)
+compatibilidad    =   2.73 sec*proc (178 tests)
+conformidad       =   0.55 sec*proc (25 tests)
+contrato          =   0.12 sec*proc (11 tests)
+contratos         =   0.11 sec*proc (12 tests)
+diagnostico       =   0.03 sec*proc (4 tests)
+dic               =   0.04 sec*proc (4 tests)
+documentacion     =   0.05 sec*proc (2 tests)
+historico         =   0.07 sec*proc (1 test)
+locale            =   0.03 sec*proc (3 tests)
+matematicas       =   0.83 sec*proc (65 tests)
+memoria           =   0.90 sec*proc (36 tests)
+p02e              =   0.86 sec*proc (9 tests)
+p02f              =   0.16 sec*proc (15 tests)
+p02g              =   0.14 sec*proc (5 tests)
+p11               =   0.21 sec*proc (2 tests)
+p12a              =   0.55 sec*proc (25 tests)
+p12b1             =   0.91 sec*proc (61 tests)
+p12b2             =   0.73 sec*proc (52 tests)
+p12b3             =   0.83 sec*proc (65 tests)
+parser            =   0.11 sec*proc (1 test)
+pila              =   0.98 sec*proc (10 tests)
+recuperacion      =   0.86 sec*proc (9 tests)
+utf8              =   0.01 sec*proc (1 test)
+
+Total Test time (real) =   5.11 sec
+
+The following tests FAILED:
+	  1 - mictlan_alpha_identidad (Failed)                  alpha compatibilidad
+	  2 - mictlan_alpha_extensiones (Failed)                alpha compatibilidad
+	  3 - mictlan_alpha_latino_valores (Failed)             alpha compatibilidad
+	  4 - mictlan_alpha_latino_control (Failed)             alpha compatibilidad
+	  5 - mictlan_alpha_latino_colecciones (Failed)         alpha compatibilidad
+	  6 - mictlan_alpha_diagnosticos (Failed)               alpha compatibilidad
+	  7 - mictlan_alpha_repl (Failed)                       alpha compatibilidad
+	  8 - mictlan_alpha_modulos (Failed)                    alpha compatibilidad
+	  9 - mictlan_p12a_numeros_lat (Failed)                 compatibilidad conformidad p12a
+	 10 - mictlan_p12a_numeros_mict (Failed)                compatibilidad conformidad p12a
+	 11 - mictlan_p12a_precedencia_lat (Failed)             compatibilidad conformidad p12a
+	 12 - mictlan_p12a_precedencia_mict (Failed)            compatibilidad conformidad p12a
+	 13 - mictlan_p12a_logica_lat (Failed)                  compatibilidad conformidad p12a
+	 14 - mictlan_p12a_logica_mict (Failed)                 compatibilidad conformidad p12a
+	 15 - mictlan_p12a_comparaciones_lat (Failed)           compatibilidad conformidad p12a
+	 16 - mictlan_p12a_comparaciones_mict (Failed)          compatibilidad conformidad p12a
+	 17 - mictlan_p12a_funciones_lat (Failed)               compatibilidad conformidad p12a
+	 18 - mictlan_p12a_funciones_mict (Failed)              compatibilidad conformidad p12a
+	 19 - mictlan_p12a_recursion_lat (Failed)               compatibilidad conformidad p12a
+	 20 - mictlan_p12a_recursion_mict (Failed)              compatibilidad conformidad p12a
+	 21 - mictlan_p12a_ambitos_lat (Failed)                 compatibilidad conformidad p12a
+	 22 - mictlan_p12a_ambitos_mict (Failed)                compatibilidad conformidad p12a
+	 23 - mictlan_p12a_asignaciones_lat (Failed)            compatibilidad conformidad p12a
+	 24 - mictlan_p12a_asignaciones_mict (Failed)           compatibilidad conformidad p12a
+	 25 - mictlan_p12a_condicional_lat (Failed)             compatibilidad conformidad p12a
+	 26 - mictlan_p12a_condicional_mict (Failed)            compatibilidad conformidad p12a
+	 27 - mictlan_p12a_local_inaccesible_lat (Failed)       compatibilidad conformidad p12a
+	 28 - mictlan_p12a_local_inaccesible_mict (Failed)      compatibilidad conformidad p12a
+	 29 - mictlan_p12a_argumentos_exceso_lat (Failed)       compatibilidad conformidad p12a
+	 30 - mictlan_p12a_argumentos_exceso_mict (Failed)      compatibilidad conformidad p12a
+	 31 - mictlan_p12a_locale_C (Failed)                    conformidad locale p12a
+	 32 - mictlan_p12a_locale_es_ES_UTF-8 (Failed)          conformidad locale p12a
+	 33 - mictlan_p12a_locale_fr_FR_UTF-8 (Failed)          conformidad locale p12a
+	 34 - mictlan_p12b1_herencia_lat (Failed)               cadenas compatibilidad p12b1
+	 35 - mictlan_p12b1_herencia_mict (Failed)              cadenas compatibilidad p12b1
+	 36 - mictlan_p12b1_limites_validos_lat (Failed)        cadenas compatibilidad p12b1
+	 37 - mictlan_p12b1_limites_validos_mict (Failed)       cadenas compatibilidad p12b1
+	 38 - mictlan_p12b1_unicode_lat (Failed)                cadenas compatibilidad p12b1
+	 39 - mictlan_p12b1_unicode_mict (Failed)               cadenas compatibilidad p12b1
+	 40 - mictlan_p12b1_separacion_explicita_lat (Failed)   cadenas compatibilidad p12b1
+	 41 - mictlan_p12b1_separacion_explicita_mict (Failed)  cadenas compatibilidad p12b1
+	 42 - mictlan_p12b1_sub_inicio_negativo_lat (Failed)    cadenas compatibilidad p12b1
+	 43 - mictlan_p12b1_sub_inicio_negativo_mict (Failed)   cadenas compatibilidad p12b1
+	 44 - mictlan_p12b1_sub_cantidad_negativa_lat (Failed)  cadenas compatibilidad p12b1
+	 45 - mictlan_p12b1_sub_cantidad_negativa_mict (Failed) cadenas compatibilidad p12b1
+	 46 - mictlan_p12b1_sub_inicio_exceso_lat (Failed)      cadenas compatibilidad p12b1
+	 47 - mictlan_p12b1_sub_inicio_exceso_mict (Failed)     cadenas compatibilidad p12b1
+	 48 - mictlan_p12b1_insertar_negativo_lat (Failed)      cadenas compatibilidad p12b1
+	 49 - mictlan_p12b1_insertar_negativo_mict (Failed)     cadenas compatibilidad p12b1
+	 50 - mictlan_p12b1_indice_infinito_lat (Failed)        cadenas compatibilidad p12b1
+	 51 - mictlan_p12b1_indice_infinito_mict (Failed)       cadenas compatibilidad p12b1
+	 52 - mictlan_p12b1_indice_enorme_lat (Failed)          cadenas compatibilidad p12b1
+	 53 - mictlan_p12b1_indice_enorme_mict (Failed)         cadenas compatibilidad p12b1
+	 54 - mictlan_p12b1_relleno_negativo_lat (Failed)       cadenas compatibilidad p12b1
+	 55 - mictlan_p12b1_relleno_negativo_mict (Failed)      cadenas compatibilidad p12b1
+	 56 - mictlan_p12b1_reemplazo_vacio_lat (Failed)        cadenas compatibilidad p12b1
+	 57 - mictlan_p12b1_reemplazo_vacio_mict (Failed)       cadenas compatibilidad p12b1
+	 58 - mictlan_p12b1_tipo_texto_lat (Failed)             cadenas compatibilidad p12b1
+	 59 - mictlan_p12b1_tipo_texto_mict (Failed)            cadenas compatibilidad p12b1
+	 60 - mictlan_p12b1_tipo_indice_lat (Failed)            cadenas compatibilidad p12b1
+	 61 - mictlan_p12b1_tipo_indice_mict (Failed)           cadenas compatibilidad p12b1
+	 62 - mictlan_p12b1_unicode_invalido_lat (Failed)       cadenas compatibilidad p12b1
+	 63 - mictlan_p12b1_unicode_invalido_mict (Failed)      cadenas compatibilidad p12b1
+	 64 - mictlan_p12b1_unicode_truncado_lat (Failed)       cadenas compatibilidad p12b1
+	 65 - mictlan_p12b1_unicode_truncado_mict (Failed)      cadenas compatibilidad p12b1
+	 66 - mictlan_p12b1_unicode_sustituto_lat (Failed)      cadenas compatibilidad p12b1
+	 67 - mictlan_p12b1_unicode_sustituto_mict (Failed)     cadenas compatibilidad p12b1
+	 68 - mictlan_p12b1_unicode_sobrelimite_lat (Failed)    cadenas compatibilidad p12b1
+	 69 - mictlan_p12b1_unicode_sobrelimite_mict (Failed)   cadenas compatibilidad p12b1
+	 70 - mictlan_p12b1_unicode_sobrelargo_lat (Failed)     cadenas compatibilidad p12b1
+	 71 - mictlan_p12b1_unicode_sobrelargo_mict (Failed)    cadenas compatibilidad p12b1
+	 72 - mictlan_p12b1_unicode_fraccion_lat (Failed)       cadenas compatibilidad p12b1
+	 73 - mictlan_p12b1_unicode_fraccion_mict (Failed)      cadenas compatibilidad p12b1
+	 74 - mictlan_p12b1_unicode_inicio_lat (Failed)         cadenas compatibilidad p12b1
+	 75 - mictlan_p12b1_unicode_inicio_mict (Failed)        cadenas compatibilidad p12b1
+	 76 - mictlan_p12b1_separador_vacio_lat (Failed)        cadenas compatibilidad p12b1
+	 77 - mictlan_p12b1_separador_vacio_mict (Failed)       cadenas compatibilidad p12b1
+	 78 - mictlan_p12b1_regex_tipo_lat (Failed)             cadenas compatibilidad p12b1
+	 79 - mictlan_p12b1_regex_tipo_mict (Failed)            cadenas compatibilidad p12b1
+	 80 - mictlan_p12b1_regex_patron_lat (Failed)           cadenas compatibilidad p12b1
+	 81 - mictlan_p12b1_regex_patron_mict (Failed)          cadenas compatibilidad p12b1
+	 82 - mictlan_p12b1_char_rango_lat (Failed)             cadenas compatibilidad p12b1
+	 83 - mictlan_p12b1_char_rango_mict (Failed)            cadenas compatibilidad p12b1
+	 84 - mictlan_p12b1_escape_unicode_lat (Failed)         cadenas compatibilidad p12b1
+	 85 - mictlan_p12b1_escape_unicode_mict (Failed)        cadenas compatibilidad p12b1
+	 86 - mictlan_p12b1_escape_enorme_lat (Failed)          cadenas compatibilidad p12b1
+	 87 - mictlan_p12b1_escape_enorme_mict (Failed)         cadenas compatibilidad p12b1
+	 88 - mictlan_p12b1_temporales (Failed)                 cadenas memoria p12b1
+	 89 - mictlan_p12b1_unicode_api (Failed)                cadenas p12b1 utf8
+	 90 - mictlan_p12b1_documentacion_lat (Failed)          cadenas compatibilidad p12b1
+	 91 - mictlan_p12b1_documentacion_mict (Failed)         cadenas compatibilidad p12b1
+	 93 - mictlan_p12b1_cadenas_io_historico (Failed)       cadenas historico memoria p12b1
+	 94 - mictlan_p12b1_concat_error (Failed)               cadenas memoria p12b1
+	 95 - mictlan_p12b2_dic_integridad_lat (Failed)         colecciones compatibilidad p12b2
+	 96 - mictlan_p12b2_dic_integridad_mict (Failed)        colecciones compatibilidad p12b2
+	 97 - mictlan_p12b2_dic_colisiones_lat (Failed)         colecciones compatibilidad p12b2
+	 98 - mictlan_p12b2_dic_colisiones_mict (Failed)        colecciones compatibilidad p12b2
+	 99 - mictlan_p12b2_listas_herencia_lat (Failed)        colecciones compatibilidad p12b2
+	100 - mictlan_p12b2_listas_herencia_mict (Failed)       colecciones compatibilidad p12b2
+	101 - mictlan_p12b2_referencias_lat (Failed)            colecciones compatibilidad p12b2
+	102 - mictlan_p12b2_referencias_mict (Failed)           colecciones compatibilidad p12b2
+	103 - mictlan_p12b2_comparacion_numerica_lat (Failed)   colecciones compatibilidad p12b2
+	104 - mictlan_p12b2_comparacion_numerica_mict (Failed)  colecciones compatibilidad p12b2
+	105 - mictlan_p12b2_unir_alias_lat (Failed)             colecciones compatibilidad p12b2
+	106 - mictlan_p12b2_unir_alias_mict (Failed)            colecciones compatibilidad p12b2
+	107 - mictlan_p12b2_union_larga_lat (Failed)            colecciones compatibilidad p12b2
+	108 - mictlan_p12b2_union_larga_mict (Failed)           colecciones compatibilidad p12b2
+	109 - mictlan_p12b2_dic_tipo_vacio_lat (Failed)         colecciones compatibilidad p12b2
+	110 - mictlan_p12b2_dic_tipo_vacio_mict (Failed)        colecciones compatibilidad p12b2
+	111 - mictlan_p12b2_indice_infinito_lat (Failed)        colecciones compatibilidad p12b2
+	112 - mictlan_p12b2_indice_infinito_mict (Failed)       colecciones compatibilidad p12b2
+	113 - mictlan_p12b2_insertar_nan_lat (Failed)           colecciones compatibilidad p12b2
+	114 - mictlan_p12b2_insertar_nan_mict (Failed)          colecciones compatibilidad p12b2
+	115 - mictlan_p12b2_crear_infinito_lat (Failed)         colecciones compatibilidad p12b2
+	116 - mictlan_p12b2_crear_infinito_mict (Failed)        colecciones compatibilidad p12b2
+	117 - mictlan_p12b2_crear_enorme_lat (Failed)           colecciones compatibilidad p12b2
+	118 - mictlan_p12b2_crear_enorme_mict (Failed)          colecciones compatibilidad p12b2
+	119 - mictlan_p12b2_eliminar_negativo_lat (Failed)      colecciones compatibilidad p12b2
+	120 - mictlan_p12b2_eliminar_negativo_mict (Failed)     colecciones compatibilidad p12b2
+	121 - mictlan_p12b2_insertar_negativo_lat (Failed)      colecciones compatibilidad p12b2
+	122 - mictlan_p12b2_insertar_negativo_mict (Failed)     colecciones compatibilidad p12b2
+	123 - mictlan_p12b2_insertar_exceso_lat (Failed)        colecciones compatibilidad p12b2
+	124 - mictlan_p12b2_insertar_exceso_mict (Failed)       colecciones compatibilidad p12b2
+	125 - mictlan_p12b2_comparar_nan_lat (Failed)           colecciones compatibilidad p12b2
+	126 - mictlan_p12b2_comparar_nan_mict (Failed)          colecciones compatibilidad p12b2
+	127 - mictlan_p12b2_union_tipo_lista_lat (Failed)       colecciones compatibilidad p12b2
+	128 - mictlan_p12b2_union_tipo_lista_mict (Failed)      colecciones compatibilidad p12b2
+	129 - mictlan_p12b2_union_tipo_separador_lat (Failed)   colecciones compatibilidad p12b2
+	130 - mictlan_p12b2_union_tipo_separador_mict (Failed)  colecciones compatibilidad p12b2
+	131 - mictlan_p12b2_dic_colisiones (Failed)             colecciones dic memoria p12b2
+	132 - mictlan_p12b2_dic_crecimiento (Failed)            colecciones dic memoria p12b2
+	133 - mictlan_p12b2_dic_compartidos (Failed)            colecciones dic memoria p12b2
+	134 - mictlan_p12b2_dic_recoleccion (Failed)            colecciones dic memoria p12b2
+	135 - mictlan_p12b2_ciclos (Failed)                     colecciones memoria p12b2
+	136 - mictlan_p12b2_union_argumentos (Failed)           colecciones memoria p12b2
+	137 - mictlan_p12b2_union_reserva (Failed)              colecciones memoria p12b2
+	138 - mictlan_p12b2_union_publicacion (Failed)          colecciones memoria p12b2
+	139 - mictlan_p12b2_copias (Failed)                     colecciones memoria p12b2
+	140 - mictlan_p12b2_profundidad (Failed)                colecciones memoria p12b2
+	141 - mictlan_p12b2_documentacion_lat (Failed)          colecciones compatibilidad p12b2
+	142 - mictlan_p12b2_documentacion_mict (Failed)         colecciones compatibilidad p12b2
+	145 - mictlan_p12b2_limites_lat (Failed)                colecciones compatibilidad p12b2
+	146 - mictlan_p12b2_limites_mict (Failed)               colecciones compatibilidad p12b2
+	147 - mictlan_p12b3_herencia_lat (Failed)               compatibilidad matematicas p12b3
+	148 - mictlan_p12b3_herencia_mict (Failed)              compatibilidad matematicas p12b3
+	149 - mictlan_p12b3_extremos_lat (Failed)               compatibilidad matematicas p12b3
+	150 - mictlan_p12b3_extremos_mict (Failed)              compatibilidad matematicas p12b3
+	151 - mictlan_p12b3_cero_lat (Failed)                   compatibilidad matematicas p12b3
+	152 - mictlan_p12b3_cero_mict (Failed)                  compatibilidad matematicas p12b3
+	153 - mictlan_p12b3_moderna_lat (Failed)                compatibilidad matematicas p12b3
+	154 - mictlan_p12b3_moderna_mict (Failed)               compatibilidad matematicas p12b3
+	155 - mictlan_p12b3_max_vacio_lat (Failed)              compatibilidad matematicas p12b3
+	156 - mictlan_p12b3_max_vacio_mict (Failed)             compatibilidad matematicas p12b3
+	157 - mictlan_p12b3_max_tipo_lat (Failed)               compatibilidad matematicas p12b3
+	158 - mictlan_p12b3_max_tipo_mict (Failed)              compatibilidad matematicas p12b3
+	159 - mictlan_p12b3_azar_negativo_lat (Failed)          compatibilidad matematicas p12b3
+	160 - mictlan_p12b3_azar_negativo_mict (Failed)         compatibilidad matematicas p12b3
+	161 - mictlan_p12b3_azar_no_finito_lat (Failed)         compatibilidad matematicas p12b3
+	162 - mictlan_p12b3_azar_no_finito_mict (Failed)        compatibilidad matematicas p12b3
+	163 - mictlan_p12b3_azar_grande_lat (Failed)            compatibilidad matematicas p12b3
+	164 - mictlan_p12b3_azar_grande_mict (Failed)           compatibilidad matematicas p12b3
+	165 - mictlan_p12b3_azar_aridad_lat (Failed)            compatibilidad matematicas p12b3
+	166 - mictlan_p12b3_azar_aridad_mict (Failed)           compatibilidad matematicas p12b3
+	167 - mictlan_p12b3_ldexp_infinito_lat (Failed)         compatibilidad matematicas p12b3
+	168 - mictlan_p12b3_ldexp_infinito_mict (Failed)        compatibilidad matematicas p12b3
+	169 - mictlan_p12b3_ldexp_grande_lat (Failed)           compatibilidad matematicas p12b3
+	170 - mictlan_p12b3_ldexp_grande_mict (Failed)          compatibilidad matematicas p12b3
+	171 - mictlan_p12b3_estricta_invalida_lat (Failed)      compatibilidad matematicas p12b3
+	172 - mictlan_p12b3_estricta_invalida_mict (Failed)     compatibilidad matematicas p12b3
+	173 - mictlan_p12b3_estricta_desborde_lat (Failed)      compatibilidad matematicas p12b3
+	174 - mictlan_p12b3_estricta_desborde_mict (Failed)     compatibilidad matematicas p12b3
+	175 - mictlan_p12b3_estricta_subdesborde_lat (Failed)   compatibilidad matematicas p12b3
+	176 - mictlan_p12b3_estricta_subdesborde_mict (Failed)  compatibilidad matematicas p12b3
+	177 - mictlan_p12b3_estricta_tipo_lat (Failed)          compatibilidad matematicas p12b3
+	178 - mictlan_p12b3_estricta_tipo_mict (Failed)         compatibilidad matematicas p12b3
+	179 - mictlan_p12b3_entero_fraccion_lat (Failed)        compatibilidad matematicas p12b3
+	180 - mictlan_p12b3_entero_fraccion_mict (Failed)       compatibilidad matematicas p12b3
+	181 - mictlan_p12b3_entero_orden_lat (Failed)           compatibilidad matematicas p12b3
+	182 - mictlan_p12b3_entero_orden_mict (Failed)          compatibilidad matematicas p12b3
+	183 - mictlan_p12b3_semilla_fraccion_lat (Failed)       compatibilidad matematicas p12b3
+	184 - mictlan_p12b3_semilla_fraccion_mict (Failed)      compatibilidad matematicas p12b3
+	185 - mictlan_p12b3_binario_infinito_lat (Failed)       compatibilidad matematicas p12b3
+	186 - mictlan_p12b3_binario_infinito_mict (Failed)      compatibilidad matematicas p12b3
+	187 - mictlan_p12b3_raiz_dominio_lat (Failed)           compatibilidad matematicas p12b3
+	188 - mictlan_p12b3_raiz_dominio_mict (Failed)          compatibilidad matematicas p12b3
+	189 - mictlan_p12b3_log_dominio_lat (Failed)            compatibilidad matematicas p12b3
+	190 - mictlan_p12b3_log_dominio_mict (Failed)           compatibilidad matematicas p12b3
+	191 - mictlan_p12b3_potencia_dominio_lat (Failed)       compatibilidad matematicas p12b3
+	192 - mictlan_p12b3_potencia_dominio_mict (Failed)      compatibilidad matematicas p12b3
+	193 - mictlan_p12b3_potencia_desborde_lat (Failed)      compatibilidad matematicas p12b3
+	194 - mictlan_p12b3_potencia_desborde_mict (Failed)     compatibilidad matematicas p12b3
+	195 - mictlan_p12b3_potencia_subdesborde_lat (Failed)   compatibilidad matematicas p12b3
+	196 - mictlan_p12b3_potencia_subdesborde_mict (Failed)  compatibilidad matematicas p12b3
+	197 - mictlan_p12b3_predicado_tipo_lat (Failed)         compatibilidad matematicas p12b3
+	198 - mictlan_p12b3_predicado_tipo_mict (Failed)        compatibilidad matematicas p12b3
+	199 - mictlan_p12b3_no_finitos_c (Failed)               contratos matematicas p12b3
+	200 - mictlan_p12b3_extremos_c (Failed)                 contratos matematicas p12b3
+	201 - mictlan_p12b3_conversion_c (Failed)               contratos matematicas p12b3
+	202 - mictlan_p12b3_herencia_c (Failed)                 contratos matematicas p12b3
+	203 - mictlan_p12b3_precision_c (Failed)                contratos matematicas p12b3
+	204 - mictlan_p12b3_binario_c (Failed)                  contratos matematicas p12b3
+	205 - mictlan_p12b3_azar_c (Failed)                     contratos matematicas p12b3
+	206 - mictlan_p12b3_estricto_c (Failed)                 contratos matematicas p12b3
+	207 - mictlan_p12b3_dominio_c (Failed)                  contratos matematicas p12b3
+	208 - mictlan_p12b3_recuperacion_c (Failed)             contratos matematicas p12b3
+	209 - mictlan_p12b3_sdk_c (Failed)                      contratos matematicas p12b3
+	210 - mictlan_p12b3_temporales_c (Failed)               contratos matematicas p12b3
+	211 - mictlan_p12b3_azar_rechazo (Failed)               azar matematicas p12b3
+	212 - mictlan_alpha_recompilacion (Failed)              alpha memoria
+	213 - mictlan_p11_pila (Failed)                         p11 pila
+	214 - mictlan_p11_gc_cadenas (Failed)                   memoria p11
+	215 - mictlan_alpha_agotamiento (Failed)                alpha memoria
+	216 - mictlan_p02g_ciclos (Failed)                      memoria p02g
+	217 - mictlan_p02g_raices (Failed)                      memoria p02g
+	218 - mictlan_p02g_errores (Failed)                     memoria p02g
+	219 - mictlan_p02g_opacos (Failed)                      memoria p02g
+	220 - mictlan_formato (Failed)
+	221 - mictlan_cli_expresion_larga (Failed)
+	222 - mictlan_p02g_generativo (Failed)                  bytecode memoria p02g parser
+	223 - mictlan_pila_directa (Failed)                     p02e pila recuperacion
+	224 - mictlan_pila_anidada (Failed)                     p02e pila recuperacion
+	225 - mictlan_pila_prefijo (Failed)                     p02e pila recuperacion
+	226 - mictlan_pila_anidada_prefijo (Failed)             p02e pila recuperacion
+	227 - mictlan_pila_prestados (Failed)                   p02e pila recuperacion
+	228 - mictlan_pila_reentrada (Failed)                   p02e pila recuperacion
+	229 - mictlan_pila_propagar (Failed)                    p02e pila recuperacion
+	230 - mictlan_pila_consumido (Failed)                   p02e pila recuperacion
+	231 - mictlan_pila_exito (Failed)                       p02e pila recuperacion
+	232 - coverage (Failed)
+	233 - mictlan_marcos_funcion (Failed)
+	234 - mictlan_memoria_listas_referencias (Failed)
+	235 - mictlan_memoria_propiedad_numerica_asan (Failed)
+	236 - mictlan_memoria_propiedad_anidada_asan (Failed)
+	237 - mictlan_memoria_insercion_basica_asan (Failed)
+	238 - mictlan_memoria_insercion_limites_asan (Failed)
+	239 - mictlan_memoria_elemento_repetido_asan (Failed)
+	240 - mictlan_memoria_recurso_compartido_asan (Failed)
+	241 - mictlan_memoria_recurso_lista_real_asan (Failed)
+	242 - mictlan_memoria_autoextension_asan (Failed)
+	243 - mictlan_memoria_recurso_elemento_compartido_asan (Failed)
+	244 - mictlan_memoria_lista_recursos_asan (Failed)
+	245 - mictlan_memoria_lista_recursos_reemplazo_asan (Failed)
+	246 - mictlan_memoria_dos_contenedores_asan (Failed)
+	247 - mictlan_p02f_compartidos (Failed)                 contrato memoria p02f
+	248 - mictlan_p02f_anidados (Failed)                    contrato memoria p02f
+	249 - mictlan_p02f_diccionarios (Failed)                contrato memoria p02f
+	250 - mictlan_p02f_ciclo_lista (Failed)                 contrato memoria p02f
+	251 - mictlan_p02f_ciclo_mixto (Failed)                 contrato memoria p02f
+	252 - mictlan_p02f_extraer (Failed)                     contrato memoria p02f
+	253 - mictlan_p02f_reasignar (Failed)                   contrato memoria p02f
+	254 - mictlan_p02f_clonar_mixto (Failed)                contrato memoria p02f
+	255 - mictlan_p02f_error (Failed)                       contrato memoria p02f
+	256 - mictlan_p02f_ffi (Failed)                         contrato memoria p02f
+	257 - mictlan_p02f_clonar_ciclo (Failed)                contrato memoria p02f
+	258 - mictlan_p02f_control_numero_asan (Failed)         diagnostico memoria p02f
+	259 - mictlan_p02f_lista_simple_asan (Failed)           diagnostico memoria p02f
+	260 - mictlan_p02f_sustitucion_asan (Failed)            diagnostico memoria p02f
+	261 - mictlan_p02f_alias_asan (Failed)                  diagnostico memoria p02f
+Errors while running CTest

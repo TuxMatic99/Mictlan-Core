@@ -1,0 +1,3 @@
+poner(anumero_estricto(0))
+poner(anumero_estricto("0"))
+poner(anumero_estricto("-0"))

@@ -275,15 +275,58 @@ static void base_alogico(lat_mv *mv) {
 }
 
 static void base_anumero(lat_mv *mv) {
-    // FIXME: Error cuando la cadena contiene separadores de miles (,)
     lat_objeto *o = latC_desapilar(mv);
-    double var = latC_adouble(mv, o);
-    if (!var) {
-        latC_apilar(mv, latO_nulo);
+    /* Contrato historico confirmado por tests/alpha/semantica: cero -> nulo.
+       La alternativa explicita anumero_estricto distingue cero de error. */
+    double x = latC_adouble(mv, o);
+    if (!x) latC_apilar(mv, latO_nulo);
+    else latC_apilar_double(mv, x);
+}
+
+static bool numero_espacio(unsigned char c) {
+    return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v';
+}
+static bool numero_digito(unsigned char c) { return c >= '0' && c <= '9'; }
+static void base_anumero_estricto(lat_mv *mv) {
+    lat_objeto *o = latC_desapilar(mv);
+    double x;
+    bool mantisa_no_cero = false;
+    if (o->tipo == T_NUMERIC) x = getNumerico(o);
+    else if (o->tipo == T_STR) {
+        const char *inicio = latC_checar_cadena(mv, o), *p = inicio;
+        while (numero_espacio((unsigned char)*p)) ++p;
+        if (*p == '+' || *p == '-') ++p;
+        bool digitos = false;
+        while (numero_digito((unsigned char)*p)) {
+            digitos = true; mantisa_no_cero |= *p != '0'; ++p;
+        }
+        if (*p == '.') {
+            ++p;
+            while (numero_digito((unsigned char)*p)) {
+                digitos = true; mantisa_no_cero |= *p != '0'; ++p;
+            }
+        }
+        if (!digitos) latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
+        if (*p == 'e' || *p == 'E') {
+            ++p; if (*p == '+' || *p == '-') ++p;
+            if (!numero_digito((unsigned char)*p))
+                latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
+            while (numero_digito((unsigned char)*p)) ++p;
+        }
+        const char *fin_numero = p;
+        while (numero_espacio((unsigned char)*p)) ++p;
+        if (*p) latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
+        char *fin;
+        x = latC_strtod_c(inicio, &fin);
+        if (fin != fin_numero)
+            latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
+    } else {
+        latC_error(mv, "Conversion numerica estricta: tipo invalido");
         return;
     }
-    lat_objeto *tmp = latC_crear_numerico(mv, var);
-    latC_apilar(mv, tmp);
+    if (!isfinite(x) || (x == 0 && mantisa_no_cero))
+        latC_error(mv, "Conversion numerica estricta: fuera de rango");
+    latC_apilar_double(mv, x);
 }
 
 static void base_acadena(lat_mv *mv) {
@@ -312,6 +355,7 @@ static const lat_CReg libbase[] = {
     {"imprimir", base_poner, 1},
     {"acadena", base_acadena, 1},
     {"anumero", base_anumero, 1},
+    {"anumero_estricto", base_anumero_estricto, 1},
     {"alogico", base_alogico, 1},
     {"incluir", base_incluir, 1},
     {"leer", base_leer, 0},
