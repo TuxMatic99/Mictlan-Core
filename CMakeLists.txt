@@ -49,6 +49,7 @@ add_subdirectory(src)
 
 enable_testing()
 include(tests/alpha/registrar.cmake)
+include(tests/conformidad/registrar.cmake)
 add_executable(mictlan_test_recompilacion tests/alpha/recompilacion.c)
 target_link_libraries(mictlan_test_recompilacion PRIVATE liblatino)
 target_include_directories(mictlan_test_recompilacion PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")

@@ -1,0 +1,22 @@
+x = 2
+x += 3 * 4
+escribir(x)
+x -= 2
+x *= 3
+x /= 4
+x %= 5
+escribir(x)
+texto = "a"
+texto ..= "b"
+escribir(texto)
+a, b = 1, 2
+a, b = b, a
+escribir(a)
+escribir(b)
+a, b, c = 7, 8
+escribir(c)
+a, b = 10, 11, 12
+escribir(a)
+escribir(b)
+x = "otro tipo"
+escribir(x)

@@ -1,0 +1,6 @@
+funcion rama(n)
+    escribir(n)
+    retorno n * 10
+fin
+escribir(verdadero ? rama(1) : rama(2))
+escribir(falso ? rama(3) : rama(4))

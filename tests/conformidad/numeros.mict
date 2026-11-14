@@ -1,0 +1,12 @@
+# Todos los literales son numericos; 5/2 conserva la fraccion.
+escribir(5.25)
+escribir(.25)
+escribir(5.25e1)
+escribir(525e-2)
+escribir(5 / 2)
+escribir(5.25 + .75)
+escribir(-5 % 2)
+escribir(2 ^ -2)
+escribir(tipo(5))
+escribir(tipo(5.25))
+escribir(0.1 + 0.2 == 0.3)

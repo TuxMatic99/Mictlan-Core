@@ -1,0 +1,5 @@
+funcion crear()
+    local_privada = 5
+fin
+crear()
+escribir(local_privada)
