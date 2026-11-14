@@ -1,10 +1,11 @@
-name: Conformidad P1.2-A
+name: Conformidad Core
 
 on:
   pull_request:
   push:
     branches:
       - 'investigacion/p12a-*'
+      - 'investigacion/p12b1-*'
 
 permissions:
   contents: read
@@ -56,13 +57,18 @@ jobs:
         run: cmake --build build --parallel 2 2>&1 | tee build.log
       - name: Ejecutar todas las pruebas existentes y nuevas
         run: ctest --test-dir build --output-on-failure --output-junit resultados.xml
+      - name: Medir cadenas en Release
+        if: matrix.perfil == 'Release'
+        run: python3 tests/cadenas/medir.py ./build/mictlan_bench_cadenas > benchmark-cadenas.csv
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: p12a-${{ matrix.perfil }}
+          name: core-${{ matrix.perfil }}
           path: |
             configure.log
             build.log
             build/Testing/
             build/resultados.xml
             build/conformidad/
+            build/cadenas/
+            benchmark-cadenas.csv

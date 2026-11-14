@@ -33,3 +33,9 @@ La distribución de referencia de esta Alpha es Debian 13 x86_64. El SDK gráfic
 [Guía para estudiantes](docs/P12A_PRIMEROS_PASOS.md) ·
 [Pruebas de conformidad](tests/conformidad/README.md) ·
 [Verificación en Debian](docs/P12A_VERIFICAR_DEBIAN.md).
+
+## Biblioteca de cadenas P1.2-B1
+
+[Informe](docs/P12B1_INFORME.md) · [Inventario completo](docs/P12B1_INVENTARIO.md) ·
+[Referencia con ejemplos](docs/CADENAS.md) · [API explícita](docs/P12B1_API_TEXTO.md) ·
+[Pruebas](tests/cadenas/README.md) · [Verificación en Debian](docs/P12B1_VERIFICAR_DEBIAN.md).

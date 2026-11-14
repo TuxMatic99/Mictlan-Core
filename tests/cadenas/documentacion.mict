@@ -1,0 +1,81 @@
+# Ejemplos de la referencia, con oraculos independientes de Core.
+# cadena.char
+escribir(cadena.char([65, 0, 66]))
+# cadena.bytes
+escribir(cadena.bytes("AB"))
+# cadena.esta_vacia
+escribir(cadena.esta_vacia(""))
+# cadena.longitud
+escribir(cadena.longitud("niño"))
+# cadena.minusculas
+escribir(cadena.minusculas("HOLA"))
+# cadena.mayusculas
+escribir(cadena.mayusculas("hola"))
+# cadena.recortar
+escribir("[" .. cadena.recortar("  hola\t") .. "]")
+# cadena.es_numerico
+escribir(cadena.es_numerico("5.25"))
+# cadena.es_numero
+escribir(cadena.es_numero("5.25"))
+# cadena.es_alfa
+escribir(cadena.es_alfa("abc123"))
+# cadena.invertir
+escribir(cadena.invertir("abc"))
+# cadena.ejecutar
+cadena.ejecutar("escribir(42)")
+# cadena.concatenar
+escribir(cadena.concatenar("a", 4))
+# cadena.comparar
+escribir(cadena.comparar("a", "z") < 0)
+# cadena.contiene
+escribir(cadena.contiene("mañana", "ña"))
+# cadena.termina_con
+escribir(cadena.termina_con("mañana", "na"))
+# cadena.es_igual
+escribir(cadena.es_igual("é", "é"))
+# cadena.indice
+escribir(cadena.indice("niño", "o"))
+# cadena.encontrar
+escribir(cadena.encontrar("niño", "o"))
+# cadena.ultimo_indice
+escribir(cadena.ultimo_indice("ababa", "aba"))
+# cadena.eliminar
+escribir(cadena.eliminar("aaaa", "aa"))
+# cadena.separar
+escribir(cadena.separar("a::b:c", "::"))
+# cadena.inicia_con
+escribir(cadena.inicia_con("mañana", "ma"))
+# cadena.regexl
+escribir(cadena.regexl("abc", "^a"))
+# cadena.regex
+escribir(cadena.regex("aba", "a"))
+# cadena.insertar
+escribir(cadena.insertar("abc", "X", -1))
+# cadena.rellenar_izquierda
+escribir(cadena.rellenar_izquierda("ab", "x", 4))
+# cadena.rellenar_derecha
+escribir(cadena.rellenar_derecha("ab", "x", 4))
+# cadena.reemplazar
+escribir(cadena.reemplazar("aaaa", "a", "x", 2))
+# cadena.subcadena
+escribir(cadena.subcadena("abcd", 1, 2))
+# cadena.formato
+escribir(cadena.formato("%s:%i", "hola", 42))
+# cadena.longitud_bytes
+escribir(cadena.longitud_bytes("niño"))
+# cadena.longitud_unicode
+escribir(cadena.longitud_unicode("é"))
+# cadena.invertir_unicode
+escribir(cadena.invertir_unicode("año😀"))
+# cadena.subcadena_unicode
+escribir(cadena.subcadena_unicode("mañana", 1, 3))
+# cadena.indice_unicode
+escribir(cadena.indice_unicode("niño", "o"))
+# cadena.separar_texto
+escribir(cadena.separar_texto("::a::::", "::"))
+# cadena.separar_delimitadores
+escribir(cadena.separar_delimitadores("a,,b;c,", ",;"))
+# cadena.mayusculas_ascii
+escribir(cadena.mayusculas_ascii("mañana"))
+# cadena.minusculas_ascii
+escribir(cadena.minusculas_ascii("MAÑANA"))

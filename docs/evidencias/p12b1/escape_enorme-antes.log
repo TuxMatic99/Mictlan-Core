@@ -1,0 +1,14 @@
+exit=1
+<trabajo>/mictlan-core/src/latstrlib.c:109:43: runtime error: signed integer overflow: 999999999 * 10 cannot be represented in type 'int'
+    #0 0x5621ad5af5af in analizar_fmt <trabajo>/mictlan-core/src/latstrlib.c:109
+    #1 0x5621ad5b3398 in str_reemplazar <trabajo>/mictlan-core/src/latstrlib.c:558
+    #2 0x5621ad582a5d in ejecutar_funcion <trabajo>/mictlan-core/src/latmv.c:2751
+    #3 0x5621ad582b44 in latMV_funcion_correr <trabajo>/mictlan-core/src/latmv.c:2765
+    #4 0x5621ad5791d8 in latMV_call_function <trabajo>/mictlan-core/src/latmv.c:1080
+    #5 0x5621ad57fb77 in ejecutar_funcion <trabajo>/mictlan-core/src/latmv.c:2300
+    #6 0x5621ad582b44 in latMV_funcion_correr <trabajo>/mictlan-core/src/latmv.c:2765
+    #7 0x5621ad51bbe7 in latC_llamar_funcion <trabajo>/mictlan-core/src/latdo.c:1171
+    #8 0x5621ad5bb83e in main <trabajo>/mictlan-core/src/latino.c:158
+    #9 0x7f194a96eca7  (/lib/x86_64-linux-gnu/libc.so.6+0x29ca7) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
+    #10 0x7f194a96ed64 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29d64) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
+    #11 0x5621ad4eda30 in _start (<trabajo>/build-p12a-asan/mictlan+0x158a30) (BuildId: 2eb122844a3c871dd4fc853550ff8b2051ef1e10)

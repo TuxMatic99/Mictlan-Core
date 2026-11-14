@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "latmem.h"
 #include "latpropiedad.h"
 #include <limits.h>
+#include <stdint.h>
 
 #define LIB_CADENA_NAME "cadena"
 
@@ -199,7 +200,8 @@ char *logico_acadena(int i) {
 }
 
 bool inicia_con(const char *base, const char *str) {
-    return (strstr(base, str) - base) == 0;
+    /* strstr puede devolver NULL: no restar punteros sin coincidencia. */
+    return strncmp(base, str, strlen(str)) == 0;
 }
 
 bool termina_con(char *base, char *str) {
@@ -230,119 +232,104 @@ int intercambiar_pos(char *base, char *str, int startIndex) {
 int pos(char *base, char *str) { return intercambiar_pos(base, str, 0); }
 
 int ultima_pos(char *base, char *str) {
-    int result;
-    if (strlen(str) > strlen(base)) {
-        result = -1;
-    } else {
-        int start = 0;
-        int endinit = strlen(base) - strlen(str);
-        int end = endinit;
-        int endtmp = endinit;
-        while (start != end) {
-            start = intercambiar_pos(base, str, start);
-            end = intercambiar_pos(base, str, end);
-            if (start == -1) {
-                end = -1;
-            } else if (end == -1) {
-                if (endtmp == (start + 1)) {
-                    end = start;
-                } else {
-                    end = endtmp - (endtmp - start) / 2;
-                    if (end <= start) {
-                        end = start + 1;
-                    }
-                    endtmp = end;
-                }
-            } else {
-                start = end;
-                end = endinit;
-            }
-        }
-        result = start;
+    if (!*str) return (int)strlen(base);
+    const char *p = base, *hallada;
+    int ultima = -1;
+    while ((hallada = strstr(p, str)) != NULL) {
+        ultima = (int)(hallada - base);
+        p = hallada + 1; /* Conservar coincidencias solapadas. */
     }
-    return result;
+    return ultima;
 }
 
 char *insertar(char *dest, char *src, int pos) {
-    int srclen = strlen(src);
-    int dstlen = strlen(dest);
+    size_t a = strlen(dest), b = strlen(src);
     if (pos < 0) {
-        pos = dstlen + pos;
+        if ((size_t)(-(long long)pos) > a) return NULL;
+        pos = (int)(a + pos);
     }
-    if (pos > dstlen) {
-        pos = dstlen;
+    size_t inicio = (size_t)pos > a ? a : (size_t)pos;
+    if (b > SIZE_MAX - a - 1) return NULL;
+    char *ret = malloc(a + b + 1);
+    if (!ret) return NULL;
+    memcpy(ret, dest, inicio);
+    memcpy(ret + inicio, src, b);
+    memcpy(ret + inicio + b, dest + inicio, a - inicio + 1);
+    return ret;
+}
+
+static char *rellenar_bytes(char *base, char *c, int n, bool izquierda) {
+    if (n < 0) return NULL;
+    size_t len = strlen(base), unidad = strlen(c);
+    /* La repeticion incluye el desfase historico de uno. */
+    size_t rep = (size_t)n >= len ? (size_t)n - len + 1 : 0;
+    if (unidad && rep > (SIZE_MAX - len - 1) / unidad) return NULL;
+    size_t relleno = rep * unidad;
+    char *ret = malloc(len + relleno + 1);
+    if (!ret) return NULL;
+    size_t offset = izquierda ? 0 : len;
+    if (!izquierda) memcpy(ret, base, len);
+    if (unidad) for (size_t i = 0; i < rep; ++i) {
+        memcpy(ret + offset, c, unidad);
+        offset += unidad;
     }
-    char *m = malloc(srclen + dstlen + 1);
-    memcpy(m, dest, pos);
-    memcpy(m + pos, src, srclen);
-    memcpy(m + pos + srclen, dest + pos, dstlen - pos + 1);
-    return m;
+    if (izquierda) memcpy(ret + relleno, base, len);
+    ret[len + relleno] = '\0';
+    return ret;
 }
 
 char *rellenar_izquierda(char *base, char *c, int n) {
-    int len = strlen(base);
-    char *ret = malloc(len + n + 1);
-
-    strcpy(ret, "");
-
-    int i, final = len - 1;
-    for (i = 0; i < (n - final); i++) {
-        ret = strcat(ret, c);
-    }
-    ret = strcat(ret, base);
-    return ret;
+    return rellenar_bytes(base, c, n, true);
 }
 
 char *rellenar_derecha(char *base, char *c, int n) {
-    int len = strlen(base);
-    char *ret = malloc(len + n + 1);
-    strcpy(ret, base);
-    int i, final = len - 1;
-    for (i = 0; i < (n - final); i++) {
-        ret = strcat(ret, c);
-    }
-    return ret;
+    return rellenar_bytes(base, c, n, false);
 }
 
 char *reemplazar(char *o_string, char *s_string, char *r_string) {
-    char *buffer = malloc(MAX_STR_LENGTH);
-    char *ch;
-    if (!(ch = strstr(o_string, s_string))) {
-        strcpy(buffer, o_string);
-        return buffer;
+    const char *hit = strstr(o_string, s_string);
+    size_t original = strlen(o_string), patron = strlen(s_string), nuevo = strlen(r_string);
+    size_t prefijo = hit ? (size_t)(hit - o_string) : original;
+    size_t resto = hit ? original - prefijo - patron : 0;
+    if (hit && nuevo > SIZE_MAX - prefijo - resto - 1) return NULL;
+    size_t len = hit ? prefijo + nuevo + resto : original;
+    char *ret = malloc(len + 1);
+    if (!ret) return NULL;
+    memcpy(ret, o_string, prefijo);
+    if (hit) {
+        memcpy(ret + prefijo, r_string, nuevo);
+        memcpy(ret + prefijo + nuevo, hit + patron, resto);
     }
-    strncpy(buffer, o_string, ch - o_string);
-    buffer[ch - o_string] = 0;
-    sprintf(buffer + (ch - o_string), "%s%s", r_string, ch + strlen(s_string));
-    return buffer;
+    ret[len] = '\0';
+    return ret;
 }
 
 char *subcadena(const char *str, int beg, int n) {
-    char *ret = malloc(n + 1);
-    strncpy(ret, (str + beg), n);
-    *(ret + n) = 0;
+    size_t len = strlen(str);
+    if (beg < 0 || n < 0 || (size_t)beg > len) return NULL;
+    size_t cantidad = (size_t)n < len - (size_t)beg ? (size_t)n : len - (size_t)beg;
+    char *ret = malloc(cantidad + 1);
+    if (!ret) return NULL;
+    memcpy(ret, str + beg, cantidad);
+    ret[cantidad] = '\0';
     return ret;
 }
 
 char *minusculas(const char *str) {
-    int i = 0;
-    int len = strlen(str);
+    size_t len = strlen(str);
     char *ret = malloc(len + 1);
-    for (i = 0; i < len; i++) {
-        ret[i] = tolower(str[i]);
-    }
-    ret[len] = 0;
+    if (!ret) return NULL;
+    for (size_t i = 0; i < len; ++i) ret[i] = (char)tolower((unsigned char)str[i]);
+    ret[len] = '\0';
     return ret;
 }
 
 char *mayusculas(const char *str) {
-    int i = 0;
-    int len = strlen(str);
+    size_t len = strlen(str);
     char *ret = malloc(len + 1);
-    for (i = 0; i < len; i++) {
-        ret[i] = toupper(str[i]);
-    }
-    ret[len] = 0;
+    if (!ret) return NULL;
+    for (size_t i = 0; i < len; ++i) ret[i] = (char)toupper((unsigned char)str[i]);
+    ret[len] = '\0';
     return ret;
 }
 
@@ -362,20 +349,47 @@ char *quitar_espacios(const char *str) {
 
 lat_cadena *latO_cadenaNueva(lat_mv *mv, const char *str, size_t l);
 
+/* Validar antes de reservar: latC_error abandona el marco mediante longjmp. */
+static int cadena_entero(lat_mv *mv, lat_objeto *o) {
+    double valor = latC_checar_numerico(mv, o);
+    if (!isfinite(valor) || valor < INT_MIN || valor > INT_MAX)
+        latC_error(mv, "Numero fuera de rango para cadena");
+    return (int)valor; /* Truncamiento heredado hacia cero. */
+}
+
+static void cadena_publicar(lat_mv *mv, char *buffer) {
+    if (!buffer) { latC_error(mv, "Memoria virtual agotada"); return; }
+    latC_apilar_string(mv, buffer); /* La VM interna una copia, no toma el buffer. */
+    free(buffer);
+}
+
+static const char *cadena_texto_prestado(const lat_objeto *o, char **propio,
+                                         const char **error) {
+    if (o->tipo == T_STR || o->tipo == T_LABEL) return getstr(getCadena(o));
+    *propio = latP_texto(o, error);
+    return *propio;
+}
+
 void str_concatenar(lat_mv *mv) {
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    char *s1 = latC_astring(mv, a);
-    char *s2 = latC_astring(mv, b);
-    int len = strlen(s1) + strlen(s2) + 1;
-    char *s3 = calloc(1, len);
-    strcat(s3, s1);
-    strcat(s3, s2);
-    s3[len - 1] = '\0';
-    latC_apilar_string(mv, s3);
-    free(s1);
-    free(s2);
-    free(s3);
+    lat_objeto *b = latC_desapilar(mv), *a = latC_desapilar(mv);
+    char *propio_a = NULL, *propio_b = NULL;
+    const char *error = NULL;
+    const char *s1 = cadena_texto_prestado(a, &propio_a, &error);
+    const char *s2 = s1 ? cadena_texto_prestado(b, &propio_b, &error) : NULL;
+    if (!s1 || !s2) {
+        free(propio_a); free(propio_b);
+        latC_error(mv, "%s", error ? error : "Error al representar objeto");
+        return;
+    }
+    size_t n1 = strlen(s1), n2 = strlen(s2);
+    if (n2 > SIZE_MAX - n1 - 1) {
+        free(propio_a); free(propio_b);
+        latC_error(mv, "Resultado de concatenacion demasiado largo"); return;
+    }
+    char *ret = malloc(n1 + n2 + 1);
+    if (ret) { memcpy(ret, s1, n1); memcpy(ret + n1, s2, n2 + 1); }
+    free(propio_a); free(propio_b);
+    cadena_publicar(mv, ret);
 }
 
 void str_comparar(lat_mv *mv) {
@@ -438,13 +452,12 @@ void str_indice(lat_mv *mv) {
 }
 
 void str_insertar(lat_mv *mv) {
-    lat_objeto *c = latC_desapilar(mv);
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    char *buf = insertar(latC_checar_cadena(mv, a), latC_checar_cadena(mv, b),
-                         latC_checar_numerico(mv, c));
-    lat_objeto *tmp = latC_crear_cadena(mv, buf);
-    latC_apilar(mv, tmp);
+    lat_objeto *c = latC_desapilar(mv), *b = latC_desapilar(mv), *a = latC_desapilar(mv);
+    const char *base = latC_checar_cadena(mv, a), *texto = latC_checar_cadena(mv, b);
+    int posicion = cadena_entero(mv, c);
+    if (posicion < 0 && (size_t)(-(long long)posicion) > strlen(base))
+        latC_error(mv, "Indice de cadena fuera de rango");
+    cadena_publicar(mv, insertar((char *)base, (char *)texto, posicion));
 }
 
 void str_ultimo_indice(lat_mv *mv) {
@@ -456,34 +469,25 @@ void str_ultimo_indice(lat_mv *mv) {
 }
 
 void str_rellenar_izquierda(lat_mv *mv) {
-    lat_objeto *c = latC_desapilar(mv);
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    char *buf =
-        rellenar_izquierda(latC_checar_cadena(mv, a), latC_checar_cadena(mv, b),
-                           latC_checar_numerico(mv, c));
-    lat_objeto *tmp = latC_crear_cadena(mv, buf);
-    latC_apilar(mv, tmp);
+    lat_objeto *c = latC_desapilar(mv), *b = latC_desapilar(mv), *a = latC_desapilar(mv);
+    char *base = latC_checar_cadena(mv, a), *texto = latC_checar_cadena(mv, b);
+    int n = cadena_entero(mv, c);
+    if (n < 0) latC_error(mv, "Longitud de cadena fuera de rango");
+    cadena_publicar(mv, rellenar_izquierda(base, texto, n));
 }
 
 void str_rellenar_derecha(lat_mv *mv) {
-    lat_objeto *c = latC_desapilar(mv);
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    char *buf =
-        rellenar_derecha(latC_checar_cadena(mv, a), latC_checar_cadena(mv, b),
-                         latC_checar_numerico(mv, c));
-    lat_objeto *tmp = latC_crear_cadena(mv, buf);
-    latC_apilar(mv, tmp);
+    lat_objeto *c = latC_desapilar(mv), *b = latC_desapilar(mv), *a = latC_desapilar(mv);
+    char *base = latC_checar_cadena(mv, a), *texto = latC_checar_cadena(mv, b);
+    int n = cadena_entero(mv, c);
+    if (n < 0) latC_error(mv, "Longitud de cadena fuera de rango");
+    cadena_publicar(mv, rellenar_derecha(base, texto, n));
 }
 
 void str_eliminar(lat_mv *mv) {
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    char *buf = latC_checar_cadena(mv, a);
-    char *res = reemplazar(buf, latC_checar_cadena(mv, b), "");
-    lat_objeto *tmp = latC_crear_cadena(mv, res);
-    latC_apilar(mv, tmp);
+    lat_objeto *b = latC_desapilar(mv), *a = latC_desapilar(mv);
+    char *base = latC_checar_cadena(mv, a), *patron = latC_checar_cadena(mv, b);
+    cadena_publicar(mv, reemplazar(base, patron, ""));
 }
 
 void str_esta_vacia(lat_mv *mv) {
@@ -505,64 +509,70 @@ void str_longitud(lat_mv *mv) {
 }
 
 static char *reemplazar_lat(char *orig, char *rep, char *with, int veces) {
-    char *result, *ins, *tmp;
-    int len_rep, len_with, len_front, count;
-    if (!orig && !rep) {
-        return NULL;
-    };
-    len_rep = strlen(rep);
-    if (len_rep == 0) {
-        return NULL;
-    };
-    if (!with) {
-        with = "";
-    };
-    len_with = strlen(with);
-    ins = orig;
-    for (count = 0; (tmp = strstr(ins, rep)) != NULL; ++count) {
-        if (veces != 0) {
-            if (count == veces) {
-                break;
-            };
-        };
-        ins = tmp + len_rep;
+    size_t len = strlen(orig), patron = strlen(rep), nuevo = strlen(with), count = 0;
+    if (!patron) return NULL;
+    const char *p = orig, *hit;
+    while ((hit = strstr(p, rep)) != NULL && (veces <= 0 || count < (size_t)veces)) {
+        ++count;
+        p = hit + patron;
     }
-    tmp = result = malloc(strlen(orig) + (len_with - len_rep) * count + 1);
-    if (!result) {
-        return NULL;
+    size_t total;
+    if (nuevo >= patron) {
+        size_t delta = nuevo - patron;
+        if (delta && count > (SIZE_MAX - len - 1) / delta) return NULL;
+        total = len + count * delta;
+    } else total = len - count * (patron - nuevo);
+    char *ret = malloc(total + 1), *dest = ret;
+    if (!ret) return NULL;
+    p = orig;
+    for (size_t i = 0; i < count; ++i) {
+        hit = strstr(p, rep);
+        size_t prefijo = (size_t)(hit - p);
+        memcpy(dest, p, prefijo); dest += prefijo;
+        memcpy(dest, with, nuevo); dest += nuevo;
+        p = hit + patron;
     }
-    while (count--) {
-        ins = strstr(orig, rep);
-        len_front = ins - orig;
-        tmp = strncpy(tmp, orig, len_front) + len_front;
-        tmp = strcpy(tmp, with) + len_with;
-        orig += len_front + len_rep; // move to next "end of rep"
+    memcpy(dest, p, strlen(p) + 1);
+    return ret;
+}
+
+/* El lector historico de escapes forma parte del parser. No se cambia aqui:
+   se excluyen sus entradas sin contrato seguro antes de reservar temporales. */
+static void cadena_validar_escapes(lat_mv *mv, const char *s) {
+    for (size_t i = 0; s[i]; ++i) {
+        if (s[i] != '\\' || !s[i + 1]) continue;
+        ++i;
+        if (s[i] == 'u') latC_error(mv, "Escape Unicode no admitido en reemplazar");
+        if (s[i] >= '0' && s[i] <= '9') {
+            unsigned valor = 0;
+            do {
+                unsigned d = (unsigned)(s[i] - '0');
+                if (valor > ((unsigned)INT_MAX - d) / 10)
+                    latC_error(mv, "Escape numerico fuera de rango");
+                valor = valor * 10 + d;
+                ++i;
+            } while (s[i] >= '0' && s[i] <= '9');
+            --i;
+        }
     }
-    strcpy(tmp, orig);
-    return result;
 }
 
 void str_reemplazar(lat_mv *mv) {
-    lat_objeto *d = latC_desapilar(mv);
-    lat_objeto *c = latC_desapilar(mv);
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    int num = 0;
-    if (d->tipo != T_NULL) {
-        if (d->tipo != T_NULL) {
-            num = latC_checar_numerico(mv, d);
-            num = latC_checar_numerico(mv, d);
-        }
-    }
-    char *cadena_final =
-        reemplazar_lat(latC_checar_cadena(mv, a),
-                       analizar_fmt(latC_checar_cadena(mv, b),
-                                    strlen(latC_checar_cadena(mv, b))),
-                       analizar_fmt(latC_checar_cadena(mv, c),
-                                    strlen(latC_checar_cadena(mv, c))),
-                       num);
-    lat_objeto *r = latC_crear_cadena(mv, cadena_final);
-    latC_apilar(mv, r);
+    lat_objeto *d = latC_desapilar(mv), *c = latC_desapilar(mv);
+    lat_objeto *b = latC_desapilar(mv), *a = latC_desapilar(mv);
+    char *base = latC_checar_cadena(mv, a), *patron = latC_checar_cadena(mv, b);
+    char *nuevo = latC_checar_cadena(mv, c);
+    int veces = d->tipo == T_NULL ? 0 : cadena_entero(mv, d);
+    cadena_validar_escapes(mv, patron);
+    cadena_validar_escapes(mv, nuevo);
+    /* Conservar la segunda interpretacion historica de escapes. */
+    char *p = analizar_fmt(patron, strlen(patron));
+    char *n = analizar_fmt(nuevo, strlen(nuevo));
+    if (!p || !n) { free(p); free(n); latC_error(mv, "Memoria virtual agotada"); return; }
+    if (!*p) { free(p); free(n); latC_error(mv, "Patron de reemplazo vacio"); return; }
+    char *ret = reemplazar_lat(base, p, n, veces);
+    free(p); free(n);
+    cadena_publicar(mv, ret);
 }
 
 void str_inicia_con(lat_mv *mv) {
@@ -577,27 +587,22 @@ void str_inicia_con(lat_mv *mv) {
 }
 
 void str_subcadena(lat_mv *mv) {
-    lat_objeto *c = latC_desapilar(mv);
-    lat_objeto *b = latC_desapilar(mv);
-    lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp = latC_crear_cadena(
-        mv, subcadena(latC_checar_cadena(mv, a), latC_checar_numerico(mv, b),
-                      latC_checar_numerico(mv, c)));
-    latC_apilar(mv, tmp);
+    lat_objeto *c = latC_desapilar(mv), *b = latC_desapilar(mv), *a = latC_desapilar(mv);
+    const char *base = latC_checar_cadena(mv, a);
+    int inicio = cadena_entero(mv, b), cantidad = cadena_entero(mv, c);
+    if (inicio < 0 || (size_t)inicio > strlen(base)) latC_error(mv, "Indice de cadena fuera de rango");
+    if (cantidad < 0) latC_error(mv, "Longitud de cadena fuera de rango");
+    cadena_publicar(mv, subcadena(base, inicio, cantidad));
 }
 
 void str_minusculas(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_cadena(mv, minusculas(latC_checar_cadena(mv, a)));
-    latC_apilar(mv, tmp);
+    cadena_publicar(mv, minusculas(latC_checar_cadena(mv, a)));
 }
 
 void str_mayusculas(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_cadena(mv, mayusculas(latC_checar_cadena(mv, a)));
-    latC_apilar(mv, tmp);
+    cadena_publicar(mv, mayusculas(latC_checar_cadena(mv, a)));
 }
 
 void str_recortar(lat_mv *mv) {
@@ -625,7 +630,7 @@ void str_esalfa(lat_mv *mv) {
     bool res = true;
     size_t len = strlen(cad);
     for (size_t i = 0; i < len; i++) {
-        if (!isalnum(cad[i])) {
+        if (!isalnum((unsigned char)cad[i])) {
             res = false;
             break;
         }
@@ -674,19 +679,14 @@ void str_separar(lat_mv *mv) {
 }
 
 void str_invertir(lat_mv *mv) {
-    // FIXME: Pendiente implementacion para multibyte
     lat_objeto *a = latC_desapilar(mv);
-    char *orig = latC_checar_cadena(mv, a);
-    int i = strlen(orig) - 1;
-    char *dest = malloc(strlen(orig) + 1);
-    int j = 0;
-    for (; i >= 0; i--) {
-        dest[j] = orig[i];
-        j++;
-    }
-    dest[strlen(orig)] = '\0';
-    lat_objeto *tmp = latC_crear_cadena(mv, dest);
-    latC_apilar(mv, tmp);
+    const char *orig = latC_checar_cadena(mv, a);
+    size_t len = strlen(orig);
+    char *dest = malloc(len + 1);
+    if (!dest) { latC_error(mv, "Memoria virtual agotada"); return; }
+    for (size_t i = 0; i < len; ++i) dest[i] = orig[len - i - 1];
+    dest[len] = '\0';
+    cadena_publicar(mv, dest);
 }
 
 void str_ejecutar(lat_mv *mv) {
@@ -711,39 +711,26 @@ void str_ejecutar(lat_mv *mv) {
 }
 
 void str_regex(lat_mv *mv) {
-    lat_objeto *cadena_regex = latC_desapilar(mv);
-    lat_objeto *cad = latC_desapilar(mv);
-    char *tmp = NULL;
-    if (cad->tipo == T_NUMERIC) {
-        tmp = malloc(64);
-        sprintf(tmp, "%.16g", latC_checar_numerico(mv, cad));
-    } else if (cad->tipo == T_STR) {
-        tmp = malloc(strlen(latC_checar_cadena(mv, cad)) + 1);
-        strcpy(tmp, latC_checar_cadena(mv, cad));
-    } else {
-        latC_error(mv, "Error se esperaba una cadena ó númerico.");
-    };
+    lat_objeto *patron = latC_desapilar(mv), *valor = latC_desapilar(mv);
+    const char *exp = latC_checar_cadena(mv, patron), *texto;
+    char numero[64];
+    if (valor->tipo == T_NUMERIC) {
+        snprintf(numero, sizeof numero, "%.16g", latC_checar_numerico(mv, valor));
+        texto = numero;
+    } else if (valor->tipo == T_STR) texto = latC_checar_cadena(mv, valor);
+    else { latC_error(mv, "Error se esperaba una cadena ó númerico."); return; }
     regex_t regex;
-    int reti;
-    reti = regcomp(&regex, latC_checar_cadena(mv, cadena_regex), REG_EXTENDED);
-    if (reti) {
-        latC_error(mv, "Error al compilar regex.");
-    }
-    reti = regexec(&regex, tmp, 0, NULL, 0);
-    if (!reti) {
-        latC_apilar(mv, latO_verdadero);
-    } else if (reti == REG_NOMATCH) {
-        latC_apilar(mv, latO_falso);
-    } else {
-        latC_error(mv, "Error en el match regex.");
-    }
+    if (regcomp(&regex, exp, REG_EXTENDED)) { latC_error(mv, "Error al compilar regex."); return; }
+    int estado = regexec(&regex, texto, 0, NULL, 0);
     regfree(&regex);
-    free(tmp);
+    if (estado != 0 && estado != REG_NOMATCH) { latC_error(mv, "Error en el match regex."); return; }
+    latC_apilar(mv, estado == 0 ? latO_verdadero : latO_falso);
 }
 
 void str_match(lat_mv *mv) {
     lat_objeto *regexString = latC_desapilar(mv);
     lat_objeto *source = latC_desapilar(mv);
+    const char *texto_fuente = latC_checar_cadena(mv, source);
     char maxMatches = 50;
     int maxGroups = 50;
     regex_t regexCompiled;
@@ -806,7 +793,7 @@ void str_match(lat_mv *mv) {
                 break;
         }
     };
-    cursor = latC_checar_cadena(mv, source);
+    cursor = (char *)texto_fuente;
     lat_objeto *l_matches = latC_crear_lista(mv, latL_crear(mv));
     for (int m = 0; m < maxMatches; m++) {
         if (regexec(&regexCompiled, cursor, maxGroups, groupArray, 0)) {
@@ -821,18 +808,15 @@ void str_match(lat_mv *mv) {
             if (g == 0) {
                 offset = groupArray[g].rm_eo;
             }
-            char *cursorCopy = malloc(strlen(cursor) + 1);
-            strcpy(cursorCopy, cursor);
-            cursorCopy[groupArray[g].rm_eo] = 0;
-            int len = groupArray[g].rm_eo - groupArray[g].rm_so;
-            char *str = malloc(len + 1);
-            strcpy(str, cursorCopy + groupArray[g].rm_so);
-            str[len] = '\0';
-            if (strcmp("", str)) {
-                latL_agregar(mv, latC_checar_lista(mv, l_groups),
-                             latC_crear_cadena(mv, str));
+            size_t len = (size_t)(groupArray[g].rm_eo - groupArray[g].rm_so);
+            if (len) {
+                char *parte = malloc(len + 1);
+                if (!parte) { regfree(&regexCompiled); latC_error(mv, "Memoria virtual agotada"); return; }
+                memcpy(parte, cursor + groupArray[g].rm_so, len);
+                parte[len] = '\0';
+                latL_agregar(mv, latC_checar_lista(mv, l_groups), latC_crear_cadena(mv, parte));
+                free(parte);
             }
-            free(cursorCopy);
         }
         cursor += offset;
         if (latL_longitud(getLista(l_groups)) > 0) {
@@ -966,21 +950,20 @@ void str_char(lat_mv *mv) {
     lat_objeto *arg = latC_desapilar(mv);
     if (arg->tipo == T_LIST) {
         lista *lst = latC_checar_lista(mv, arg);
-        long int lng = latL_longitud(lst);
-        char *str_chars = malloc(lng + 1);
-        str_chars[0] = '\0';
-        for (long int i = 0; i < lng; i++) {
-            lat_objeto *tmp1 = latL_obtener_elemento(mv, lst, i);
-            size_t pos = strlen(str_chars);
-            str_chars[pos] = (char)latC_checar_numerico(mv, tmp1);
-            str_chars[pos + 1] = '\0';
+        /* Validar todo antes de reservar; conservar ceros omitidos de la lista. */
+        { LIST_FOREACH(lst, primero, siguiente, cur) (void)cadena_entero(mv, cur->valor); }
+        size_t len = (size_t)latL_longitud(lst), pos = 0;
+        char *ret = malloc(len + 1);
+        if (!ret) { latC_error(mv, "Memoria virtual agotada"); return; }
+        LIST_FOREACH(lst, primero, siguiente, cur) {
+            char c = (char)(int)latC_checar_numerico(mv, cur->valor);
+            if (c) ret[pos++] = c;
         }
-        latC_apilar_string(mv, str_chars);
-        free(str_chars);
+        ret[pos] = '\0';
+        cadena_publicar(mv, ret);
     } else if (arg->tipo == T_NUMERIC) {
-        char txt[1024];
-        sprintf(txt, "%c", (int)latC_checar_numerico(mv, arg));
-        latC_apilar_string(mv, txt);
+        char ret[2] = {(char)cadena_entero(mv, arg), '\0'};
+        latC_apilar_string(mv, ret);
     }
 }
 
@@ -1000,7 +983,18 @@ void str_bytes(lat_mv *mv) {
     }
 }
 
+#include "latstr_utf8.inc"
+
 static const lat_CReg libstr[] = {
+    {"longitud_bytes", str_longitud_bytes, 1},
+    {"longitud_unicode", str_longitud_unicode, 1},
+    {"invertir_unicode", str_invertir_unicode, 1},
+    {"subcadena_unicode", str_subcadena_unicode, 3},
+    {"indice_unicode", str_indice_unicode, 2},
+    {"separar_texto", str_separar_texto, 2},
+    {"separar_delimitadores", str_separar, 2},
+    {"mayusculas_ascii", str_mayusculas_ascii, 1},
+    {"minusculas_ascii", str_minusculas_ascii, 1},
     {"char", str_char, 1},
     {"bytes", str_bytes, 1},
     {"esta_vacia", str_esta_vacia, 1},
