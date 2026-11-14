@@ -1,0 +1,5 @@
+Perfil: ASan+UBSan+LSan, 144 pruebas.
+Estado: BLOCKED_INFRASTRUCTURE para ejecuciones nativas.
+1% tests passed, 143 tests failed out of 144
+LSan falla bajo ptrace; el unico aprobado es sincronizacion documental con Python.
+No se desactiva deteccion ni se reclasifica bloqueo como aprobacion.

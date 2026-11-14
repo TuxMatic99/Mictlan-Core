@@ -3,31 +3,31 @@ exit=23
 ==6==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x502000000fd5 at pc 0x7fc8b53cdb56 bp 0x7fff25f70810 sp 0x7fff25f6ffd0
 WRITE of size 5 at 0x502000000fd5 thread T0
     #0 0x7fc8b53cdb55 in strcat ../../../../src/libsanitizer/asan/asan_interceptors.cpp:515
-    #1 0x560c17914f36 in rellenar_izquierda /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latstrlib.c:290
-    #2 0x560c179168ba in str_rellenar_izquierda /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latstrlib.c:463
-    #3 0x560c178e6a5d in ejecutar_funcion /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:2751
-    #4 0x560c178e6b44 in latMV_funcion_correr /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:2765
-    #5 0x560c178dd1d8 in latMV_call_function /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:1080
-    #6 0x560c178e3b77 in ejecutar_funcion /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:2300
-    #7 0x560c178e6b44 in latMV_funcion_correr /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:2765
-    #8 0x560c1787fbe7 in latC_llamar_funcion /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latdo.c:1171
-    #9 0x560c1791f83e in main /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latino.c:158
+    #1 0x560c17914f36 in rellenar_izquierda <trabajo>/mictlan-core/src/latstrlib.c:290
+    #2 0x560c179168ba in str_rellenar_izquierda <trabajo>/mictlan-core/src/latstrlib.c:463
+    #3 0x560c178e6a5d in ejecutar_funcion <trabajo>/mictlan-core/src/latmv.c:2751
+    #4 0x560c178e6b44 in latMV_funcion_correr <trabajo>/mictlan-core/src/latmv.c:2765
+    #5 0x560c178dd1d8 in latMV_call_function <trabajo>/mictlan-core/src/latmv.c:1080
+    #6 0x560c178e3b77 in ejecutar_funcion <trabajo>/mictlan-core/src/latmv.c:2300
+    #7 0x560c178e6b44 in latMV_funcion_correr <trabajo>/mictlan-core/src/latmv.c:2765
+    #8 0x560c1787fbe7 in latC_llamar_funcion <trabajo>/mictlan-core/src/latdo.c:1171
+    #9 0x560c1791f83e in main <trabajo>/mictlan-core/src/latino.c:158
     #10 0x7fc8b49b6ca7  (/lib/x86_64-linux-gnu/libc.so.6+0x29ca7) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
     #11 0x7fc8b49b6d64 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29d64) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
-    #12 0x560c17851a30 in _start (/workspace/scratch/1de5cf9cbaa6/build-p12a-asan/mictlan+0x158a30) (BuildId: 2eb122844a3c871dd4fc853550ff8b2051ef1e10)
+    #12 0x560c17851a30 in _start (<trabajo>/build-p12a-asan/mictlan+0x158a30) (BuildId: 2eb122844a3c871dd4fc853550ff8b2051ef1e10)
 
 0x502000000fd5 is located 0 bytes after 5-byte region [0x502000000fd0,0x502000000fd5)
 allocated by thread T0 here:
     #0 0x7fc8b53d4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
-    #1 0x560c17914e90 in rellenar_izquierda /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latstrlib.c:284
-    #2 0x560c179168ba in str_rellenar_izquierda /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latstrlib.c:463
-    #3 0x560c178e6a5d in ejecutar_funcion /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:2751
-    #4 0x560c178e6b44 in latMV_funcion_correr /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:2765
-    #5 0x560c178dd1d8 in latMV_call_function /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:1080
-    #6 0x560c178e3b77 in ejecutar_funcion /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:2300
-    #7 0x560c178e6b44 in latMV_funcion_correr /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latmv.c:2765
-    #8 0x560c1787fbe7 in latC_llamar_funcion /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latdo.c:1171
-    #9 0x560c1791f83e in main /workspace/scratch/1de5cf9cbaa6/mictlan-core/src/latino.c:158
+    #1 0x560c17914e90 in rellenar_izquierda <trabajo>/mictlan-core/src/latstrlib.c:284
+    #2 0x560c179168ba in str_rellenar_izquierda <trabajo>/mictlan-core/src/latstrlib.c:463
+    #3 0x560c178e6a5d in ejecutar_funcion <trabajo>/mictlan-core/src/latmv.c:2751
+    #4 0x560c178e6b44 in latMV_funcion_correr <trabajo>/mictlan-core/src/latmv.c:2765
+    #5 0x560c178dd1d8 in latMV_call_function <trabajo>/mictlan-core/src/latmv.c:1080
+    #6 0x560c178e3b77 in ejecutar_funcion <trabajo>/mictlan-core/src/latmv.c:2300
+    #7 0x560c178e6b44 in latMV_funcion_correr <trabajo>/mictlan-core/src/latmv.c:2765
+    #8 0x560c1787fbe7 in latC_llamar_funcion <trabajo>/mictlan-core/src/latdo.c:1171
+    #9 0x560c1791f83e in main <trabajo>/mictlan-core/src/latino.c:158
     #10 0x7fc8b49b6ca7  (/lib/x86_64-linux-gnu/libc.so.6+0x29ca7) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
 
 SUMMARY: AddressSanitizer: heap-buffer-overflow ../../../../src/libsanitizer/asan/asan_interceptors.cpp:515 in strcat

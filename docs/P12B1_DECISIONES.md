@@ -39,3 +39,17 @@ la opción de una biblioteca pequeña, sin incorporarla aquí.
 Los índices heredados finitos dentro del rango de int mantienen truncamiento
 hacia cero. Los nuevos índices Unicode exigen enteros. La representación de
 texto sigue terminada por NUL: no es una biblioteca para buffers binarios.
+
+## Hallazgos adicionales verificados durante la implementación
+
+El uso de la segunda interpretación de escapes reproduce un heap-buffer-overflow
+con ASan para una secuencia literal \u incompleta y un desbordamiento entero
+con UBSan para un escape numérico enorme. B1 valida esas entradas en la función
+nativa antes de llamar al lector histórico; no modifica el lector usado por
+el parser. Los logs y dos regresiones conservan la evidencia.
+
+La revisión de concatenación demuestra además que una primera conversión puede
+quedar sin liberar si la segunda falla por una colección cíclica. Una prueba
+específica falla antes del arreglo y pasa después. La implementación nueva
+toma prestados los textos existentes, usa conversiones diferidas para otros
+valores y libera sus reservas antes de propagar el error.

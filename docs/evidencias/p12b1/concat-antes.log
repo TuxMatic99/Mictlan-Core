@@ -1,7 +1,7 @@
-Test project /workspace/scratch/1de5cf9cbaa6/build-base-debug
+Test project <trabajo>/build-base-debug
     Start 94: mictlan_p12b1_concat_error
 1/1 Test #94: mictlan_p12b1_concat_error .......***Failed    0.00 sec
-[1;31mconcat-error:0:0:[0m Referencia circular al representar objeto
+concat-error:0:0: Referencia circular al representar objeto
 Conversion sin liberar tras error: 1
 
 
