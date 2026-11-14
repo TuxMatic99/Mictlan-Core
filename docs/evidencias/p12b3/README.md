@@ -33,3 +33,26 @@ El CSV contiene tres procesos por tamaño y comprueba el máximo antes de medir.
 Son mediciones Debug iniciales, no comparaciones de rendimiento Release.
 
 Los logs versionados sólo normalizan escapes de color y espacios al final de línea.
+
+## Evidencia posterior
+
+`implementacion-{debug,release}.log`: 245/245 con el código
+`00c3a91542521b47476b3de612afd29eca7ff787`. `final-local-{debug,release}.log`:
+251/251 tras añadir los ejemplos y pruebas de locale, sin cambios de producción.
+`implementacion-asan-local-bloqueado.extracto.log` conserva el diagnóstico y
+resumen del intento de 261 tests: 258 bloqueados por ptrace; tres verificadores
+auxiliares aprobados. No se declara aprobación instrumentada local.
+
+`ci-antes.extracto.log`: selección de diagnósticos, configuración y recuento del
+[job inicial instrumentado](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43641329286/job/132589344971).
+La fuga del test azar al abortar por API ausente correspondía a una segunda VM
+del arnés sin cerrar; se corrigió el arnés, no se atribuye a Core.
+`ci-implementacion-asan.extracto.log`: selección de configuración, tests B3 y
+recuento del [job aprobado](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43641793526/job/132590763466).
+Los extractos son explícitamente parciales; los enlaces llevan al log completo.
+
+Los CSV `benchmark-{antes,despues}-release.csv` comparan tres procesos por tamaño;
+la base se recompiló en un worktree separado en 3125a001 y se enlazó el mismo
+benchmark contra ella. Se usó `-O3` y el mismo GCC 14.2. Las rutas extraídas de
+readline indicadas arriba se añadieron también a la compilación manual inicial,
+que sin ellas falló (no se contó como medición). Los CSV Debug son complementarios.

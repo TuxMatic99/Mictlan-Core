@@ -100,9 +100,10 @@ static int binario(void) {
 static int azar(void) {
     /* Vector de referencia SplitMix64, estado inicial 0, bits bajos de 32. */
     const uint32_t esperados[]={0x7b1dcdaf,0xa1b965f4,0x8009454f,0x724c81ec,0x51a8749b};
-    double cero=0;lat_mv *otra=latC_crear_mv();otra->nombre_archivo="azar-otra";
+    double cero=0;
     for(int ronda=0;ronda<2;++ronda){(void)llamar(vm,"semilla_aleatoria",&cero,1);
       for(int i=0;i<5;++i)C(dos("aleatorio_entero",0,4294967295.)==esperados[i]);}
+    lat_mv *otra=latC_crear_mv();otra->nombre_archivo="azar-otra";
     double limites[]={0,4294967295.};lat_objeto r=llamar(otra,"aleatorio_entero",limites,2);
     int ok=r.tipo==T_NUMERIC&&getNumerico(&r)==esperados[0];latC_destruir_mv(otra);C(ok);
     C(dos("aleatorio_entero",-9007199254740991.,-9007199254740991.)==-9007199254740991.);

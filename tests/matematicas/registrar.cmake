@@ -49,3 +49,16 @@ endif()
 add_test(NAME mictlan_p12b3_azar_rechazo COMMAND mictlan_test_azar_rechazo)
 set_tests_properties(mictlan_p12b3_azar_rechazo PROPERTIES TIMEOUT 20 LABELS "p12b3;matematicas;azar"
  FAIL_REGULAR_EXPRESSION "P12B3_ASSERT;AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+matematica_caso(documentacion 0 "")
+add_test(NAME mictlan_p12b3_documentacion_sincronizada
+ COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/generar_doc_matematicas.py" --check)
+set_tests_properties(mictlan_p12b3_documentacion_sincronizada PROPERTIES TIMEOUT 20 LABELS "p12b3;matematicas;documentacion")
+add_executable(mictlan_test_matematicas_locale "${matematicas_raiz}/locale.c")
+target_include_directories(mictlan_test_matematicas_locale PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(mictlan_test_matematicas_locale PRIVATE liblatino)
+foreach(locale IN ITEMS C es_ES.UTF-8 fr_FR.UTF-8)
+ string(REPLACE "." "_" nombre "${locale}")
+ add_test(NAME mictlan_p12b3_locale_${nombre} COMMAND mictlan_test_matematicas_locale "${locale}")
+ set_tests_properties(mictlan_p12b3_locale_${nombre} PROPERTIES TIMEOUT 20 LABELS "p12b3;matematicas;locale"
+ SKIP_RETURN_CODE 77 FAIL_REGULAR_EXPRESSION "AddressSanitizer;UndefinedBehaviorSanitizer;LeakSanitizer;runtime error:")
+endforeach()
