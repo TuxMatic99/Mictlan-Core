@@ -8,6 +8,7 @@ on:
       - 'investigacion/p12b1-*'
       - 'investigacion/p12b2-*'
       - 'investigacion/p12b3-*'
+      - 'investigacion/p12b4a-*'
 
 permissions:
   contents: read

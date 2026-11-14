@@ -1,0 +1,81 @@
+{
+  "copia_ausente": {
+    "inicial": {
+      "destino": "ANTERIOR",
+      "ajeno": "INTACTO"
+    },
+    "programa": "archivo.duplicar(\"ausente\",\"destino\")\n",
+    "final": {
+      "destino": "ANTERIOR",
+      "ajeno": "INTACTO"
+    },
+    "codigo": 1,
+    "diagnostico": "No se pudo abrir"
+  },
+  "copia_normal": {
+    "inicial": {
+      "origen": "María ñ\n",
+      "destino": "ANTERIOR"
+    },
+    "programa": "archivo.duplicar(\"origen\",\"destino\")\nponer(archivo.leer(\"destino\"))\n",
+    "final": {
+      "origen": "María ñ\n",
+      "destino": "María ñ\n"
+    },
+    "salida": "María ñ\n\n"
+  },
+  "lectura": {
+    "inicial": {
+      "texto": "\nñ\n\nfin\n"
+    },
+    "programa": "poner(archivo.lineas(\"texto\"))\nponer(archivo.leer_texto_seguro(\"ausente\"))\n",
+    "final": {
+      "texto": "\nñ\n\nfin\n"
+    },
+    "salida": "[\"\", \"ñ\", \"\", \"fin\"]\nnulo\n"
+  },
+  "escritura": {
+    "programa": "archivo.escribir(\"texto\",\"a\")\narchivo.anexar(\"texto\",\"ñ\")\nponer(archivo.intentar_escribir(\"no-existe/texto\",\"x\"))\nponer(archivo.leer(\"texto\"))\n",
+    "final": {
+      "texto": "añ"
+    },
+    "salida": "falso\nañ\n"
+  },
+  "atomico": {
+    "inicial": {
+      "texto": "ANTERIOR"
+    },
+    "programa": "poner(archivo.escribir_atomico(\"texto\",\"nuevo\"))\nponer(archivo.leer_texto_seguro(\"texto\"))\n",
+    "final": {
+      "texto": "nuevo"
+    },
+    "salida": "1\nnuevo\n"
+  },
+  "auxiliares": {
+    "programa": "poner(archivo.crear(\"nuevo\"))\nponer(archivo.crear(\"nuevo\"))\nponer(archivo.renombrar(\"nuevo\",\"otro\"))\nponer(archivo.borrar(\"otro\"))\nponer(archivo.eliminar(\"otro\"))\n",
+    "final": {},
+    "salida": "verdadero\nfalso\notro\nverdadero\nfalso\n"
+  },
+  "ejecutar_lat": {
+    "inicial": {
+      "hijo.lat": "archivo.escribir(\"marca\",\"42\")\n"
+    },
+    "programa": "archivo.ejecutar(\"hijo.lat\")\nponer(archivo.leer(\"marca\"))\n",
+    "final": {
+      "hijo.lat": "archivo.escribir(\"marca\",\"42\")\n",
+      "marca": "42"
+    },
+    "salida": "42\n"
+  },
+  "ejecutar_mict": {
+    "inicial": {
+      "hijo.mict": "archivo.escribir(\"marca\",\"42\")\n"
+    },
+    "programa": "archivo.ejecutar(\"hijo.mict\")\nponer(archivo.leer(\"marca\"))\n",
+    "final": {
+      "hijo.mict": "archivo.escribir(\"marca\",\"42\")\n",
+      "marca": "42"
+    },
+    "salida": "42\n"
+  }
+}

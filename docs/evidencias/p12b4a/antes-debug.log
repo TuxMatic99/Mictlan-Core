@@ -1,0 +1,935 @@
+Test project /workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug
+        Start   1: mictlan_alpha_identidad
+  1/331 Test   #1: mictlan_alpha_identidad ....................   Passed    0.08 sec
+        Start   2: mictlan_alpha_extensiones
+  2/331 Test   #2: mictlan_alpha_extensiones ..................   Passed    0.04 sec
+        Start   3: mictlan_alpha_latino_valores
+  3/331 Test   #3: mictlan_alpha_latino_valores ...............   Passed    0.07 sec
+        Start   4: mictlan_alpha_latino_control
+  4/331 Test   #4: mictlan_alpha_latino_control ...............   Passed    0.07 sec
+        Start   5: mictlan_alpha_latino_colecciones
+  5/331 Test   #5: mictlan_alpha_latino_colecciones ...........   Passed    0.06 sec
+        Start   6: mictlan_alpha_diagnosticos
+  6/331 Test   #6: mictlan_alpha_diagnosticos .................   Passed    0.07 sec
+        Start   7: mictlan_alpha_repl
+  7/331 Test   #7: mictlan_alpha_repl .........................   Passed    0.02 sec
+        Start   8: mictlan_alpha_modulos
+  8/331 Test   #8: mictlan_alpha_modulos ......................   Passed    0.03 sec
+        Start   9: mictlan_p12a_numeros_lat
+  9/331 Test   #9: mictlan_p12a_numeros_lat ...................   Passed    0.01 sec
+        Start  10: mictlan_p12a_numeros_mict
+ 10/331 Test  #10: mictlan_p12a_numeros_mict ..................   Passed    0.02 sec
+        Start  11: mictlan_p12a_precedencia_lat
+ 11/331 Test  #11: mictlan_p12a_precedencia_lat ...............   Passed    0.01 sec
+        Start  12: mictlan_p12a_precedencia_mict
+ 12/331 Test  #12: mictlan_p12a_precedencia_mict ..............   Passed    0.01 sec
+        Start  13: mictlan_p12a_logica_lat
+ 13/331 Test  #13: mictlan_p12a_logica_lat ....................   Passed    0.02 sec
+        Start  14: mictlan_p12a_logica_mict
+ 14/331 Test  #14: mictlan_p12a_logica_mict ...................   Passed    0.01 sec
+        Start  15: mictlan_p12a_comparaciones_lat
+ 15/331 Test  #15: mictlan_p12a_comparaciones_lat .............   Passed    0.01 sec
+        Start  16: mictlan_p12a_comparaciones_mict
+ 16/331 Test  #16: mictlan_p12a_comparaciones_mict ............   Passed    0.03 sec
+        Start  17: mictlan_p12a_funciones_lat
+ 17/331 Test  #17: mictlan_p12a_funciones_lat .................   Passed    0.05 sec
+        Start  18: mictlan_p12a_funciones_mict
+ 18/331 Test  #18: mictlan_p12a_funciones_mict ................   Passed    0.02 sec
+        Start  19: mictlan_p12a_recursion_lat
+ 19/331 Test  #19: mictlan_p12a_recursion_lat .................   Passed    0.02 sec
+        Start  20: mictlan_p12a_recursion_mict
+ 20/331 Test  #20: mictlan_p12a_recursion_mict ................   Passed    0.04 sec
+        Start  21: mictlan_p12a_ambitos_lat
+ 21/331 Test  #21: mictlan_p12a_ambitos_lat ...................   Passed    0.01 sec
+        Start  22: mictlan_p12a_ambitos_mict
+ 22/331 Test  #22: mictlan_p12a_ambitos_mict ..................   Passed    0.01 sec
+        Start  23: mictlan_p12a_asignaciones_lat
+ 23/331 Test  #23: mictlan_p12a_asignaciones_lat ..............   Passed    0.01 sec
+        Start  24: mictlan_p12a_asignaciones_mict
+ 24/331 Test  #24: mictlan_p12a_asignaciones_mict .............   Passed    0.01 sec
+        Start  25: mictlan_p12a_condicional_lat
+ 25/331 Test  #25: mictlan_p12a_condicional_lat ...............   Passed    0.01 sec
+        Start  26: mictlan_p12a_condicional_mict
+ 26/331 Test  #26: mictlan_p12a_condicional_mict ..............   Passed    0.01 sec
+        Start  27: mictlan_p12a_local_inaccesible_lat
+ 27/331 Test  #27: mictlan_p12a_local_inaccesible_lat .........   Passed    0.01 sec
+        Start  28: mictlan_p12a_local_inaccesible_mict
+ 28/331 Test  #28: mictlan_p12a_local_inaccesible_mict ........   Passed    0.01 sec
+        Start  29: mictlan_p12a_argumentos_exceso_lat
+ 29/331 Test  #29: mictlan_p12a_argumentos_exceso_lat .........   Passed    0.01 sec
+        Start  30: mictlan_p12a_argumentos_exceso_mict
+ 30/331 Test  #30: mictlan_p12a_argumentos_exceso_mict ........   Passed    0.01 sec
+        Start  31: mictlan_p12a_locale_C
+ 31/331 Test  #31: mictlan_p12a_locale_C ......................   Passed    0.00 sec
+        Start  32: mictlan_p12a_locale_es_ES_UTF-8
+ 32/331 Test  #32: mictlan_p12a_locale_es_ES_UTF-8 ............   Passed    0.00 sec
+        Start  33: mictlan_p12a_locale_fr_FR_UTF-8
+ 33/331 Test  #33: mictlan_p12a_locale_fr_FR_UTF-8 ............   Passed    0.00 sec
+        Start  34: mictlan_p12b1_herencia_lat
+ 34/331 Test  #34: mictlan_p12b1_herencia_lat .................   Passed    0.02 sec
+        Start  35: mictlan_p12b1_herencia_mict
+ 35/331 Test  #35: mictlan_p12b1_herencia_mict ................   Passed    0.02 sec
+        Start  36: mictlan_p12b1_limites_validos_lat
+ 36/331 Test  #36: mictlan_p12b1_limites_validos_lat ..........   Passed    0.02 sec
+        Start  37: mictlan_p12b1_limites_validos_mict
+ 37/331 Test  #37: mictlan_p12b1_limites_validos_mict .........   Passed    0.02 sec
+        Start  38: mictlan_p12b1_unicode_lat
+ 38/331 Test  #38: mictlan_p12b1_unicode_lat ..................   Passed    0.02 sec
+        Start  39: mictlan_p12b1_unicode_mict
+ 39/331 Test  #39: mictlan_p12b1_unicode_mict .................   Passed    0.01 sec
+        Start  40: mictlan_p12b1_separacion_explicita_lat
+ 40/331 Test  #40: mictlan_p12b1_separacion_explicita_lat .....   Passed    0.01 sec
+        Start  41: mictlan_p12b1_separacion_explicita_mict
+ 41/331 Test  #41: mictlan_p12b1_separacion_explicita_mict ....   Passed    0.01 sec
+        Start  42: mictlan_p12b1_sub_inicio_negativo_lat
+ 42/331 Test  #42: mictlan_p12b1_sub_inicio_negativo_lat ......   Passed    0.02 sec
+        Start  43: mictlan_p12b1_sub_inicio_negativo_mict
+ 43/331 Test  #43: mictlan_p12b1_sub_inicio_negativo_mict .....   Passed    0.02 sec
+        Start  44: mictlan_p12b1_sub_cantidad_negativa_lat
+ 44/331 Test  #44: mictlan_p12b1_sub_cantidad_negativa_lat ....   Passed    0.02 sec
+        Start  45: mictlan_p12b1_sub_cantidad_negativa_mict
+ 45/331 Test  #45: mictlan_p12b1_sub_cantidad_negativa_mict ...   Passed    0.01 sec
+        Start  46: mictlan_p12b1_sub_inicio_exceso_lat
+ 46/331 Test  #46: mictlan_p12b1_sub_inicio_exceso_lat ........   Passed    0.01 sec
+        Start  47: mictlan_p12b1_sub_inicio_exceso_mict
+ 47/331 Test  #47: mictlan_p12b1_sub_inicio_exceso_mict .......   Passed    0.02 sec
+        Start  48: mictlan_p12b1_insertar_negativo_lat
+ 48/331 Test  #48: mictlan_p12b1_insertar_negativo_lat ........   Passed    0.01 sec
+        Start  49: mictlan_p12b1_insertar_negativo_mict
+ 49/331 Test  #49: mictlan_p12b1_insertar_negativo_mict .......   Passed    0.01 sec
+        Start  50: mictlan_p12b1_indice_infinito_lat
+ 50/331 Test  #50: mictlan_p12b1_indice_infinito_lat ..........   Passed    0.02 sec
+        Start  51: mictlan_p12b1_indice_infinito_mict
+ 51/331 Test  #51: mictlan_p12b1_indice_infinito_mict .........   Passed    0.01 sec
+        Start  52: mictlan_p12b1_indice_enorme_lat
+ 52/331 Test  #52: mictlan_p12b1_indice_enorme_lat ............   Passed    0.01 sec
+        Start  53: mictlan_p12b1_indice_enorme_mict
+ 53/331 Test  #53: mictlan_p12b1_indice_enorme_mict ...........   Passed    0.01 sec
+        Start  54: mictlan_p12b1_relleno_negativo_lat
+ 54/331 Test  #54: mictlan_p12b1_relleno_negativo_lat .........   Passed    0.01 sec
+        Start  55: mictlan_p12b1_relleno_negativo_mict
+ 55/331 Test  #55: mictlan_p12b1_relleno_negativo_mict ........   Passed    0.02 sec
+        Start  56: mictlan_p12b1_reemplazo_vacio_lat
+ 56/331 Test  #56: mictlan_p12b1_reemplazo_vacio_lat ..........   Passed    0.02 sec
+        Start  57: mictlan_p12b1_reemplazo_vacio_mict
+ 57/331 Test  #57: mictlan_p12b1_reemplazo_vacio_mict .........   Passed    0.01 sec
+        Start  58: mictlan_p12b1_tipo_texto_lat
+ 58/331 Test  #58: mictlan_p12b1_tipo_texto_lat ...............   Passed    0.01 sec
+        Start  59: mictlan_p12b1_tipo_texto_mict
+ 59/331 Test  #59: mictlan_p12b1_tipo_texto_mict ..............   Passed    0.01 sec
+        Start  60: mictlan_p12b1_tipo_indice_lat
+ 60/331 Test  #60: mictlan_p12b1_tipo_indice_lat ..............   Passed    0.02 sec
+        Start  61: mictlan_p12b1_tipo_indice_mict
+ 61/331 Test  #61: mictlan_p12b1_tipo_indice_mict .............   Passed    0.01 sec
+        Start  62: mictlan_p12b1_unicode_invalido_lat
+ 62/331 Test  #62: mictlan_p12b1_unicode_invalido_lat .........   Passed    0.02 sec
+        Start  63: mictlan_p12b1_unicode_invalido_mict
+ 63/331 Test  #63: mictlan_p12b1_unicode_invalido_mict ........   Passed    0.01 sec
+        Start  64: mictlan_p12b1_unicode_truncado_lat
+ 64/331 Test  #64: mictlan_p12b1_unicode_truncado_lat .........   Passed    0.01 sec
+        Start  65: mictlan_p12b1_unicode_truncado_mict
+ 65/331 Test  #65: mictlan_p12b1_unicode_truncado_mict ........   Passed    0.01 sec
+        Start  66: mictlan_p12b1_unicode_sustituto_lat
+ 66/331 Test  #66: mictlan_p12b1_unicode_sustituto_lat ........   Passed    0.01 sec
+        Start  67: mictlan_p12b1_unicode_sustituto_mict
+ 67/331 Test  #67: mictlan_p12b1_unicode_sustituto_mict .......   Passed    0.01 sec
+        Start  68: mictlan_p12b1_unicode_sobrelimite_lat
+ 68/331 Test  #68: mictlan_p12b1_unicode_sobrelimite_lat ......   Passed    0.01 sec
+        Start  69: mictlan_p12b1_unicode_sobrelimite_mict
+ 69/331 Test  #69: mictlan_p12b1_unicode_sobrelimite_mict .....   Passed    0.01 sec
+        Start  70: mictlan_p12b1_unicode_sobrelargo_lat
+ 70/331 Test  #70: mictlan_p12b1_unicode_sobrelargo_lat .......   Passed    0.01 sec
+        Start  71: mictlan_p12b1_unicode_sobrelargo_mict
+ 71/331 Test  #71: mictlan_p12b1_unicode_sobrelargo_mict ......   Passed    0.02 sec
+        Start  72: mictlan_p12b1_unicode_fraccion_lat
+ 72/331 Test  #72: mictlan_p12b1_unicode_fraccion_lat .........   Passed    0.01 sec
+        Start  73: mictlan_p12b1_unicode_fraccion_mict
+ 73/331 Test  #73: mictlan_p12b1_unicode_fraccion_mict ........   Passed    0.01 sec
+        Start  74: mictlan_p12b1_unicode_inicio_lat
+ 74/331 Test  #74: mictlan_p12b1_unicode_inicio_lat ...........   Passed    0.01 sec
+        Start  75: mictlan_p12b1_unicode_inicio_mict
+ 75/331 Test  #75: mictlan_p12b1_unicode_inicio_mict ..........   Passed    0.01 sec
+        Start  76: mictlan_p12b1_separador_vacio_lat
+ 76/331 Test  #76: mictlan_p12b1_separador_vacio_lat ..........   Passed    0.01 sec
+        Start  77: mictlan_p12b1_separador_vacio_mict
+ 77/331 Test  #77: mictlan_p12b1_separador_vacio_mict .........   Passed    0.01 sec
+        Start  78: mictlan_p12b1_regex_tipo_lat
+ 78/331 Test  #78: mictlan_p12b1_regex_tipo_lat ...............   Passed    0.01 sec
+        Start  79: mictlan_p12b1_regex_tipo_mict
+ 79/331 Test  #79: mictlan_p12b1_regex_tipo_mict ..............   Passed    0.01 sec
+        Start  80: mictlan_p12b1_regex_patron_lat
+ 80/331 Test  #80: mictlan_p12b1_regex_patron_lat .............   Passed    0.01 sec
+        Start  81: mictlan_p12b1_regex_patron_mict
+ 81/331 Test  #81: mictlan_p12b1_regex_patron_mict ............   Passed    0.02 sec
+        Start  82: mictlan_p12b1_char_rango_lat
+ 82/331 Test  #82: mictlan_p12b1_char_rango_lat ...............   Passed    0.01 sec
+        Start  83: mictlan_p12b1_char_rango_mict
+ 83/331 Test  #83: mictlan_p12b1_char_rango_mict ..............   Passed    0.03 sec
+        Start  84: mictlan_p12b1_escape_unicode_lat
+ 84/331 Test  #84: mictlan_p12b1_escape_unicode_lat ...........   Passed    0.01 sec
+        Start  85: mictlan_p12b1_escape_unicode_mict
+ 85/331 Test  #85: mictlan_p12b1_escape_unicode_mict ..........   Passed    0.01 sec
+        Start  86: mictlan_p12b1_escape_enorme_lat
+ 86/331 Test  #86: mictlan_p12b1_escape_enorme_lat ............   Passed    0.01 sec
+        Start  87: mictlan_p12b1_escape_enorme_mict
+ 87/331 Test  #87: mictlan_p12b1_escape_enorme_mict ...........   Passed    0.01 sec
+        Start  88: mictlan_p12b1_temporales
+ 88/331 Test  #88: mictlan_p12b1_temporales ...................   Passed    0.03 sec
+        Start  89: mictlan_p12b1_unicode_api
+ 89/331 Test  #89: mictlan_p12b1_unicode_api ..................   Passed    0.00 sec
+        Start  90: mictlan_p12b1_documentacion_lat
+ 90/331 Test  #90: mictlan_p12b1_documentacion_lat ............   Passed    0.02 sec
+        Start  91: mictlan_p12b1_documentacion_mict
+ 91/331 Test  #91: mictlan_p12b1_documentacion_mict ...........   Passed    0.02 sec
+        Start  92: mictlan_p12b1_documentacion_sincronizada
+ 92/331 Test  #92: mictlan_p12b1_documentacion_sincronizada ...   Passed    0.03 sec
+        Start  93: mictlan_p12b1_cadenas_io_historico
+ 93/331 Test  #93: mictlan_p12b1_cadenas_io_historico .........   Passed    0.01 sec
+        Start  94: mictlan_p12b1_concat_error
+ 94/331 Test  #94: mictlan_p12b1_concat_error .................   Passed    0.00 sec
+        Start  95: mictlan_p12b2_dic_integridad_lat
+ 95/331 Test  #95: mictlan_p12b2_dic_integridad_lat ...........   Passed    0.01 sec
+        Start  96: mictlan_p12b2_dic_integridad_mict
+ 96/331 Test  #96: mictlan_p12b2_dic_integridad_mict ..........   Passed    0.01 sec
+        Start  97: mictlan_p12b2_dic_colisiones_lat
+ 97/331 Test  #97: mictlan_p12b2_dic_colisiones_lat ...........   Passed    0.01 sec
+        Start  98: mictlan_p12b2_dic_colisiones_mict
+ 98/331 Test  #98: mictlan_p12b2_dic_colisiones_mict ..........   Passed    0.02 sec
+        Start  99: mictlan_p12b2_listas_herencia_lat
+ 99/331 Test  #99: mictlan_p12b2_listas_herencia_lat ..........   Passed    0.01 sec
+        Start 100: mictlan_p12b2_listas_herencia_mict
+100/331 Test #100: mictlan_p12b2_listas_herencia_mict .........   Passed    0.01 sec
+        Start 101: mictlan_p12b2_referencias_lat
+101/331 Test #101: mictlan_p12b2_referencias_lat ..............   Passed    0.01 sec
+        Start 102: mictlan_p12b2_referencias_mict
+102/331 Test #102: mictlan_p12b2_referencias_mict .............   Passed    0.01 sec
+        Start 103: mictlan_p12b2_comparacion_numerica_lat
+103/331 Test #103: mictlan_p12b2_comparacion_numerica_lat .....   Passed    0.01 sec
+        Start 104: mictlan_p12b2_comparacion_numerica_mict
+104/331 Test #104: mictlan_p12b2_comparacion_numerica_mict ....   Passed    0.01 sec
+        Start 105: mictlan_p12b2_unir_alias_lat
+105/331 Test #105: mictlan_p12b2_unir_alias_lat ...............   Passed    0.01 sec
+        Start 106: mictlan_p12b2_unir_alias_mict
+106/331 Test #106: mictlan_p12b2_unir_alias_mict ..............   Passed    0.01 sec
+        Start 107: mictlan_p12b2_union_larga_lat
+107/331 Test #107: mictlan_p12b2_union_larga_lat ..............   Passed    0.01 sec
+        Start 108: mictlan_p12b2_union_larga_mict
+108/331 Test #108: mictlan_p12b2_union_larga_mict .............   Passed    0.01 sec
+        Start 109: mictlan_p12b2_dic_tipo_vacio_lat
+109/331 Test #109: mictlan_p12b2_dic_tipo_vacio_lat ...........   Passed    0.01 sec
+        Start 110: mictlan_p12b2_dic_tipo_vacio_mict
+110/331 Test #110: mictlan_p12b2_dic_tipo_vacio_mict ..........   Passed    0.02 sec
+        Start 111: mictlan_p12b2_indice_infinito_lat
+111/331 Test #111: mictlan_p12b2_indice_infinito_lat ..........   Passed    0.02 sec
+        Start 112: mictlan_p12b2_indice_infinito_mict
+112/331 Test #112: mictlan_p12b2_indice_infinito_mict .........   Passed    0.01 sec
+        Start 113: mictlan_p12b2_insertar_nan_lat
+113/331 Test #113: mictlan_p12b2_insertar_nan_lat .............   Passed    0.01 sec
+        Start 114: mictlan_p12b2_insertar_nan_mict
+114/331 Test #114: mictlan_p12b2_insertar_nan_mict ............   Passed    0.01 sec
+        Start 115: mictlan_p12b2_crear_infinito_lat
+115/331 Test #115: mictlan_p12b2_crear_infinito_lat ...........   Passed    0.01 sec
+        Start 116: mictlan_p12b2_crear_infinito_mict
+116/331 Test #116: mictlan_p12b2_crear_infinito_mict ..........   Passed    0.02 sec
+        Start 117: mictlan_p12b2_crear_enorme_lat
+117/331 Test #117: mictlan_p12b2_crear_enorme_lat .............   Passed    0.01 sec
+        Start 118: mictlan_p12b2_crear_enorme_mict
+118/331 Test #118: mictlan_p12b2_crear_enorme_mict ............   Passed    0.01 sec
+        Start 119: mictlan_p12b2_eliminar_negativo_lat
+119/331 Test #119: mictlan_p12b2_eliminar_negativo_lat ........   Passed    0.01 sec
+        Start 120: mictlan_p12b2_eliminar_negativo_mict
+120/331 Test #120: mictlan_p12b2_eliminar_negativo_mict .......   Passed    0.01 sec
+        Start 121: mictlan_p12b2_insertar_negativo_lat
+121/331 Test #121: mictlan_p12b2_insertar_negativo_lat ........   Passed    0.01 sec
+        Start 122: mictlan_p12b2_insertar_negativo_mict
+122/331 Test #122: mictlan_p12b2_insertar_negativo_mict .......   Passed    0.01 sec
+        Start 123: mictlan_p12b2_insertar_exceso_lat
+123/331 Test #123: mictlan_p12b2_insertar_exceso_lat ..........   Passed    0.01 sec
+        Start 124: mictlan_p12b2_insertar_exceso_mict
+124/331 Test #124: mictlan_p12b2_insertar_exceso_mict .........   Passed    0.01 sec
+        Start 125: mictlan_p12b2_comparar_nan_lat
+125/331 Test #125: mictlan_p12b2_comparar_nan_lat .............   Passed    0.01 sec
+        Start 126: mictlan_p12b2_comparar_nan_mict
+126/331 Test #126: mictlan_p12b2_comparar_nan_mict ............   Passed    0.01 sec
+        Start 127: mictlan_p12b2_union_tipo_lista_lat
+127/331 Test #127: mictlan_p12b2_union_tipo_lista_lat .........   Passed    0.01 sec
+        Start 128: mictlan_p12b2_union_tipo_lista_mict
+128/331 Test #128: mictlan_p12b2_union_tipo_lista_mict ........   Passed    0.01 sec
+        Start 129: mictlan_p12b2_union_tipo_separador_lat
+129/331 Test #129: mictlan_p12b2_union_tipo_separador_lat .....   Passed    0.01 sec
+        Start 130: mictlan_p12b2_union_tipo_separador_mict
+130/331 Test #130: mictlan_p12b2_union_tipo_separador_mict ....   Passed    0.02 sec
+        Start 131: mictlan_p12b2_dic_colisiones
+131/331 Test #131: mictlan_p12b2_dic_colisiones ...............   Passed    0.00 sec
+        Start 132: mictlan_p12b2_dic_crecimiento
+132/331 Test #132: mictlan_p12b2_dic_crecimiento ..............   Passed    0.01 sec
+        Start 133: mictlan_p12b2_dic_compartidos
+133/331 Test #133: mictlan_p12b2_dic_compartidos ..............   Passed    0.00 sec
+        Start 134: mictlan_p12b2_dic_recoleccion
+134/331 Test #134: mictlan_p12b2_dic_recoleccion ..............   Passed    0.00 sec
+        Start 135: mictlan_p12b2_ciclos
+135/331 Test #135: mictlan_p12b2_ciclos .......................   Passed    0.01 sec
+        Start 136: mictlan_p12b2_union_argumentos
+136/331 Test #136: mictlan_p12b2_union_argumentos .............   Passed    0.00 sec
+        Start 137: mictlan_p12b2_union_reserva
+137/331 Test #137: mictlan_p12b2_union_reserva ................   Passed    0.00 sec
+        Start 138: mictlan_p12b2_union_publicacion
+138/331 Test #138: mictlan_p12b2_union_publicacion ............   Passed    0.00 sec
+        Start 139: mictlan_p12b2_copias
+139/331 Test #139: mictlan_p12b2_copias .......................   Passed    0.00 sec
+        Start 140: mictlan_p12b2_profundidad
+140/331 Test #140: mictlan_p12b2_profundidad ..................   Passed    0.00 sec
+        Start 141: mictlan_p12b2_documentacion_lat
+141/331 Test #141: mictlan_p12b2_documentacion_lat ............   Passed    0.01 sec
+        Start 142: mictlan_p12b2_documentacion_mict
+142/331 Test #142: mictlan_p12b2_documentacion_mict ...........   Passed    0.02 sec
+        Start 143: mictlan_p12b2_documentacion_sincronizada
+143/331 Test #143: mictlan_p12b2_documentacion_sincronizada ...   Passed    0.06 sec
+        Start 144: mictlan_p12b2_abi
+144/331 Test #144: mictlan_p12b2_abi ..........................   Passed    0.04 sec
+        Start 145: mictlan_p12b2_limites_lat
+145/331 Test #145: mictlan_p12b2_limites_lat ..................   Passed    0.01 sec
+        Start 146: mictlan_p12b2_limites_mict
+146/331 Test #146: mictlan_p12b2_limites_mict .................   Passed    0.01 sec
+        Start 147: mictlan_p12b3_herencia_lat
+147/331 Test #147: mictlan_p12b3_herencia_lat .................   Passed    0.02 sec
+        Start 148: mictlan_p12b3_herencia_mict
+148/331 Test #148: mictlan_p12b3_herencia_mict ................   Passed    0.01 sec
+        Start 149: mictlan_p12b3_extremos_lat
+149/331 Test #149: mictlan_p12b3_extremos_lat .................   Passed    0.01 sec
+        Start 150: mictlan_p12b3_extremos_mict
+150/331 Test #150: mictlan_p12b3_extremos_mict ................   Passed    0.02 sec
+        Start 151: mictlan_p12b3_cero_lat
+151/331 Test #151: mictlan_p12b3_cero_lat .....................   Passed    0.01 sec
+        Start 152: mictlan_p12b3_cero_mict
+152/331 Test #152: mictlan_p12b3_cero_mict ....................   Passed    0.03 sec
+        Start 153: mictlan_p12b3_moderna_lat
+153/331 Test #153: mictlan_p12b3_moderna_lat ..................   Passed    0.01 sec
+        Start 154: mictlan_p12b3_moderna_mict
+154/331 Test #154: mictlan_p12b3_moderna_mict .................   Passed    0.02 sec
+        Start 155: mictlan_p12b3_max_vacio_lat
+155/331 Test #155: mictlan_p12b3_max_vacio_lat ................   Passed    0.01 sec
+        Start 156: mictlan_p12b3_max_vacio_mict
+156/331 Test #156: mictlan_p12b3_max_vacio_mict ...............   Passed    0.01 sec
+        Start 157: mictlan_p12b3_max_tipo_lat
+157/331 Test #157: mictlan_p12b3_max_tipo_lat .................   Passed    0.01 sec
+        Start 158: mictlan_p12b3_max_tipo_mict
+158/331 Test #158: mictlan_p12b3_max_tipo_mict ................   Passed    0.01 sec
+        Start 159: mictlan_p12b3_azar_negativo_lat
+159/331 Test #159: mictlan_p12b3_azar_negativo_lat ............   Passed    0.02 sec
+        Start 160: mictlan_p12b3_azar_negativo_mict
+160/331 Test #160: mictlan_p12b3_azar_negativo_mict ...........   Passed    0.01 sec
+        Start 161: mictlan_p12b3_azar_no_finito_lat
+161/331 Test #161: mictlan_p12b3_azar_no_finito_lat ...........   Passed    0.01 sec
+        Start 162: mictlan_p12b3_azar_no_finito_mict
+162/331 Test #162: mictlan_p12b3_azar_no_finito_mict ..........   Passed    0.02 sec
+        Start 163: mictlan_p12b3_azar_grande_lat
+163/331 Test #163: mictlan_p12b3_azar_grande_lat ..............   Passed    0.01 sec
+        Start 164: mictlan_p12b3_azar_grande_mict
+164/331 Test #164: mictlan_p12b3_azar_grande_mict .............   Passed    0.01 sec
+        Start 165: mictlan_p12b3_azar_aridad_lat
+165/331 Test #165: mictlan_p12b3_azar_aridad_lat ..............   Passed    0.01 sec
+        Start 166: mictlan_p12b3_azar_aridad_mict
+166/331 Test #166: mictlan_p12b3_azar_aridad_mict .............   Passed    0.02 sec
+        Start 167: mictlan_p12b3_ldexp_infinito_lat
+167/331 Test #167: mictlan_p12b3_ldexp_infinito_lat ...........   Passed    0.01 sec
+        Start 168: mictlan_p12b3_ldexp_infinito_mict
+168/331 Test #168: mictlan_p12b3_ldexp_infinito_mict ..........   Passed    0.01 sec
+        Start 169: mictlan_p12b3_ldexp_grande_lat
+169/331 Test #169: mictlan_p12b3_ldexp_grande_lat .............   Passed    0.02 sec
+        Start 170: mictlan_p12b3_ldexp_grande_mict
+170/331 Test #170: mictlan_p12b3_ldexp_grande_mict ............   Passed    0.01 sec
+        Start 171: mictlan_p12b3_estricta_invalida_lat
+171/331 Test #171: mictlan_p12b3_estricta_invalida_lat ........   Passed    0.02 sec
+        Start 172: mictlan_p12b3_estricta_invalida_mict
+172/331 Test #172: mictlan_p12b3_estricta_invalida_mict .......   Passed    0.01 sec
+        Start 173: mictlan_p12b3_estricta_desborde_lat
+173/331 Test #173: mictlan_p12b3_estricta_desborde_lat ........   Passed    0.01 sec
+        Start 174: mictlan_p12b3_estricta_desborde_mict
+174/331 Test #174: mictlan_p12b3_estricta_desborde_mict .......   Passed    0.01 sec
+        Start 175: mictlan_p12b3_estricta_subdesborde_lat
+175/331 Test #175: mictlan_p12b3_estricta_subdesborde_lat .....   Passed    0.02 sec
+        Start 176: mictlan_p12b3_estricta_subdesborde_mict
+176/331 Test #176: mictlan_p12b3_estricta_subdesborde_mict ....   Passed    0.01 sec
+        Start 177: mictlan_p12b3_estricta_tipo_lat
+177/331 Test #177: mictlan_p12b3_estricta_tipo_lat ............   Passed    0.01 sec
+        Start 178: mictlan_p12b3_estricta_tipo_mict
+178/331 Test #178: mictlan_p12b3_estricta_tipo_mict ...........   Passed    0.01 sec
+        Start 179: mictlan_p12b3_entero_fraccion_lat
+179/331 Test #179: mictlan_p12b3_entero_fraccion_lat ..........   Passed    0.01 sec
+        Start 180: mictlan_p12b3_entero_fraccion_mict
+180/331 Test #180: mictlan_p12b3_entero_fraccion_mict .........   Passed    0.01 sec
+        Start 181: mictlan_p12b3_entero_orden_lat
+181/331 Test #181: mictlan_p12b3_entero_orden_lat .............   Passed    0.02 sec
+        Start 182: mictlan_p12b3_entero_orden_mict
+182/331 Test #182: mictlan_p12b3_entero_orden_mict ............   Passed    0.01 sec
+        Start 183: mictlan_p12b3_semilla_fraccion_lat
+183/331 Test #183: mictlan_p12b3_semilla_fraccion_lat .........   Passed    0.01 sec
+        Start 184: mictlan_p12b3_semilla_fraccion_mict
+184/331 Test #184: mictlan_p12b3_semilla_fraccion_mict ........   Passed    0.01 sec
+        Start 185: mictlan_p12b3_binario_infinito_lat
+185/331 Test #185: mictlan_p12b3_binario_infinito_lat .........   Passed    0.01 sec
+        Start 186: mictlan_p12b3_binario_infinito_mict
+186/331 Test #186: mictlan_p12b3_binario_infinito_mict ........   Passed    0.01 sec
+        Start 187: mictlan_p12b3_raiz_dominio_lat
+187/331 Test #187: mictlan_p12b3_raiz_dominio_lat .............   Passed    0.02 sec
+        Start 188: mictlan_p12b3_raiz_dominio_mict
+188/331 Test #188: mictlan_p12b3_raiz_dominio_mict ............   Passed    0.01 sec
+        Start 189: mictlan_p12b3_log_dominio_lat
+189/331 Test #189: mictlan_p12b3_log_dominio_lat ..............   Passed    0.01 sec
+        Start 190: mictlan_p12b3_log_dominio_mict
+190/331 Test #190: mictlan_p12b3_log_dominio_mict .............   Passed    0.01 sec
+        Start 191: mictlan_p12b3_potencia_dominio_lat
+191/331 Test #191: mictlan_p12b3_potencia_dominio_lat .........   Passed    0.01 sec
+        Start 192: mictlan_p12b3_potencia_dominio_mict
+192/331 Test #192: mictlan_p12b3_potencia_dominio_mict ........   Passed    0.02 sec
+        Start 193: mictlan_p12b3_potencia_desborde_lat
+193/331 Test #193: mictlan_p12b3_potencia_desborde_lat ........   Passed    0.02 sec
+        Start 194: mictlan_p12b3_potencia_desborde_mict
+194/331 Test #194: mictlan_p12b3_potencia_desborde_mict .......   Passed    0.01 sec
+        Start 195: mictlan_p12b3_potencia_subdesborde_lat
+195/331 Test #195: mictlan_p12b3_potencia_subdesborde_lat .....   Passed    0.01 sec
+        Start 196: mictlan_p12b3_potencia_subdesborde_mict
+196/331 Test #196: mictlan_p12b3_potencia_subdesborde_mict ....   Passed    0.01 sec
+        Start 197: mictlan_p12b3_predicado_tipo_lat
+197/331 Test #197: mictlan_p12b3_predicado_tipo_lat ...........   Passed    0.01 sec
+        Start 198: mictlan_p12b3_predicado_tipo_mict
+198/331 Test #198: mictlan_p12b3_predicado_tipo_mict ..........   Passed    0.02 sec
+        Start 199: mictlan_p12b3_no_finitos_c
+199/331 Test #199: mictlan_p12b3_no_finitos_c .................   Passed    0.00 sec
+        Start 200: mictlan_p12b3_extremos_c
+200/331 Test #200: mictlan_p12b3_extremos_c ...................   Passed    0.00 sec
+        Start 201: mictlan_p12b3_conversion_c
+201/331 Test #201: mictlan_p12b3_conversion_c .................   Passed    0.00 sec
+        Start 202: mictlan_p12b3_herencia_c
+202/331 Test #202: mictlan_p12b3_herencia_c ...................   Passed    0.00 sec
+        Start 203: mictlan_p12b3_precision_c
+203/331 Test #203: mictlan_p12b3_precision_c ..................   Passed    0.00 sec
+        Start 204: mictlan_p12b3_binario_c
+204/331 Test #204: mictlan_p12b3_binario_c ....................   Passed    0.00 sec
+        Start 205: mictlan_p12b3_azar_c
+205/331 Test #205: mictlan_p12b3_azar_c .......................   Passed    0.00 sec
+        Start 206: mictlan_p12b3_estricto_c
+206/331 Test #206: mictlan_p12b3_estricto_c ...................   Passed    0.00 sec
+        Start 207: mictlan_p12b3_dominio_c
+207/331 Test #207: mictlan_p12b3_dominio_c ....................   Passed    0.00 sec
+        Start 208: mictlan_p12b3_recuperacion_c
+208/331 Test #208: mictlan_p12b3_recuperacion_c ...............   Passed    0.00 sec
+        Start 209: mictlan_p12b3_sdk_c
+209/331 Test #209: mictlan_p12b3_sdk_c ........................   Passed    0.00 sec
+        Start 210: mictlan_p12b3_temporales_c
+210/331 Test #210: mictlan_p12b3_temporales_c .................   Passed    0.01 sec
+        Start 211: mictlan_p12b3_azar_rechazo
+211/331 Test #211: mictlan_p12b3_azar_rechazo .................   Passed    0.00 sec
+        Start 212: mictlan_p12b3_documentacion_lat
+212/331 Test #212: mictlan_p12b3_documentacion_lat ............   Passed    0.01 sec
+        Start 213: mictlan_p12b3_documentacion_mict
+213/331 Test #213: mictlan_p12b3_documentacion_mict ...........   Passed    0.02 sec
+        Start 214: mictlan_p12b3_documentacion_sincronizada
+214/331 Test #214: mictlan_p12b3_documentacion_sincronizada ...   Passed    0.03 sec
+        Start 215: mictlan_p12b3_locale_C
+215/331 Test #215: mictlan_p12b3_locale_C .....................   Passed    0.00 sec
+        Start 216: mictlan_p12b3_locale_es_ES_UTF-8
+216/331 Test #216: mictlan_p12b3_locale_es_ES_UTF-8 ...........   Passed    0.00 sec
+        Start 217: mictlan_p12b3_locale_fr_FR_UTF-8
+217/331 Test #217: mictlan_p12b3_locale_fr_FR_UTF-8 ...........   Passed    0.00 sec
+        Start 218: mictlan_p12b4a_enlace_aislado
+218/331 Test #218: mictlan_p12b4a_enlace_aislado ..............   Passed    0.07 sec
+        Start 219: mictlan_p12b4a_ausente_nuevo_c
+219/331 Test #219: mictlan_p12b4a_ausente_nuevo_c .............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.06 sec
+padre.mict:0:0: Error: No se pudo abrir el archivo 'ausente'
+B4A_ASSERT 17: access("destino",F_OK)!=0
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 220: mictlan_p12b4a_ausente_existente_c
+220/331 Test #220: mictlan_p12b4a_ausente_existente_c .........***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.07 sec
+padre.mict:0:0: Error: No se pudo abrir el archivo 'ausente'
+B4A_ASSERT 18: contenido("destino","ANTERIOR",8)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 221: mictlan_p12b4a_misma_ruta_c
+221/331 Test #221: mictlan_p12b4a_misma_ruta_c ................   Passed    0.05 sec
+        Start 222: mictlan_p12b4a_mismo_inode_c
+222/331 Test #222: mictlan_p12b4a_mismo_inode_c ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT 20: dos("duplicar","origen","alias")==LAT_ERRRUN
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 223: mictlan_p12b4a_enlace_destino_c
+223/331 Test #223: mictlan_p12b4a_enlace_destino_c ............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT 21: dos("duplicar","origen","destino")==LAT_ERRRUN
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 224: mictlan_p12b4a_origen_directorio_c
+224/331 Test #224: mictlan_p12b4a_origen_directorio_c .........***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.06 sec
+B4A_ASSERT 22: dos("duplicar","directorio","destino")==LAT_ERRRUN
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 225: mictlan_p12b4a_destino_invalido_c
+225/331 Test #225: mictlan_p12b4a_destino_invalido_c ..........   Passed    0.05 sec
+        Start 226: mictlan_p12b4a_vacio_c
+226/331 Test #226: mictlan_p12b4a_vacio_c .....................   Passed    0.05 sec
+        Start 227: mictlan_p12b4a_binario_c
+227/331 Test #227: mictlan_p12b4a_binario_c ...................   Passed    0.06 sec
+        Start 228: mictlan_p12b4a_lectura_c
+228/331 Test #228: mictlan_p12b4a_lectura_c ...................   Passed    0.05 sec
+        Start 229: mictlan_p12b4a_limites_c
+229/331 Test #229: mictlan_p12b4a_limites_c ...................   Passed    0.15 sec
+        Start 230: mictlan_p12b4a_auxiliares_c
+230/331 Test #230: mictlan_p12b4a_auxiliares_c ................   Passed    0.05 sec
+        Start 231: mictlan_p12b4a_ejecutar_lat_c
+231/331 Test #231: mictlan_p12b4a_ejecutar_lat_c ..............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT 38: mv->nombre_archivo==anterior&&mv->global->REPL&&mv->nlin==17&&mv->ncol==23
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 232: mictlan_p12b4a_ejecutar_mict_c
+232/331 Test #232: mictlan_p12b4a_ejecutar_mict_c .............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT 39: contenido("marca","42",2)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 233: mictlan_p12b4a_ejecutar_error_lat_c
+233/331 Test #233: mictlan_p12b4a_ejecutar_error_lat_c ........***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+hijo.lat:1:1: El parametro debe de ser una cadena
+B4A_ASSERT 37: uno("ejecutar",ruta)==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 234: mictlan_p12b4a_ejecutar_error_mict_c
+234/331 Test #234: mictlan_p12b4a_ejecutar_error_mict_c .......***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT 37: uno("ejecutar",ruta)==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 235: mictlan_p12b4a_ejecutar_sintaxis_lat_c
+235/331 Test #235: mictlan_p12b4a_ejecutar_sintaxis_lat_c .....   Passed    0.05 sec
+        Start 236: mictlan_p12b4a_ejecutar_sintaxis_mict_c
+236/331 Test #236: mictlan_p12b4a_ejecutar_sintaxis_mict_c ....***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT 37: uno("ejecutar",ruta)==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 237: mictlan_p12b4a_ejecutar_vacio_lat_c
+237/331 Test #237: mictlan_p12b4a_ejecutar_vacio_lat_c ........   Passed    0.06 sec
+        Start 238: mictlan_p12b4a_ejecutar_vacio_mict_c
+238/331 Test #238: mictlan_p12b4a_ejecutar_vacio_mict_c .......***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.06 sec
+B4A_ASSERT 37: uno("ejecutar",ruta)==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+
+        Start 239: mictlan_p12b4a_copia_ausente_lat
+239/331 Test #239: mictlan_p12b4a_copia_ausente_lat ...........***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 40, in <module>
+    assert actual==esperado,('Contenido de disco incorrecto',actual,esperado,r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^
+AssertionError: ('Contenido de disco incorrecto', {'ajeno': b'INTACTO', 'destino': b''}, {'destino': b'ANTERIOR', 'ajeno': b'INTACTO'}, 1, "\x1b[1;31m/tmp/mictlan-b4a-593qgkj1/programa.lat:1:1:\x1b[0m Error: No se pudo abrir el archivo 'ausente'\n")
+
+        Start 240: mictlan_p12b4a_copia_ausente_mict
+240/331 Test #240: mictlan_p12b4a_copia_ausente_mict ..........***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 40, in <module>
+    assert actual==esperado,('Contenido de disco incorrecto',actual,esperado,r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^
+AssertionError: ('Contenido de disco incorrecto', {'ajeno': b'INTACTO', 'destino': b''}, {'destino': b'ANTERIOR', 'ajeno': b'INTACTO'}, 1, "\x1b[1;31m/tmp/mictlan-b4a-5uz7e9_f/programa.mict:1:1:\x1b[0m Error: No se pudo abrir el archivo 'ausente'\n")
+
+        Start 241: mictlan_p12b4a_copia_normal_lat
+241/331 Test #241: mictlan_p12b4a_copia_normal_lat ............   Passed    0.05 sec
+        Start 242: mictlan_p12b4a_copia_normal_mict
+242/331 Test #242: mictlan_p12b4a_copia_normal_mict ...........   Passed    0.05 sec
+        Start 243: mictlan_p12b4a_lectura_lat
+243/331 Test #243: mictlan_p12b4a_lectura_lat .................   Passed    0.05 sec
+        Start 244: mictlan_p12b4a_lectura_mict
+244/331 Test #244: mictlan_p12b4a_lectura_mict ................   Passed    0.05 sec
+        Start 245: mictlan_p12b4a_escritura_lat
+245/331 Test #245: mictlan_p12b4a_escritura_lat ...............   Passed    0.06 sec
+        Start 246: mictlan_p12b4a_escritura_mict
+246/331 Test #246: mictlan_p12b4a_escritura_mict ..............   Passed    0.06 sec
+        Start 247: mictlan_p12b4a_atomico_lat
+247/331 Test #247: mictlan_p12b4a_atomico_lat .................   Passed    0.05 sec
+        Start 248: mictlan_p12b4a_atomico_mict
+248/331 Test #248: mictlan_p12b4a_atomico_mict ................   Passed    0.05 sec
+        Start 249: mictlan_p12b4a_auxiliares_lat
+249/331 Test #249: mictlan_p12b4a_auxiliares_lat ..............   Passed    0.06 sec
+        Start 250: mictlan_p12b4a_auxiliares_mict
+250/331 Test #250: mictlan_p12b4a_auxiliares_mict .............   Passed    0.06 sec
+        Start 251: mictlan_p12b4a_ejecutar_lat_lat
+251/331 Test #251: mictlan_p12b4a_ejecutar_lat_lat ............   Passed    0.05 sec
+        Start 252: mictlan_p12b4a_ejecutar_lat_mict
+252/331 Test #252: mictlan_p12b4a_ejecutar_lat_mict ...........   Passed    0.06 sec
+        Start 253: mictlan_p12b4a_ejecutar_mict_lat
+253/331 Test #253: mictlan_p12b4a_ejecutar_mict_lat ...........***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 40, in <module>
+    assert actual==esperado,('Contenido de disco incorrecto',actual,esperado,r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^
+AssertionError: ('Contenido de disco incorrecto', {'hijo.mict': b'archivo.escribir("marca","42")\n'}, {'hijo.mict': b'archivo.escribir("marca","42")\n', 'marca': b'42'}, 0, '')
+
+        Start 254: mictlan_p12b4a_ejecutar_mict_mict
+254/331 Test #254: mictlan_p12b4a_ejecutar_mict_mict ..........***Failed    0.06 sec
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b4a/tests/archivos/ejecutar.py", line 40, in <module>
+    assert actual==esperado,('Contenido de disco incorrecto',actual,esperado,r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^
+AssertionError: ('Contenido de disco incorrecto', {'hijo.mict': b'archivo.escribir("marca","42")\n'}, {'hijo.mict': b'archivo.escribir("marca","42")\n', 'marca': b'42'}, 0, '')
+
+        Start 255: mictlan_p12b4a_copia_fallo_1
+255/331 Test #255: mictlan_p12b4a_copia_fallo_1 ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+padre.mict:0:0: Error: No se pudo abrir el archivo 'origen'
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=1 activado=1 estado=2 flujos=1 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 256: mictlan_p12b4a_copia_fallo_2
+256/331 Test #256: mictlan_p12b4a_copia_fallo_2 ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+padre.mict:0:0: Error: No se pudo abrir el archivo 'destino'
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=2 activado=1 estado=2 flujos=1 fd=0 buffers=0 temporales=0 destino_anterior=1
+
+        Start 257: mictlan_p12b4a_copia_fallo_3
+257/331 Test #257: mictlan_p12b4a_copia_fallo_3 ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=3 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 258: mictlan_p12b4a_copia_fallo_4
+258/331 Test #258: mictlan_p12b4a_copia_fallo_4 ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.06 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=4 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 259: mictlan_p12b4a_copia_fallo_5
+259/331 Test #259: mictlan_p12b4a_copia_fallo_5 ...............   Passed    0.05 sec
+        Start 260: mictlan_p12b4a_copia_fallo_6
+260/331 Test #260: mictlan_p12b4a_copia_fallo_6 ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=6 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 261: mictlan_p12b4a_copia_fallo_7
+261/331 Test #261: mictlan_p12b4a_copia_fallo_7 ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=7 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 262: mictlan_p12b4a_copia_fallo_8
+262/331 Test #262: mictlan_p12b4a_copia_fallo_8 ...............   Passed    0.06 sec
+        Start 263: mictlan_p12b4a_copia_fallo_9
+263/331 Test #263: mictlan_p12b4a_copia_fallo_9 ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.06 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=9 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 264: mictlan_p12b4a_copia_fallo_10
+264/331 Test #264: mictlan_p12b4a_copia_fallo_10 ..............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=10 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 265: mictlan_p12b4a_copia_fallo_11
+265/331 Test #265: mictlan_p12b4a_copia_fallo_11 ..............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=11 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 266: mictlan_p12b4a_copia_fallo_12
+266/331 Test #266: mictlan_p12b4a_copia_fallo_12 ..............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.06 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=12 activado=0 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 267: mictlan_p12b4a_copia_fallo_13
+267/331 Test #267: mictlan_p12b4a_copia_fallo_13 ..............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=13 activado=0 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 268: mictlan_p12b4a_copia_fallo_14
+268/331 Test #268: mictlan_p12b4a_copia_fallo_14 ..............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=14 activado=0 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 269: mictlan_p12b4a_copia_fallo_15
+269/331 Test #269: mictlan_p12b4a_copia_fallo_15 ..............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=copia fallo=15 activado=0 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 270: mictlan_p12b4a_leer_fallo_3
+270/331 Test #270: mictlan_p12b4a_leer_fallo_3 ................   Passed    0.05 sec
+        Start 271: mictlan_p12b4a_leer_fallo_4
+271/331 Test #271: mictlan_p12b4a_leer_fallo_4 ................***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=leer fallo=4 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=1
+
+        Start 272: mictlan_p12b4a_leer_fallo_5
+272/331 Test #272: mictlan_p12b4a_leer_fallo_5 ................   Passed    0.05 sec
+        Start 273: mictlan_p12b4a_leer_fallo_10
+273/331 Test #273: mictlan_p12b4a_leer_fallo_10 ...............   Passed    0.05 sec
+        Start 274: mictlan_p12b4a_leer_fallo_15
+274/331 Test #274: mictlan_p12b4a_leer_fallo_15 ...............   Passed    0.05 sec
+        Start 275: mictlan_p12b4a_leer_fallo_16
+275/331 Test #275: mictlan_p12b4a_leer_fallo_16 ...............   Passed    0.05 sec
+        Start 276: mictlan_p12b4a_leer_fallo_17
+276/331 Test #276: mictlan_p12b4a_leer_fallo_17 ...............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+padre.mict:0:0: Fallo inyectado al publicar texto
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=leer fallo=17 activado=1 estado=2 flujos=0 fd=0 buffers=1 temporales=0 destino_anterior=1
+
+        Start 277: mictlan_p12b4a_seguro_fallo_3
+277/331 Test #277: mictlan_p12b4a_seguro_fallo_3 ..............   Passed    0.05 sec
+        Start 278: mictlan_p12b4a_seguro_fallo_4
+278/331 Test #278: mictlan_p12b4a_seguro_fallo_4 ..............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=seguro fallo=4 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=1
+
+        Start 279: mictlan_p12b4a_seguro_fallo_5
+279/331 Test #279: mictlan_p12b4a_seguro_fallo_5 ..............   Passed    0.05 sec
+        Start 280: mictlan_p12b4a_seguro_fallo_10
+280/331 Test #280: mictlan_p12b4a_seguro_fallo_10 .............   Passed    0.05 sec
+        Start 281: mictlan_p12b4a_seguro_fallo_15
+281/331 Test #281: mictlan_p12b4a_seguro_fallo_15 .............   Passed    0.05 sec
+        Start 282: mictlan_p12b4a_seguro_fallo_16
+282/331 Test #282: mictlan_p12b4a_seguro_fallo_16 .............   Passed    0.05 sec
+        Start 283: mictlan_p12b4a_seguro_fallo_17
+283/331 Test #283: mictlan_p12b4a_seguro_fallo_17 .............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.06 sec
+padre.mict:0:0: Fallo inyectado al publicar texto
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=seguro fallo=17 activado=1 estado=2 flujos=0 fd=0 buffers=1 temporales=0 destino_anterior=1
+
+        Start 284: mictlan_p12b4a_lineas_fallo_3
+284/331 Test #284: mictlan_p12b4a_lineas_fallo_3 ..............   Passed    0.05 sec
+        Start 285: mictlan_p12b4a_lineas_fallo_10
+285/331 Test #285: mictlan_p12b4a_lineas_fallo_10 .............   Passed    0.06 sec
+        Start 286: mictlan_p12b4a_lineas_fallo_15
+286/331 Test #286: mictlan_p12b4a_lineas_fallo_15 .............   Passed    0.05 sec
+        Start 287: mictlan_p12b4a_lineas_fallo_18
+287/331 Test #287: mictlan_p12b4a_lineas_fallo_18 .............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+padre.mict:0:0: Fallo inyectado al crear lista
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=lineas fallo=18 activado=1 estado=2 flujos=0 fd=0 buffers=1 temporales=0 destino_anterior=1
+
+        Start 288: mictlan_p12b4a_escribir_fallo_6
+288/331 Test #288: mictlan_p12b4a_escribir_fallo_6 ............   Passed    0.06 sec
+        Start 289: mictlan_p12b4a_escribir_fallo_7
+289/331 Test #289: mictlan_p12b4a_escribir_fallo_7 ............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=escribir fallo=7 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 290: mictlan_p12b4a_escribir_fallo_8
+290/331 Test #290: mictlan_p12b4a_escribir_fallo_8 ............***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=escribir fallo=8 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=0
+
+        Start 291: mictlan_p12b4a_escribir_fallo_9
+291/331 Test #291: mictlan_p12b4a_escribir_fallo_9 ............   Passed    0.07 sec
+        Start 292: mictlan_p12b4a_escribir_fallo_11
+292/331 Test #292: mictlan_p12b4a_escribir_fallo_11 ...........   Passed    0.05 sec
+        Start 293: mictlan_p12b4a_ejecutar_fallo_3
+293/331 Test #293: mictlan_p12b4a_ejecutar_fallo_3 ............   Passed    0.05 sec
+        Start 294: mictlan_p12b4a_ejecutar_fallo_10
+294/331 Test #294: mictlan_p12b4a_ejecutar_fallo_10 ...........***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+hijo.lat:1:1: No se pudo escribir el archivo 'marca'
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=ejecutar fallo=10 activado=1 estado=0 flujos=0 fd=0 buffers=0 temporales=0 destino_anterior=1
+
+        Start 295: mictlan_p12b4a_ejecutar_fallo_15
+295/331 Test #295: mictlan_p12b4a_ejecutar_fallo_15 ...........   Passed    0.05 sec
+        Start 296: mictlan_p12b4a_ejecutar_fallo_19
+296/331 Test #296: mictlan_p12b4a_ejecutar_fallo_19 ...........***Failed  Error regular expression found in output. Regex=[B4A_ASSERT]  0.05 sec
+hijo.lat:0:0: Fallo inyectado al compilar archivo
+B4A_ASSERT fallo o recurso no resuelto
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+Biblioteca SHA256=b0729ea0721f316f49d4abb393e299dfd89ad3ce1fff0844485e9bc02c9e0e89
+operacion=ejecutar fallo=19 activado=1 estado=2 flujos=0 fd=0 buffers=13 temporales=0 destino_anterior=1
+
+        Start 297: mictlan_p12b4a_atomico_historico
+297/331 Test #297: mictlan_p12b4a_atomico_historico ...........   Passed    0.09 sec
+        Start 298: mictlan_alpha_recompilacion
+298/331 Test #298: mictlan_alpha_recompilacion ................   Passed    0.04 sec
+        Start 299: mictlan_p11_pila
+299/331 Test #299: mictlan_p11_pila ...........................   Passed    0.02 sec
+        Start 300: mictlan_p11_gc_cadenas
+300/331 Test #300: mictlan_p11_gc_cadenas .....................   Passed    0.01 sec
+        Start 301: mictlan_alpha_agotamiento
+301/331 Test #301: mictlan_alpha_agotamiento ..................   Passed    0.00 sec
+        Start 302: mictlan_p02g_ciclos
+302/331 Test #302: mictlan_p02g_ciclos ........................   Passed    0.00 sec
+        Start 303: mictlan_p02g_raices
+303/331 Test #303: mictlan_p02g_raices ........................   Passed    0.00 sec
+        Start 304: mictlan_p02g_errores
+304/331 Test #304: mictlan_p02g_errores .......................   Passed    0.01 sec
+        Start 305: mictlan_p02g_opacos
+305/331 Test #305: mictlan_p02g_opacos ........................   Passed    0.00 sec
+        Start 306: mictlan_formato
+306/331 Test #306: mictlan_formato ............................   Passed    0.00 sec
+        Start 307: mictlan_cli_expresion_larga
+307/331 Test #307: mictlan_cli_expresion_larga ................   Passed    0.02 sec
+        Start 308: mictlan_p02g_generativo
+308/331 Test #308: mictlan_p02g_generativo ....................   Passed    0.03 sec
+        Start 309: mictlan_pila_directa
+309/331 Test #309: mictlan_pila_directa .......................   Passed    0.02 sec
+        Start 310: mictlan_pila_anidada
+310/331 Test #310: mictlan_pila_anidada .......................   Passed    0.02 sec
+        Start 311: mictlan_pila_prefijo
+311/331 Test #311: mictlan_pila_prefijo .......................   Passed    0.01 sec
+        Start 312: mictlan_pila_anidada_prefijo
+312/331 Test #312: mictlan_pila_anidada_prefijo ...............   Passed    0.02 sec
+        Start 313: mictlan_pila_prestados
+313/331 Test #313: mictlan_pila_prestados .....................   Passed    0.01 sec
+        Start 314: mictlan_pila_reentrada
+314/331 Test #314: mictlan_pila_reentrada .....................   Passed    0.05 sec
+        Start 315: mictlan_pila_propagar
+315/331 Test #315: mictlan_pila_propagar ......................   Passed    0.03 sec
+        Start 316: mictlan_pila_consumido
+316/331 Test #316: mictlan_pila_consumido .....................   Passed    0.01 sec
+        Start 317: mictlan_pila_exito
+317/331 Test #317: mictlan_pila_exito .........................   Passed    0.01 sec
+        Start 318: coverage
+318/331 Test #318: coverage ...................................   Passed    0.02 sec
+        Start 319: mictlan_marcos_funcion
+319/331 Test #319: mictlan_marcos_funcion .....................   Passed    0.01 sec
+        Start 320: mictlan_memoria_listas_referencias
+320/331 Test #320: mictlan_memoria_listas_referencias .........   Passed    0.02 sec
+        Start 321: mictlan_p02f_compartidos
+321/331 Test #321: mictlan_p02f_compartidos ...................   Passed    0.01 sec
+        Start 322: mictlan_p02f_anidados
+322/331 Test #322: mictlan_p02f_anidados ......................   Passed    0.00 sec
+        Start 323: mictlan_p02f_diccionarios
+323/331 Test #323: mictlan_p02f_diccionarios ..................   Passed    0.00 sec
+        Start 324: mictlan_p02f_ciclo_lista
+324/331 Test #324: mictlan_p02f_ciclo_lista ...................   Passed    0.00 sec
+        Start 325: mictlan_p02f_ciclo_mixto
+325/331 Test #325: mictlan_p02f_ciclo_mixto ...................   Passed    0.01 sec
+        Start 326: mictlan_p02f_extraer
+326/331 Test #326: mictlan_p02f_extraer .......................   Passed    0.00 sec
+        Start 327: mictlan_p02f_reasignar
+327/331 Test #327: mictlan_p02f_reasignar .....................   Passed    0.00 sec
+        Start 328: mictlan_p02f_clonar_mixto
+328/331 Test #328: mictlan_p02f_clonar_mixto ..................   Passed    0.00 sec
+        Start 329: mictlan_p02f_error
+329/331 Test #329: mictlan_p02f_error .........................   Passed    0.02 sec
+        Start 330: mictlan_p02f_ffi
+330/331 Test #330: mictlan_p02f_ffi ...........................   Passed    0.01 sec
+        Start 331: mictlan_p02f_clonar_ciclo
+331/331 Test #331: mictlan_p02f_clonar_ciclo ..................   Passed    0.00 sec
+
+89% tests passed, 37 tests failed out of 331
+
+Label Time Summary:
+abi               =   0.04 sec*proc (1 test)
+alpha             =   0.48 sec*proc (10 tests)
+archivos          =   4.42 sec*proc (80 tests)
+azar              =   0.00 sec*proc (1 test)
+bytecode          =   0.03 sec*proc (1 test)
+cadenas           =   0.81 sec*proc (61 tests)
+colecciones       =   0.57 sec*proc (52 tests)
+compatibilidad    =   2.59 sec*proc (180 tests)
+conformidad       =   0.33 sec*proc (25 tests)
+contrato          =   0.07 sec*proc (11 tests)
+contratos         =   0.04 sec*proc (12 tests)
+dic               =   0.02 sec*proc (4 tests)
+documentacion     =   0.12 sec*proc (3 tests)
+historico         =   0.01 sec*proc (1 test)
+locale            =   0.02 sec*proc (6 tests)
+matematicas       =   0.74 sec*proc (71 tests)
+memoria           =   0.24 sec*proc (32 tests)
+p02e              =   0.20 sec*proc (9 tests)
+p02f              =   0.07 sec*proc (11 tests)
+p02g              =   0.05 sec*proc (5 tests)
+p11               =   0.03 sec*proc (2 tests)
+p12a              =   0.33 sec*proc (25 tests)
+p12b1             =   0.81 sec*proc (61 tests)
+p12b2             =   0.57 sec*proc (52 tests)
+p12b3             =   0.74 sec*proc (71 tests)
+p12b4a            =   4.42 sec*proc (80 tests)
+parser            =   0.03 sec*proc (1 test)
+pila              =   0.22 sec*proc (10 tests)
+recuperacion      =   0.20 sec*proc (9 tests)
+utf8              =   0.00 sec*proc (1 test)
+
+Total Test time (real) =   7.91 sec
+
+The following tests FAILED:
+	219 - mictlan_p12b4a_ausente_nuevo_c (Failed)           archivos p12b4a
+	220 - mictlan_p12b4a_ausente_existente_c (Failed)       archivos p12b4a
+	222 - mictlan_p12b4a_mismo_inode_c (Failed)             archivos p12b4a
+	223 - mictlan_p12b4a_enlace_destino_c (Failed)          archivos p12b4a
+	224 - mictlan_p12b4a_origen_directorio_c (Failed)       archivos p12b4a
+	231 - mictlan_p12b4a_ejecutar_lat_c (Failed)            archivos p12b4a
+	232 - mictlan_p12b4a_ejecutar_mict_c (Failed)           archivos p12b4a
+	233 - mictlan_p12b4a_ejecutar_error_lat_c (Failed)      archivos p12b4a
+	234 - mictlan_p12b4a_ejecutar_error_mict_c (Failed)     archivos p12b4a
+	236 - mictlan_p12b4a_ejecutar_sintaxis_mict_c (Failed)  archivos p12b4a
+	238 - mictlan_p12b4a_ejecutar_vacio_mict_c (Failed)     archivos p12b4a
+	239 - mictlan_p12b4a_copia_ausente_lat (Failed)         archivos p12b4a
+	240 - mictlan_p12b4a_copia_ausente_mict (Failed)        archivos p12b4a
+	253 - mictlan_p12b4a_ejecutar_mict_lat (Failed)         archivos p12b4a
+	254 - mictlan_p12b4a_ejecutar_mict_mict (Failed)        archivos p12b4a
+	255 - mictlan_p12b4a_copia_fallo_1 (Failed)             archivos p12b4a
+	256 - mictlan_p12b4a_copia_fallo_2 (Failed)             archivos p12b4a
+	257 - mictlan_p12b4a_copia_fallo_3 (Failed)             archivos p12b4a
+	258 - mictlan_p12b4a_copia_fallo_4 (Failed)             archivos p12b4a
+	260 - mictlan_p12b4a_copia_fallo_6 (Failed)             archivos p12b4a
+	261 - mictlan_p12b4a_copia_fallo_7 (Failed)             archivos p12b4a
+	263 - mictlan_p12b4a_copia_fallo_9 (Failed)             archivos p12b4a
+	264 - mictlan_p12b4a_copia_fallo_10 (Failed)            archivos p12b4a
+	265 - mictlan_p12b4a_copia_fallo_11 (Failed)            archivos p12b4a
+	266 - mictlan_p12b4a_copia_fallo_12 (Failed)            archivos p12b4a
+	267 - mictlan_p12b4a_copia_fallo_13 (Failed)            archivos p12b4a
+	268 - mictlan_p12b4a_copia_fallo_14 (Failed)            archivos p12b4a
+	269 - mictlan_p12b4a_copia_fallo_15 (Failed)            archivos p12b4a
+	271 - mictlan_p12b4a_leer_fallo_4 (Failed)              archivos p12b4a
+	276 - mictlan_p12b4a_leer_fallo_17 (Failed)             archivos p12b4a
+	278 - mictlan_p12b4a_seguro_fallo_4 (Failed)            archivos p12b4a
+	283 - mictlan_p12b4a_seguro_fallo_17 (Failed)           archivos p12b4a
+	287 - mictlan_p12b4a_lineas_fallo_18 (Failed)           archivos p12b4a
+	289 - mictlan_p12b4a_escribir_fallo_7 (Failed)          archivos p12b4a
+	290 - mictlan_p12b4a_escribir_fallo_8 (Failed)          archivos p12b4a
+	294 - mictlan_p12b4a_ejecutar_fallo_10 (Failed)         archivos p12b4a
+	296 - mictlan_p12b4a_ejecutar_fallo_19 (Failed)         archivos p12b4a
+Errors while running CTest
