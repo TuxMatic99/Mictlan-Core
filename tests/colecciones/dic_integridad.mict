@@ -1,0 +1,19 @@
+d = {"a": 1}
+escribir(dic.longitud(d))
+dic.eliminar(d, "a")
+escribir(dic.longitud(d))
+escribir(dic.llaves(d))
+escribir(dic.valores(d))
+escribir(dic.contiene(d, "a"))
+dic.eliminar(d, "a")
+dic.eliminar(d, "ausente")
+escribir(dic.longitud(d))
+d.a = 9
+d.b = nulo
+escribir(dic.longitud(d))
+escribir(dic.contiene(d, "b"))
+escribir(d.a)
+escribir(lista.longitud(diccionario.vals(d)))
+dic.eliminar(d, "b")
+escribir(diccionario.longitud(d))
+escribir(d.a)

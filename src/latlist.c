@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "latino.h"
 #include "latmem.h"
 #include "latpropiedad.h"
+#include "latcolecciones.h"
 
 LATINO_API lista *latL_crear(lat_mv *mv) {
   lista *l = latM_asignar(mv, sizeof(lista));
@@ -167,7 +168,10 @@ LATINO_API bool latL_contiene_valor(lat_mv *mv, lista *list, void *data) {
 
   LIST_FOREACH(list, primero, siguiente, cur) {
     lat_objeto *tmp = (lat_objeto *)cur->valor;
-    if (latO_comparar(mv, tmp, bus) == 0) {
+    int comparacion = tmp->tipo == T_NUMERIC && bus->tipo == T_NUMERIC
+        ? latP_numero_lista(mv, getNumerico(tmp), getNumerico(bus))
+        : latO_comparar(mv, tmp, bus);
+    if (comparacion == 0) {
       return true;
     }
   }

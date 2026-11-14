@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "latino.h"
 #include "latmem.h"
 #include "latpropiedad.h"
+#include "latcolecciones.h"
 #include <string.h>
 #include <stdint.h>
 
@@ -259,6 +260,28 @@ LATINO_API void latH_destruir(lat_mv *mv, hash_map *dic) {
 int latH_hash(const char *key) {
   unsigned int h = latH_hash_fnv1a(key);
   return (int)(h % 256);
+}
+
+/* La celda de valor puede seguir en dic.valores o en otro contenedor.
+   Desvincular metadatos; la VM conserva la propiedad de objetos y payloads. */
+bool latP_dic_eliminar(lat_mv *mv, hash_map *m, const char *clave) {
+  size_t indice = latH_hash_fnv1a(clave) % m->capacity;
+  lista *cubeta = m->buckets[indice];
+  if (!cubeta) return false;
+  LIST_FOREACH(cubeta, primero, siguiente, cur) {
+    hash_val *entrada = (hash_val *)cur->valor;
+    if (strcmp(entrada->llave, clave) == 0) {
+      (void)latL_eliminar_nodo(mv, cubeta, cur);
+      latM_liberar(mv, entrada);
+      --m->longitud;
+      if (cubeta->longitud == 0) {
+        m->buckets[indice] = NULL;
+        latL_destruir(mv, cubeta);
+      }
+      return true;
+    }
+  }
+  return false;
 }
 
 LATINO_API void *latH_obtener(hash_map *m, const char *key) {

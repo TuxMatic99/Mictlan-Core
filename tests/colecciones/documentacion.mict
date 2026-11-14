@@ -1,0 +1,88 @@
+// lista.agregar
+l = [1]
+lista.agregar(l, 2)
+escribir(l)
+
+// lista.insertar
+l = [1]
+lista.insertar(l, 2, 0)
+escribir(l)
+
+// lista.extender
+l = [1]
+lista.extender(l, l)
+escribir(l)
+
+// lista.eliminar_indice
+l = [4, 5]
+lista.eliminar_indice(l, 0)
+escribir(l)
+
+// lista.invertir
+escribir(lista.invertir([1, 2, 3]))
+
+// lista.longitud
+escribir(lista.longitud([1, nulo, 1]))
+
+// lista.indice
+escribir(lista.indice([2, 2, 3], 2))
+
+// lista.encontrar
+escribir(lista.encontrar([2, 2, 3], 2))
+
+// lista.eliminar
+l = [2, 2, 3]
+lista.eliminar(l, 2)
+escribir(l)
+
+// lista.contiene
+escribir(lista.contiene([0.1], 0.9))
+
+// lista.comparar
+escribir(lista.comparar([9], [0, 0]))
+escribir(lista.comparar([0.1], [0.9]))
+
+// lista.concatenar
+escribir(lista.concatenar([1, 2], [2, 3]))
+
+// lista.crear
+escribir(lista.crear(2.9))
+escribir(lista.crear(-1.8))
+
+// lista.separar
+escribir(lista.separar([1, "niño", 2], ":"))
+escribir(lista.separar([nulo, "x", falso, "y"], ":"))
+
+// lista.unir
+escribir(lista.unir([1, "niño", 2], ":"))
+escribir(lista.unir([nulo, "x", falso, "y"], ":"))
+
+// dic.longitud
+escribir(dic.longitud({"a": nulo, "b": 2}))
+
+// dic.llaves
+escribir(dic.llaves({"nombre": 1}))
+
+// dic.valores
+escribir(dic.valores({"dato": 8}))
+
+// dic.vals
+escribir(dic.vals({"dato": 8}))
+
+// dic.contiene
+escribir(dic.contiene({"dato": nulo}, "dato"))
+
+// dic.eliminar
+d = {"a": 1, "b": 2}
+dic.eliminar(d, "a")
+escribir(dic.longitud(d))
+escribir(d.b)
+
+a = [[1], 2]
+b = a
+c = lista.concatenar(a, [])
+b[1] = 5
+escribir(a[1])
+escribir(c[1])
+a[0][0] = 9
+escribir(c[0][0])

@@ -1,0 +1,32 @@
+Registro recuperado de la misión anterior; no ejecutado de nuevo durante el cierre documental.
+SHA de código/pruebas: c4aa656abc8302f893fe74e913867e2852552317
+Compilación instrumentada: correcta. CTest devuelve 8.
+193 pruebas bloqueadas por LSan/ptrace; 3 pruebas de documentación/ABI aprobadas.
+No hay aprobación de ejecución nativa instrumentada en este entorno.
+Se conserva el primer diagnóstico completo; clasificación por caso en el TSV.
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1
+UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1
+LSAN_OPTIONS=exitcode=23
+
+Test project $WORKSPACE/build-p12b2-asan
+        Start   1: mictlan_alpha_identidad
+  1/196 Test   #1: mictlan_alpha_identidad ............................***Failed    0.02 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/alpha/verificar.cmake:14 (message):
+  Código 23, se esperaba 0.
+
+
+
+  ==246==LeakSanitizer has encountered a fatal error.
+
+  ==246==HINT: For debugging, try setting environment variable
+  LSAN_OPTIONS=verbosity=1:log_threads=1
+
+  ==246==HINT: LeakSanitizer does not work under ptrace (strace, gdb, etc)
+
+Call Stack (most recent call first):
+  $WORKSPACE/mictlan-core/tests/alpha/verificar.cmake:50 (ejecutar)
+
+
+
+        Start   2: mictlan_alpha_extensiones
+  2/196 Test   #2: mictlan_alpha_extensiones ..........................***Failed    0.02 sec

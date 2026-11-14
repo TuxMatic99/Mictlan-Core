@@ -23,8 +23,34 @@ THE SOFTWARE.
  */
 
 #include "latino.h"
+#include "latmem.h"
+#include "latdo.h"
+#include "laterror.h"
+#include <limits.h>
+#include <stdint.h>
+#include <math.h>
 
 #define LIB_LISTA_NAME "lista"
+
+/* Latino trunca fracciones finitas hacia cero. Validar antes del cast evita
+   comportamiento indefinido para NaN, infinito o cantidades fuera de int. */
+static int lista_entero(lat_mv *mv, lat_objeto *o) {
+    double n = trunc(latC_checar_numerico(mv, o));
+    if (!isfinite(n) || n < INT_MIN || n > INT_MAX) {
+        latC_error(mv, "Numero fuera de rango para lista");
+        return 0;
+    }
+    return (int)n;
+}
+
+static void lista_publicar(lat_mv *mv, lista *l) {
+    lat_objeto *o = latC_crear_lista(mv, l);
+    latC_apilar(mv, o);
+#if !HABILITAR_GC
+    /* La pila conserva el payload; este descriptor no es un elemento. */
+    latM_liberar(mv, o);
+#endif
+}
 
 static void lista_agregar(lat_mv *mv) {
     lat_objeto *elem = latC_desapilar(mv);
@@ -53,7 +79,7 @@ static void lista_eliminar_indice(lat_mv *mv) {
     lat_objeto *b = latC_desapilar(mv);
     lat_objeto *a = latC_desapilar(mv);
     lista *lst = latC_checar_lista(mv, a);
-    int pos = latC_checar_numerico(mv, b);
+    int pos = lista_entero(mv, b);
     if (pos < 0 || pos >= latL_longitud(lst)) {
         latC_error(mv, "Indice fuera de rango");
     }
@@ -67,38 +93,35 @@ static void lista_invertir(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
     lista *lst = latC_checar_lista(mv, a);
     lista *nl = latL_crear(mv);
-    // FIXME: For performance
-    int i;
-    int len = latL_longitud(lst) - 1;
-    for (i = len; i >= 0; i--) {
-        latL_agregar(mv, nl, latL_obtener_elemento(mv, lst, i));
+    for (nodo_lista *n = lst->ultimo; n; n = n->anterior) {
+        latL_agregar(mv, nl, n->valor);
     }
-    lat_objeto *tmp = latC_crear_lista(mv, nl);
-    latC_apilar(mv, tmp);
+    lista_publicar(mv, nl);
 }
 
 static void lista_longitud(lat_mv *mv) {
     lat_objeto *o = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, latL_longitud(latC_checar_lista(mv, o)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, latL_longitud(latC_checar_lista(mv, o)));
 }
 
 static void lista_comparar(lat_mv *mv) {
     lat_objeto *b = latC_desapilar(mv);
     lat_objeto *a = latC_desapilar(mv);
-    lat_objeto *tmp =
-        latC_crear_numerico(mv, latL_comparar(mv, latC_checar_lista(mv, a),
-                                              latC_checar_lista(mv, b)));
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, latL_comparar(mv, latC_checar_lista(mv, a),
+                                             latC_checar_lista(mv, b)));
 }
 
 static void lista_insertar(lat_mv *mv) {
     lat_objeto *c = latC_desapilar(mv);
     lat_objeto *b = latC_desapilar(mv);
     lat_objeto *a = latC_desapilar(mv);
-    latL_insertar_elemento(mv, latC_checar_lista(mv, a), latO_clonar(mv, b),
-                           latC_checar_numerico(mv, c));
+    lista *lst = latC_checar_lista(mv, a);
+    int pos = lista_entero(mv, c);
+    if (pos < 0 || pos > latL_longitud(lst)) {
+        latC_error(mv, "Indice fuera de rango");
+        return;
+    }
+    latL_insertar_elemento(mv, lst, latO_clonar(mv, b), pos);
 }
 
 static void lista_eliminar(lat_mv *mv) {
@@ -117,8 +140,7 @@ static void lista_indice(lat_mv *mv) {
     lat_objeto *a = latC_desapilar(mv);
     lista *lst = latC_checar_lista(mv, a);
     int i = latL_obtener_indice(mv, lst, b);
-    lat_objeto *tmp = latC_crear_numerico(mv, (double)i);
-    latC_apilar(mv, tmp);
+    latC_apilar_double(mv, i);
 }
 
 static void lista_contiene(lat_mv *mv) {
@@ -136,7 +158,7 @@ static void lista_contiene(lat_mv *mv) {
 static void lista_crear(lat_mv *mv) {
     lat_objeto *num = latC_desapilar(mv);
     int i = 0;
-    int cant = latC_checar_numerico(mv, num);
+    int cant = lista_entero(mv, num);
     lista *lst = latL_crear(mv);
     if (cant > 0) {
         while (i < cant) {
@@ -144,80 +166,87 @@ static void lista_crear(lat_mv *mv) {
             i++;
         }
     }
-    latC_apilar(mv, latC_crear_lista(mv, lst));
+    lista_publicar(mv, lst);
 }
 
 void lista_concatenar(lat_mv *mv) {
     lat_objeto *l2 = latC_desapilar(mv);
     lat_objeto *l1 = latC_desapilar(mv);
 
-    lista *nl = latL_crear(mv);
     lista *lt1 = latC_checar_lista(mv, l1);
     lista *lt2 = latC_checar_lista(mv, l2);
+    lista *nl = latL_crear(mv);
+    latL_extender(mv, nl, lt1);
+    latL_extender(mv, nl, lt2);
+    lista_publicar(mv, nl);
+}
 
-    int i;
-    int len1 = latL_longitud(lt1), len2 = latL_longitud(lt2);
-
-    for (i = 0; i < len1; i++) {
-        latL_agregar(mv, nl, latL_obtener_elemento(mv, lt1, i));
+/* Texto prestado o buffer numerico local: no hay conversiones que reserven. */
+static const char *lista_texto(lat_objeto *o, char numero[64]) {
+    if (o->tipo == T_STR) return getstr(getCadena(o));
+    if (o->tipo == T_NUMERIC) {
+        snprintf(numero, 64, "%.16g", getNumerico(o));
+        return numero;
     }
-    for (i = 0; i < len2; i++) {
-        latL_agregar(mv, nl, latL_obtener_elemento(mv, lt2, i));
-    }
-
-    lat_objeto *tmp = latC_crear_lista(mv, nl);
-    latC_apilar(mv, tmp);
+    return NULL;
 }
 
 void lista_separar(lat_mv *mv) {
     lat_objeto *separador = latC_desapilar(mv);
     lat_objeto *list_ = latC_desapilar(mv);
-    long int mem = 64; // incluyo en el valor de la memoria 64 espacios por si
-                       // acaso son númericos
-    char *texto = malloc(mem); // inicio la asignación de memoria
-    char *sep = " "; // el separador por defecto será " " (un espacio)
-    if (separador->tipo != T_NULL) {
-        sep = latC_checar_cadena(mv, separador); // si no es nulo, ponemos el
-                                                 // separador que indique el
-                                                 // usuario en el segundo
-                                                 // argumento
-    };
-    char *sep_elegido = sep;
-    lista *lst = latC_checar_lista(mv, list_); // creamos la lista
-    texto[0] = '\0'; // iniciamos el valor 0 de texto como nulo
-    long int lng = latL_longitud(lst); // creo la longitud de la lista para no
-                                       // tener que llamarla a cada ciclo
-    for (long int i = 0; i < lng; i++) {
-        sep_elegido =
-            i == 0 ? ""
-                   : sep; // si i es igual a 0, no ingresará nada, en cambio,
-        lat_objeto *tmp1 =
-            latL_obtener_elemento(mv, lst, i); // obtengo el elemento
-        if (tmp1->tipo == T_STR) {             // si es cadena...
-            mem += strlen(latC_checar_cadena(mv, tmp1)) +
-                   1; // aumentaré el valor de la memoria a la longitud de la
-                      // cadena + 1
-            texto = realloc(
-                texto, mem); // asigno la memoria nuevamente sin borrar su valor
-            strcat(texto, sep_elegido);
-            strcat(texto, latC_checar_cadena(mv, tmp1));
-        } else if (tmp1->tipo == T_NUMERIC) {
-            double val = latC_checar_numerico(mv, tmp1);
-            char numbuf[64];
-            snprintf(numbuf, sizeof(numbuf), "%.16g", val);
-            mem += strlen(sep_elegido) + strlen(numbuf) + 1;
-            texto = realloc(texto, mem);
-            strcat(texto, sep_elegido);
-            strcat(texto, numbuf);
+    lista *lst = latC_checar_lista(mv, list_);
+    const char *sep = separador->tipo == T_NULL ? " "
+                      : latC_checar_cadena(mv, separador);
+    size_t nsep = strlen(sep), total = 0;
+    bool primero = true;
+    for (nodo_lista *n = lst->primero; n; n = n->siguiente) {
+        char numero[64];
+        const char *texto = lista_texto((lat_objeto *)n->valor, numero);
+        if (texto) {
+            size_t bytes = strlen(texto), extra = primero ? 0 : nsep;
+            if (bytes > SIZE_MAX - total - 1 ||
+                extra > SIZE_MAX - total - bytes - 1) {
+                latC_error(mv, "Resultado de union demasiado largo");
+                return;
+            }
+            total += bytes + extra;
         }
+        /* Compatibilidad: posicion original, incluso si se omiten valores. */
+        primero = false;
     }
-    if (*texto == '\0') { // ahora regreso al valor de texto, y lo comparo con
-                          // el primer valor que asigne, si es nulo...
-        latC_apilar(mv, latO_nulo); // retorna nulo.
-    } else {
-        latC_apilar_string(mv, texto); // sino, la lista concatenada
+    if (total == 0) {
+        latC_apilar(mv, latO_nulo);
+        return;
     }
-    free(texto);
+    char *buffer = malloc(total + 1);
+    if (!buffer) {
+        latC_error(mv, "Memoria agotada al unir lista");
+        return;
+    }
+    char *destino = buffer;
+    primero = true;
+    for (nodo_lista *n = lst->primero; n; n = n->siguiente) {
+        char numero[64];
+        const char *texto = lista_texto((lat_objeto *)n->valor, numero);
+        if (texto) {
+            if (!primero) { memcpy(destino, sep, nsep); destino += nsep; }
+            size_t bytes = strlen(texto);
+            memcpy(destino, texto, bytes);
+            destino += bytes;
+        }
+        primero = false;
+    }
+    *destino = '\0';
+    /* Publicar puede fallar al internar o apilar. Liberar tambien si salta
+       al manejador; despues propagar el mismo estado al llamador original. */
+    struct lat_longjmp guardia;
+    guardia.previo = mv->error;
+    guardia.status = 0;
+    mv->error = &guardia;
+    LAT_TRY(mv, &guardia, latC_apilar_string(mv, buffer););
+    mv->error = guardia.previo;
+    free(buffer);
+    if (guardia.status) latD_lanzar(mv, guardia.status);
 }
 
 static const lat_CReg liblist[] = {
@@ -235,6 +264,7 @@ static const lat_CReg liblist[] = {
     {"concatenar", lista_concatenar, 2},
     {"crear", lista_crear, 1},
     {"separar", lista_separar, 2},
+    {"unir", lista_separar, 2},
     {NULL, NULL, 0}};
 
 void latC_abrir_liblatino_listlib(lat_mv *mv) {

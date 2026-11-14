@@ -1,0 +1,733 @@
+Test project $WORKSPACE/build-base-debug
+      Start  95: mictlan_p12b2_dic_integridad_lat
+ 1/43 Test  #95: mictlan_p12b2_dic_integridad_lat ..........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  1
+
+  0
+
+  []
+
+  []
+
+  falso
+
+  0
+
+  2
+
+  verdadero
+
+  9
+
+  2
+
+  1
+
+  9
+
+
+
+  Obtenida:
+
+  1
+
+  1
+
+  []
+
+  []
+
+  falso
+
+  1
+
+  3
+
+  verdadero
+
+  9
+
+  2
+
+  3
+
+  9
+
+
+
+
+      Start  96: mictlan_p12b2_dic_integridad_mict
+ 2/43 Test  #96: mictlan_p12b2_dic_integridad_mict .........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  1
+
+  0
+
+  []
+
+  []
+
+  falso
+
+  0
+
+  2
+
+  verdadero
+
+  9
+
+  2
+
+  1
+
+  9
+
+
+
+  Obtenida:
+
+  1
+
+  1
+
+  []
+
+  []
+
+  falso
+
+  1
+
+  3
+
+  verdadero
+
+  9
+
+  2
+
+  3
+
+  9
+
+
+
+
+      Start  97: mictlan_p12b2_dic_colisiones_lat
+ 3/43 Test  #97: mictlan_p12b2_dic_colisiones_lat ..........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  2
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  11
+
+  33
+
+  2
+
+  verdadero
+
+  1
+
+  33
+
+  0
+
+  1
+
+  44
+
+
+
+  Obtenida:
+
+  3
+
+  falso
+
+  falso
+
+  falso
+
+
+
+
+
+  0
+
+  verdadero
+
+  3
+
+
+
+  3
+
+  4
+
+  44
+
+
+
+
+      Start  98: mictlan_p12b2_dic_colisiones_mict
+ 4/43 Test  #98: mictlan_p12b2_dic_colisiones_mict .........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  2
+
+  verdadero
+
+  falso
+
+  verdadero
+
+  11
+
+  33
+
+  2
+
+  verdadero
+
+  1
+
+  33
+
+  0
+
+  1
+
+  44
+
+
+
+  Obtenida:
+
+  3
+
+  falso
+
+  falso
+
+  falso
+
+
+
+
+
+  0
+
+  verdadero
+
+  3
+
+
+
+  3
+
+  4
+
+  44
+
+
+
+
+      Start  99: mictlan_p12b2_listas_herencia_lat
+ 5/43 Test  #99: mictlan_p12b2_listas_herencia_lat .........   Passed    0.01 sec
+      Start 100: mictlan_p12b2_listas_herencia_mict
+ 6/43 Test #100: mictlan_p12b2_listas_herencia_mict ........   Passed    0.01 sec
+      Start 101: mictlan_p12b2_referencias_lat
+ 7/43 Test #101: mictlan_p12b2_referencias_lat .............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  5
+
+  2
+
+  9
+
+  9
+
+  [[9], 5]
+
+  [2, [9]]
+
+  8
+
+  0
+
+  8
+
+  9
+
+  10
+
+
+
+  Obtenida:
+
+  5
+
+  2
+
+  9
+
+  9
+
+  [[9], 5]
+
+  [2, [9]]
+
+  8
+
+  1
+
+  8
+
+  9
+
+  10
+
+
+
+
+      Start 102: mictlan_p12b2_referencias_mict
+ 8/43 Test #102: mictlan_p12b2_referencias_mict ............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  5
+
+  2
+
+  9
+
+  9
+
+  [[9], 5]
+
+  [2, [9]]
+
+  8
+
+  0
+
+  8
+
+  9
+
+  10
+
+
+
+  Obtenida:
+
+  5
+
+  2
+
+  9
+
+  9
+
+  [[9], 5]
+
+  [2, [9]]
+
+  8
+
+  1
+
+  8
+
+  9
+
+  10
+
+
+
+
+      Start 103: mictlan_p12b2_comparacion_numerica_lat
+ 9/43 Test #103: mictlan_p12b2_comparacion_numerica_lat ....***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  -1
+
+  1
+
+  falso
+
+  -1
+
+  0
+
+  -1
+
+  0
+
+
+
+  Obtenida:
+
+  0
+
+  0
+
+  verdadero
+
+  -1
+
+  -1
+
+  -1
+
+  0
+
+
+
+
+      Start 104: mictlan_p12b2_comparacion_numerica_mict
+10/43 Test #104: mictlan_p12b2_comparacion_numerica_mict ...***Failed    0.00 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  -1
+
+  1
+
+  falso
+
+  -1
+
+  0
+
+  -1
+
+  0
+
+
+
+  Obtenida:
+
+  0
+
+  0
+
+  verdadero
+
+  -1
+
+  -1
+
+  -1
+
+  0
+
+
+
+
+      Start 105: mictlan_p12b2_unir_alias_lat
+11/43 Test #105: mictlan_p12b2_unir_alias_lat ..............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 1; esperado 0.
+
+
+
+
+  $WORKSPACE/build-base-debug/colecciones/unir_alias-lat/programa.lat:1:16:
+  No se encontro la fun 'unir'
+
+
+
+
+      Start 106: mictlan_p12b2_unir_alias_mict
+12/43 Test #106: mictlan_p12b2_unir_alias_mict .............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 1; esperado 0.
+
+
+
+
+  $WORKSPACE/build-base-debug/colecciones/unir_alias-mict/programa.mict:1:16:
+  No se encontro la fun 'unir'
+
+
+
+
+      Start 107: mictlan_p12b2_union_larga_lat
+13/43 Test #107: mictlan_p12b2_union_larga_lat .............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Subprocess aborted; esperado 0.
+
+
+
+  realloc(): invalid next size
+
+
+
+
+      Start 108: mictlan_p12b2_union_larga_mict
+14/43 Test #108: mictlan_p12b2_union_larga_mict ............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Subprocess aborted; esperado 0.
+
+
+
+  realloc(): invalid next size
+
+
+
+
+      Start 109: mictlan_p12b2_dic_tipo_vacio_lat
+15/43 Test #109: mictlan_p12b2_dic_tipo_vacio_lat ..........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 110: mictlan_p12b2_dic_tipo_vacio_mict
+16/43 Test #110: mictlan_p12b2_dic_tipo_vacio_mict .........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 111: mictlan_p12b2_indice_infinito_lat
+17/43 Test #111: mictlan_p12b2_indice_infinito_lat .........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Numero fuera de rango para lista
+
+
+  $WORKSPACE/build-base-debug/colecciones/indice_infinito-lat/programa.lat:1:1:
+  Indice fuera de rango
+
+
+
+
+      Start 112: mictlan_p12b2_indice_infinito_mict
+18/43 Test #112: mictlan_p12b2_indice_infinito_mict ........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Numero fuera de rango para lista
+
+
+  $WORKSPACE/build-base-debug/colecciones/indice_infinito-mict/programa.mict:1:1:
+  Indice fuera de rango
+
+
+
+
+      Start 113: mictlan_p12b2_insertar_nan_lat
+19/43 Test #113: mictlan_p12b2_insertar_nan_lat ............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Numero fuera de rango para lista
+
+
+  $WORKSPACE/build-base-debug/colecciones/insertar_nan-lat/programa.lat:1:1:
+  Indice fuera de rango
+
+
+
+
+      Start 114: mictlan_p12b2_insertar_nan_mict
+20/43 Test #114: mictlan_p12b2_insertar_nan_mict ...........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Numero fuera de rango para lista
+
+
+  $WORKSPACE/build-base-debug/colecciones/insertar_nan-mict/programa.mict:1:1:
+  Indice fuera de rango
+
+
+
+
+      Start 115: mictlan_p12b2_crear_infinito_lat
+21/43 Test #115: mictlan_p12b2_crear_infinito_lat ..........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 116: mictlan_p12b2_crear_infinito_mict
+22/43 Test #116: mictlan_p12b2_crear_infinito_mict .........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 117: mictlan_p12b2_crear_enorme_lat
+23/43 Test #117: mictlan_p12b2_crear_enorme_lat ............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 118: mictlan_p12b2_crear_enorme_mict
+24/43 Test #118: mictlan_p12b2_crear_enorme_mict ...........***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 119: mictlan_p12b2_eliminar_negativo_lat
+25/43 Test #119: mictlan_p12b2_eliminar_negativo_lat .......   Passed    0.01 sec
+      Start 120: mictlan_p12b2_eliminar_negativo_mict
+26/43 Test #120: mictlan_p12b2_eliminar_negativo_mict ......   Passed    0.01 sec
+      Start 121: mictlan_p12b2_insertar_negativo_lat
+27/43 Test #121: mictlan_p12b2_insertar_negativo_lat .......   Passed    0.01 sec
+      Start 122: mictlan_p12b2_insertar_negativo_mict
+28/43 Test #122: mictlan_p12b2_insertar_negativo_mict ......   Passed    0.01 sec
+      Start 123: mictlan_p12b2_insertar_exceso_lat
+29/43 Test #123: mictlan_p12b2_insertar_exceso_lat .........   Passed    0.01 sec
+      Start 124: mictlan_p12b2_insertar_exceso_mict
+30/43 Test #124: mictlan_p12b2_insertar_exceso_mict ........   Passed    0.01 sec
+      Start 125: mictlan_p12b2_comparar_nan_lat
+31/43 Test #125: mictlan_p12b2_comparar_nan_lat ............***Failed    0.01 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 126: mictlan_p12b2_comparar_nan_mict
+32/43 Test #126: mictlan_p12b2_comparar_nan_mict ...........***Failed    0.00 sec
+CMake Error at $WORKSPACE/mictlan-core/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 127: mictlan_p12b2_union_tipo_lista_lat
+33/43 Test #127: mictlan_p12b2_union_tipo_lista_lat ........   Passed    0.01 sec
+      Start 128: mictlan_p12b2_union_tipo_lista_mict
+34/43 Test #128: mictlan_p12b2_union_tipo_lista_mict .......   Passed    0.01 sec
+      Start 129: mictlan_p12b2_union_tipo_separador_lat
+35/43 Test #129: mictlan_p12b2_union_tipo_separador_lat ....   Passed    0.01 sec
+      Start 130: mictlan_p12b2_union_tipo_separador_mict
+36/43 Test #130: mictlan_p12b2_union_tipo_separador_mict ...   Passed    0.00 sec
+      Start 131: mictlan_p12b2_dic_colisiones
+37/43 Test #131: mictlan_p12b2_dic_colisiones ..............***Failed    0.00 sec
+Dic B2 linea 21: m->longitud==2 && entradas(m)==2
+
+      Start 132: mictlan_p12b2_dic_crecimiento
+38/43 Test #132: mictlan_p12b2_dic_crecimiento .............***Failed    0.01 sec
+Dic B2 linea 31: m->longitud==esperadas && entradas(m)==esperadas
+
+      Start 133: mictlan_p12b2_dic_compartidos
+39/43 Test #133: mictlan_p12b2_dic_compartidos .............***Failed    0.00 sec
+Dic B2 linea 48: borrar(mv,f,d,"dato")==0 && m->longitud==0
+
+      Start 134: mictlan_p12b2_dic_recoleccion
+40/43 Test #134: mictlan_p12b2_dic_recoleccion .............***Failed    0.00 sec
+Dic B2 linea 48: borrar(mv,f,d,"dato")==0 && m->longitud==0
+
+      Start 135: mictlan_p12b2_ciclos
+41/43 Test #135: mictlan_p12b2_ciclos ......................***Exception: SegFault  0.01 sec
+
+      Start 136: mictlan_p12b2_union_argumentos
+42/43 Test #136: mictlan_p12b2_union_argumentos ............***Failed    0.00 sec
+union-b2:0:0: El parametro debe de ser una lista
+Temporal: vivos=1, estado=2
+
+      Start 137: mictlan_p12b2_union_reserva
+43/43 Test #137: mictlan_p12b2_union_reserva ...............***Exception: SegFault  0.00 sec
+
+
+28% tests passed, 31 tests failed out of 43
+
+Label Time Summary:
+colecciones       =   0.23 sec*proc (43 tests)
+compatibilidad    =   0.21 sec*proc (36 tests)
+dic               =   0.01 sec*proc (4 tests)
+memoria           =   0.02 sec*proc (7 tests)
+p12b2             =   0.23 sec*proc (43 tests)
+
+Total Test time (real) =   0.25 sec
+
+The following tests FAILED:
+	 95 - mictlan_p12b2_dic_integridad_lat (Failed)         colecciones compatibilidad p12b2
+	 96 - mictlan_p12b2_dic_integridad_mict (Failed)        colecciones compatibilidad p12b2
+	 97 - mictlan_p12b2_dic_colisiones_lat (Failed)         colecciones compatibilidad p12b2
+	 98 - mictlan_p12b2_dic_colisiones_mict (Failed)        colecciones compatibilidad p12b2
+	101 - mictlan_p12b2_referencias_lat (Failed)            colecciones compatibilidad p12b2
+	102 - mictlan_p12b2_referencias_mict (Failed)           colecciones compatibilidad p12b2
+	103 - mictlan_p12b2_comparacion_numerica_lat (Failed)   colecciones compatibilidad p12b2
+	104 - mictlan_p12b2_comparacion_numerica_mict (Failed)  colecciones compatibilidad p12b2
+	105 - mictlan_p12b2_unir_alias_lat (Failed)             colecciones compatibilidad p12b2
+	106 - mictlan_p12b2_unir_alias_mict (Failed)            colecciones compatibilidad p12b2
+	107 - mictlan_p12b2_union_larga_lat (Failed)            colecciones compatibilidad p12b2
+	108 - mictlan_p12b2_union_larga_mict (Failed)           colecciones compatibilidad p12b2
+	109 - mictlan_p12b2_dic_tipo_vacio_lat (Failed)         colecciones compatibilidad p12b2
+	110 - mictlan_p12b2_dic_tipo_vacio_mict (Failed)        colecciones compatibilidad p12b2
+	111 - mictlan_p12b2_indice_infinito_lat (Failed)        colecciones compatibilidad p12b2
+	112 - mictlan_p12b2_indice_infinito_mict (Failed)       colecciones compatibilidad p12b2
+	113 - mictlan_p12b2_insertar_nan_lat (Failed)           colecciones compatibilidad p12b2
+	114 - mictlan_p12b2_insertar_nan_mict (Failed)          colecciones compatibilidad p12b2
+	115 - mictlan_p12b2_crear_infinito_lat (Failed)         colecciones compatibilidad p12b2
+	116 - mictlan_p12b2_crear_infinito_mict (Failed)        colecciones compatibilidad p12b2
+	117 - mictlan_p12b2_crear_enorme_lat (Failed)           colecciones compatibilidad p12b2
+	118 - mictlan_p12b2_crear_enorme_mict (Failed)          colecciones compatibilidad p12b2
+	125 - mictlan_p12b2_comparar_nan_lat (Failed)           colecciones compatibilidad p12b2
+	126 - mictlan_p12b2_comparar_nan_mict (Failed)          colecciones compatibilidad p12b2
+	131 - mictlan_p12b2_dic_colisiones (Failed)             colecciones dic memoria p12b2
+	132 - mictlan_p12b2_dic_crecimiento (Failed)            colecciones dic memoria p12b2
+	133 - mictlan_p12b2_dic_compartidos (Failed)            colecciones dic memoria p12b2
+	134 - mictlan_p12b2_dic_recoleccion (Failed)            colecciones dic memoria p12b2
+	135 - mictlan_p12b2_ciclos (SEGFAULT)                   colecciones memoria p12b2
+	136 - mictlan_p12b2_union_argumentos (Failed)           colecciones memoria p12b2
+	137 - mictlan_p12b2_union_reserva (SEGFAULT)            colecciones memoria p12b2
+Errors while running CTest

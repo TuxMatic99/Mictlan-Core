@@ -1,0 +1,7 @@
+escribir(lista.comparar([0.1], [0.9]))
+escribir(lista.comparar([0.9], [0.1]))
+escribir(lista.contiene([0.1], 0.9))
+escribir(lista.indice([0.1], 0.9))
+escribir(lista.comparar([1e999], [1e999]))
+escribir(lista.comparar([-1e999], [1e999]))
+escribir(lista.comparar(["1"], [1]))

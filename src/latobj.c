@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include "latmem.h"
 #include "latobj.h"
 #include "latpropiedad.h"
+#include "latcolecciones.h"
 
 /* Los envoltorios de T_FUN se copian sin contar referencias. Por ello el
    payload se conserva hasta el cierre de la VM, no hasta destruir una copia.
@@ -635,29 +636,48 @@ void latL_modificar_elemento(lat_mv *mv, lista *list, void *data, int pos) {
   }
 }
 
+typedef struct lat_comparacion_camino {
+  lista *a;
+  lista *b;
+  const struct lat_comparacion_camino *anterior;
+} lat_comparacion_camino;
+
+static int comparar_listas(lat_mv *mv, lista *lhs, lista *rhs,
+                           const lat_comparacion_camino *camino,
+                           unsigned nivel) {
+  /* Mantener el orden historico: longitud antes de contenido. */
+  if (lhs->longitud < rhs->longitud) return -1;
+  if (lhs->longitud > rhs->longitud) return 1;
+  for (const lat_comparacion_camino *p = camino; p; p = p->anterior) {
+    if (p->a == lhs && p->b == rhs) {
+      latC_error(mv, "No se pueden comparar listas ciclicas");
+      return 0;
+    }
+  }
+  if (nivel >= 256) {
+    latC_error(mv, "Profundidad de comparacion de listas excedida (256)");
+    return 0;
+  }
+  lat_comparacion_camino actual = {lhs, rhs, camino};
+  nodo_lista *a = lhs->primero, *b = rhs->primero;
+  for (; a && b; a = a->siguiente, b = b->siguiente) {
+    lat_objeto *oa = (lat_objeto *)a->valor;
+    lat_objeto *ob = (lat_objeto *)b->valor;
+    int res;
+    if (oa->tipo == T_LIST && ob->tipo == T_LIST) {
+      res = comparar_listas(mv, getLista(oa), getLista(ob), &actual, nivel + 1);
+    } else if (oa->tipo == T_NUMERIC && ob->tipo == T_NUMERIC) {
+      res = latP_numero_lista(mv, getNumerico(oa), getNumerico(ob));
+    } else {
+      res = latO_comparar(mv, oa, ob);
+    }
+    if (res) return res < 0 ? -1 : 1;
+  }
+  return 0;
+}
+
 int latL_comparar(lat_mv *mv, lista *lhs, lista *rhs) {
-  int res = 0;
-  int len1 = latL_longitud(lhs);
-  int len2 = latL_longitud(rhs);
-  if (len1 < len2) {
-    return -1;
-  }
-  if (len1 > len2) {
-    return 1;
-  }
-  int i;
-  for (i = 0; i < len1; i++) {
-    lat_objeto *tmp1 = latL_obtener_elemento(mv, lhs, i);
-    lat_objeto *tmp2 = latL_obtener_elemento(mv, rhs, i);
-    res = latO_comparar(mv, tmp1, tmp2);
-    if (res < 0) {
-      return -1;
-    }
-    if (res > 0) {
-      return 1;
-    }
-  }
-  return res;
+  return comparar_listas(mv, lhs, rhs, NULL, 0);
 }
 
 int latL_obtener_indice(lat_mv *mv, lista *list, void *data) {

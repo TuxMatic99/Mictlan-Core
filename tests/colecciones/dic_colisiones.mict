@@ -1,0 +1,20 @@
+# b2_32, b2_87 y b2_128 colisionan realmente en capacidad inicial 256.
+d = {"b2_32": 11, "b2_87": 22, "b2_128": 33}
+v = dic.valores(d)
+dic.eliminar(d, "b2_87")
+escribir(dic.longitud(d))
+escribir(dic.contiene(d, "b2_32"))
+escribir(dic.contiene(d, "b2_87"))
+escribir(dic.contiene(d, "b2_128"))
+escribir(d.b2_32)
+escribir(d.b2_128)
+escribir(lista.longitud(dic.llaves(d)))
+escribir(lista.contiene(v, 22))
+dic.eliminar(d, "b2_32")
+escribir(dic.longitud(d))
+escribir(d.b2_128)
+dic.eliminar(d, "b2_128")
+escribir(dic.longitud(d))
+d.b2_87 = 44
+escribir(dic.longitud(d))
+escribir(d.b2_87)
