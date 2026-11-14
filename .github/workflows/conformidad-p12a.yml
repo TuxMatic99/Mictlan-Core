@@ -6,6 +6,7 @@ on:
     branches:
       - 'investigacion/p12a-*'
       - 'investigacion/p12b1-*'
+      - 'investigacion/p12b2-*'
 
 permissions:
   contents: read
@@ -60,6 +61,9 @@ jobs:
       - name: Medir cadenas en Release
         if: matrix.perfil == 'Release'
         run: python3 tests/cadenas/medir.py ./build/mictlan_bench_cadenas > benchmark-cadenas.csv
+      - name: Medir colecciones en Release
+        if: matrix.perfil == 'Release'
+        run: python3 tests/colecciones/medir.py ./build/mictlan_bench_colecciones > benchmark-colecciones.csv
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -71,4 +75,6 @@ jobs:
             build/resultados.xml
             build/conformidad/
             build/cadenas/
+            build/colecciones/
             benchmark-cadenas.csv
+            benchmark-colecciones.csv
