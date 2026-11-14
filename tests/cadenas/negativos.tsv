@@ -19,3 +19,5 @@ separador_vacio	Separador de texto vacio
 regex_tipo	El parametro debe de ser una cadena
 regex_patron	Error al compilar regex
 char_rango	Numero fuera de rango para cadena
+escape_unicode	Escape Unicode no admitido en reemplazar
+escape_enorme	Escape numerico fuera de rango
