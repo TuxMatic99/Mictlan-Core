@@ -1,0 +1,2 @@
+archivo.duplicar("origen","destino")
+poner(archivo.leer("destino"))

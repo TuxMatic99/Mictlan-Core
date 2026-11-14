@@ -1,0 +1,3 @@
+archivo.escribir("hijo.mict", "archivo.escribir(\"marca\", \"42\")\n")
+archivo.ejecutar("hijo.mict")
+poner(archivo.leer("marca"))

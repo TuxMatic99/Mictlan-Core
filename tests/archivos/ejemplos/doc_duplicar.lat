@@ -1,0 +1,4 @@
+archivo.escribir("origen", "copia ñ")
+archivo.escribir("destino", "anterior")
+archivo.duplicar("origen", "destino")
+poner(archivo.leer("destino"))

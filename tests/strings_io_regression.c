@@ -15,7 +15,15 @@ static void liberar_observando(void *p) {
 #define free liberar_observando
 #include "../src/latmv.c"
 #undef free
+static int cierre_fallido;
+static int cerrar_inyectado(FILE *fp) {
+    int r=fclose(fp);
+    if(cierre_fallido){cierre_fallido=0;errno=EIO;return EOF;}
+    return r;
+}
+#define fclose cerrar_inyectado
 #include "../src/latfilelib.c"
+#undef fclose
 char *quitar_espacios(const char *s);
 void str_recortar(lat_mv *mv);
 void str_separar(lat_mv *mv);
@@ -96,7 +104,7 @@ int main(void) {
         EXIGIR(fwrite("a\0b",1,3,fp)==3 && fclose(fp)==0);
         texto(mv,ruta); file_leer(mv); exigir_logico(mv,false);
 #ifdef __linux__
-        texto(mv,"/dev/full"); texto(mv,"error diferido");
+        texto(mv,ruta); texto(mv,"error diferido"); cierre_fallido=1;
         file_intentar_escribir(mv); exigir_logico(mv,false);
 #endif
         EXIGIR(mv->ptrpila==0 && mv->ptrctx==0);

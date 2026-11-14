@@ -1,0 +1,819 @@
+Test project /workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug
+        Start   1: mictlan_alpha_identidad
+  1/391 Test   #1: mictlan_alpha_identidad ........................   Passed    0.07 sec
+        Start   2: mictlan_alpha_extensiones
+  2/391 Test   #2: mictlan_alpha_extensiones ......................   Passed    0.05 sec
+        Start   3: mictlan_alpha_latino_valores
+  3/391 Test   #3: mictlan_alpha_latino_valores ...................   Passed    0.06 sec
+        Start   4: mictlan_alpha_latino_control
+  4/391 Test   #4: mictlan_alpha_latino_control ...................   Passed    0.07 sec
+        Start   5: mictlan_alpha_latino_colecciones
+  5/391 Test   #5: mictlan_alpha_latino_colecciones ...............   Passed    0.05 sec
+        Start   6: mictlan_alpha_diagnosticos
+  6/391 Test   #6: mictlan_alpha_diagnosticos .....................   Passed    0.06 sec
+        Start   7: mictlan_alpha_repl
+  7/391 Test   #7: mictlan_alpha_repl .............................   Passed    0.03 sec
+        Start   8: mictlan_alpha_modulos
+  8/391 Test   #8: mictlan_alpha_modulos ..........................   Passed    0.03 sec
+        Start   9: mictlan_p12a_numeros_lat
+  9/391 Test   #9: mictlan_p12a_numeros_lat .......................   Passed    0.02 sec
+        Start  10: mictlan_p12a_numeros_mict
+ 10/391 Test  #10: mictlan_p12a_numeros_mict ......................   Passed    0.01 sec
+        Start  11: mictlan_p12a_precedencia_lat
+ 11/391 Test  #11: mictlan_p12a_precedencia_lat ...................   Passed    0.01 sec
+        Start  12: mictlan_p12a_precedencia_mict
+ 12/391 Test  #12: mictlan_p12a_precedencia_mict ..................   Passed    0.01 sec
+        Start  13: mictlan_p12a_logica_lat
+ 13/391 Test  #13: mictlan_p12a_logica_lat ........................   Passed    0.01 sec
+        Start  14: mictlan_p12a_logica_mict
+ 14/391 Test  #14: mictlan_p12a_logica_mict .......................   Passed    0.01 sec
+        Start  15: mictlan_p12a_comparaciones_lat
+ 15/391 Test  #15: mictlan_p12a_comparaciones_lat .................   Passed    0.01 sec
+        Start  16: mictlan_p12a_comparaciones_mict
+ 16/391 Test  #16: mictlan_p12a_comparaciones_mict ................   Passed    0.02 sec
+        Start  17: mictlan_p12a_funciones_lat
+ 17/391 Test  #17: mictlan_p12a_funciones_lat .....................   Passed    0.02 sec
+        Start  18: mictlan_p12a_funciones_mict
+ 18/391 Test  #18: mictlan_p12a_funciones_mict ....................   Passed    0.02 sec
+        Start  19: mictlan_p12a_recursion_lat
+ 19/391 Test  #19: mictlan_p12a_recursion_lat .....................   Passed    0.02 sec
+        Start  20: mictlan_p12a_recursion_mict
+ 20/391 Test  #20: mictlan_p12a_recursion_mict ....................   Passed    0.02 sec
+        Start  21: mictlan_p12a_ambitos_lat
+ 21/391 Test  #21: mictlan_p12a_ambitos_lat .......................   Passed    0.01 sec
+        Start  22: mictlan_p12a_ambitos_mict
+ 22/391 Test  #22: mictlan_p12a_ambitos_mict ......................   Passed    0.02 sec
+        Start  23: mictlan_p12a_asignaciones_lat
+ 23/391 Test  #23: mictlan_p12a_asignaciones_lat ..................   Passed    0.01 sec
+        Start  24: mictlan_p12a_asignaciones_mict
+ 24/391 Test  #24: mictlan_p12a_asignaciones_mict .................   Passed    0.01 sec
+        Start  25: mictlan_p12a_condicional_lat
+ 25/391 Test  #25: mictlan_p12a_condicional_lat ...................   Passed    0.02 sec
+        Start  26: mictlan_p12a_condicional_mict
+ 26/391 Test  #26: mictlan_p12a_condicional_mict ..................   Passed    0.01 sec
+        Start  27: mictlan_p12a_local_inaccesible_lat
+ 27/391 Test  #27: mictlan_p12a_local_inaccesible_lat .............   Passed    0.01 sec
+        Start  28: mictlan_p12a_local_inaccesible_mict
+ 28/391 Test  #28: mictlan_p12a_local_inaccesible_mict ............   Passed    0.01 sec
+        Start  29: mictlan_p12a_argumentos_exceso_lat
+ 29/391 Test  #29: mictlan_p12a_argumentos_exceso_lat .............   Passed    0.01 sec
+        Start  30: mictlan_p12a_argumentos_exceso_mict
+ 30/391 Test  #30: mictlan_p12a_argumentos_exceso_mict ............   Passed    0.01 sec
+        Start  31: mictlan_p12a_locale_C
+ 31/391 Test  #31: mictlan_p12a_locale_C ..........................   Passed    0.00 sec
+        Start  32: mictlan_p12a_locale_es_ES_UTF-8
+ 32/391 Test  #32: mictlan_p12a_locale_es_ES_UTF-8 ................   Passed    0.00 sec
+        Start  33: mictlan_p12a_locale_fr_FR_UTF-8
+ 33/391 Test  #33: mictlan_p12a_locale_fr_FR_UTF-8 ................   Passed    0.01 sec
+        Start  34: mictlan_p12b1_herencia_lat
+ 34/391 Test  #34: mictlan_p12b1_herencia_lat .....................   Passed    0.02 sec
+        Start  35: mictlan_p12b1_herencia_mict
+ 35/391 Test  #35: mictlan_p12b1_herencia_mict ....................   Passed    0.01 sec
+        Start  36: mictlan_p12b1_limites_validos_lat
+ 36/391 Test  #36: mictlan_p12b1_limites_validos_lat ..............   Passed    0.01 sec
+        Start  37: mictlan_p12b1_limites_validos_mict
+ 37/391 Test  #37: mictlan_p12b1_limites_validos_mict .............   Passed    0.01 sec
+        Start  38: mictlan_p12b1_unicode_lat
+ 38/391 Test  #38: mictlan_p12b1_unicode_lat ......................   Passed    0.01 sec
+        Start  39: mictlan_p12b1_unicode_mict
+ 39/391 Test  #39: mictlan_p12b1_unicode_mict .....................   Passed    0.01 sec
+        Start  40: mictlan_p12b1_separacion_explicita_lat
+ 40/391 Test  #40: mictlan_p12b1_separacion_explicita_lat .........   Passed    0.02 sec
+        Start  41: mictlan_p12b1_separacion_explicita_mict
+ 41/391 Test  #41: mictlan_p12b1_separacion_explicita_mict ........   Passed    0.01 sec
+        Start  42: mictlan_p12b1_sub_inicio_negativo_lat
+ 42/391 Test  #42: mictlan_p12b1_sub_inicio_negativo_lat ..........   Passed    0.01 sec
+        Start  43: mictlan_p12b1_sub_inicio_negativo_mict
+ 43/391 Test  #43: mictlan_p12b1_sub_inicio_negativo_mict .........   Passed    0.01 sec
+        Start  44: mictlan_p12b1_sub_cantidad_negativa_lat
+ 44/391 Test  #44: mictlan_p12b1_sub_cantidad_negativa_lat ........   Passed    0.02 sec
+        Start  45: mictlan_p12b1_sub_cantidad_negativa_mict
+ 45/391 Test  #45: mictlan_p12b1_sub_cantidad_negativa_mict .......   Passed    0.01 sec
+        Start  46: mictlan_p12b1_sub_inicio_exceso_lat
+ 46/391 Test  #46: mictlan_p12b1_sub_inicio_exceso_lat ............   Passed    0.01 sec
+        Start  47: mictlan_p12b1_sub_inicio_exceso_mict
+ 47/391 Test  #47: mictlan_p12b1_sub_inicio_exceso_mict ...........   Passed    0.02 sec
+        Start  48: mictlan_p12b1_insertar_negativo_lat
+ 48/391 Test  #48: mictlan_p12b1_insertar_negativo_lat ............   Passed    0.01 sec
+        Start  49: mictlan_p12b1_insertar_negativo_mict
+ 49/391 Test  #49: mictlan_p12b1_insertar_negativo_mict ...........   Passed    0.02 sec
+        Start  50: mictlan_p12b1_indice_infinito_lat
+ 50/391 Test  #50: mictlan_p12b1_indice_infinito_lat ..............   Passed    0.02 sec
+        Start  51: mictlan_p12b1_indice_infinito_mict
+ 51/391 Test  #51: mictlan_p12b1_indice_infinito_mict .............   Passed    0.01 sec
+        Start  52: mictlan_p12b1_indice_enorme_lat
+ 52/391 Test  #52: mictlan_p12b1_indice_enorme_lat ................   Passed    0.01 sec
+        Start  53: mictlan_p12b1_indice_enorme_mict
+ 53/391 Test  #53: mictlan_p12b1_indice_enorme_mict ...............   Passed    0.01 sec
+        Start  54: mictlan_p12b1_relleno_negativo_lat
+ 54/391 Test  #54: mictlan_p12b1_relleno_negativo_lat .............   Passed    0.01 sec
+        Start  55: mictlan_p12b1_relleno_negativo_mict
+ 55/391 Test  #55: mictlan_p12b1_relleno_negativo_mict ............   Passed    0.03 sec
+        Start  56: mictlan_p12b1_reemplazo_vacio_lat
+ 56/391 Test  #56: mictlan_p12b1_reemplazo_vacio_lat ..............   Passed    0.01 sec
+        Start  57: mictlan_p12b1_reemplazo_vacio_mict
+ 57/391 Test  #57: mictlan_p12b1_reemplazo_vacio_mict .............   Passed    0.02 sec
+        Start  58: mictlan_p12b1_tipo_texto_lat
+ 58/391 Test  #58: mictlan_p12b1_tipo_texto_lat ...................   Passed    0.01 sec
+        Start  59: mictlan_p12b1_tipo_texto_mict
+ 59/391 Test  #59: mictlan_p12b1_tipo_texto_mict ..................   Passed    0.01 sec
+        Start  60: mictlan_p12b1_tipo_indice_lat
+ 60/391 Test  #60: mictlan_p12b1_tipo_indice_lat ..................   Passed    0.01 sec
+        Start  61: mictlan_p12b1_tipo_indice_mict
+ 61/391 Test  #61: mictlan_p12b1_tipo_indice_mict .................   Passed    0.02 sec
+        Start  62: mictlan_p12b1_unicode_invalido_lat
+ 62/391 Test  #62: mictlan_p12b1_unicode_invalido_lat .............   Passed    0.01 sec
+        Start  63: mictlan_p12b1_unicode_invalido_mict
+ 63/391 Test  #63: mictlan_p12b1_unicode_invalido_mict ............   Passed    0.01 sec
+        Start  64: mictlan_p12b1_unicode_truncado_lat
+ 64/391 Test  #64: mictlan_p12b1_unicode_truncado_lat .............   Passed    0.01 sec
+        Start  65: mictlan_p12b1_unicode_truncado_mict
+ 65/391 Test  #65: mictlan_p12b1_unicode_truncado_mict ............   Passed    0.02 sec
+        Start  66: mictlan_p12b1_unicode_sustituto_lat
+ 66/391 Test  #66: mictlan_p12b1_unicode_sustituto_lat ............   Passed    0.02 sec
+        Start  67: mictlan_p12b1_unicode_sustituto_mict
+ 67/391 Test  #67: mictlan_p12b1_unicode_sustituto_mict ...........   Passed    0.01 sec
+        Start  68: mictlan_p12b1_unicode_sobrelimite_lat
+ 68/391 Test  #68: mictlan_p12b1_unicode_sobrelimite_lat ..........   Passed    0.01 sec
+        Start  69: mictlan_p12b1_unicode_sobrelimite_mict
+ 69/391 Test  #69: mictlan_p12b1_unicode_sobrelimite_mict .........   Passed    0.01 sec
+        Start  70: mictlan_p12b1_unicode_sobrelargo_lat
+ 70/391 Test  #70: mictlan_p12b1_unicode_sobrelargo_lat ...........   Passed    0.01 sec
+        Start  71: mictlan_p12b1_unicode_sobrelargo_mict
+ 71/391 Test  #71: mictlan_p12b1_unicode_sobrelargo_mict ..........   Passed    0.03 sec
+        Start  72: mictlan_p12b1_unicode_fraccion_lat
+ 72/391 Test  #72: mictlan_p12b1_unicode_fraccion_lat .............   Passed    0.02 sec
+        Start  73: mictlan_p12b1_unicode_fraccion_mict
+ 73/391 Test  #73: mictlan_p12b1_unicode_fraccion_mict ............   Passed    0.01 sec
+        Start  74: mictlan_p12b1_unicode_inicio_lat
+ 74/391 Test  #74: mictlan_p12b1_unicode_inicio_lat ...............   Passed    0.01 sec
+        Start  75: mictlan_p12b1_unicode_inicio_mict
+ 75/391 Test  #75: mictlan_p12b1_unicode_inicio_mict ..............   Passed    0.01 sec
+        Start  76: mictlan_p12b1_separador_vacio_lat
+ 76/391 Test  #76: mictlan_p12b1_separador_vacio_lat ..............   Passed    0.01 sec
+        Start  77: mictlan_p12b1_separador_vacio_mict
+ 77/391 Test  #77: mictlan_p12b1_separador_vacio_mict .............   Passed    0.02 sec
+        Start  78: mictlan_p12b1_regex_tipo_lat
+ 78/391 Test  #78: mictlan_p12b1_regex_tipo_lat ...................   Passed    0.02 sec
+        Start  79: mictlan_p12b1_regex_tipo_mict
+ 79/391 Test  #79: mictlan_p12b1_regex_tipo_mict ..................   Passed    0.02 sec
+        Start  80: mictlan_p12b1_regex_patron_lat
+ 80/391 Test  #80: mictlan_p12b1_regex_patron_lat .................   Passed    0.02 sec
+        Start  81: mictlan_p12b1_regex_patron_mict
+ 81/391 Test  #81: mictlan_p12b1_regex_patron_mict ................   Passed    0.01 sec
+        Start  82: mictlan_p12b1_char_rango_lat
+ 82/391 Test  #82: mictlan_p12b1_char_rango_lat ...................   Passed    0.01 sec
+        Start  83: mictlan_p12b1_char_rango_mict
+ 83/391 Test  #83: mictlan_p12b1_char_rango_mict ..................   Passed    0.02 sec
+        Start  84: mictlan_p12b1_escape_unicode_lat
+ 84/391 Test  #84: mictlan_p12b1_escape_unicode_lat ...............   Passed    0.01 sec
+        Start  85: mictlan_p12b1_escape_unicode_mict
+ 85/391 Test  #85: mictlan_p12b1_escape_unicode_mict ..............   Passed    0.01 sec
+        Start  86: mictlan_p12b1_escape_enorme_lat
+ 86/391 Test  #86: mictlan_p12b1_escape_enorme_lat ................   Passed    0.01 sec
+        Start  87: mictlan_p12b1_escape_enorme_mict
+ 87/391 Test  #87: mictlan_p12b1_escape_enorme_mict ...............   Passed    0.01 sec
+        Start  88: mictlan_p12b1_temporales
+ 88/391 Test  #88: mictlan_p12b1_temporales .......................   Passed    0.07 sec
+        Start  89: mictlan_p12b1_unicode_api
+ 89/391 Test  #89: mictlan_p12b1_unicode_api ......................   Passed    0.00 sec
+        Start  90: mictlan_p12b1_documentacion_lat
+ 90/391 Test  #90: mictlan_p12b1_documentacion_lat ................   Passed    0.02 sec
+        Start  91: mictlan_p12b1_documentacion_mict
+ 91/391 Test  #91: mictlan_p12b1_documentacion_mict ...............   Passed    0.02 sec
+        Start  92: mictlan_p12b1_documentacion_sincronizada
+ 92/391 Test  #92: mictlan_p12b1_documentacion_sincronizada .......   Passed    0.05 sec
+        Start  93: mictlan_p12b1_cadenas_io_historico
+ 93/391 Test  #93: mictlan_p12b1_cadenas_io_historico .............   Passed    0.01 sec
+        Start  94: mictlan_p12b1_concat_error
+ 94/391 Test  #94: mictlan_p12b1_concat_error .....................   Passed    0.01 sec
+        Start  95: mictlan_p12b2_dic_integridad_lat
+ 95/391 Test  #95: mictlan_p12b2_dic_integridad_lat ...............   Passed    0.01 sec
+        Start  96: mictlan_p12b2_dic_integridad_mict
+ 96/391 Test  #96: mictlan_p12b2_dic_integridad_mict ..............   Passed    0.01 sec
+        Start  97: mictlan_p12b2_dic_colisiones_lat
+ 97/391 Test  #97: mictlan_p12b2_dic_colisiones_lat ...............   Passed    0.01 sec
+        Start  98: mictlan_p12b2_dic_colisiones_mict
+ 98/391 Test  #98: mictlan_p12b2_dic_colisiones_mict ..............   Passed    0.01 sec
+        Start  99: mictlan_p12b2_listas_herencia_lat
+ 99/391 Test  #99: mictlan_p12b2_listas_herencia_lat ..............   Passed    0.02 sec
+        Start 100: mictlan_p12b2_listas_herencia_mict
+100/391 Test #100: mictlan_p12b2_listas_herencia_mict .............   Passed    0.01 sec
+        Start 101: mictlan_p12b2_referencias_lat
+101/391 Test #101: mictlan_p12b2_referencias_lat ..................   Passed    0.01 sec
+        Start 102: mictlan_p12b2_referencias_mict
+102/391 Test #102: mictlan_p12b2_referencias_mict .................   Passed    0.01 sec
+        Start 103: mictlan_p12b2_comparacion_numerica_lat
+103/391 Test #103: mictlan_p12b2_comparacion_numerica_lat .........   Passed    0.02 sec
+        Start 104: mictlan_p12b2_comparacion_numerica_mict
+104/391 Test #104: mictlan_p12b2_comparacion_numerica_mict ........   Passed    0.01 sec
+        Start 105: mictlan_p12b2_unir_alias_lat
+105/391 Test #105: mictlan_p12b2_unir_alias_lat ...................   Passed    0.01 sec
+        Start 106: mictlan_p12b2_unir_alias_mict
+106/391 Test #106: mictlan_p12b2_unir_alias_mict ..................   Passed    0.01 sec
+        Start 107: mictlan_p12b2_union_larga_lat
+107/391 Test #107: mictlan_p12b2_union_larga_lat ..................   Passed    0.03 sec
+        Start 108: mictlan_p12b2_union_larga_mict
+108/391 Test #108: mictlan_p12b2_union_larga_mict .................   Passed    0.01 sec
+        Start 109: mictlan_p12b2_dic_tipo_vacio_lat
+109/391 Test #109: mictlan_p12b2_dic_tipo_vacio_lat ...............   Passed    0.01 sec
+        Start 110: mictlan_p12b2_dic_tipo_vacio_mict
+110/391 Test #110: mictlan_p12b2_dic_tipo_vacio_mict ..............   Passed    0.02 sec
+        Start 111: mictlan_p12b2_indice_infinito_lat
+111/391 Test #111: mictlan_p12b2_indice_infinito_lat ..............   Passed    0.01 sec
+        Start 112: mictlan_p12b2_indice_infinito_mict
+112/391 Test #112: mictlan_p12b2_indice_infinito_mict .............   Passed    0.01 sec
+        Start 113: mictlan_p12b2_insertar_nan_lat
+113/391 Test #113: mictlan_p12b2_insertar_nan_lat .................   Passed    0.02 sec
+        Start 114: mictlan_p12b2_insertar_nan_mict
+114/391 Test #114: mictlan_p12b2_insertar_nan_mict ................   Passed    0.02 sec
+        Start 115: mictlan_p12b2_crear_infinito_lat
+115/391 Test #115: mictlan_p12b2_crear_infinito_lat ...............   Passed    0.01 sec
+        Start 116: mictlan_p12b2_crear_infinito_mict
+116/391 Test #116: mictlan_p12b2_crear_infinito_mict ..............   Passed    0.01 sec
+        Start 117: mictlan_p12b2_crear_enorme_lat
+117/391 Test #117: mictlan_p12b2_crear_enorme_lat .................   Passed    0.02 sec
+        Start 118: mictlan_p12b2_crear_enorme_mict
+118/391 Test #118: mictlan_p12b2_crear_enorme_mict ................   Passed    0.01 sec
+        Start 119: mictlan_p12b2_eliminar_negativo_lat
+119/391 Test #119: mictlan_p12b2_eliminar_negativo_lat ............   Passed    0.02 sec
+        Start 120: mictlan_p12b2_eliminar_negativo_mict
+120/391 Test #120: mictlan_p12b2_eliminar_negativo_mict ...........   Passed    0.02 sec
+        Start 121: mictlan_p12b2_insertar_negativo_lat
+121/391 Test #121: mictlan_p12b2_insertar_negativo_lat ............   Passed    0.01 sec
+        Start 122: mictlan_p12b2_insertar_negativo_mict
+122/391 Test #122: mictlan_p12b2_insertar_negativo_mict ...........   Passed    0.01 sec
+        Start 123: mictlan_p12b2_insertar_exceso_lat
+123/391 Test #123: mictlan_p12b2_insertar_exceso_lat ..............   Passed    0.01 sec
+        Start 124: mictlan_p12b2_insertar_exceso_mict
+124/391 Test #124: mictlan_p12b2_insertar_exceso_mict .............   Passed    0.02 sec
+        Start 125: mictlan_p12b2_comparar_nan_lat
+125/391 Test #125: mictlan_p12b2_comparar_nan_lat .................   Passed    0.02 sec
+        Start 126: mictlan_p12b2_comparar_nan_mict
+126/391 Test #126: mictlan_p12b2_comparar_nan_mict ................   Passed    0.01 sec
+        Start 127: mictlan_p12b2_union_tipo_lista_lat
+127/391 Test #127: mictlan_p12b2_union_tipo_lista_lat .............   Passed    0.01 sec
+        Start 128: mictlan_p12b2_union_tipo_lista_mict
+128/391 Test #128: mictlan_p12b2_union_tipo_lista_mict ............   Passed    0.01 sec
+        Start 129: mictlan_p12b2_union_tipo_separador_lat
+129/391 Test #129: mictlan_p12b2_union_tipo_separador_lat .........   Passed    0.01 sec
+        Start 130: mictlan_p12b2_union_tipo_separador_mict
+130/391 Test #130: mictlan_p12b2_union_tipo_separador_mict ........   Passed    0.02 sec
+        Start 131: mictlan_p12b2_dic_colisiones
+131/391 Test #131: mictlan_p12b2_dic_colisiones ...................   Passed    0.00 sec
+        Start 132: mictlan_p12b2_dic_crecimiento
+132/391 Test #132: mictlan_p12b2_dic_crecimiento ..................   Passed    0.01 sec
+        Start 133: mictlan_p12b2_dic_compartidos
+133/391 Test #133: mictlan_p12b2_dic_compartidos ..................   Passed    0.00 sec
+        Start 134: mictlan_p12b2_dic_recoleccion
+134/391 Test #134: mictlan_p12b2_dic_recoleccion ..................   Passed    0.00 sec
+        Start 135: mictlan_p12b2_ciclos
+135/391 Test #135: mictlan_p12b2_ciclos ...........................   Passed    0.00 sec
+        Start 136: mictlan_p12b2_union_argumentos
+136/391 Test #136: mictlan_p12b2_union_argumentos .................   Passed    0.00 sec
+        Start 137: mictlan_p12b2_union_reserva
+137/391 Test #137: mictlan_p12b2_union_reserva ....................   Passed    0.00 sec
+        Start 138: mictlan_p12b2_union_publicacion
+138/391 Test #138: mictlan_p12b2_union_publicacion ................   Passed    0.00 sec
+        Start 139: mictlan_p12b2_copias
+139/391 Test #139: mictlan_p12b2_copias ...........................   Passed    0.01 sec
+        Start 140: mictlan_p12b2_profundidad
+140/391 Test #140: mictlan_p12b2_profundidad ......................   Passed    0.00 sec
+        Start 141: mictlan_p12b2_documentacion_lat
+141/391 Test #141: mictlan_p12b2_documentacion_lat ................   Passed    0.02 sec
+        Start 142: mictlan_p12b2_documentacion_mict
+142/391 Test #142: mictlan_p12b2_documentacion_mict ...............   Passed    0.02 sec
+        Start 143: mictlan_p12b2_documentacion_sincronizada
+143/391 Test #143: mictlan_p12b2_documentacion_sincronizada .......   Passed    0.12 sec
+        Start 144: mictlan_p12b2_abi
+144/391 Test #144: mictlan_p12b2_abi ..............................   Passed    0.06 sec
+        Start 145: mictlan_p12b2_limites_lat
+145/391 Test #145: mictlan_p12b2_limites_lat ......................   Passed    0.01 sec
+        Start 146: mictlan_p12b2_limites_mict
+146/391 Test #146: mictlan_p12b2_limites_mict .....................   Passed    0.01 sec
+        Start 147: mictlan_p12b3_herencia_lat
+147/391 Test #147: mictlan_p12b3_herencia_lat .....................   Passed    0.02 sec
+        Start 148: mictlan_p12b3_herencia_mict
+148/391 Test #148: mictlan_p12b3_herencia_mict ....................   Passed    0.02 sec
+        Start 149: mictlan_p12b3_extremos_lat
+149/391 Test #149: mictlan_p12b3_extremos_lat .....................   Passed    0.01 sec
+        Start 150: mictlan_p12b3_extremos_mict
+150/391 Test #150: mictlan_p12b3_extremos_mict ....................   Passed    0.02 sec
+        Start 151: mictlan_p12b3_cero_lat
+151/391 Test #151: mictlan_p12b3_cero_lat .........................   Passed    0.02 sec
+        Start 152: mictlan_p12b3_cero_mict
+152/391 Test #152: mictlan_p12b3_cero_mict ........................   Passed    0.01 sec
+        Start 153: mictlan_p12b3_moderna_lat
+153/391 Test #153: mictlan_p12b3_moderna_lat ......................   Passed    0.01 sec
+        Start 154: mictlan_p12b3_moderna_mict
+154/391 Test #154: mictlan_p12b3_moderna_mict .....................   Passed    0.02 sec
+        Start 155: mictlan_p12b3_max_vacio_lat
+155/391 Test #155: mictlan_p12b3_max_vacio_lat ....................   Passed    0.01 sec
+        Start 156: mictlan_p12b3_max_vacio_mict
+156/391 Test #156: mictlan_p12b3_max_vacio_mict ...................   Passed    0.02 sec
+        Start 157: mictlan_p12b3_max_tipo_lat
+157/391 Test #157: mictlan_p12b3_max_tipo_lat .....................   Passed    0.01 sec
+        Start 158: mictlan_p12b3_max_tipo_mict
+158/391 Test #158: mictlan_p12b3_max_tipo_mict ....................   Passed    0.01 sec
+        Start 159: mictlan_p12b3_azar_negativo_lat
+159/391 Test #159: mictlan_p12b3_azar_negativo_lat ................   Passed    0.01 sec
+        Start 160: mictlan_p12b3_azar_negativo_mict
+160/391 Test #160: mictlan_p12b3_azar_negativo_mict ...............   Passed    0.02 sec
+        Start 161: mictlan_p12b3_azar_no_finito_lat
+161/391 Test #161: mictlan_p12b3_azar_no_finito_lat ...............   Passed    0.01 sec
+        Start 162: mictlan_p12b3_azar_no_finito_mict
+162/391 Test #162: mictlan_p12b3_azar_no_finito_mict ..............   Passed    0.01 sec
+        Start 163: mictlan_p12b3_azar_grande_lat
+163/391 Test #163: mictlan_p12b3_azar_grande_lat ..................   Passed    0.01 sec
+        Start 164: mictlan_p12b3_azar_grande_mict
+164/391 Test #164: mictlan_p12b3_azar_grande_mict .................   Passed    0.02 sec
+        Start 165: mictlan_p12b3_azar_aridad_lat
+165/391 Test #165: mictlan_p12b3_azar_aridad_lat ..................   Passed    0.01 sec
+        Start 166: mictlan_p12b3_azar_aridad_mict
+166/391 Test #166: mictlan_p12b3_azar_aridad_mict .................   Passed    0.01 sec
+        Start 167: mictlan_p12b3_ldexp_infinito_lat
+167/391 Test #167: mictlan_p12b3_ldexp_infinito_lat ...............   Passed    0.01 sec
+        Start 168: mictlan_p12b3_ldexp_infinito_mict
+168/391 Test #168: mictlan_p12b3_ldexp_infinito_mict ..............   Passed    0.02 sec
+        Start 169: mictlan_p12b3_ldexp_grande_lat
+169/391 Test #169: mictlan_p12b3_ldexp_grande_lat .................   Passed    0.01 sec
+        Start 170: mictlan_p12b3_ldexp_grande_mict
+170/391 Test #170: mictlan_p12b3_ldexp_grande_mict ................   Passed    0.01 sec
+        Start 171: mictlan_p12b3_estricta_invalida_lat
+171/391 Test #171: mictlan_p12b3_estricta_invalida_lat ............   Passed    0.01 sec
+        Start 172: mictlan_p12b3_estricta_invalida_mict
+172/391 Test #172: mictlan_p12b3_estricta_invalida_mict ...........   Passed    0.01 sec
+        Start 173: mictlan_p12b3_estricta_desborde_lat
+173/391 Test #173: mictlan_p12b3_estricta_desborde_lat ............   Passed    0.01 sec
+        Start 174: mictlan_p12b3_estricta_desborde_mict
+174/391 Test #174: mictlan_p12b3_estricta_desborde_mict ...........   Passed    0.01 sec
+        Start 175: mictlan_p12b3_estricta_subdesborde_lat
+175/391 Test #175: mictlan_p12b3_estricta_subdesborde_lat .........   Passed    0.02 sec
+        Start 176: mictlan_p12b3_estricta_subdesborde_mict
+176/391 Test #176: mictlan_p12b3_estricta_subdesborde_mict ........   Passed    0.01 sec
+        Start 177: mictlan_p12b3_estricta_tipo_lat
+177/391 Test #177: mictlan_p12b3_estricta_tipo_lat ................   Passed    0.01 sec
+        Start 178: mictlan_p12b3_estricta_tipo_mict
+178/391 Test #178: mictlan_p12b3_estricta_tipo_mict ...............   Passed    0.01 sec
+        Start 179: mictlan_p12b3_entero_fraccion_lat
+179/391 Test #179: mictlan_p12b3_entero_fraccion_lat ..............   Passed    0.02 sec
+        Start 180: mictlan_p12b3_entero_fraccion_mict
+180/391 Test #180: mictlan_p12b3_entero_fraccion_mict .............   Passed    0.02 sec
+        Start 181: mictlan_p12b3_entero_orden_lat
+181/391 Test #181: mictlan_p12b3_entero_orden_lat .................   Passed    0.02 sec
+        Start 182: mictlan_p12b3_entero_orden_mict
+182/391 Test #182: mictlan_p12b3_entero_orden_mict ................   Passed    0.01 sec
+        Start 183: mictlan_p12b3_semilla_fraccion_lat
+183/391 Test #183: mictlan_p12b3_semilla_fraccion_lat .............   Passed    0.01 sec
+        Start 184: mictlan_p12b3_semilla_fraccion_mict
+184/391 Test #184: mictlan_p12b3_semilla_fraccion_mict ............   Passed    0.01 sec
+        Start 185: mictlan_p12b3_binario_infinito_lat
+185/391 Test #185: mictlan_p12b3_binario_infinito_lat .............   Passed    0.01 sec
+        Start 186: mictlan_p12b3_binario_infinito_mict
+186/391 Test #186: mictlan_p12b3_binario_infinito_mict ............   Passed    0.01 sec
+        Start 187: mictlan_p12b3_raiz_dominio_lat
+187/391 Test #187: mictlan_p12b3_raiz_dominio_lat .................   Passed    0.01 sec
+        Start 188: mictlan_p12b3_raiz_dominio_mict
+188/391 Test #188: mictlan_p12b3_raiz_dominio_mict ................   Passed    0.01 sec
+        Start 189: mictlan_p12b3_log_dominio_lat
+189/391 Test #189: mictlan_p12b3_log_dominio_lat ..................   Passed    0.01 sec
+        Start 190: mictlan_p12b3_log_dominio_mict
+190/391 Test #190: mictlan_p12b3_log_dominio_mict .................   Passed    0.01 sec
+        Start 191: mictlan_p12b3_potencia_dominio_lat
+191/391 Test #191: mictlan_p12b3_potencia_dominio_lat .............   Passed    0.01 sec
+        Start 192: mictlan_p12b3_potencia_dominio_mict
+192/391 Test #192: mictlan_p12b3_potencia_dominio_mict ............   Passed    0.01 sec
+        Start 193: mictlan_p12b3_potencia_desborde_lat
+193/391 Test #193: mictlan_p12b3_potencia_desborde_lat ............   Passed    0.01 sec
+        Start 194: mictlan_p12b3_potencia_desborde_mict
+194/391 Test #194: mictlan_p12b3_potencia_desborde_mict ...........   Passed    0.01 sec
+        Start 195: mictlan_p12b3_potencia_subdesborde_lat
+195/391 Test #195: mictlan_p12b3_potencia_subdesborde_lat .........   Passed    0.01 sec
+        Start 196: mictlan_p12b3_potencia_subdesborde_mict
+196/391 Test #196: mictlan_p12b3_potencia_subdesborde_mict ........   Passed    0.01 sec
+        Start 197: mictlan_p12b3_predicado_tipo_lat
+197/391 Test #197: mictlan_p12b3_predicado_tipo_lat ...............   Passed    0.01 sec
+        Start 198: mictlan_p12b3_predicado_tipo_mict
+198/391 Test #198: mictlan_p12b3_predicado_tipo_mict ..............   Passed    0.01 sec
+        Start 199: mictlan_p12b3_no_finitos_c
+199/391 Test #199: mictlan_p12b3_no_finitos_c .....................   Passed    0.00 sec
+        Start 200: mictlan_p12b3_extremos_c
+200/391 Test #200: mictlan_p12b3_extremos_c .......................   Passed    0.00 sec
+        Start 201: mictlan_p12b3_conversion_c
+201/391 Test #201: mictlan_p12b3_conversion_c .....................   Passed    0.00 sec
+        Start 202: mictlan_p12b3_herencia_c
+202/391 Test #202: mictlan_p12b3_herencia_c .......................   Passed    0.00 sec
+        Start 203: mictlan_p12b3_precision_c
+203/391 Test #203: mictlan_p12b3_precision_c ......................   Passed    0.00 sec
+        Start 204: mictlan_p12b3_binario_c
+204/391 Test #204: mictlan_p12b3_binario_c ........................   Passed    0.01 sec
+        Start 205: mictlan_p12b3_azar_c
+205/391 Test #205: mictlan_p12b3_azar_c ...........................   Passed    0.00 sec
+        Start 206: mictlan_p12b3_estricto_c
+206/391 Test #206: mictlan_p12b3_estricto_c .......................   Passed    0.00 sec
+        Start 207: mictlan_p12b3_dominio_c
+207/391 Test #207: mictlan_p12b3_dominio_c ........................   Passed    0.00 sec
+        Start 208: mictlan_p12b3_recuperacion_c
+208/391 Test #208: mictlan_p12b3_recuperacion_c ...................   Passed    0.00 sec
+        Start 209: mictlan_p12b3_sdk_c
+209/391 Test #209: mictlan_p12b3_sdk_c ............................   Passed    0.00 sec
+        Start 210: mictlan_p12b3_temporales_c
+210/391 Test #210: mictlan_p12b3_temporales_c .....................   Passed    0.00 sec
+        Start 211: mictlan_p12b3_azar_rechazo
+211/391 Test #211: mictlan_p12b3_azar_rechazo .....................   Passed    0.01 sec
+        Start 212: mictlan_p12b3_documentacion_lat
+212/391 Test #212: mictlan_p12b3_documentacion_lat ................   Passed    0.02 sec
+        Start 213: mictlan_p12b3_documentacion_mict
+213/391 Test #213: mictlan_p12b3_documentacion_mict ...............   Passed    0.03 sec
+        Start 214: mictlan_p12b3_documentacion_sincronizada
+214/391 Test #214: mictlan_p12b3_documentacion_sincronizada .......   Passed    0.03 sec
+        Start 215: mictlan_p12b3_locale_C
+215/391 Test #215: mictlan_p12b3_locale_C .........................   Passed    0.00 sec
+        Start 216: mictlan_p12b3_locale_es_ES_UTF-8
+216/391 Test #216: mictlan_p12b3_locale_es_ES_UTF-8 ...............   Passed    0.00 sec
+        Start 217: mictlan_p12b3_locale_fr_FR_UTF-8
+217/391 Test #217: mictlan_p12b3_locale_fr_FR_UTF-8 ...............   Passed    0.00 sec
+        Start 218: mictlan_p12b4a_enlace_aislado
+218/391 Test #218: mictlan_p12b4a_enlace_aislado ..................   Passed    0.06 sec
+        Start 219: mictlan_p12b4a_origen_fifo_c
+219/391 Test #219: mictlan_p12b4a_origen_fifo_c ...................   Passed    0.17 sec
+        Start 220: mictlan_p12b4a_tipos_c
+220/391 Test #220: mictlan_p12b4a_tipos_c .........................   Passed    0.06 sec
+        Start 221: mictlan_p12b4a_grande_c
+221/391 Test #221: mictlan_p12b4a_grande_c ........................   Passed    0.61 sec
+        Start 222: mictlan_p12b4a_repetidas_c
+222/391 Test #222: mictlan_p12b4a_repetidas_c .....................   Passed    0.06 sec
+        Start 223: mictlan_p12b4a_ejecutar_anidado_lat_c
+223/391 Test #223: mictlan_p12b4a_ejecutar_anidado_lat_c ..........   Passed    0.05 sec
+        Start 224: mictlan_p12b4a_ejecutar_anidado_mict_c
+224/391 Test #224: mictlan_p12b4a_ejecutar_anidado_mict_c .........   Passed    0.06 sec
+        Start 225: mictlan_p12b4a_ejecutar_anidado_error_lat_c
+225/391 Test #225: mictlan_p12b4a_ejecutar_anidado_error_lat_c ....   Passed    0.15 sec
+        Start 226: mictlan_p12b4a_ejecutar_anidado_error_mict_c
+226/391 Test #226: mictlan_p12b4a_ejecutar_anidado_error_mict_c ...   Passed    0.07 sec
+        Start 227: mictlan_p12b4a_ejecutar_ausente_lat_c
+227/391 Test #227: mictlan_p12b4a_ejecutar_ausente_lat_c ..........   Passed    0.06 sec
+        Start 228: mictlan_p12b4a_ejecutar_ausente_mict_c
+228/391 Test #228: mictlan_p12b4a_ejecutar_ausente_mict_c .........   Passed    0.06 sec
+        Start 229: mictlan_p12b4a_ejecutar_binario_lat_c
+229/391 Test #229: mictlan_p12b4a_ejecutar_binario_lat_c ..........   Passed    0.13 sec
+        Start 230: mictlan_p12b4a_ejecutar_binario_mict_c
+230/391 Test #230: mictlan_p12b4a_ejecutar_binario_mict_c .........   Passed    0.06 sec
+        Start 231: mictlan_p12b4a_ausente_nuevo_c
+231/391 Test #231: mictlan_p12b4a_ausente_nuevo_c .................   Passed    0.13 sec
+        Start 232: mictlan_p12b4a_ausente_existente_c
+232/391 Test #232: mictlan_p12b4a_ausente_existente_c .............   Passed    0.06 sec
+        Start 233: mictlan_p12b4a_misma_ruta_c
+233/391 Test #233: mictlan_p12b4a_misma_ruta_c ....................   Passed    0.16 sec
+        Start 234: mictlan_p12b4a_mismo_inode_c
+234/391 Test #234: mictlan_p12b4a_mismo_inode_c ...................   Passed    0.06 sec
+        Start 235: mictlan_p12b4a_enlace_destino_c
+235/391 Test #235: mictlan_p12b4a_enlace_destino_c ................   Passed    0.06 sec
+        Start 236: mictlan_p12b4a_origen_directorio_c
+236/391 Test #236: mictlan_p12b4a_origen_directorio_c .............   Passed    0.13 sec
+        Start 237: mictlan_p12b4a_destino_invalido_c
+237/391 Test #237: mictlan_p12b4a_destino_invalido_c ..............   Passed    0.05 sec
+        Start 238: mictlan_p12b4a_vacio_c
+238/391 Test #238: mictlan_p12b4a_vacio_c .........................   Passed    0.07 sec
+        Start 239: mictlan_p12b4a_binario_c
+239/391 Test #239: mictlan_p12b4a_binario_c .......................   Passed    0.06 sec
+        Start 240: mictlan_p12b4a_lectura_c
+240/391 Test #240: mictlan_p12b4a_lectura_c .......................   Passed    0.06 sec
+        Start 241: mictlan_p12b4a_limites_c
+241/391 Test #241: mictlan_p12b4a_limites_c .......................   Passed    0.09 sec
+        Start 242: mictlan_p12b4a_auxiliares_c
+242/391 Test #242: mictlan_p12b4a_auxiliares_c ....................   Passed    0.06 sec
+        Start 243: mictlan_p12b4a_ejecutar_lat_c
+243/391 Test #243: mictlan_p12b4a_ejecutar_lat_c ..................   Passed    0.05 sec
+        Start 244: mictlan_p12b4a_ejecutar_mict_c
+244/391 Test #244: mictlan_p12b4a_ejecutar_mict_c .................   Passed    0.13 sec
+        Start 245: mictlan_p12b4a_ejecutar_error_lat_c
+245/391 Test #245: mictlan_p12b4a_ejecutar_error_lat_c ............   Passed    0.05 sec
+        Start 246: mictlan_p12b4a_ejecutar_error_mict_c
+246/391 Test #246: mictlan_p12b4a_ejecutar_error_mict_c ...........   Passed    0.06 sec
+        Start 247: mictlan_p12b4a_ejecutar_sintaxis_lat_c
+247/391 Test #247: mictlan_p12b4a_ejecutar_sintaxis_lat_c .........   Passed    0.05 sec
+        Start 248: mictlan_p12b4a_ejecutar_sintaxis_mict_c
+248/391 Test #248: mictlan_p12b4a_ejecutar_sintaxis_mict_c ........   Passed    0.07 sec
+        Start 249: mictlan_p12b4a_ejecutar_vacio_lat_c
+249/391 Test #249: mictlan_p12b4a_ejecutar_vacio_lat_c ............   Passed    0.05 sec
+        Start 250: mictlan_p12b4a_ejecutar_vacio_mict_c
+250/391 Test #250: mictlan_p12b4a_ejecutar_vacio_mict_c ...........   Passed    0.06 sec
+        Start 251: mictlan_p12b4a_sin_retorno_escribir_lat
+251/391 Test #251: mictlan_p12b4a_sin_retorno_escribir_lat ........   Passed    0.05 sec
+        Start 252: mictlan_p12b4a_sin_retorno_escribir_mict
+252/391 Test #252: mictlan_p12b4a_sin_retorno_escribir_mict .......   Passed    0.05 sec
+        Start 253: mictlan_p12b4a_sin_retorno_anexar_lat
+253/391 Test #253: mictlan_p12b4a_sin_retorno_anexar_lat ..........   Passed    0.05 sec
+        Start 254: mictlan_p12b4a_sin_retorno_anexar_mict
+254/391 Test #254: mictlan_p12b4a_sin_retorno_anexar_mict .........   Passed    0.13 sec
+        Start 255: mictlan_p12b4a_sin_retorno_duplicar_lat
+255/391 Test #255: mictlan_p12b4a_sin_retorno_duplicar_lat ........   Passed    0.05 sec
+        Start 256: mictlan_p12b4a_sin_retorno_duplicar_mict
+256/391 Test #256: mictlan_p12b4a_sin_retorno_duplicar_mict .......   Passed    0.06 sec
+        Start 257: mictlan_p12b4a_sin_retorno_ejecutar_lat
+257/391 Test #257: mictlan_p12b4a_sin_retorno_ejecutar_lat ........   Passed    0.06 sec
+        Start 258: mictlan_p12b4a_sin_retorno_ejecutar_mict
+258/391 Test #258: mictlan_p12b4a_sin_retorno_ejecutar_mict .......   Passed    0.17 sec
+        Start 259: mictlan_p12b4a_copia_ausente_lat
+259/391 Test #259: mictlan_p12b4a_copia_ausente_lat ...............   Passed    0.05 sec
+        Start 260: mictlan_p12b4a_copia_ausente_mict
+260/391 Test #260: mictlan_p12b4a_copia_ausente_mict ..............   Passed    0.06 sec
+        Start 261: mictlan_p12b4a_copia_normal_lat
+261/391 Test #261: mictlan_p12b4a_copia_normal_lat ................   Passed    0.06 sec
+        Start 262: mictlan_p12b4a_copia_normal_mict
+262/391 Test #262: mictlan_p12b4a_copia_normal_mict ...............   Passed    0.15 sec
+        Start 263: mictlan_p12b4a_lectura_lat
+263/391 Test #263: mictlan_p12b4a_lectura_lat .....................   Passed    0.14 sec
+        Start 264: mictlan_p12b4a_lectura_mict
+264/391 Test #264: mictlan_p12b4a_lectura_mict ....................   Passed    0.11 sec
+        Start 265: mictlan_p12b4a_escritura_lat
+265/391 Test #265: mictlan_p12b4a_escritura_lat ...................   Passed    0.06 sec
+        Start 266: mictlan_p12b4a_escritura_mict
+266/391 Test #266: mictlan_p12b4a_escritura_mict ..................   Passed    0.13 sec
+        Start 267: mictlan_p12b4a_atomico_lat
+267/391 Test #267: mictlan_p12b4a_atomico_lat .....................   Passed    0.06 sec
+        Start 268: mictlan_p12b4a_atomico_mict
+268/391 Test #268: mictlan_p12b4a_atomico_mict ....................   Passed    0.13 sec
+        Start 269: mictlan_p12b4a_auxiliares_lat
+269/391 Test #269: mictlan_p12b4a_auxiliares_lat ..................   Passed    0.06 sec
+        Start 270: mictlan_p12b4a_auxiliares_mict
+270/391 Test #270: mictlan_p12b4a_auxiliares_mict .................   Passed    0.13 sec
+        Start 271: mictlan_p12b4a_ejecutar_lat_lat
+271/391 Test #271: mictlan_p12b4a_ejecutar_lat_lat ................   Passed    0.06 sec
+        Start 272: mictlan_p12b4a_ejecutar_lat_mict
+272/391 Test #272: mictlan_p12b4a_ejecutar_lat_mict ...............   Passed    0.13 sec
+        Start 273: mictlan_p12b4a_ejecutar_mict_lat
+273/391 Test #273: mictlan_p12b4a_ejecutar_mict_lat ...............   Passed    0.05 sec
+        Start 274: mictlan_p12b4a_ejecutar_mict_mict
+274/391 Test #274: mictlan_p12b4a_ejecutar_mict_mict ..............   Passed    0.13 sec
+        Start 275: mictlan_p12b4a_copia_fallo_1
+275/391 Test #275: mictlan_p12b4a_copia_fallo_1 ...................   Passed    0.06 sec
+        Start 276: mictlan_p12b4a_copia_fallo_2
+276/391 Test #276: mictlan_p12b4a_copia_fallo_2 ...................   Passed    0.12 sec
+        Start 277: mictlan_p12b4a_copia_fallo_3
+277/391 Test #277: mictlan_p12b4a_copia_fallo_3 ...................   Passed    0.05 sec
+        Start 278: mictlan_p12b4a_copia_fallo_4
+278/391 Test #278: mictlan_p12b4a_copia_fallo_4 ...................   Passed    0.05 sec
+        Start 279: mictlan_p12b4a_copia_fallo_5
+279/391 Test #279: mictlan_p12b4a_copia_fallo_5 ...................   Passed    0.05 sec
+        Start 280: mictlan_p12b4a_copia_fallo_6
+280/391 Test #280: mictlan_p12b4a_copia_fallo_6 ...................   Passed    0.05 sec
+        Start 281: mictlan_p12b4a_copia_fallo_7
+281/391 Test #281: mictlan_p12b4a_copia_fallo_7 ...................   Passed    0.05 sec
+        Start 282: mictlan_p12b4a_copia_fallo_8
+282/391 Test #282: mictlan_p12b4a_copia_fallo_8 ...................   Passed    0.13 sec
+        Start 283: mictlan_p12b4a_copia_fallo_9
+283/391 Test #283: mictlan_p12b4a_copia_fallo_9 ...................   Passed    0.13 sec
+        Start 284: mictlan_p12b4a_copia_fallo_10
+284/391 Test #284: mictlan_p12b4a_copia_fallo_10 ..................   Passed    0.07 sec
+        Start 285: mictlan_p12b4a_copia_fallo_11
+285/391 Test #285: mictlan_p12b4a_copia_fallo_11 ..................   Passed    0.06 sec
+        Start 286: mictlan_p12b4a_copia_fallo_12
+286/391 Test #286: mictlan_p12b4a_copia_fallo_12 ..................   Passed    0.05 sec
+        Start 287: mictlan_p12b4a_copia_fallo_13
+287/391 Test #287: mictlan_p12b4a_copia_fallo_13 ..................   Passed    0.06 sec
+        Start 288: mictlan_p12b4a_copia_fallo_14
+288/391 Test #288: mictlan_p12b4a_copia_fallo_14 ..................   Passed    0.06 sec
+        Start 289: mictlan_p12b4a_copia_fallo_15
+289/391 Test #289: mictlan_p12b4a_copia_fallo_15 ..................   Passed    0.15 sec
+        Start 290: mictlan_p12b4a_copia_fallo_20
+290/391 Test #290: mictlan_p12b4a_copia_fallo_20 ..................   Passed    0.05 sec
+        Start 291: mictlan_p12b4a_copia_fallo_21
+291/391 Test #291: mictlan_p12b4a_copia_fallo_21 ..................   Passed    0.12 sec
+        Start 292: mictlan_p12b4a_copia_fallo_22
+292/391 Test #292: mictlan_p12b4a_copia_fallo_22 ..................   Passed    0.11 sec
+        Start 293: mictlan_p12b4a_copia_fallo_24
+293/391 Test #293: mictlan_p12b4a_copia_fallo_24 ..................   Passed    0.12 sec
+        Start 294: mictlan_p12b4a_leer_fallo_3
+294/391 Test #294: mictlan_p12b4a_leer_fallo_3 ....................   Passed    0.05 sec
+        Start 295: mictlan_p12b4a_leer_fallo_4
+295/391 Test #295: mictlan_p12b4a_leer_fallo_4 ....................   Passed    0.12 sec
+        Start 296: mictlan_p12b4a_leer_fallo_5
+296/391 Test #296: mictlan_p12b4a_leer_fallo_5 ....................   Passed    0.12 sec
+        Start 297: mictlan_p12b4a_leer_fallo_10
+297/391 Test #297: mictlan_p12b4a_leer_fallo_10 ...................   Passed    0.06 sec
+        Start 298: mictlan_p12b4a_leer_fallo_15
+298/391 Test #298: mictlan_p12b4a_leer_fallo_15 ...................   Passed    0.12 sec
+        Start 299: mictlan_p12b4a_leer_fallo_16
+299/391 Test #299: mictlan_p12b4a_leer_fallo_16 ...................   Passed    0.06 sec
+        Start 300: mictlan_p12b4a_leer_fallo_17
+300/391 Test #300: mictlan_p12b4a_leer_fallo_17 ...................   Passed    0.12 sec
+        Start 301: mictlan_p12b4a_leer_fallo_24
+301/391 Test #301: mictlan_p12b4a_leer_fallo_24 ...................   Passed    0.05 sec
+        Start 302: mictlan_p12b4a_seguro_fallo_3
+302/391 Test #302: mictlan_p12b4a_seguro_fallo_3 ..................   Passed    0.05 sec
+        Start 303: mictlan_p12b4a_seguro_fallo_4
+303/391 Test #303: mictlan_p12b4a_seguro_fallo_4 ..................   Passed    0.06 sec
+        Start 304: mictlan_p12b4a_seguro_fallo_5
+304/391 Test #304: mictlan_p12b4a_seguro_fallo_5 ..................   Passed    0.04 sec
+        Start 305: mictlan_p12b4a_seguro_fallo_10
+305/391 Test #305: mictlan_p12b4a_seguro_fallo_10 .................   Passed    0.13 sec
+        Start 306: mictlan_p12b4a_seguro_fallo_15
+306/391 Test #306: mictlan_p12b4a_seguro_fallo_15 .................   Passed    0.06 sec
+        Start 307: mictlan_p12b4a_seguro_fallo_16
+307/391 Test #307: mictlan_p12b4a_seguro_fallo_16 .................   Passed    0.12 sec
+        Start 308: mictlan_p12b4a_seguro_fallo_17
+308/391 Test #308: mictlan_p12b4a_seguro_fallo_17 .................   Passed    0.06 sec
+        Start 309: mictlan_p12b4a_seguro_fallo_24
+309/391 Test #309: mictlan_p12b4a_seguro_fallo_24 .................   Passed    0.05 sec
+        Start 310: mictlan_p12b4a_lineas_fallo_3
+310/391 Test #310: mictlan_p12b4a_lineas_fallo_3 ..................   Passed    0.08 sec
+        Start 311: mictlan_p12b4a_lineas_fallo_10
+311/391 Test #311: mictlan_p12b4a_lineas_fallo_10 .................   Passed    0.05 sec
+        Start 312: mictlan_p12b4a_lineas_fallo_15
+312/391 Test #312: mictlan_p12b4a_lineas_fallo_15 .................   Passed    0.13 sec
+        Start 313: mictlan_p12b4a_lineas_fallo_18
+313/391 Test #313: mictlan_p12b4a_lineas_fallo_18 .................   Passed    0.11 sec
+        Start 314: mictlan_p12b4a_escribir_fallo_6
+314/391 Test #314: mictlan_p12b4a_escribir_fallo_6 ................   Passed    0.05 sec
+        Start 315: mictlan_p12b4a_escribir_fallo_7
+315/391 Test #315: mictlan_p12b4a_escribir_fallo_7 ................   Passed    0.12 sec
+        Start 316: mictlan_p12b4a_escribir_fallo_8
+316/391 Test #316: mictlan_p12b4a_escribir_fallo_8 ................   Passed    0.06 sec
+        Start 317: mictlan_p12b4a_escribir_fallo_9
+317/391 Test #317: mictlan_p12b4a_escribir_fallo_9 ................   Passed    0.13 sec
+        Start 318: mictlan_p12b4a_escribir_fallo_11
+318/391 Test #318: mictlan_p12b4a_escribir_fallo_11 ...............   Passed    0.05 sec
+        Start 319: mictlan_p12b4a_escribir_fallo_25
+319/391 Test #319: mictlan_p12b4a_escribir_fallo_25 ...............   Passed    0.13 sec
+        Start 320: mictlan_p12b4a_ejecutar_fallo_3
+320/391 Test #320: mictlan_p12b4a_ejecutar_fallo_3 ................   Passed    0.05 sec
+        Start 321: mictlan_p12b4a_ejecutar_fallo_4
+321/391 Test #321: mictlan_p12b4a_ejecutar_fallo_4 ................   Passed    0.12 sec
+        Start 322: mictlan_p12b4a_ejecutar_fallo_5
+322/391 Test #322: mictlan_p12b4a_ejecutar_fallo_5 ................   Passed    0.05 sec
+        Start 323: mictlan_p12b4a_ejecutar_fallo_10
+323/391 Test #323: mictlan_p12b4a_ejecutar_fallo_10 ...............   Passed    0.13 sec
+        Start 324: mictlan_p12b4a_ejecutar_fallo_15
+324/391 Test #324: mictlan_p12b4a_ejecutar_fallo_15 ...............   Passed    0.05 sec
+        Start 325: mictlan_p12b4a_ejecutar_fallo_19
+325/391 Test #325: mictlan_p12b4a_ejecutar_fallo_19 ...............   Passed    0.15 sec
+        Start 326: mictlan_p12b4a_ejecutar_fallo_23
+326/391 Test #326: mictlan_p12b4a_ejecutar_fallo_23 ...............   Passed    0.11 sec
+        Start 327: mictlan_p12b4a_ejecutar_fallo_24
+327/391 Test #327: mictlan_p12b4a_ejecutar_fallo_24 ...............   Passed    0.07 sec
+        Start 328: mictlan_p12b4a_atomico_historico
+328/391 Test #328: mictlan_p12b4a_atomico_historico ...............   Passed    0.21 sec
+        Start 329: mictlan_p12b4a_doc_leer_lat
+329/391 Test #329: mictlan_p12b4a_doc_leer_lat ....................   Passed    0.08 sec
+        Start 330: mictlan_p12b4a_doc_leer_mict
+330/391 Test #330: mictlan_p12b4a_doc_leer_mict ...................   Passed    0.06 sec
+        Start 331: mictlan_p12b4a_doc_intentar_leer_lat
+331/391 Test #331: mictlan_p12b4a_doc_intentar_leer_lat ...........   Passed    0.06 sec
+        Start 332: mictlan_p12b4a_doc_intentar_leer_mict
+332/391 Test #332: mictlan_p12b4a_doc_intentar_leer_mict ..........   Passed    0.15 sec
+        Start 333: mictlan_p12b4a_doc_leer_texto_seguro_lat
+333/391 Test #333: mictlan_p12b4a_doc_leer_texto_seguro_lat .......   Passed    0.05 sec
+        Start 334: mictlan_p12b4a_doc_leer_texto_seguro_mict
+334/391 Test #334: mictlan_p12b4a_doc_leer_texto_seguro_mict ......   Passed    0.17 sec
+        Start 335: mictlan_p12b4a_doc_lineas_lat
+335/391 Test #335: mictlan_p12b4a_doc_lineas_lat ..................   Passed    0.06 sec
+        Start 336: mictlan_p12b4a_doc_lineas_mict
+336/391 Test #336: mictlan_p12b4a_doc_lineas_mict .................   Passed    0.06 sec
+        Start 337: mictlan_p12b4a_doc_escribir_lat
+337/391 Test #337: mictlan_p12b4a_doc_escribir_lat ................   Passed    0.13 sec
+        Start 338: mictlan_p12b4a_doc_escribir_mict
+338/391 Test #338: mictlan_p12b4a_doc_escribir_mict ...............   Passed    0.08 sec
+        Start 339: mictlan_p12b4a_doc_anexar_lat
+339/391 Test #339: mictlan_p12b4a_doc_anexar_lat ..................   Passed    0.06 sec
+        Start 340: mictlan_p12b4a_doc_anexar_mict
+340/391 Test #340: mictlan_p12b4a_doc_anexar_mict .................   Passed    0.05 sec
+        Start 341: mictlan_p12b4a_doc_intentar_escribir_lat
+341/391 Test #341: mictlan_p12b4a_doc_intentar_escribir_lat .......   Passed    0.15 sec
+        Start 342: mictlan_p12b4a_doc_intentar_escribir_mict
+342/391 Test #342: mictlan_p12b4a_doc_intentar_escribir_mict ......   Passed    0.06 sec
+        Start 343: mictlan_p12b4a_doc_escribir_atomico_lat
+343/391 Test #343: mictlan_p12b4a_doc_escribir_atomico_lat ........   Passed    0.07 sec
+        Start 344: mictlan_p12b4a_doc_escribir_atomico_mict
+344/391 Test #344: mictlan_p12b4a_doc_escribir_atomico_mict .......   Passed    0.05 sec
+        Start 345: mictlan_p12b4a_doc_duplicar_lat
+345/391 Test #345: mictlan_p12b4a_doc_duplicar_lat ................   Passed    0.08 sec
+        Start 346: mictlan_p12b4a_doc_duplicar_mict
+346/391 Test #346: mictlan_p12b4a_doc_duplicar_mict ...............   Passed    0.15 sec
+        Start 347: mictlan_p12b4a_doc_ejecutar_lat
+347/391 Test #347: mictlan_p12b4a_doc_ejecutar_lat ................   Passed    0.06 sec
+        Start 348: mictlan_p12b4a_doc_ejecutar_mict
+348/391 Test #348: mictlan_p12b4a_doc_ejecutar_mict ...............   Passed    0.06 sec
+        Start 349: mictlan_p12b4a_doc_crear_lat
+349/391 Test #349: mictlan_p12b4a_doc_crear_lat ...................   Passed    0.06 sec
+        Start 350: mictlan_p12b4a_doc_crear_mict
+350/391 Test #350: mictlan_p12b4a_doc_crear_mict ..................   Passed    0.06 sec
+        Start 351: mictlan_p12b4a_doc_eliminar_lat
+351/391 Test #351: mictlan_p12b4a_doc_eliminar_lat ................   Passed    0.06 sec
+        Start 352: mictlan_p12b4a_doc_eliminar_mict
+352/391 Test #352: mictlan_p12b4a_doc_eliminar_mict ...............   Passed    0.06 sec
+        Start 353: mictlan_p12b4a_doc_borrar_lat
+353/391 Test #353: mictlan_p12b4a_doc_borrar_lat ..................   Passed    0.06 sec
+        Start 354: mictlan_p12b4a_doc_borrar_mict
+354/391 Test #354: mictlan_p12b4a_doc_borrar_mict .................   Passed    0.05 sec
+        Start 355: mictlan_p12b4a_doc_renombrar_lat
+355/391 Test #355: mictlan_p12b4a_doc_renombrar_lat ...............   Passed    0.06 sec
+        Start 356: mictlan_p12b4a_doc_renombrar_mict
+356/391 Test #356: mictlan_p12b4a_doc_renombrar_mict ..............   Passed    0.07 sec
+        Start 357: mictlan_p12b4a_documentacion
+357/391 Test #357: mictlan_p12b4a_documentacion ...................   Passed    0.03 sec
+        Start 358: mictlan_alpha_recompilacion
+358/391 Test #358: mictlan_alpha_recompilacion ....................   Passed    0.05 sec
+        Start 359: mictlan_p11_pila
+359/391 Test #359: mictlan_p11_pila ...............................   Passed    0.02 sec
+        Start 360: mictlan_p11_gc_cadenas
+360/391 Test #360: mictlan_p11_gc_cadenas .........................   Passed    0.01 sec
+        Start 361: mictlan_alpha_agotamiento
+361/391 Test #361: mictlan_alpha_agotamiento ......................   Passed    0.00 sec
+        Start 362: mictlan_p02g_ciclos
+362/391 Test #362: mictlan_p02g_ciclos ............................   Passed    0.00 sec
+        Start 363: mictlan_p02g_raices
+363/391 Test #363: mictlan_p02g_raices ............................   Passed    0.01 sec
+        Start 364: mictlan_p02g_errores
+364/391 Test #364: mictlan_p02g_errores ...........................   Passed    0.01 sec
+        Start 365: mictlan_p02g_opacos
+365/391 Test #365: mictlan_p02g_opacos ............................   Passed    0.00 sec
+        Start 366: mictlan_formato
+366/391 Test #366: mictlan_formato ................................   Passed    0.01 sec
+        Start 367: mictlan_cli_expresion_larga
+367/391 Test #367: mictlan_cli_expresion_larga ....................   Passed    0.02 sec
+        Start 368: mictlan_p02g_generativo
+368/391 Test #368: mictlan_p02g_generativo ........................   Passed    0.02 sec
+        Start 369: mictlan_pila_directa
+369/391 Test #369: mictlan_pila_directa ...........................   Passed    0.13 sec
+        Start 370: mictlan_pila_anidada
+370/391 Test #370: mictlan_pila_anidada ...........................   Passed    0.02 sec
+        Start 371: mictlan_pila_prefijo
+371/391 Test #371: mictlan_pila_prefijo ...........................   Passed    0.02 sec
+        Start 372: mictlan_pila_anidada_prefijo
+372/391 Test #372: mictlan_pila_anidada_prefijo ...................   Passed    0.02 sec
+        Start 373: mictlan_pila_prestados
+373/391 Test #373: mictlan_pila_prestados .........................   Passed    0.02 sec
+        Start 374: mictlan_pila_reentrada
+374/391 Test #374: mictlan_pila_reentrada .........................   Passed    0.04 sec
+        Start 375: mictlan_pila_propagar
+375/391 Test #375: mictlan_pila_propagar ..........................   Passed    0.04 sec
+        Start 376: mictlan_pila_consumido
+376/391 Test #376: mictlan_pila_consumido .........................   Passed    0.01 sec
+        Start 377: mictlan_pila_exito
+377/391 Test #377: mictlan_pila_exito .............................   Passed    0.01 sec
+        Start 378: coverage
+378/391 Test #378: coverage .......................................   Passed    0.02 sec
+        Start 379: mictlan_marcos_funcion
+379/391 Test #379: mictlan_marcos_funcion .........................   Passed    0.03 sec
+        Start 380: mictlan_memoria_listas_referencias
+380/391 Test #380: mictlan_memoria_listas_referencias .............   Passed    0.01 sec
+        Start 381: mictlan_p02f_compartidos
+381/391 Test #381: mictlan_p02f_compartidos .......................   Passed    0.00 sec
+        Start 382: mictlan_p02f_anidados
+382/391 Test #382: mictlan_p02f_anidados ..........................   Passed    0.00 sec
+        Start 383: mictlan_p02f_diccionarios
+383/391 Test #383: mictlan_p02f_diccionarios ......................   Passed    0.00 sec
+        Start 384: mictlan_p02f_ciclo_lista
+384/391 Test #384: mictlan_p02f_ciclo_lista .......................   Passed    0.00 sec
+        Start 385: mictlan_p02f_ciclo_mixto
+385/391 Test #385: mictlan_p02f_ciclo_mixto .......................   Passed    0.00 sec
+        Start 386: mictlan_p02f_extraer
+386/391 Test #386: mictlan_p02f_extraer ...........................   Passed    0.01 sec
+        Start 387: mictlan_p02f_reasignar
+387/391 Test #387: mictlan_p02f_reasignar .........................   Passed    0.00 sec
+        Start 388: mictlan_p02f_clonar_mixto
+388/391 Test #388: mictlan_p02f_clonar_mixto ......................   Passed    0.00 sec
+        Start 389: mictlan_p02f_error
+389/391 Test #389: mictlan_p02f_error .............................   Passed    0.01 sec
+        Start 390: mictlan_p02f_ffi
+390/391 Test #390: mictlan_p02f_ffi ...............................   Passed    0.01 sec
+        Start 391: mictlan_p02f_clonar_ciclo
+391/391 Test #391: mictlan_p02f_clonar_ciclo ......................   Passed    0.00 sec
+
+100% tests passed out of 391
+
+Label Time Summary:
+abi               =   0.06 sec*proc (1 test)
+alpha             =   0.48 sec*proc (10 tests)
+archivos          =  12.10 sec*proc (140 tests)
+azar              =   0.01 sec*proc (1 test)
+bytecode          =   0.02 sec*proc (1 test)
+cadenas           =   0.87 sec*proc (61 tests)
+colecciones       =   0.77 sec*proc (52 tests)
+compatibilidad    =   2.68 sec*proc (180 tests)
+conformidad       =   0.31 sec*proc (25 tests)
+contrato          =   0.05 sec*proc (11 tests)
+contratos         =   0.04 sec*proc (12 tests)
+dic               =   0.02 sec*proc (4 tests)
+documentacion     =   0.23 sec*proc (4 tests)
+historico         =   0.01 sec*proc (1 test)
+locale            =   0.03 sec*proc (6 tests)
+matematicas       =   0.75 sec*proc (71 tests)
+memoria           =   0.27 sec*proc (32 tests)
+p02e              =   0.32 sec*proc (9 tests)
+p02f              =   0.05 sec*proc (11 tests)
+p02g              =   0.04 sec*proc (5 tests)
+p11               =   0.03 sec*proc (2 tests)
+p12a              =   0.31 sec*proc (25 tests)
+p12b1             =   0.87 sec*proc (61 tests)
+p12b2             =   0.77 sec*proc (52 tests)
+p12b3             =   0.75 sec*proc (71 tests)
+p12b4a            =  12.10 sec*proc (140 tests)
+parser            =   0.02 sec*proc (1 test)
+pila              =   0.34 sec*proc (10 tests)
+recuperacion      =   0.32 sec*proc (9 tests)
+utf8              =   0.00 sec*proc (1 test)
+
+Total Test time (real) =  15.95 sec

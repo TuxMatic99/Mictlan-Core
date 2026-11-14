@@ -1,0 +1,62 @@
+{
+  "verificado_utc": "2026-11-14T23:17:30.014Z",
+  "main": "b3be302bbfdc0dfc371b6871dd203f7ff9ce3a0b",
+  "base_b4a": "b0a2d860363e07274feae1d0cf2b421515386d73",
+  "prs": [
+    {
+      "numero": 7,
+      "url": "https://github.com/TuxMatic99/Mictlan-Core/pull/7",
+      "estado": "open",
+      "borrador": true,
+      "fusionada": false,
+      "rama": "investigacion/p12a-conformidad",
+      "head": "c25eb7e5008e1201ebd1292da7b2da0dd0a554a0",
+      "base_rama": "investigacion/p11-memoria-pila",
+      "base_sha": "9f3a1965f2794c8921adf9cdfa3e0c192060c657"
+    },
+    {
+      "numero": 8,
+      "url": "https://github.com/TuxMatic99/Mictlan-Core/pull/8",
+      "estado": "open",
+      "borrador": true,
+      "fusionada": false,
+      "rama": "investigacion/p12b1-cadenas",
+      "head": "6b8204ab92196fccfc217c80c6f381aa8ef03535",
+      "base_rama": "investigacion/p12a-conformidad",
+      "base_sha": "c25eb7e5008e1201ebd1292da7b2da0dd0a554a0"
+    },
+    {
+      "numero": 9,
+      "url": "https://github.com/TuxMatic99/Mictlan-Core/pull/9",
+      "estado": "open",
+      "borrador": true,
+      "fusionada": false,
+      "rama": "investigacion/p12b2-colecciones",
+      "head": "3125a0016e1adcfa0ac68c2c37ba40108a033cc9",
+      "base_rama": "investigacion/p12b1-cadenas",
+      "base_sha": "6b8204ab92196fccfc217c80c6f381aa8ef03535"
+    },
+    {
+      "numero": 10,
+      "url": "https://github.com/TuxMatic99/Mictlan-Core/pull/10",
+      "estado": "open",
+      "borrador": true,
+      "fusionada": false,
+      "rama": "investigacion/p12b3-matematicas",
+      "head": "b0a2d860363e07274feae1d0cf2b421515386d73",
+      "base_rama": "investigacion/p12b2-colecciones",
+      "base_sha": "3125a0016e1adcfa0ac68c2c37ba40108a033cc9"
+    },
+    {
+      "numero": 11,
+      "url": "https://github.com/TuxMatic99/Mictlan-Core/pull/11",
+      "estado": "open",
+      "borrador": true,
+      "fusionada": false,
+      "rama": "investigacion/p12b4a-integridad-archivos",
+      "head": "257d80e64e38e82b1396755070ea8b6fb756a654",
+      "base_rama": "investigacion/p12b3-matematicas",
+      "base_sha": "b0a2d860363e07274feae1d0cf2b421515386d73"
+    }
+  ]
+}

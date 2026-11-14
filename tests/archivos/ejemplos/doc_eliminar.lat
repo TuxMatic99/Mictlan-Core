@@ -1,0 +1,3 @@
+archivo.escribir("nota", "sintético")
+poner(archivo.eliminar("nota"))
+poner(archivo.eliminar("nota"))

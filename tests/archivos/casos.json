@@ -1,0 +1,328 @@
+{
+  "copia_ausente": {
+    "inicial": {
+      "destino": "ANTERIOR",
+      "ajeno": "INTACTO"
+    },
+    "programa": "archivo.duplicar(\"ausente\",\"destino\")\n",
+    "final": {
+      "destino": "ANTERIOR",
+      "ajeno": "INTACTO"
+    },
+    "codigo": 1,
+    "diagnostico": "No se pudo abrir"
+  },
+  "copia_normal": {
+    "inicial": {
+      "origen": "María ñ\n",
+      "destino": "ANTERIOR"
+    },
+    "programa": "archivo.duplicar(\"origen\",\"destino\")\nponer(archivo.leer(\"destino\"))\n",
+    "final": {
+      "origen": "María ñ\n",
+      "destino": "María ñ\n"
+    },
+    "salida": "María ñ\n\n"
+  },
+  "lectura": {
+    "inicial": {
+      "texto": "\nñ\n\nfin\n"
+    },
+    "programa": "poner(archivo.lineas(\"texto\"))\nponer(archivo.leer_texto_seguro(\"ausente\"))\n",
+    "final": {
+      "texto": "\nñ\n\nfin\n"
+    },
+    "salida": "[\"\", \"ñ\", \"\", \"fin\"]\nnulo\n"
+  },
+  "escritura": {
+    "programa": "archivo.escribir(\"texto\",\"a\")\narchivo.anexar(\"texto\",\"ñ\")\nponer(archivo.intentar_escribir(\"no-existe/texto\",\"x\"))\nponer(archivo.leer(\"texto\"))\n",
+    "final": {
+      "texto": "añ"
+    },
+    "salida": "falso\nañ\n"
+  },
+  "atomico": {
+    "inicial": {
+      "texto": "ANTERIOR"
+    },
+    "programa": "poner(archivo.escribir_atomico(\"texto\",\"nuevo\"))\nponer(archivo.leer_texto_seguro(\"texto\"))\n",
+    "final": {
+      "texto": "nuevo"
+    },
+    "salida": "1\nnuevo\n"
+  },
+  "auxiliares": {
+    "programa": "poner(archivo.crear(\"nuevo\"))\nponer(archivo.crear(\"nuevo\"))\nponer(archivo.renombrar(\"nuevo\",\"otro\"))\nponer(archivo.borrar(\"otro\"))\nponer(archivo.eliminar(\"otro\"))\n",
+    "final": {},
+    "salida": "verdadero\nfalso\notro\nverdadero\nfalso\n"
+  },
+  "ejecutar_lat": {
+    "inicial": {
+      "hijo.lat": "archivo.escribir(\"marca\",\"42\")\n"
+    },
+    "programa": "archivo.ejecutar(\"hijo.lat\")\nponer(archivo.leer(\"marca\"))\n",
+    "final": {
+      "hijo.lat": "archivo.escribir(\"marca\",\"42\")\n",
+      "marca": "42"
+    },
+    "salida": "42\n"
+  },
+  "ejecutar_mict": {
+    "inicial": {
+      "hijo.mict": "archivo.escribir(\"marca\",\"42\")\n"
+    },
+    "programa": "archivo.ejecutar(\"hijo.mict\")\nponer(archivo.leer(\"marca\"))\n",
+    "final": {
+      "hijo.mict": "archivo.escribir(\"marca\",\"42\")\n",
+      "marca": "42"
+    },
+    "salida": "42\n"
+  },
+  "doc_leer": {
+    "documentacion": {
+      "nombre": "leer",
+      "firma": "archivo.leer(ruta)",
+      "explica": "Lee el archivo entero como una cadena.",
+      "resultado": "Cadena; falso ante ausencia, error de E/S, NUL o exceso de tamaño.",
+      "limites": "Ruta debe ser cadena. Vacío devuelve \"\". Máximo 8 MiB. No valida UTF-8. Puede seguir enlaces de lectura. Para distinguir ausencia, usar leer_texto_seguro.",
+      "coste": "Tiempo O(n), memoria O(n)."
+    },
+    "programa": "archivo.escribir(\"nota\", \"María ñ\")\nponer(archivo.leer(\"nota\"))\nponer(archivo.leer(\"ausente\"))\n",
+    "salida": "María ñ\nfalso\n",
+    "final": {
+      "nota": "María ñ"
+    }
+  },
+  "doc_intentar_leer": {
+    "documentacion": {
+      "nombre": "intentar_leer",
+      "firma": "archivo.intentar_leer(ruta)",
+      "explica": "Es el alias histórico de leer: llama a la misma función.",
+      "resultado": "Cadena o falso; no distingue inexistente de error.",
+      "limites": "Archivo vacío produce \"\"; mantiene el límite 8 MiB y rechazo de NUL. Un error de tipo sigue siendo error de programación.",
+      "coste": "O(n) tiempo y memoria."
+    },
+    "programa": "archivo.escribir(\"nota\", \"\")\nponer(tipo(archivo.intentar_leer(\"nota\")))\nponer(archivo.intentar_leer(\"ausente\"))\n",
+    "salida": "cadena\nfalso\n",
+    "final": {
+      "nota": ""
+    }
+  },
+  "doc_leer_texto_seguro": {
+    "documentacion": {
+      "nombre": "leer_texto_seguro",
+      "firma": "archivo.leer_texto_seguro(ruta)",
+      "explica": "Distingue una lectura correcta, una ruta ausente y un fallo operativo.",
+      "resultado": "Cadena si se leyó todo; nulo si fopen informa ENOENT; falso para los demás fallos.",
+      "limites": "Vacío es \"\", no nulo. ENOENT incluye un directorio padre inexistente. Máximo 8 MiB, sin NUL; no valida Unicode ni hace segura una ruta controlada por terceros.",
+      "coste": "O(n) tiempo y memoria."
+    },
+    "programa": "archivo.escribir(\"nota\", \"ñ\")\nponer(archivo.leer_texto_seguro(\"nota\"))\nponer(archivo.leer_texto_seguro(\"ausente\"))\n",
+    "salida": "ñ\nnulo\n",
+    "final": {
+      "nota": "ñ"
+    }
+  },
+  "doc_lineas": {
+    "documentacion": {
+      "nombre": "lineas",
+      "firma": "archivo.lineas(ruta)",
+      "explica": "Devuelve las líneas del archivo, sin los separadores LF.",
+      "resultado": "Lista nueva de cadenas; error de ejecución si no puede leer el texto completo.",
+      "limites": "Vacío devuelve []; conserva líneas vacías interiores y CR. Un LF final no crea una línea vacía adicional. Máximo 8 MiB y sin NUL; las cadenas son valores de la VM, sin recurso de archivo abierto.",
+      "coste": "O(n) tiempo y memoria."
+    },
+    "programa": "archivo.escribir(\"nota\", \"\\nñ\\n\\nfin\\r\\n\")\nponer(lista.longitud(archivo.lineas(\"nota\")))\narchivo.escribir(\"vacio\", \"\")\nponer(archivo.lineas(\"vacio\"))\n",
+    "salida": "4\n[]\n",
+    "final": {
+      "nota": "\nñ\n\nfin\r\n",
+      "vacio": ""
+    }
+  },
+  "doc_escribir": {
+    "documentacion": {
+      "nombre": "escribir",
+      "firma": "archivo.escribir(ruta, texto)",
+      "explica": "Crea o reemplaza el contenido mediante escritura directa.",
+      "resultado": "Sin valor de retorno utilizable; usar como sentencia; error de ejecución ante fallo operativo.",
+      "limites": "Ambos argumentos son cadenas. Texto vacío trunca a cero bytes. Sigue enlaces; el fallo puede dejar contenido parcial o truncado. No tiene el límite de 8 MiB de las lecturas. Preferir escribir_atomico para reemplazar datos que deben conservarse si falla. No anidar la llamada como argumento ni usarla como valor: el contrato nativo no apila un retorno y la VM informa operandos insuficientes. Modernizar esa regla global queda fuera de esta misión.",
+      "coste": "O(n) tiempo; memoria auxiliar O(1), aparte de texto y buffers stdio."
+    },
+    "programa": "archivo.escribir(\"nota\", \"nuevo\")\nponer(archivo.leer(\"nota\"))\n",
+    "salida": "nuevo\n",
+    "final": {
+      "nota": "nuevo"
+    }
+  },
+  "doc_anexar": {
+    "documentacion": {
+      "nombre": "anexar",
+      "firma": "archivo.anexar(ruta, texto)",
+      "explica": "Añade texto al final; crea el archivo si no existe.",
+      "resultado": "Sin valor de retorno utilizable; usar como sentencia; error si la escritura o cierre falla.",
+      "limites": "Cadenas obligatorias. Texto vacío puede crear un archivo vacío. Escritura directa: ante fallo pueden quedar bytes añadidos. No garantiza transacciones entre escritores concurrentes; sigue enlaces. No anidar la llamada como argumento ni usarla como valor: el contrato nativo no apila un retorno y la VM informa operandos insuficientes. Modernizar esa regla global queda fuera de esta misión.",
+      "coste": "O(n) sobre los bytes añadidos; memoria auxiliar O(1)."
+    },
+    "programa": "archivo.escribir(\"nota\", \"a\")\narchivo.anexar(\"nota\", \"ñ\")\nponer(archivo.leer(\"nota\"))\n",
+    "salida": "añ\n",
+    "final": {
+      "nota": "añ"
+    }
+  },
+  "doc_intentar_escribir": {
+    "documentacion": {
+      "nombre": "intentar_escribir",
+      "firma": "archivo.intentar_escribir(ruta, texto)",
+      "explica": "Permite consultar un fallo operativo sin interrumpir el programa.",
+      "resultado": "Verdadero sólo tras escritura y cierre correctos; falso ante fallo operativo; tipos incorrectos lanzan error.",
+      "limites": "Texto vacío crea/trunca. No es escritura atómica: falso no significa que el destino conserve sus bytes. Para esa garantía antes del reemplazo usar escribir_atomico.",
+      "coste": "O(n) tiempo y O(1) memoria auxiliar."
+    },
+    "programa": "poner(archivo.intentar_escribir(\"nota\", \"bien\"))\nponer(archivo.intentar_escribir(\"no-existe/nota\", \"x\"))\n",
+    "salida": "verdadero\nfalso\n",
+    "final": {
+      "nota": "bien"
+    }
+  },
+  "doc_escribir_atomico": {
+    "documentacion": {
+      "nombre": "escribir_atomico",
+      "firma": "archivo.escribir_atomico(ruta, texto)",
+      "explica": "Prepara un archivo temporal y reemplaza el destino sólo cuando sus bytes se han escrito, sincronizado y cerrado.",
+      "resultado": "1: reemplazo y sincronización confirmados; 0: fallo antes del reemplazo; 2: reemplazado, sincronización/cierre del directorio sin confirmar (advierte); -1: plataforma no implementada.",
+      "limites": "Linux, directorio estable, sistema de archivos local. Cadenas obligatorias, texto hasta 8 MiB; vacío válido. Destino regular o ausente, sin seguir enlace final. Nuevo inode con permisos 0600, sin preservar metadatos. No usar como simple booleano: 2 ya reemplazó el destino. No promete resistencia a cambios concurrentes de rutas.",
+      "coste": "O(n) tiempo, O(longitud de ruta) memoria y O(n) espacio temporal en disco; fsync añade latencia."
+    },
+    "programa": "poner(archivo.escribir_atomico(\"nota\", \"completo\"))\nponer(archivo.leer_texto_seguro(\"nota\"))\n",
+    "salida": "1\ncompleto\n",
+    "final": {
+      "nota": "completo"
+    }
+  },
+  "doc_duplicar": {
+    "documentacion": {
+      "nombre": "duplicar",
+      "firma": "archivo.duplicar(origen, destino)",
+      "explica": "Copia todos los bytes de un archivo regular; también admite contenido binario y archivos vacíos.",
+      "resultado": "Sin valor de retorno utilizable; usar como sentencia. Error antes del reemplazo mantiene el destino anterior o su ausencia. Si el directorio no confirma durabilidad tras reemplazar, advierte y conserva la copia.",
+      "limites": "Cadenas obligatorias. Linux; reutiliza escribir_atomico internamente. Rechaza mismo inode, destino simbólico o no regular, origen no regular. El origen simbólico que resuelve a archivo regular se admite. Reemplaza un destino regular con inode nuevo y permisos 0600; otros enlaces duros al destino viejo conservan sus bytes. Sin límite de 8 MiB para copiar. Fuera de Linux falla sin modificar destino. No anidar la llamada como argumento ni usarla como valor: el contrato nativo no apila un retorno y la VM informa operandos insuficientes. Modernizar esa regla global queda fuera de esta misión.",
+      "coste": "O(n) tiempo, bloque de 16 KiB más O(ruta) memoria; O(n) espacio temporal en disco."
+    },
+    "programa": "archivo.escribir(\"origen\", \"copia ñ\")\narchivo.escribir(\"destino\", \"anterior\")\narchivo.duplicar(\"origen\", \"destino\")\nponer(archivo.leer(\"destino\"))\n",
+    "salida": "copia ñ\n",
+    "final": {
+      "origen": "copia ñ",
+      "destino": "copia ñ"
+    }
+  },
+  "doc_ejecutar": {
+    "documentacion": {
+      "nombre": "ejecutar",
+      "firma": "archivo.ejecutar(ruta)",
+      "explica": "Analiza, compila y ejecuta un programa Mictlán o Latino en la VM actual.",
+      "resultado": "Sin valor de retorno utilizable; usar como sentencia; errores de lectura, análisis, compilación o ejecución se propagan. Restaura el archivo activo, REPL y ubicación del llamador.",
+      "limites": "Sólo .lat y .mict, sensibles a mayúsculas; otras extensiones conservan el no-op histórico. Vacío sigue siendo error. Rutas relativas al directorio de trabajo. No crea una VM aislada ni revierte efectos del programa. El cargador requiere archivo posicionable, sin NUL, tamaño hasta INT_MAX−2. No es una operación para contenido no confiable. No anidar la llamada como argumento ni usarla como valor: el contrato nativo no apila un retorno y la VM informa operandos insuficientes. Modernizar esa regla global queda fuera de esta misión.",
+      "coste": "O(n) para lectura, más coste de análisis, compilación y programa; memoria de fuente/AST/bytecode y objetos de la VM."
+    },
+    "programa": "archivo.escribir(\"hijo.mict\", \"archivo.escribir(\\\"marca\\\", \\\"42\\\")\\n\")\narchivo.ejecutar(\"hijo.mict\")\nponer(archivo.leer(\"marca\"))\n",
+    "salida": "42\n",
+    "final": {
+      "hijo.mict": "archivo.escribir(\"marca\", \"42\")\n",
+      "marca": "42"
+    }
+  },
+  "doc_crear": {
+    "documentacion": {
+      "nombre": "crear",
+      "firma": "archivo.crear(ruta)",
+      "explica": "Crea exclusivamente un archivo vacío, evitando truncar uno existente.",
+      "resultado": "Verdadero si crea y cierra correctamente; falso si ya existe o falla.",
+      "limites": "Ruta cadena; no crea directorios padres. Un fallo de cierre después de crear puede dejar un archivo vacío aunque devuelva falso. No promete revertir creación. Los permisos dependen de fopen y umask, a diferencia del 0600 del reemplazo atómico.",
+      "coste": "Coste de resolver ruta y abrir/cerrar; memoria auxiliar O(1)."
+    },
+    "programa": "poner(archivo.crear(\"nota\"))\narchivo.escribir(\"nota\", \"conservar\")\nponer(archivo.crear(\"nota\"))\nponer(archivo.leer(\"nota\"))\n",
+    "salida": "verdadero\nfalso\nconservar\n",
+    "final": {
+      "nota": "conservar"
+    }
+  },
+  "doc_eliminar": {
+    "documentacion": {
+      "nombre": "eliminar",
+      "firma": "archivo.eliminar(ruta)",
+      "explica": "Elimina una entrada del sistema de archivos mediante remove.",
+      "resultado": "Verdadero si remove tuvo éxito; falso en otro caso, incluida ruta ausente.",
+      "limites": "Ruta cadena. Conserva la capacidad POSIX de borrar directorios vacíos y enlaces (no su objetivo); no borra directorios recursivamente. No elimina los bytes de otros enlaces duros al mismo archivo. No promete fsync del directorio.",
+      "coste": "Coste del sistema de archivos y resolución de ruta; O(1) memoria auxiliar."
+    },
+    "programa": "archivo.escribir(\"nota\", \"sintético\")\nponer(archivo.eliminar(\"nota\"))\nponer(archivo.eliminar(\"nota\"))\n",
+    "salida": "verdadero\nfalso\n",
+    "final": {}
+  },
+  "doc_borrar": {
+    "documentacion": {
+      "nombre": "borrar",
+      "firma": "archivo.borrar(ruta)",
+      "explica": "Es el alias histórico exacto de eliminar.",
+      "resultado": "Verdadero o falso, con los mismos tipos y errores que eliminar.",
+      "limites": "No es borrado recursivo ni borrado físico garantizado. Mantiene remove de POSIX, incluyendo directorios vacíos.",
+      "coste": "Coste de sistema de archivos; O(1) memoria auxiliar."
+    },
+    "programa": "archivo.crear(\"nota\")\nponer(archivo.borrar(\"nota\"))\nponer(archivo.borrar(\"nota\"))\n",
+    "salida": "verdadero\nfalso\n",
+    "final": {}
+  },
+  "doc_renombrar": {
+    "documentacion": {
+      "nombre": "renombrar",
+      "firma": "archivo.renombrar(origen, destino)",
+      "explica": "Cambia el nombre o ubicación mediante rename del sistema.",
+      "resultado": "Cadena con el destino si tuvo éxito; falso si rename falla.",
+      "limites": "Ambos argumentos cadenas. POSIX puede reemplazar un destino existente: se conserva este contrato histórico. Puede fallar entre sistemas de archivos. No confirma durabilidad con fsync ni deshace el movimiento si posteriormente falla publicar el resultado en la VM.",
+      "coste": "Resolución de rutas/operación del sistema; O(longitud del resultado) al publicar la cadena."
+    },
+    "programa": "archivo.escribir(\"origen\", \"contenido\")\nponer(archivo.renombrar(\"origen\", \"destino\"))\nponer(archivo.leer(\"destino\"))\n",
+    "salida": "destino\ncontenido\n",
+    "final": {
+      "destino": "contenido"
+    }
+  },
+  "sin_retorno_escribir": {
+    "programa": "poner(archivo.escribir(\"nota\", \"nuevo\"))\nponer(archivo.leer(\"nota\"))\n",
+    "final": {
+      "nota": "nuevo"
+    },
+    "codigo": 1,
+    "diagnostico": "Operandos insuficientes",
+    "salida": ""
+  },
+  "sin_retorno_anexar": {
+    "programa": "archivo.escribir(\"nota\", \"a\")\nponer(archivo.anexar(\"nota\", \"ñ\"))\nponer(archivo.leer(\"nota\"))\n",
+    "final": {
+      "nota": "añ"
+    },
+    "codigo": 1,
+    "diagnostico": "Operandos insuficientes",
+    "salida": ""
+  },
+  "sin_retorno_duplicar": {
+    "programa": "archivo.escribir(\"origen\", \"copia ñ\")\narchivo.escribir(\"destino\", \"anterior\")\nponer(archivo.duplicar(\"origen\", \"destino\"))\nponer(archivo.leer(\"destino\"))\n",
+    "final": {
+      "origen": "copia ñ",
+      "destino": "copia ñ"
+    },
+    "codigo": 1,
+    "diagnostico": "Operandos insuficientes",
+    "salida": ""
+  },
+  "sin_retorno_ejecutar": {
+    "programa": "archivo.escribir(\"hijo.mict\", \"archivo.escribir(\\\"marca\\\", \\\"42\\\")\\n\")\nponer(archivo.ejecutar(\"hijo.mict\"))\nponer(archivo.leer(\"marca\"))\n",
+    "final": {
+      "hijo.mict": "archivo.escribir(\"marca\", \"42\")\n",
+      "marca": "42"
+    },
+    "codigo": 1,
+    "diagnostico": "Operandos insuficientes",
+    "salida": ""
+  }
+}

@@ -8,6 +8,7 @@ on:
       - 'investigacion/p12b1-*'
       - 'investigacion/p12b2-*'
       - 'investigacion/p12b3-*'
+      - 'investigacion/p12b4a-*'
 
 permissions:
   contents: read
@@ -34,6 +35,8 @@ jobs:
       LSAN_OPTIONS: exitcode=23
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Preparar compilador y locales de coma decimal
         run: |
           sudo apt-get update
@@ -57,8 +60,16 @@ jobs:
           cmake "${args[@]}" 2>&1 | tee configure.log
       - name: Compilar
         run: cmake --build build --parallel 2 2>&1 | tee build.log
+      - name: Registrar revision y herramientas
+        run: |
+          git rev-parse HEAD HEAD^{tree}
+          cc --version
+          cmake --version
+          python3 --version
+          ldd --version
+          env -u LD_LIBRARY_PATH -u LD_PRELOAD -u LD_AUDIT ldd build/mictlan
       - name: Ejecutar todas las pruebas existentes y nuevas
-        run: ctest --test-dir build --output-on-failure --output-junit resultados.xml
+        run: env -u LD_LIBRARY_PATH -u LD_PRELOAD -u LD_AUDIT ctest --test-dir build --output-on-failure --output-junit resultados.xml
       - name: Medir cadenas en Release
         if: matrix.perfil == 'Release'
         run: python3 tests/cadenas/medir.py ./build/mictlan_bench_cadenas > benchmark-cadenas.csv

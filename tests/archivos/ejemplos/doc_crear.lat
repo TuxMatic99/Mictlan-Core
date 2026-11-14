@@ -1,0 +1,4 @@
+poner(archivo.crear("nota"))
+archivo.escribir("nota", "conservar")
+poner(archivo.crear("nota"))
+poner(archivo.leer("nota"))

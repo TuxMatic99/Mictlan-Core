@@ -1,0 +1,2 @@
+archivo.ejecutar("hijo.lat")
+poner(archivo.leer("marca"))

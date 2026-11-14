@@ -1,0 +1,22 @@
+Revisión de código/batería: 257d80e64e38e82b1396755070ea8b6fb756a654
+Linux-6.18.57-x86_64-with-glibc2.41
+$ cc --version
+cc (Debian 14.2.0-19) 14.2.0
+$ cmake --version
+cmake version 4.4.5
+$ python3 --version
+Python 3.12.14
+$ ldd --version
+ldd (Debian GLIBC 2.41-12+deb13u4) 2.41
+$ git diff b0a2d860363e07274feae1d0cf2b421515386d73 -- include
+Sin diferencias en cabeceras públicas.
+debug: /workspace/scratch/1de5cf9cbaa6/build-p12b4a-debug/liblatino.so
+SHA256 6efbe48a52c401bbcba49dc7fa256fe1068a852824a5e1838843cbb8292e9b70
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 0 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+release: /workspace/scratch/1de5cf9cbaa6/build-p12b4a-release/liblatino.so
+SHA256 f5e3f4ec5a1f26dc282da253a50d1a2df23d0e2b113eb55ab9110c847e6b99bd
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 0 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+asan: /workspace/scratch/1de5cf9cbaa6/build-p12b4a-asan/liblatino.so
+SHA256 68e8973d5256bf9277123def2efe28f451f5e7c9135ae58f30b41e984f38abcc
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 7 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+Python usado por CTest (CMake FindPython3): /usr/bin/python3.13; Python 3.13.5

@@ -1,0 +1,5 @@
+poner(archivo.crear("nuevo"))
+poner(archivo.crear("nuevo"))
+poner(archivo.renombrar("nuevo","otro"))
+poner(archivo.borrar("otro"))
+poner(archivo.eliminar("otro"))

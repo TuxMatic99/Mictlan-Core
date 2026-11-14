@@ -1,0 +1,4 @@
+archivo.escribir("nota", "\nñ\n\nfin\r\n")
+poner(lista.longitud(archivo.lineas("nota")))
+archivo.escribir("vacio", "")
+poner(archivo.lineas("vacio"))

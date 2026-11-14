@@ -1,0 +1,2 @@
+poner(archivo.lineas("texto"))
+poner(archivo.leer_texto_seguro("ausente"))

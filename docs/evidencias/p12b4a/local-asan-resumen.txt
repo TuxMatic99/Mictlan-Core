@@ -1,0 +1,11 @@
+Debian 13 local; ASan+UBSan+LSan habilitados.
+CTest: 5/407 aprobadas (ABI/documentacion), 402 fallidas por bloqueo de LSan/ptrace.
+No se cuenta la suite instrumentada como aprobada.
+Aprobadas:
+mictlan_p12b1_documentacion_sincronizada
+mictlan_p12b2_documentacion_sincronizada
+mictlan_p12b2_abi
+mictlan_p12b3_documentacion_sincronizada
+mictlan_p12b4a_documentacion
+Diagnostico repetido: LeakSanitizer has encountered a fatal error; does not work under ptrace.
+Registro completo comprimido: local-asan.log.gz

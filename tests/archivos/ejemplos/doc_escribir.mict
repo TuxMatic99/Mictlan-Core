@@ -1,0 +1,2 @@
+archivo.escribir("nota", "nuevo")
+poner(archivo.leer("nota"))
