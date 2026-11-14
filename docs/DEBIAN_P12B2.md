@@ -7,6 +7,7 @@ ya existente; estos comandos no se ejecutaron durante el cierre documental.
 ## Preparar una copia y fijar el SHA
 
 ```bash
+set -euo pipefail
 sudo apt update
 sudo apt install -y build-essential git cmake libreadline-dev python3 locales
 sudo localedef -i es_ES -f UTF-8 es_ES.UTF-8
@@ -14,7 +15,6 @@ sudo localedef -i fr_FR -f UTF-8 fr_FR.UTF-8
 
 git clone https://github.com/TuxMatic99/Mictlan-Core.git mictlan-core-p12b2
 cd mictlan-core-p12b2
-set -euo pipefail
 git fetch origin investigacion/p12b2-colecciones
 revision=c4aa656abc8302f893fe74e913867e2852552317
 git switch --detach "$revision"
