@@ -44,3 +44,13 @@ unir tres cadenas con un separador largo: `antes-union-asan.log`.
 
 No se cambiarán la gramática, las estructuras públicas ni las políticas de
 propiedad de P0.2-E/F/G. Los ayudantes nuevos serán privados a Core.
+
+## Limpieza al publicar un resultado (prueba adicional)
+
+La inyección de un error dentro de latC_apilar_string demuestra un buffer perdido
+antes de la corrección (`evidencias/p12b2/antes-publicacion.log`). Validar argumentos
+y comprobar malloc no cubre ese salto de error. Se comparte la definición privada
+ya existente de lat_longjmp en laterror.h, sin cambiar campos ni funcionamiento.
+La unión instala una guardia local, libera su buffer y propaga exactamente el mismo
+estado al manejador anterior. El cambio en latdo.c solo mueve esa declaración;
+no altera instrucciones, recuperación de pila, parser ni reglas globales de la VM.

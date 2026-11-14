@@ -24,6 +24,8 @@ THE SOFTWARE.
 
 #include "latino.h"
 #include "latmem.h"
+#include "latdo.h"
+#include "laterror.h"
 #include <limits.h>
 #include <stdint.h>
 #include <math.h>
@@ -235,8 +237,16 @@ void lista_separar(lat_mv *mv) {
         primero = false;
     }
     *destino = '\0';
-    latC_apilar_string(mv, buffer);
+    /* Publicar puede fallar al internar o apilar. Liberar tambien si salta
+       al manejador; despues propagar el mismo estado al llamador original. */
+    struct lat_longjmp guardia;
+    guardia.previo = mv->error;
+    guardia.status = 0;
+    mv->error = &guardia;
+    LAT_TRY(mv, &guardia, latC_apilar_string(mv, buffer););
+    mv->error = guardia.previo;
     free(buffer);
+    if (guardia.status) latD_lanzar(mv, guardia.status);
 }
 
 static const lat_CReg liblist[] = {

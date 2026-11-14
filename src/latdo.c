@@ -42,11 +42,7 @@ THE SOFTWARE.
   funcion_codigo[fi++] = latMV_bytecode_crear(I, A, B, M, L, C, F)
 #define fpn(vm, N) fi = ast_analizar(vm, N, funcion_codigo, fi)
 
-struct lat_longjmp {
-  struct lat_longjmp *previo;
-  lat_jmpbuf b;
-  volatile int status;
-};
+#include "laterror.h"
 
 void str_concatenar(lat_mv *mv);
 static bool encontrar_romper(ast *nodo);
