@@ -1,0 +1,22 @@
+max_vacio	Numero invalido de argumentos
+max_tipo	El parametro debe de ser un decimal
+azar_negativo	Limite aleatorio fuera de rango
+azar_no_finito	Limite aleatorio fuera de rango
+azar_grande	Limite aleatorio fuera de rango
+azar_aridad	Numero invalido de argumentos
+ldexp_infinito	Exponente fuera de rango
+ldexp_grande	Exponente fuera de rango
+estricta_invalida	Conversion numerica estricta: sintaxis invalida
+estricta_desborde	Conversion numerica estricta: fuera de rango
+estricta_subdesborde	Conversion numerica estricta: fuera de rango
+estricta_tipo	Conversion numerica estricta: tipo invalido
+entero_fraccion	Se requiere un entero exacto
+entero_orden	Intervalo aleatorio invertido
+semilla_fraccion	Se requiere un entero exacto
+binario_infinito	Se requiere un numero finito
+raiz_dominio	Dominio invalido para raiz_segura
+log_dominio	Dominio invalido para log_seguro
+potencia_dominio	Dominio invalido para potencia_segura
+potencia_desborde	Resultado fuera de rango
+potencia_subdesborde	Resultado fuera de rango
+predicado_tipo	El parametro debe de ser un decimal

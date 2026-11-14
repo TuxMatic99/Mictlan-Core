@@ -1,0 +1,691 @@
+Test project /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug
+      Start 147: mictlan_p12b3_herencia_lat
+ 1/63 Test #147: mictlan_p12b3_herencia_lat ................   Passed    0.01 sec
+      Start 148: mictlan_p12b3_herencia_mict
+ 2/63 Test #148: mictlan_p12b3_herencia_mict ...............   Passed    0.01 sec
+      Start 149: mictlan_p12b3_extremos_lat
+ 3/63 Test #149: mictlan_p12b3_extremos_lat ................***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  -1e+16
+
+  1e+16
+
+
+
+  Obtenida:
+
+  -999999999999999
+
+  999999999999999
+
+
+
+
+      Start 150: mictlan_p12b3_extremos_mict
+ 4/63 Test #150: mictlan_p12b3_extremos_mict ...............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  -1e+16
+
+  1e+16
+
+
+
+  Obtenida:
+
+  -999999999999999
+
+  999999999999999
+
+
+
+
+      Start 151: mictlan_p12b3_cero_lat
+ 5/63 Test #151: mictlan_p12b3_cero_lat ....................***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  0
+
+  0
+
+  -0
+
+
+
+  Obtenida:
+
+  nulo
+
+  nulo
+
+  nulo
+
+
+
+
+      Start 152: mictlan_p12b3_cero_mict
+ 6/63 Test #152: mictlan_p12b3_cero_mict ...................***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:29 (message):
+  Salida distinta.
+
+  Esperada:
+
+  0
+
+  0
+
+  -0
+
+
+
+  Obtenida:
+
+  nulo
+
+  nulo
+
+  nulo
+
+
+
+
+      Start 153: mictlan_p12b3_moderna_lat
+ 7/63 Test #153: mictlan_p12b3_moderna_lat .................***Failed    0.00 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 1; esperado 0.
+
+
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/moderna-lat/programa.lat:1:12:
+  No se encontro la fun 'descomponer_binario'
+
+
+
+
+      Start 154: mictlan_p12b3_moderna_mict
+ 8/63 Test #154: mictlan_p12b3_moderna_mict ................***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 1; esperado 0.
+
+
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/moderna-mict/programa.mict:1:12:
+  No se encontro la fun 'descomponer_binario'
+
+
+
+
+      Start 155: mictlan_p12b3_max_vacio_lat
+ 9/63 Test #155: mictlan_p12b3_max_vacio_lat ...............   Passed    0.01 sec
+      Start 156: mictlan_p12b3_max_vacio_mict
+10/63 Test #156: mictlan_p12b3_max_vacio_mict ..............   Passed    0.01 sec
+      Start 157: mictlan_p12b3_max_tipo_lat
+11/63 Test #157: mictlan_p12b3_max_tipo_lat ................   Passed    0.01 sec
+      Start 158: mictlan_p12b3_max_tipo_mict
+12/63 Test #158: mictlan_p12b3_max_tipo_mict ...............   Passed    0.01 sec
+      Start 159: mictlan_p12b3_azar_negativo_lat
+13/63 Test #159: mictlan_p12b3_azar_negativo_lat ...........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Floating-point exception; esperado 1.
+
+
+
+
+
+
+      Start 160: mictlan_p12b3_azar_negativo_mict
+14/63 Test #160: mictlan_p12b3_azar_negativo_mict ..........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo Floating-point exception; esperado 1.
+
+
+
+
+
+
+      Start 161: mictlan_p12b3_azar_no_finito_lat
+15/63 Test #161: mictlan_p12b3_azar_no_finito_lat ..........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 162: mictlan_p12b3_azar_no_finito_mict
+16/63 Test #162: mictlan_p12b3_azar_no_finito_mict .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 163: mictlan_p12b3_azar_grande_lat
+17/63 Test #163: mictlan_p12b3_azar_grande_lat .............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 164: mictlan_p12b3_azar_grande_mict
+18/63 Test #164: mictlan_p12b3_azar_grande_mict ............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 165: mictlan_p12b3_azar_aridad_lat
+19/63 Test #165: mictlan_p12b3_azar_aridad_lat .............   Passed    0.01 sec
+      Start 166: mictlan_p12b3_azar_aridad_mict
+20/63 Test #166: mictlan_p12b3_azar_aridad_mict ............   Passed    0.01 sec
+      Start 167: mictlan_p12b3_ldexp_infinito_lat
+21/63 Test #167: mictlan_p12b3_ldexp_infinito_lat ..........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 168: mictlan_p12b3_ldexp_infinito_mict
+22/63 Test #168: mictlan_p12b3_ldexp_infinito_mict .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 169: mictlan_p12b3_ldexp_grande_lat
+23/63 Test #169: mictlan_p12b3_ldexp_grande_lat ............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 170: mictlan_p12b3_ldexp_grande_mict
+24/63 Test #170: mictlan_p12b3_ldexp_grande_mict ...........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:23 (message):
+  Codigo 0; esperado 1.
+
+
+
+
+
+
+      Start 171: mictlan_p12b3_estricta_invalida_lat
+25/63 Test #171: mictlan_p12b3_estricta_invalida_lat .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Conversion numerica estricta: sintaxis invalida
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/estricta_invalida-lat/programa.lat:1:1:
+  Variable 'anumero_estricto' indefinida
+
+
+
+
+      Start 172: mictlan_p12b3_estricta_invalida_mict
+26/63 Test #172: mictlan_p12b3_estricta_invalida_mict ......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Conversion numerica estricta: sintaxis invalida
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/estricta_invalida-mict/programa.mict:1:1:
+  Variable 'anumero_estricto' indefinida
+
+
+
+
+      Start 173: mictlan_p12b3_estricta_desborde_lat
+27/63 Test #173: mictlan_p12b3_estricta_desborde_lat .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Conversion numerica estricta: fuera de rango
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/estricta_desborde-lat/programa.lat:1:1:
+  Variable 'anumero_estricto' indefinida
+
+
+
+
+      Start 174: mictlan_p12b3_estricta_desborde_mict
+28/63 Test #174: mictlan_p12b3_estricta_desborde_mict ......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Conversion numerica estricta: fuera de rango
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/estricta_desborde-mict/programa.mict:1:1:
+  Variable 'anumero_estricto' indefinida
+
+
+
+
+      Start 175: mictlan_p12b3_estricta_subdesborde_lat
+29/63 Test #175: mictlan_p12b3_estricta_subdesborde_lat ....***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Conversion numerica estricta: fuera de rango
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/estricta_subdesborde-lat/programa.lat:1:1:
+  Variable 'anumero_estricto' indefinida
+
+
+
+
+      Start 176: mictlan_p12b3_estricta_subdesborde_mict
+30/63 Test #176: mictlan_p12b3_estricta_subdesborde_mict ...***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Conversion numerica estricta: fuera de rango
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/estricta_subdesborde-mict/programa.mict:1:1:
+  Variable 'anumero_estricto' indefinida
+
+
+
+
+      Start 177: mictlan_p12b3_estricta_tipo_lat
+31/63 Test #177: mictlan_p12b3_estricta_tipo_lat ...........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Conversion numerica estricta: tipo invalido
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/estricta_tipo-lat/programa.lat:1:1:
+  Variable 'anumero_estricto' indefinida
+
+
+
+
+      Start 178: mictlan_p12b3_estricta_tipo_mict
+32/63 Test #178: mictlan_p12b3_estricta_tipo_mict ..........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Conversion numerica estricta: tipo invalido
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/estricta_tipo-mict/programa.mict:1:1:
+  Variable 'anumero_estricto' indefinida
+
+
+
+
+      Start 179: mictlan_p12b3_entero_fraccion_lat
+33/63 Test #179: mictlan_p12b3_entero_fraccion_lat .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Se requiere un entero exacto
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/entero_fraccion-lat/programa.lat:1:6:
+  No se encontro la fun 'aleatorio_entero'
+
+
+
+
+      Start 180: mictlan_p12b3_entero_fraccion_mict
+34/63 Test #180: mictlan_p12b3_entero_fraccion_mict ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Se requiere un entero exacto
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/entero_fraccion-mict/programa.mict:1:6:
+  No se encontro la fun 'aleatorio_entero'
+
+
+
+
+      Start 181: mictlan_p12b3_entero_orden_lat
+35/63 Test #181: mictlan_p12b3_entero_orden_lat ............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Intervalo aleatorio invertido
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/entero_orden-lat/programa.lat:1:6:
+  No se encontro la fun 'aleatorio_entero'
+
+
+
+
+      Start 182: mictlan_p12b3_entero_orden_mict
+36/63 Test #182: mictlan_p12b3_entero_orden_mict ...........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Intervalo aleatorio invertido
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/entero_orden-mict/programa.mict:1:6:
+  No se encontro la fun 'aleatorio_entero'
+
+
+
+
+      Start 183: mictlan_p12b3_semilla_fraccion_lat
+37/63 Test #183: mictlan_p12b3_semilla_fraccion_lat ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Se requiere un entero exacto
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/semilla_fraccion-lat/programa.lat:1:6:
+  No se encontro la fun 'semilla_aleatoria'
+
+
+
+
+      Start 184: mictlan_p12b3_semilla_fraccion_mict
+38/63 Test #184: mictlan_p12b3_semilla_fraccion_mict .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Se requiere un entero exacto
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/semilla_fraccion-mict/programa.mict:1:6:
+  No se encontro la fun 'semilla_aleatoria'
+
+
+
+
+      Start 185: mictlan_p12b3_binario_infinito_lat
+39/63 Test #185: mictlan_p12b3_binario_infinito_lat ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Se requiere un numero finito
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/binario_infinito-lat/programa.lat:1:6:
+  No se encontro la fun 'descomponer_binario'
+
+
+
+
+      Start 186: mictlan_p12b3_binario_infinito_mict
+40/63 Test #186: mictlan_p12b3_binario_infinito_mict .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Se requiere un numero finito
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/binario_infinito-mict/programa.mict:1:6:
+  No se encontro la fun 'descomponer_binario'
+
+
+
+
+      Start 187: mictlan_p12b3_raiz_dominio_lat
+41/63 Test #187: mictlan_p12b3_raiz_dominio_lat ............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Dominio invalido para raiz_segura
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/raiz_dominio-lat/programa.lat:1:6:
+  No se encontro la fun 'raiz_segura'
+
+
+
+
+      Start 188: mictlan_p12b3_raiz_dominio_mict
+42/63 Test #188: mictlan_p12b3_raiz_dominio_mict ...........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Dominio invalido para raiz_segura
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/raiz_dominio-mict/programa.mict:1:6:
+  No se encontro la fun 'raiz_segura'
+
+
+
+
+      Start 189: mictlan_p12b3_log_dominio_lat
+43/63 Test #189: mictlan_p12b3_log_dominio_lat .............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Dominio invalido para log_seguro
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/log_dominio-lat/programa.lat:1:6:
+  No se encontro la fun 'log_seguro'
+
+
+
+
+      Start 190: mictlan_p12b3_log_dominio_mict
+44/63 Test #190: mictlan_p12b3_log_dominio_mict ............***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Dominio invalido para log_seguro
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/log_dominio-mict/programa.mict:1:6:
+  No se encontro la fun 'log_seguro'
+
+
+
+
+      Start 191: mictlan_p12b3_potencia_dominio_lat
+45/63 Test #191: mictlan_p12b3_potencia_dominio_lat ........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Dominio invalido para potencia_segura
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/potencia_dominio-lat/programa.lat:1:6:
+  No se encontro la fun 'potencia_segura'
+
+
+
+
+      Start 192: mictlan_p12b3_potencia_dominio_mict
+46/63 Test #192: mictlan_p12b3_potencia_dominio_mict .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Dominio invalido para potencia_segura
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/potencia_dominio-mict/programa.mict:1:6:
+  No se encontro la fun 'potencia_segura'
+
+
+
+
+      Start 193: mictlan_p12b3_potencia_desborde_lat
+47/63 Test #193: mictlan_p12b3_potencia_desborde_lat .......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Resultado fuera de rango
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/potencia_desborde-lat/programa.lat:1:6:
+  No se encontro la fun 'potencia_segura'
+
+
+
+
+      Start 194: mictlan_p12b3_potencia_desborde_mict
+48/63 Test #194: mictlan_p12b3_potencia_desborde_mict ......***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Resultado fuera de rango
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/potencia_desborde-mict/programa.mict:1:6:
+  No se encontro la fun 'potencia_segura'
+
+
+
+
+      Start 195: mictlan_p12b3_potencia_subdesborde_lat
+49/63 Test #195: mictlan_p12b3_potencia_subdesborde_lat ....***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Resultado fuera de rango
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/potencia_subdesborde-lat/programa.lat:1:6:
+  No se encontro la fun 'potencia_segura'
+
+
+
+
+      Start 196: mictlan_p12b3_potencia_subdesborde_mict
+50/63 Test #196: mictlan_p12b3_potencia_subdesborde_mict ...***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: Resultado fuera de rango
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/potencia_subdesborde-mict/programa.mict:1:6:
+  No se encontro la fun 'potencia_segura'
+
+
+
+
+      Start 197: mictlan_p12b3_predicado_tipo_lat
+51/63 Test #197: mictlan_p12b3_predicado_tipo_lat ..........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: El parametro debe de ser un decimal
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/predicado_tipo-lat/programa.lat:1:6:
+  No se encontro la fun 'es_nan'
+
+
+
+
+      Start 198: mictlan_p12b3_predicado_tipo_mict
+52/63 Test #198: mictlan_p12b3_predicado_tipo_mict .........***Failed    0.01 sec
+CMake Error at /workspace/scratch/1de5cf9cbaa6/mictlan-core-p12b3/tests/conformidad/verificar.cmake:41 (message):
+  Diagnostico ausente: El parametro debe de ser un decimal
+
+
+  /workspace/scratch/1de5cf9cbaa6/build-p12b3-debug/matematicas/predicado_tipo-mict/programa.mict:1:6:
+  No se encontro la fun 'es_nan'
+
+
+
+
+      Start 199: mictlan_p12b3_extremos_c
+53/63 Test #199: mictlan_p12b3_extremos_c ..................***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.00 sec
+P12B3_ASSERT 35: dos("max",-1e20,-2e20)==-1e20
+
+      Start 200: mictlan_p12b3_conversion_c
+54/63 Test #200: mictlan_p12b3_conversion_c ................***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.00 sec
+P12B3_ASSERT 44: uno("anumero",0)==0
+
+      Start 201: mictlan_p12b3_herencia_c
+55/63 Test #201: mictlan_p12b3_herencia_c ..................   Passed    0.00 sec
+      Start 202: mictlan_p12b3_precision_c
+56/63 Test #202: mictlan_p12b3_precision_c .................   Passed    0.00 sec
+      Start 203: mictlan_p12b3_binario_c
+57/63 Test #203: mictlan_p12b3_binario_c ...................***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.00 sec
+Funcion ausente: descomponer_binario
+P12B3_ASSERT 75: r.tipo==T_LIST&&getLista(&r)->longitud==2
+
+      Start 204: mictlan_p12b3_azar_c
+58/63 Test #204: mictlan_p12b3_azar_c ......................***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.00 sec
+Funcion ausente: semilla_aleatoria
+Funcion ausente: aleatorio_entero
+P12B3_ASSERT 87: dos("aleatorio_entero",0,4294967295.)==esperados[i]
+
+      Start 205: mictlan_p12b3_estricto_c
+59/63 Test #205: mictlan_p12b3_estricto_c ..................***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.00 sec
+P12B3_ASSERT 98: texto("anumero_estricto","  +12.5e-1\t",&e)==1.25&&e==0
+
+      Start 206: mictlan_p12b3_dominio_c
+60/63 Test #206: mictlan_p12b3_dominio_c ...................***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.00 sec
+Funcion ausente: raiz_segura
+P12B3_ASSERT 108: uno("raiz_segura",4)==2
+
+      Start 207: mictlan_p12b3_recuperacion_c
+61/63 Test #207: mictlan_p12b3_recuperacion_c ..............***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.00 sec
+contratos-p12b3:0:0: El parametro debe de ser un decimal
+contratos-p12b3:0:0: El parametro debe de ser un decimal
+contratos-p12b3:0:0: Numero invalido de argumentos
+P12B3_ASSERT 121: vm->ptrpila==1&&getNumerico(latC_tope(vm))==777
+
+      Start 208: mictlan_p12b3_sdk_c
+62/63 Test #208: mictlan_p12b3_sdk_c .......................***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.00 sec
+P12B3_ASSERT 133: latC_llamar_funcion(vm,fs[k])==LAT_ERRRUN
+
+      Start 209: mictlan_p12b3_temporales_c
+63/63 Test #209: mictlan_p12b3_temporales_c ................***Failed  Error regular expression found in output. Regex=[P12B3_ASSERT]  0.01 sec
+P12B3_ASSERT 140: vm->memoria_usada==inicio
+bytes_vm_inicio=78448 bytes_vm_final=1505496
+
+
+16% tests passed, 53 tests failed out of 63
+
+Label Time Summary:
+compatibilidad    =   0.33 sec*proc (52 tests)
+contratos         =   0.03 sec*proc (11 tests)
+matematicas       =   0.35 sec*proc (63 tests)
+p12b3             =   0.35 sec*proc (63 tests)
+
+Total Test time (real) =   0.38 sec
+
+The following tests FAILED:
+	149 - mictlan_p12b3_extremos_lat (Failed)               compatibilidad matematicas p12b3
+	150 - mictlan_p12b3_extremos_mict (Failed)              compatibilidad matematicas p12b3
+	151 - mictlan_p12b3_cero_lat (Failed)                   compatibilidad matematicas p12b3
+	152 - mictlan_p12b3_cero_mict (Failed)                  compatibilidad matematicas p12b3
+	153 - mictlan_p12b3_moderna_lat (Failed)                compatibilidad matematicas p12b3
+	154 - mictlan_p12b3_moderna_mict (Failed)               compatibilidad matematicas p12b3
+	159 - mictlan_p12b3_azar_negativo_lat (Failed)          compatibilidad matematicas p12b3
+	160 - mictlan_p12b3_azar_negativo_mict (Failed)         compatibilidad matematicas p12b3
+	161 - mictlan_p12b3_azar_no_finito_lat (Failed)         compatibilidad matematicas p12b3
+	162 - mictlan_p12b3_azar_no_finito_mict (Failed)        compatibilidad matematicas p12b3
+	163 - mictlan_p12b3_azar_grande_lat (Failed)            compatibilidad matematicas p12b3
+	164 - mictlan_p12b3_azar_grande_mict (Failed)           compatibilidad matematicas p12b3
+	167 - mictlan_p12b3_ldexp_infinito_lat (Failed)         compatibilidad matematicas p12b3
+	168 - mictlan_p12b3_ldexp_infinito_mict (Failed)        compatibilidad matematicas p12b3
+	169 - mictlan_p12b3_ldexp_grande_lat (Failed)           compatibilidad matematicas p12b3
+	170 - mictlan_p12b3_ldexp_grande_mict (Failed)          compatibilidad matematicas p12b3
+	171 - mictlan_p12b3_estricta_invalida_lat (Failed)      compatibilidad matematicas p12b3
+	172 - mictlan_p12b3_estricta_invalida_mict (Failed)     compatibilidad matematicas p12b3
+	173 - mictlan_p12b3_estricta_desborde_lat (Failed)      compatibilidad matematicas p12b3
+	174 - mictlan_p12b3_estricta_desborde_mict (Failed)     compatibilidad matematicas p12b3
+	175 - mictlan_p12b3_estricta_subdesborde_lat (Failed)   compatibilidad matematicas p12b3
+	176 - mictlan_p12b3_estricta_subdesborde_mict (Failed)  compatibilidad matematicas p12b3
+	177 - mictlan_p12b3_estricta_tipo_lat (Failed)          compatibilidad matematicas p12b3
+	178 - mictlan_p12b3_estricta_tipo_mict (Failed)         compatibilidad matematicas p12b3
+	179 - mictlan_p12b3_entero_fraccion_lat (Failed)        compatibilidad matematicas p12b3
+	180 - mictlan_p12b3_entero_fraccion_mict (Failed)       compatibilidad matematicas p12b3
+	181 - mictlan_p12b3_entero_orden_lat (Failed)           compatibilidad matematicas p12b3
+	182 - mictlan_p12b3_entero_orden_mict (Failed)          compatibilidad matematicas p12b3
+	183 - mictlan_p12b3_semilla_fraccion_lat (Failed)       compatibilidad matematicas p12b3
+	184 - mictlan_p12b3_semilla_fraccion_mict (Failed)      compatibilidad matematicas p12b3
+	185 - mictlan_p12b3_binario_infinito_lat (Failed)       compatibilidad matematicas p12b3
+	186 - mictlan_p12b3_binario_infinito_mict (Failed)      compatibilidad matematicas p12b3
+	187 - mictlan_p12b3_raiz_dominio_lat (Failed)           compatibilidad matematicas p12b3
+	188 - mictlan_p12b3_raiz_dominio_mict (Failed)          compatibilidad matematicas p12b3
+	189 - mictlan_p12b3_log_dominio_lat (Failed)            compatibilidad matematicas p12b3
+	190 - mictlan_p12b3_log_dominio_mict (Failed)           compatibilidad matematicas p12b3
+	191 - mictlan_p12b3_potencia_dominio_lat (Failed)       compatibilidad matematicas p12b3
+	192 - mictlan_p12b3_potencia_dominio_mict (Failed)      compatibilidad matematicas p12b3
+	193 - mictlan_p12b3_potencia_desborde_lat (Failed)      compatibilidad matematicas p12b3
+	194 - mictlan_p12b3_potencia_desborde_mict (Failed)     compatibilidad matematicas p12b3
+	195 - mictlan_p12b3_potencia_subdesborde_lat (Failed)   compatibilidad matematicas p12b3
+	196 - mictlan_p12b3_potencia_subdesborde_mict (Failed)  compatibilidad matematicas p12b3
+	197 - mictlan_p12b3_predicado_tipo_lat (Failed)         compatibilidad matematicas p12b3
+	198 - mictlan_p12b3_predicado_tipo_mict (Failed)        compatibilidad matematicas p12b3
+	199 - mictlan_p12b3_extremos_c (Failed)                 contratos matematicas p12b3
+	200 - mictlan_p12b3_conversion_c (Failed)               contratos matematicas p12b3
+	203 - mictlan_p12b3_binario_c (Failed)                  contratos matematicas p12b3
+	204 - mictlan_p12b3_azar_c (Failed)                     contratos matematicas p12b3
+	205 - mictlan_p12b3_estricto_c (Failed)                 contratos matematicas p12b3
+	206 - mictlan_p12b3_dominio_c (Failed)                  contratos matematicas p12b3
+	207 - mictlan_p12b3_recuperacion_c (Failed)             contratos matematicas p12b3
+	208 - mictlan_p12b3_sdk_c (Failed)                      contratos matematicas p12b3
+	209 - mictlan_p12b3_temporales_c (Failed)               contratos matematicas p12b3
+Errors while running CTest
