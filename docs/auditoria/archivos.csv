@@ -57,7 +57,7 @@ src/latrecurso.h,RES,789,5ce3865fe6855182e669a441347e877426fade1d9215b5ef03307e0
 src/latrepl.c,REPL,3426,4900698427fca8a3aab88d285485d698f2683c62197c94097117f5d0b192afbd,texto,latrepl.h;latino.h
 src/latstr_utf8.inc,STR,5486,5fe5959ddf7fe805dd638c5d63480335e74e62234b78fcda941e9f113aa0dc44,texto,
 src/latstrlib.c,STR,35791,e46d89e2881397d9024677091e438d78fb02eea07a40c591fa83ee61d065de1e,texto,latino.h;latgc.h;latmem.h;latpropiedad.h;limits.h;stdint.h;latstr_utf8.inc
-src/latsyslib.c,SYS,11195,da77204bfdc7ff9057783d35656ab7e66f9c8e35cbf3abb0c25ce69e34719efd,texto,signal.h;stdio.h;stdlib.h;string.h;time.h;latcompat.h;latgc.h;latino.h;latlist.h;latmem.h;latmv.h
+src/latsyslib.c,SYS,14408,4fe7d78c8b9d0d6ca7a574094e793865d09b6c92e2ea8dca9df8d5aad429b57b,texto,errno.h;limits.h;math.h;signal.h;stdio.h;stdlib.h;string.h;time.h;latcompat.h;latdo.h;laterror.h;latnumerico.h;latgc.h;latino.h;latlist.h;latmem.h;latmv.h
 src/latuilib.c,OPTIONAL,3675,b566fcb4a9c79ad28e0946e14f8bc2f19d85db35b3959c7be80bb231c32bb73c,texto,latino.h
 src/lib/Debug/jansson_d.dll,PLATFORM,90624,41eb737fcf682a64f6b3b4620ab6f1ba24f967fa3aade45cc13b70da6f75cc4c,binario,
 src/lib/Debug/jansson_d.lib,PLATFORM,15938,6b23195cd31a570373e73e2c4f91dacef0a4bdef44fa0ea294a40059a3576e50,binario,

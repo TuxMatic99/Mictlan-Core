@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 
+#include <errno.h>
+#include <limits.h>
+#include <math.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,6 +32,9 @@ THE SOFTWARE.
 #include <time.h>
 
 #include "latcompat.h"
+#include "latdo.h"
+#include "laterror.h"
+#include "latnumerico.h"
 #include "latgc.h"
 #include "latino.h"
 #include "latlist.h"
@@ -45,7 +51,7 @@ typedef struct OS_VERSION_LAT Struct;
 
 Struct
 buscar_os_version() { // Busca y asigna el valor del Build del sistema operativo
-  Struct os_v;
+  Struct os_v = {0, 0, 0};
 
 #ifdef WIN32
   OSVERSIONINFO osvi;
@@ -87,17 +93,27 @@ buscar_os_version() { // Busca y asigna el valor del Build del sistema operativo
   // TODO: Implementar para MSYS2
 #else
   struct utsname buffer;
-  char *p = buffer.release;
-
-  if (uname(&buffer) < 0) {
-    perror("Failed to uname");
+  if (uname(&buffer) < 0) return os_v;
+  /* Sólo segmentos decimales separados por puntos. Un sufijo del kernel
+     no es otro componente; tampoco se avanza más allá del terminador. */
+  const char *p = buffer.release;
+  unsigned long *partes[] = {&os_v.osMayor, &os_v.osMenor, &os_v.osBuild};
+  for (size_t i = 0; i < 3; ++i) {
+    unsigned long valor = 0;
+    if (*p < '0' || *p > '9') break;
+    do {
+      unsigned long digito = (unsigned long)(*p - '0');
+      if (valor > (ULONG_MAX - digito) / 10) {
+        errno = ERANGE;
+        return os_v;
+      }
+      valor = valor * 10 + digito;
+      ++p;
+    } while (*p >= '0' && *p <= '9');
+    *partes[i] = valor;
+    if (*p != '.') break;
+    ++p;
   }
-  // os_v.osMayor = (int)strtol(buffer.version, (char **)NULL, 10);
-  // os_v.osMayor = atoi(buffer.version);
-  // os_v.osMayor = buffer.release;
-  os_v.osMayor = strtol(p, &p, 10);
-  os_v.osMenor = strtol(++p, &p, 10);
-  os_v.osBuild = strtol(++p, &p, 10);
 #endif
 
   return os_v;
@@ -105,160 +121,210 @@ buscar_os_version() { // Busca y asigna el valor del Build del sistema operativo
 
 volatile sig_atomic_t senial;
 
-void sleep_ms(int milliseconds) // cross-platform sleep function
-{
+/* Devuelve el fallo al llamador nativo sin cambiar la firma C histórica. */
+static int sistema_pausar_ms(int milliseconds) {
+  if (milliseconds < 0) { errno = EINVAL; return -1; }
 #ifdef WIN32
-  Sleep(milliseconds);
+  Sleep((DWORD)milliseconds);
+  return 0;
 #elif _POSIX_C_SOURCE >= 199309L
-  struct timespec ts;
-  ts.tv_sec = milliseconds / 1000;
-  ts.tv_nsec = (milliseconds % 1000) * 1000000;
-  nanosleep(&ts, NULL);
+  struct timespec pedido, resto;
+  pedido.tv_sec = milliseconds / 1000;
+  pedido.tv_nsec = (milliseconds % 1000) * 1000000L;
+  while (nanosleep(&pedido, &resto) != 0) {
+    if (errno != EINTR) return -1;
+    pedido = resto;
+  }
+  return 0;
 #else
-  usleep(milliseconds * 1000);
+  /* El fallback no multiplica un int grande por 1000. */
+  while (milliseconds > 0) {
+    int bloque = milliseconds > 999 ? 999 : milliseconds;
+    if (usleep((unsigned int)bloque * 1000U) != 0) return -1;
+    milliseconds -= bloque;
+  }
+  return 0;
 #endif
+}
+
+void sleep_ms(int milliseconds) {
+  (void)sistema_pausar_ms(milliseconds);
 }
 
 static void latSO_ejecutar(lat_mv *mv) {
   lat_objeto *cmd = latC_desapilar(mv);
-  system(latC_checar_cadena(mv, cmd));
+  if (system(latC_checar_cadena(mv, cmd)) == -1)
+    latC_error(mv, "No se pudo ejecutar el comando");
+  /* El estado no cero del hijo sigue sin ser un error del lenguaje. */
 }
 
 static void latSO_dormir(lat_mv *mv) {
-  lat_objeto *mili_segundos = latC_desapilar(mv);
-  latC_sleep(latC_checar_numerico(mv, mili_segundos));
+  double segundos = latC_checar_numerico(mv, latC_desapilar(mv));
+  if (!isfinite(segundos) || segundos < 0)
+    latC_error(mv, "Duracion fuera de rango");
+#ifdef WIN32
+  double ms = trunc(segundos * 1000.0);
+  if (!isfinite(ms) || ms > (double)MAXDWORD)
+    latC_error(mv, "Duracion fuera de rango");
+  Sleep((DWORD)ms);
+#else
+  int ms = latN_entero(mv, segundos * 1000.0, "Duracion fuera de rango");
+  if (sistema_pausar_ms(ms) != 0)
+    latC_error(mv, "Error al esperar la duracion indicada");
+#endif
 }
 
+static void sistema_publicar_texto(lat_mv *mv, void *p) {
+  latC_apilar_string(mv, p);
+}
 
-static void latSO_pipe(lat_mv *mv)
-{
-    lat_objeto *cmd = latC_desapilar(mv);
-    const char *comando = latC_checar_cadena(mv, cmd);
-
-    FILE *fp = latC_popen(mv, comando, "r");
-
-    if (fp == NULL) {
-        latC_error(mv, "No se pudo ejecutar el comando");
-        return;
-    }
-
-    if (MAX_STR_LENGTH < 2) {
-        latC_pclose(mv, fp);
-        latC_error(mv, "Capacidad de lectura insuficiente");
-        return;
-    }
-
-    char *p = latM_asignar(mv, MAX_STR_LENGTH);
-
-    size_t leidos = fread(
-        p, 1, MAX_STR_LENGTH - 1, fp
-    );
-
-    int error_lectura = ferror(fp);
-
-    p[leidos] = '\0';
-
-    /* Eliminar un salto final solo si existe. */
-    if (leidos > 0 && p[leidos - 1] == '\n') {
-        p[--leidos] = '\0';
-        if (leidos > 0 && p[leidos - 1] == '\r') {
-            p[--leidos] = '\0';
-        }
-    }
-
-    int estado_cierre = latC_pclose(mv, fp);
-
-    if (error_lectura || estado_cierre == -1) {
-        latM_liberar(mv, p);
-        latC_error(mv, "Error al leer o cerrar la tuberia");
-        return;
-    }
-
-    lat_objeto *tmp = latC_crear_cadena(mv, p);
+static void latSO_pipe(lat_mv *mv) {
+  const char *comando = latC_checar_cadena(mv, latC_desapilar(mv));
+  if (MAX_STR_LENGTH < 2) {
+    latC_error(mv, "Capacidad de lectura insuficiente");
+    return;
+  }
+  /* Reservar antes de abrir: latM_asignar puede lanzar un error. */
+  char *p = latM_asignar(mv, MAX_STR_LENGTH);
+  FILE *fp = latC_popen(mv, comando, "r");
+  if (!fp) {
     latM_liberar(mv, p);
-
-    latC_apilar(mv, tmp);
+    latC_error(mv, "No se pudo ejecutar el comando");
+    return;
+  }
+  const size_t capacidad = MAX_STR_LENGTH - 1;
+  size_t usados = 0;
+  int error_lectura = 0, exceso = 0, contiene_nul = 0;
+  unsigned char bloque[8192];
+  for (;;) {
+    errno = 0;
+    size_t n = fread(bloque, 1, sizeof(bloque), fp);
+    int error = errno;
+    if (memchr(bloque, 0, n)) contiene_nul = 1;
+    size_t copiar = n < capacidad - usados ? n : capacidad - usados;
+    memcpy(p + usados, bloque, copiar);
+    usados += copiar;
+    if (n > copiar) exceso = 1;
+    /* Aun con exceso/NUL se consume la salida finita. Nunca se entrega un
+       prefijo incompleto ni se espera al hijo dejando su salida bloqueada. */
+    if (ferror(fp)) {
+      if (error == EINTR) { clearerr(fp); continue; }
+      error_lectura = 1;
+      break;
+    }
+    if (feof(fp)) break;
+    if (!n) { error_lectura = 1; break; }
+  }
+  int estado_cierre = latC_pclose(mv, fp);
+  const char *error = error_lectura || estado_cierre == -1
+      ? "Error al leer o cerrar la tuberia"
+      : exceso ? "Salida de tuberia demasiado larga"
+      : contiene_nul ? "Salida de tuberia contiene NUL" : NULL;
+  if (error) {
+    latM_liberar(mv, p);
+    latC_error(mv, "%s", error);
+    return;
+  }
+  if (usados && p[usados - 1] == '\n') {
+    --usados;
+    if (usados && p[usados - 1] == '\r') --usados;
+  }
+  p[usados] = '\0';
+  struct lat_longjmp guard;
+  int estado = latE_proteger(mv, &guard, sistema_publicar_texto, p);
+  latM_liberar(mv, p);
+  if (estado) latD_lanzar(mv, estado);
 }
 
+static time_t sistema_reloj(lat_mv *mv) {
+  time_t ahora = time(NULL);
+  if (ahora == (time_t)-1) latC_error(mv, "No se pudo consultar el reloj");
+  return ahora;
+}
+
+static void sistema_calendario(lat_mv *mv, const time_t *raw,
+                               struct tm *salida, int utc) {
+#ifndef _WIN32
+  struct tm *r = utc ? gmtime_r(raw, salida) : localtime_r(raw, salida);
+#else
+  struct tm *r = utc ? gmtime(raw) : localtime(raw);
+  if (r) *salida = *r;
+#endif
+  if (!r) latC_error(mv, "Tiempo fuera de rango del calendario");
+}
 
 static void latSO_fecha(lat_mv *mv) {
-  lat_objeto *tiempo = latC_desapilar(mv);
-  char *num = latC_checar_cadena(mv, tiempo);
-  time_t raw;
-  struct tm *tipo;
-  time(&raw);
-  tipo = localtime(&raw);
-  lat_objeto *tmp = latO_nulo;
-  if (!strcmp(num, "seg")) {
-    tmp = latC_crear_numerico(mv, tipo->tm_sec); // segundos
-  } else if (!strcmp(num, "min")) {
-    tmp = latC_crear_numerico(mv, tipo->tm_min);
-  } else if (!strcmp(num, "hora")) {
-    tmp = latC_crear_numerico(mv, tipo->tm_hour);
-  } else if (!strcmp(num, "d_mes")) {
-    tmp = latC_crear_numerico(mv, tipo->tm_mday); // dia del mes
-  } else if (!strcmp(num, "mes")) {
-    tmp = latC_crear_numerico(mv, tipo->tm_mon + 1); // número de mes, empiezan en 0
-  } else if (!strcmp(num, "sem")) {
-    char semanaBuffer[3];
-    strftime(semanaBuffer, sizeof(semanaBuffer), "%V", tipo);
-    int numSemana = atoi(semanaBuffer);
-    tmp = latC_crear_numerico(mv, numSemana); // número de semana en el año
-  } else if (!strcmp(num, "año")) {
-    tmp = latC_crear_numerico(mv, tipo->tm_year + 1900); // los años empiezan en 1900
-  } else if (!strcmp(num, "d_sem")) {
-    tmp = latC_crear_numerico(mv, tipo->tm_wday + 1); // día de la semana, empiezan en 0
-  } else if (!strcmp(num, "d_año")) {
-    tmp = latC_crear_numerico(mv, tipo->tm_yday + 1); // día del año, empieza en 0
+  const char *num = latC_checar_cadena(mv, latC_desapilar(mv));
+  time_t raw = sistema_reloj(mv);
+  struct tm tipo;
+  sistema_calendario(mv, &raw, &tipo, !strcmp(num, "iso"));
+  double resultado;
+  if (!strcmp(num, "seg")) resultado = tipo.tm_sec;
+  else if (!strcmp(num, "min")) resultado = tipo.tm_min;
+  else if (!strcmp(num, "hora")) resultado = tipo.tm_hour;
+  else if (!strcmp(num, "d_mes")) resultado = tipo.tm_mday;
+  else if (!strcmp(num, "mes")) resultado = tipo.tm_mon + 1;
+  else if (!strcmp(num, "año")) resultado = (double)tipo.tm_year + 1900;
+  else if (!strcmp(num, "d_sem")) resultado = tipo.tm_wday + 1;
+  else if (!strcmp(num, "d_año")) resultado = tipo.tm_yday + 1;
+  else if (!strcmp(num, "sem")) {
+    char semana[3];
+    if (!strftime(semana, sizeof(semana), "%V", &tipo))
+      latC_error(mv, "No se pudo dar formato de tiempo");
+    resultado = atoi(semana);
   } else if (!strcmp(num, "horario_de_verano")) {
-    tmp = latC_crear_logico(mv, tipo->tm_isdst); 
+    latC_apilar(mv, tipo.tm_isdst ? latO_verdadero : latO_falso);
+    return;
   } else if (!strcmp(num, "iso")) {
-    char fechaIsoBuffer[21];
-    struct tm *tipo_utc;
-    tipo_utc = gmtime(&raw);
-    
-    strftime(fechaIsoBuffer, sizeof(fechaIsoBuffer), "%Y-%m-%dT%H:%M:%SZ", tipo_utc);
-    tmp = latC_crear_cadena(mv, fechaIsoBuffer); // fecha en formato ISO 8601 UTC
+    char iso[21];
+    if (!strftime(iso, sizeof(iso), "%Y-%m-%dT%H:%M:%SZ", &tipo))
+      latC_error(mv, "No se pudo dar formato de tiempo");
+    latC_apilar_string(mv, iso);
+    return;
   } else {
     latC_error(mv, "El formato de tiempo indicado no existe");
+    return;
   }
-  latC_apilar(mv, tmp);
+  latC_apilar_double(mv, resultado);
+}
+
+/* time_t es entero en las plataformas soportadas. Comparar con potencias
+   exactas de dos evita redondear TIME_MAX hacia un valor no representable. */
+static time_t sistema_instante(lat_mv *mv, double numero) {
+  int bits = (int)(sizeof(time_t) * CHAR_BIT);
+  int con_signo = (time_t)-1 < (time_t)0;
+  double limite = ldexp(1.0, bits - con_signo);
+  double entero = trunc(numero);
+  if (!isfinite(numero) || entero < (con_signo ? -limite : 0.0) || entero >= limite)
+    latC_error(mv, "Tiempo fuera de rango");
+  return (time_t)entero;
 }
 
 void latSO_tiempo(lat_mv *mv) {
   lat_objeto *unixt = latC_desapilar(mv);
-  lat_objeto *_formato_str = latC_desapilar(mv);
-  time_t unix_time = time(NULL);
-  if (_formato_str->tipo == T_NULL) {
-    latC_apilar_double(mv, unix_time);
-  } else {
-    const char *ftmstr = latC_checar_cadena(mv, _formato_str);
-    if (unixt->tipo != T_NULL) {
-      unix_time = latC_checar_numerico(mv, unixt);
-    };
-    struct tm estructura;
-    char res[MAX_STR_INTERN];
-#ifndef _WIN32
-    localtime_r(&unix_time, &estructura);
-#else
-    struct tm *tm_ptr = localtime(&unix_time);
-    if (tm_ptr) {
-      estructura = *tm_ptr;
-    }
-#endif // !_WIN32
-    if (!strftime(res, sizeof(res), ftmstr, &estructura)) {
-      latC_apilar(mv, latO_nulo);
-    } else {
-      latC_apilar_string(mv, res);
-    }
+  lat_objeto *obj_formato = latC_desapilar(mv);
+  if (obj_formato->tipo == T_NULL) {
+    latC_apilar_double(mv, (double)sistema_reloj(mv));
+    return;
   }
+  const char *fmt = latC_checar_cadena(mv, obj_formato);
+  time_t instante = unixt->tipo == T_NULL ? sistema_reloj(mv)
+      : sistema_instante(mv, latC_checar_numerico(mv, unixt));
+  struct tm estructura;
+  char res[MAX_STR_INTERN];
+  sistema_calendario(mv, &instante, &estructura, 0);
+  if (!strftime(res, sizeof(res), fmt, &estructura)) latC_apilar(mv, latO_nulo);
+  else latC_apilar_string(mv, res);
 }
 
 static void proceso_al_activarse(int sig) { senial = sig; }
 
 static void latSO_avisar(lat_mv *mv) {
   lat_objeto *a = latC_desapilar(mv);
-  signal(latC_checar_numerico(mv, a), proceso_al_activarse);
+  int numero = latN_entero(mv, latC_checar_numerico(mv, a),
+                           "Numero de senial fuera de rango");
+  if (signal(numero, proceso_al_activarse) == SIG_ERR)
+    latC_error(mv, "No se pudo registrar la senial");
   if (!senial) {
     latC_apilar(mv, latO_falso);
     return;
@@ -281,7 +347,8 @@ static void latSO_cwd(lat_mv *mv) {
 static void latSO_iraxy(lat_mv *mv) {
   lat_objeto *x = latC_desapilar(mv);
   lat_objeto *y = latC_desapilar(mv);
-  int yx = latC_checar_numerico(mv, y), xx = latC_checar_numerico(mv, x);
+  int yx = latN_entero(mv, latC_checar_numerico(mv, y), "Coordenada fuera de rango");
+  int xx = latN_entero(mv, latC_checar_numerico(mv, x), "Coordenada fuera de rango");
 #ifdef _WIN32
   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
   COORD pos = {yx, xx};

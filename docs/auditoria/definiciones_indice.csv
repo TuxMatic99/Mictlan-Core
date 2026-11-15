@@ -452,25 +452,30 @@ src/latstrlib.c,887,str_formato,lat_mv *mv,STR
 src/latstrlib.c,949,str_char,lat_mv *mv,STR
 src/latstrlib.c,970,str_bytes,lat_mv *mv,STR
 src/latstrlib.c,1031,latC_abrir_liblatino_strlib,lat_mv *mv,STR
-src/latsyslib.c,47,buscar_os_version,,SYS
-src/latsyslib.c,108,sleep_ms,int milliseconds,SYS
-src/latsyslib.c,122,latSO_ejecutar,lat_mv *mv,SYS
-src/latsyslib.c,127,latSO_dormir,lat_mv *mv,SYS
-src/latsyslib.c,133,latSO_pipe,lat_mv *mv,SYS
-src/latsyslib.c,184,latSO_fecha,lat_mv *mv,SYS
-src/latsyslib.c,228,latSO_tiempo,lat_mv *mv,SYS
-src/latsyslib.c,257,proceso_al_activarse,int sig,SYS
-src/latsyslib.c,259,latSO_avisar,lat_mv *mv,SYS
-src/latsyslib.c,270,latSO_salir,lat_mv *mv,SYS
-src/latsyslib.c,272,latSO_cwd,lat_mv *mv,SYS
-src/latsyslib.c,281,latSO_iraxy,lat_mv *mv,SYS
-src/latsyslib.c,296,latSO_usuario,lat_mv *mv,SYS
-src/latsyslib.c,311,latSO_operativo,lat_mv *mv,SYS
-src/latsyslib.c,322,latOS_veriones,"lat_mv *mv, int i",SYS
-src/latsyslib.c,343,latSO_ver_mayor,lat_mv *mv,SYS
-src/latsyslib.c,345,latSO_ver_menor,lat_mv *mv,SYS
-src/latsyslib.c,347,latSO_ver_build,lat_mv *mv,SYS
-src/latsyslib.c,388,latC_abrir_liblatino_syslib,lat_mv *mv,SYS
+src/latsyslib.c,53,buscar_os_version,,SYS
+src/latsyslib.c,125,sistema_pausar_ms,int milliseconds,SYS
+src/latsyslib.c,150,sleep_ms,int milliseconds,SYS
+src/latsyslib.c,154,latSO_ejecutar,lat_mv *mv,SYS
+src/latsyslib.c,161,latSO_dormir,lat_mv *mv,SYS
+src/latsyslib.c,177,sistema_publicar_texto,"lat_mv *mv, void *p",SYS
+src/latsyslib.c,181,latSO_pipe,lat_mv *mv,SYS
+src/latsyslib.c,239,sistema_reloj,lat_mv *mv,SYS
+src/latsyslib.c,245,sistema_calendario,"lat_mv *mv, const time_t *raw, struct tm *salida, int utc",SYS
+src/latsyslib.c,256,latSO_fecha,lat_mv *mv,SYS
+src/latsyslib.c,293,sistema_instante,"lat_mv *mv, double numero",SYS
+src/latsyslib.c,303,latSO_tiempo,lat_mv *mv,SYS
+src/latsyslib.c,320,proceso_al_activarse,int sig,SYS
+src/latsyslib.c,322,latSO_avisar,lat_mv *mv,SYS
+src/latsyslib.c,336,latSO_salir,lat_mv *mv,SYS
+src/latsyslib.c,338,latSO_cwd,lat_mv *mv,SYS
+src/latsyslib.c,347,latSO_iraxy,lat_mv *mv,SYS
+src/latsyslib.c,363,latSO_usuario,lat_mv *mv,SYS
+src/latsyslib.c,378,latSO_operativo,lat_mv *mv,SYS
+src/latsyslib.c,389,latOS_veriones,"lat_mv *mv, int i",SYS
+src/latsyslib.c,410,latSO_ver_mayor,lat_mv *mv,SYS
+src/latsyslib.c,412,latSO_ver_menor,lat_mv *mv,SYS
+src/latsyslib.c,414,latSO_ver_build,lat_mv *mv,SYS
+src/latsyslib.c,455,latC_abrir_liblatino_syslib,lat_mv *mv,SYS
 src/latuilib.c,31,ui_winProc,lat_mv *mv,OPTIONAL
 src/latuilib.c,66,ui_messagebox,lat_mv *mv,OPTIONAL
 src/latuilib.c,80,ui_flash,lat_mv *mv,OPTIONAL

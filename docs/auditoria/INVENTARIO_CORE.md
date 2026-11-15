@@ -1,6 +1,6 @@
 # Inventario reproducible de Core — A0
 
-Censo: **92 archivos**, **26 subsistemas**, **222 registros nativos** (incluidos opcionales), **545 candidatos de definición C**.
+Censo: **92 archivos**, **26 subsistemas**, **222 registros nativos** (incluidos opcionales), **550 candidatos de definición C**.
 
 Se incluyen todos los archivos versionados de src/, include/ y tools/parser/, también binarios, generados y componentes no activados. Un hash o una prueba aprobada no acredita corrección. El índice de definiciones es léxico: puede incluir alternativas de preprocesador y no reemplaza un análisis C por plataforma. Los contratos se documentan por subsistema; sis recibe además auditoría por función.
 
