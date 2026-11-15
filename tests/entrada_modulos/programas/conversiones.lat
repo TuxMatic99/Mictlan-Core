@@ -1,0 +1,4 @@
+poner(anumero("0"))
+poner(anumero_estricto("0"))
+poner(anumero_estricto(" 1.5 "))
+poner(anumero_estricto("-0"))

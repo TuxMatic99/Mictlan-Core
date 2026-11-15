@@ -1,3 +1,6 @@
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
 /*
 The MIT License (MIT)
 
@@ -22,26 +25,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
 
 #include "latcompat.h"
 
+#ifdef __APPLE__
+#include <xlocale.h>
+#endif
+
 double latC_strtod_c(const char *nptr, char **endptr) {
-  /* Fuerza LC_NUMERIC="C" durante la conversión y restaura luego. */
-  const char *oldloc = setlocale(LC_NUMERIC, NULL);
-  char oldbuf[64];
-  if (oldloc) {
-    strncpy(oldbuf, oldloc, sizeof(oldbuf) - 1);
-    oldbuf[sizeof(oldbuf) - 1] = '\0';
-  } else {
-    oldbuf[0] = '\0';
+  /* Locale propio de esta conversión: no cambia el global ni el del hilo. */
+  int previo = errno;
+#if defined(_WIN32) || defined(__WIN32__)
+  _locale_t loc = _create_locale(LC_NUMERIC, "C");
+#else
+  locale_t loc = newlocale(LC_NUMERIC_MASK, "C", (locale_t)0);
+#endif
+  if (!loc) {
+    if (endptr) *endptr = (char *)nptr;
+    errno = ENOMEM;
+    return 0;
   }
-  setlocale(LC_NUMERIC, "C");
-  double v = strtod(nptr, endptr);
-  if (oldbuf[0] != '\0') {
-    setlocale(LC_NUMERIC, oldbuf);
-  }
+  errno = previo;
+#if defined(_WIN32) || defined(__WIN32__)
+  double v = _strtod_l(nptr, endptr, loc);
+  int estado = errno;
+  _free_locale(loc);
+#else
+  double v = strtod_l(nptr, endptr, loc);
+  int estado = errno;
+  freelocale(loc);
+#endif
+  errno = estado;
   return v;
 }

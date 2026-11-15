@@ -1,0 +1,3 @@
+poner(leer())
+poner(leer_texto())
+poner(leer_numero())
