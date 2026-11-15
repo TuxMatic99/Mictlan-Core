@@ -1,0 +1,551 @@
+archivo,linea_lexica,nombre,argumentos_lexicos,subsistema
+src/latast.c,161,rango_literal,"const ast *nodo, double *numero",AST
+src/latast.c,289,latA_destruir,ast *a,AST
+src/latbaselib.c,46,eslegible,const char *archivo,BASE
+src/latbaselib.c,90,base_poner,lat_mv *mv,BASE
+src/latbaselib.c,98,base_imprimirf,lat_mv *mv,BASE
+src/latbaselib.c,111,incluir_compilar_ejecutar,"lat_mv *mv, void *datos",BASE
+src/latbaselib.c,117,incluir_fuente,"lat_mv *mv, const char *prefijo, const char *nombre, const char *extension",BASE
+src/latbaselib.c,154,base_incluir,lat_mv *mv,BASE
+src/latbaselib.c,265,entrada_publicar,"lat_mv *mv, void *datos",BASE
+src/latbaselib.c,280,entrada_leer,"lat_mv *mv, enum entrada_modo modo",BASE
+src/latbaselib.c,322,base_leer,lat_mv *mv,BASE
+src/latbaselib.c,323,base_leer_texto,lat_mv *mv,BASE
+src/latbaselib.c,324,base_leer_numero,lat_mv *mv,BASE
+src/latbaselib.c,326,base_limpiar,lat_mv *mv,BASE
+src/latbaselib.c,331,base_tipo,lat_mv *mv,BASE
+src/latbaselib.c,336,base_alogico,lat_mv *mv,BASE
+src/latbaselib.c,342,base_anumero,lat_mv *mv,BASE
+src/latbaselib.c,351,numero_espacio,unsigned char c,BASE
+src/latbaselib.c,354,numero_digito,unsigned char c,BASE
+src/latbaselib.c,355,numero_desde_texto,"lat_mv *mv, const char *inicio",BASE
+src/latbaselib.c,390,base_anumero_estricto,lat_mv *mv,BASE
+src/latbaselib.c,404,base_acadena,lat_mv *mv,BASE
+src/latbaselib.c,412,base_error,lat_mv *mv,BASE
+src/latbaselib.c,418,base_beep,lat_mv *mv,BASE
+src/latbaselib.c,443,latC_abrir_liblatino_baselib,lat_mv *mv,BASE
+src/latclass.c,76,latC_agregar_metodo,"lat_mv *mv, lat_class *clase, const char *nombre, lat_objeto *funcion, bool estatico",CLASS
+src/latclass.c,86,latC_establecer_constructor,"lat_class *clase, lat_objeto *constructor",CLASS
+src/latclass.c,121,latC_asignar_propiedad,"lat_mv *mv, lat_instancia *inst, const char *nombre, lat_objeto *valor",CLASS
+src/latclass.c,162,latC_llamar_super,"lat_mv *mv, lat_objeto *instancia, int nargs",CLASS
+src/latclass.c,204,latC_destruir_clase,"lat_mv *mv, lat_class *clase",CLASS
+src/latclass.c,227,latC_destruir_instancia,"lat_mv *mv, lat_instancia *inst",CLASS
+src/latcolecciones.h,7,latP_numero_lista,"lat_mv *mv, double a, double b",LIST
+src/latcurseslib.c,87,cur_attr_get,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,88,cur_wattr_get,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,89,cur_attr_set,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,90,cur_wattr_set,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,91,cur_attr_off,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,92,cur_wattr_off,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,93,cur_attr_on,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,94,cur_wattr_on,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,95,cur_attroff,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,144,cur_wattroff,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,145,cur_attron,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,153,cur_wattron,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,154,cur_attrset,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,155,cur_wattrset,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,156,cur_chgat,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,157,cur_wchgat,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,158,cur_mvchgat,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,159,cur_mvwchgat,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,160,cur_color_set,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,161,cur_wcolor_set,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,162,cur_standend,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,163,cur_wstandend,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,164,cur_standout,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,165,cur_wstandout,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,168,cur_beep,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,169,cur_flash,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,185,cur_wborder,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,206,cur_caja,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,230,cur_limpiar,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,233,cur_startcolor,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,241,cur_canchangecolor,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,242,cur_initpair,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,256,cur_colorpair,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,274,cur_tomarcaracter,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,284,cur_iniciarpantalla,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,285,cur_salirpantalla,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,288,cur_cpausa,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,289,cur_nocbreak,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,290,cur_crudo,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,291,cur_eco,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,292,cur_noeco,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,294,cur_mediotiempo,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,304,cur_mover,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,311,cur_movervent,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,324,cur_imprimir,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,329,cur_ventimprimir,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,336,cur_mvimprimir,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,345,cur_mvventimprimir,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,359,cur_refrescar,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,360,cur_refrescarvent,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,368,cur_velocidadtransmision,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,369,cur_borrarchar,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,371,cur_has_ic,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,372,cur_has_il,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,373,cur_killchar,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,375,cur_longname,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,377,cur_termattrs,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,378,cur_termname,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,383,cur_ventana,lat_mv *mv,OPTIONAL
+src/latcurseslib.c,494,latC_abrir_liblatino_curseslib,lat_mv *mv,OPTIONAL
+src/latdevlib.c,31,dev_mostrar,lat_mv *mv,DEV
+src/latdevlib.c,45,dev_imprimir_pila,lat_mv *mv,DEV
+src/latdevlib.c,51,latC_abrir_liblatino_devlib,lat_mv *mv,DEV
+src/latdic.c,39,modulo_registrado,"lat_mv *mv, hash_map *dic",DIC
+src/latdic.c,46,latH_registrar_modulo,"lat_mv *mv, hash_map *dic",DIC
+src/latdic.c,55,latH_liberar_modulos,lat_mv *mv,DIC
+src/latdic.c,71,latH_hash_fnv1a,const char *key,DIC
+src/latdic.c,84,latH_resize,"lat_mv *mv, hash_map *m, size_t new_capacity",DIC
+src/latdic.c,151,latH_asignar,"lat_mv *mv, hash_map *m, const char *key, void *val",DIC
+src/latdic.c,212,latH_limpiar,"lat_mv *mv, hash_map *dic",DIC
+src/latdic.c,236,latH_destruir,"lat_mv *mv, hash_map *dic",DIC
+src/latdic.c,260,latH_hash,const char *key,DIC
+src/latdic.c,267,latP_dic_eliminar,"lat_mv *mv, hash_map *m, const char *clave",DIC
+src/latdiclib.c,30,dic_longitud,lat_mv *mv,DIC
+src/latdiclib.c,37,dic_llaves,lat_mv *mv,DIC
+src/latdiclib.c,59,dic_valores,lat_mv *mv,DIC
+src/latdiclib.c,81,dic_contiene,lat_mv *mv,DIC
+src/latdiclib.c,89,dic_eliminar,lat_mv *mv,DIC
+src/latdiclib.c,105,latC_abrir_liblatino_diclib,lat_mv *mv,DIC
+src/latdo.c,122,liberar_elegir,ast *a,COMP
+src/latdo.c,142,contar_num_parargs,"ast *nodo, nodo_tipo nt",COMP
+src/latdo.c,160,encontrar_vararg,ast *nodo,COMP
+src/latdo.c,167,encontrar_load_vararg,ast *nodo,COMP
+src/latdo.c,174,jumpLoop_buscar_NODO_SI,"ast *nodo, int NODO_JUMP",COMP
+src/latdo.c,215,encontrar_romper,ast *nodo,COMP
+src/latdo.c,240,encontrar_continuar,ast *nodo,COMP
+src/latdo.c,273,ast_analizar,"lat_mv *mv, ast *nodo, lat_bytecode *codigo, int i",COMP
+src/latdo.c,956,mostrar_bytecode,"lat_mv *mv, lat_bytecode *codigo",COMP
+src/latdo.c,1104,latD_lanzar,"lat_mv *mv, int errcode",COMP
+src/latdo.c,1116,latC_error,"lat_mv *mv, const char *fmt, ...",COMP
+src/latdo.c,1150,latC_llamar_funcion,"lat_mv *mv, lat_objeto *func",COMP
+src/laterror.h,14,latE_proteger,"lat_mv *mv, struct lat_longjmp *guard, void (*accion)(lat_mv *, void *), void *datos",COMP
+src/latfilelib.c,97,file_sincronizar,int fd,FILE
+src/latfilelib.c,108,file_reemplazar_atomico,"const char *path, const char *texto, FILE *origen",FILE
+src/latfilelib.c,205,file_guardar_atomico,"const char *path, const char *texto",FILE
+src/latfilelib.c,216,latF_escribir_atomico,"const char *path, const char *texto",FILE
+src/latfilelib.c,220,file_publicar_texto,"lat_mv *mv, void *buf",FILE
+src/latfilelib.c,224,file_entregar_texto,"lat_mv *mv, char *buf",FILE
+src/latfilelib.c,231,file_leer_texto_seguro,lat_mv *mv,FILE
+src/latfilelib.c,239,file_escribir_atomico,lat_mv *mv,FILE
+src/latfilelib.c,250,file_escribir_texto,"const char *path, const char *texto, const char *modo",FILE
+src/latfilelib.c,273,file_publicar_lineas,"lat_mv *mv, void *datos",FILE
+src/latfilelib.c,291,file_lineas,lat_mv *mv,FILE
+src/latfilelib.c,306,file_leer,lat_mv *mv,FILE
+src/latfilelib.c,315,file_intentar_escribir,lat_mv *mv,FILE
+src/latfilelib.c,323,file_escribir,lat_mv *mv,FILE
+src/latfilelib.c,338,file_correr_programa,"lat_mv *mv, void *datos",FILE
+src/latfilelib.c,344,file_ejecutar,lat_mv *mv,FILE
+src/latfilelib.c,372,file_duplicar,lat_mv *mv,FILE
+src/latfilelib.c,414,file_eliminar,lat_mv *mv,FILE
+src/latfilelib.c,425,file_crear,lat_mv *mv,FILE
+src/latfilelib.c,436,file_renombrar,lat_mv *mv,FILE
+src/latfilelib.c,445,file_anexar,lat_mv *mv,FILE
+src/latfilelib.c,470,latC_abrir_liblatino_filelib,lat_mv *mv,FILE
+src/latgc.c,34,gc_agregar,"lat_mv *mv, lat_objeto *o",GC_LEG
+src/latgc.c,45,gc_paso,lat_mv *mv,GC_LEG
+src/latgc.c,64,gc_recolectar,lat_mv *mv,GC_LEG
+src/latgc.c,83,gc_checar,lat_mv *mv,GC_LEG
+src/latgc.c,92,gc_mostrar,lat_mv *mv,GC_LEG
+src/latgc.c,97,latC_abrir_liblatino_gc,lat_mv *mv,GC_LEG
+src/latino.c,44,mostrar_ayuda,void,CLI
+src/latino.c,59,main,"int argc, char *argv[]",CLI
+src/latlex.c,1534,yy_get_next_buffer,yyscan_t yyscanner,LEX
+src/latlex.c,1673,yy_get_previous_state,yyscan_t yyscanner,LEX
+src/latlex.c,1706,yy_try_NUL_trans,"yy_state_type yy_current_state , yyscan_t yyscanner",LEX
+src/latlex.c,1737,yyinput,yyscan_t yyscanner) static int input (yyscan_t yyscanner,LEX
+src/latlex.c,1822,yyrestart,"FILE * input_file , yyscan_t yyscanner",LEX
+src/latlex.c,1840,yy_switch_to_buffer,"YY_BUFFER_STATE new_buffer , yyscan_t yyscanner",LEX
+src/latlex.c,1872,yy_load_buffer_state,yyscan_t yyscanner,LEX
+src/latlex.c,1887,yy_create_buffer,"FILE * file, int size , yyscan_t yyscanner",LEX
+src/latlex.c,1915,yy_delete_buffer,"YY_BUFFER_STATE b , yyscan_t yyscanner",LEX
+src/latlex.c,1935,yy_init_buffer,"YY_BUFFER_STATE b, FILE * file , yyscan_t yyscanner",LEX
+src/latlex.c,1964,yy_flush_buffer,"YY_BUFFER_STATE b , yyscan_t yyscanner",LEX
+src/latlex.c,1994,yypush_buffer_state,"YY_BUFFER_STATE new_buffer , yyscan_t yyscanner",LEX
+src/latlex.c,2025,yypop_buffer_state,yyscan_t yyscanner,LEX
+src/latlex.c,2045,yyensure_buffer_stack,yyscan_t yyscanner,LEX
+src/latlex.c,2095,yy_scan_buffer,"char * base, yy_size_t size , yyscan_t yyscanner",LEX
+src/latlex.c,2132,yy_scan_string,"const char * yystr , yyscan_t yyscanner",LEX
+src/latlex.c,2145,yy_scan_bytes,"const char * yybytes, int _yybytes_len , yyscan_t yyscanner",LEX
+src/latlex.c,2179,yy_fatal_error,"const char* msg , yyscan_t yyscanner",LEX
+src/latlex.c,2209,yyget_extra,yyscan_t yyscanner,LEX
+src/latlex.c,2218,yyget_lineno,yyscan_t yyscanner,LEX
+src/latlex.c,2231,yyget_column,yyscan_t yyscanner,LEX
+src/latlex.c,2262,yyget_leng,yyscan_t yyscanner,LEX
+src/latlex.c,2282,yyset_extra,"YY_EXTRA_TYPE user_defined , yyscan_t yyscanner",LEX
+src/latlex.c,2292,yyset_lineno,"int _line_number , yyscan_t yyscanner",LEX
+src/latlex.c,2307,yyset_column,"int _column_no , yyscan_t yyscanner",LEX
+src/latlex.c,2324,yyset_in,"FILE * _in_str , yyscan_t yyscanner",LEX
+src/latlex.c,2330,yyset_out,"FILE * _out_str , yyscan_t yyscanner",LEX
+src/latlex.c,2336,yyget_debug,yyscan_t yyscanner,LEX
+src/latlex.c,2342,yyset_debug,"int _bdebug , yyscan_t yyscanner",LEX
+src/latlex.c,2350,yyget_lval,yyscan_t yyscanner,LEX
+src/latlex.c,2356,yyset_lval,"YYSTYPE * yylval_param , yyscan_t yyscanner",LEX
+src/latlex.c,2368,yyset_lloc,"YYLTYPE * yylloc_param , yyscan_t yyscanner",LEX
+src/latlex.c,2380,yylex_init,yyscan_t* ptr_yy_globals,LEX
+src/latlex.c,2407,yylex_init_extra,"YY_EXTRA_TYPE yy_user_defined, yyscan_t* ptr_yy_globals",LEX
+src/latlex.c,2434,yy_init_globals,yyscan_t yyscanner,LEX
+src/latlex.c,2468,yylex_destroy,yyscan_t yyscanner,LEX
+src/latlex.c,2502,yy_flex_strncpy,"char* s1, const char * s2, int n , yyscan_t yyscanner",LEX
+src/latlex.c,2514,yy_flex_strlen,"const char * s , yyscan_t yyscanner",LEX
+src/latlex.c,2546,yyfree,"void * ptr , yyscan_t yyscanner",LEX
+src/latlist.c,45,latL_destruir,"lat_mv *mv, lista *list",LIST
+src/latlist.c,56,latL_limpiar,"lat_mv *mv, lista *list",LIST
+src/latlist.c,61,latL_limpiar_destruir,"lat_mv *mv, lista *list",LIST
+src/latlist.c,66,latL_agregar,"lat_mv *mv, lista *list, void *value",LIST
+src/latlist.c,90,latL_insertar_inicio,"lat_mv *mv, lista *list, void *value",LIST
+src/latlist.c,136,latL_extender,"lat_mv *mv, lista *destino, lista *origen",LIST
+src/latlist.c,166,latL_contiene_valor,"lat_mv *mv, lista *list, void *data",LIST
+src/latlist.c,212,latL_insertar_elemento,"lat_mv *mv, lista *list, void *data, int pos",LIST
+src/latlista_recursos.c,25,latLR_longitud,const lat_lista_recursos *c,RES
+src/latlista_recursos.c,30,latLR_agregar,"lat_mv *mv, lat_lista_recursos *c, lat_recurso *recurso",RES
+src/latlista_recursos.c,70,latLR_reemplazar,"lat_mv *mv, lat_lista_recursos *c, int indice, lat_recurso *nuevo",RES
+src/latlista_recursos.c,106,latLR_eliminar,"lat_mv *mv, lat_lista_recursos *c, int indice",RES
+src/latlista_recursos.c,130,latLR_destruir,"lat_mv *mv, lat_lista_recursos **referencia",RES
+src/latlistlib.c,37,lista_entero,"lat_mv *mv, lat_objeto *o",LIST
+src/latlistlib.c,46,lista_publicar,"lat_mv *mv, lista *l",LIST
+src/latlistlib.c,55,lista_agregar,lat_mv *mv,LIST
+src/latlistlib.c,64,lista_extender,lat_mv *mv,LIST
+src/latlistlib.c,78,lista_eliminar_indice,lat_mv *mv,LIST
+src/latlistlib.c,92,lista_invertir,lat_mv *mv,LIST
+src/latlistlib.c,102,lista_longitud,lat_mv *mv,LIST
+src/latlistlib.c,107,lista_comparar,lat_mv *mv,LIST
+src/latlistlib.c,114,lista_insertar,lat_mv *mv,LIST
+src/latlistlib.c,127,lista_eliminar,lat_mv *mv,LIST
+src/latlistlib.c,138,lista_indice,lat_mv *mv,LIST
+src/latlistlib.c,146,lista_contiene,lat_mv *mv,LIST
+src/latlistlib.c,158,lista_crear,lat_mv *mv,LIST
+src/latlistlib.c,172,lista_concatenar,lat_mv *mv,LIST
+src/latlistlib.c,194,lista_separar,lat_mv *mv,LIST
+src/latlistlib.c,270,latC_abrir_liblatino_listlib,lat_mv *mv,LIST
+src/latlocale.c,39,latC_strtod_c,"const char *nptr, char **endptr",BASE
+src/latmathlib.c,42,mate_abs,lat_mv *mv,MATH
+src/latmathlib.c,47,mate_acos,lat_mv *mv,MATH
+src/latmathlib.c,52,mate_acosh,lat_mv *mv,MATH
+src/latmathlib.c,57,mate_asin,lat_mv *mv,MATH
+src/latmathlib.c,62,mate_asinh,lat_mv *mv,MATH
+src/latmathlib.c,67,mate_atan,lat_mv *mv,MATH
+src/latmathlib.c,72,mate_atanh,lat_mv *mv,MATH
+src/latmathlib.c,77,mate_atan2,lat_mv *mv,MATH
+src/latmathlib.c,83,mate_cos,lat_mv *mv,MATH
+src/latmathlib.c,88,mate_cosh,lat_mv *mv,MATH
+src/latmathlib.c,93,mate_cbrt,lat_mv *mv,MATH
+src/latmathlib.c,98,mate_sin,lat_mv *mv,MATH
+src/latmathlib.c,103,mate_sinh,lat_mv *mv,MATH
+src/latmathlib.c,108,mate_tan,lat_mv *mv,MATH
+src/latmathlib.c,113,mate_tanh,lat_mv *mv,MATH
+src/latmathlib.c,118,mate_exp,lat_mv *mv,MATH
+src/latmathlib.c,123,mate_log,lat_mv *mv,MATH
+src/latmathlib.c,128,mate_log10,lat_mv *mv,MATH
+src/latmathlib.c,133,mate_sqrt,lat_mv *mv,MATH
+src/latmathlib.c,138,mate_ceil,lat_mv *mv,MATH
+src/latmathlib.c,143,mate_floor,lat_mv *mv,MATH
+src/latmathlib.c,148,mate_pow,lat_mv *mv,MATH
+src/latmathlib.c,154,mate_frexp,lat_mv *mv,MATH
+src/latmathlib.c,162,mate_ldexp,lat_mv *mv,MATH
+src/latmathlib.c,183,mate_random,lat_mv *mv,MATH
+src/latmathlib.c,208,mate_pi,lat_mv *mv,MATH
+src/latmathlib.c,212,mate_tau,lat_mv *mv,MATH
+src/latmathlib.c,216,mate_e,lat_mv *mv,MATH
+src/latmathlib.c,220,mate_base,lat_mv *mv,MATH
+src/latmathlib.c,227,mate_parte,lat_mv *mv,MATH
+src/latmathlib.c,234,mate_porc,lat_mv *mv,MATH
+src/latmathlib.c,240,mate_trunc,lat_mv *mv,MATH
+src/latmathlib.c,245,mate_round,lat_mv *mv,MATH
+src/latmathlib.c,250,mate_extremo,"lat_mv *mv, bool maximo",MATH
+src/latmathlib.c,262,mate_max,lat_mv *mv,MATH
+src/latmathlib.c,263,mate_min,lat_mv *mv,MATH
+src/latmathlib.c,265,mate_finito,"lat_mv *mv, lat_objeto *o",MATH
+src/latmathlib.c,270,mate_descomponer_binario,lat_mv *mv,MATH
+src/latmathlib.c,279,mate_es_finito,lat_mv *mv,MATH
+src/latmathlib.c,283,mate_es_infinito,lat_mv *mv,MATH
+src/latmathlib.c,287,mate_es_nan,lat_mv *mv,MATH
+src/latmathlib.c,292,mate_entero_exacto,"lat_mv *mv, lat_objeto *o, double minimo",MATH
+src/latmathlib.c,298,mate_semilla_aleatoria,lat_mv *mv,MATH
+src/latmathlib.c,303,mate_aleatorio_entero,lat_mv *mv,MATH
+src/latmathlib.c,315,mate_raiz_segura,lat_mv *mv,MATH
+src/latmathlib.c,320,mate_log_seguro,lat_mv *mv,MATH
+src/latmathlib.c,325,mate_potencia_segura,lat_mv *mv,MATH
+src/latmathlib.c,387,latC_abrir_liblatino_mathlib,lat_mv *mv,MATH
+src/latmem.c,67,indice,"struct lat_constante_registro *r, const void *p",MEM
+src/latmem.c,81,desvincular_hash,"struct lat_constante_registro *r, lat_propiedad_entrada *e",MEM
+src/latmem.c,87,vincular_hash,"struct lat_constante_registro *r, lat_propiedad_entrada *e",MEM
+src/latmem.c,93,iniciar,"lat_mv *mv, bool general",MEM
+src/latmem.c,104,latP_iniciar,lat_mv *mv,MEM
+src/latmem.c,106,latP_semilla_aleatoria,"lat_mv *mv, uint64_t semilla",MEM
+src/latmem.c,117,latP_aleatorio64,lat_mv *mv,MEM
+src/latmem.c,125,registrar,"lat_mv *mv, void *ptr, lat_propiedad_tipo tipo, bool constante",MEM
+src/latmem.c,161,latP_registrar,"lat_mv *mv, void *ptr, lat_propiedad_tipo tipo",MEM
+src/latmem.c,164,latP_retener_constante,"lat_mv *mv, lat_objeto *o",MEM
+src/latmem.c,167,latP_es_constante,"lat_mv *mv, lat_objeto *o",MEM
+src/latmem.c,171,latP_contiene,"lat_mv *mv, void *ptr, lat_propiedad_tipo tipo",MEM
+src/latmem.c,179,latP_olvidar,"lat_mv *mv, void *ptr",MEM
+src/latmem.c,193,latP_cerrar,lat_mv *mv,MEM
+src/latmem.c,209,latP_soltar_constantes,lat_mv *mv,MEM
+src/latmem.c,239,latM_tamanio,void *ptr,MEM
+src/latmem.c,280,latM_liberar,"lat_mv *mv, void *ptr",MEM
+src/latmem.c,310,latP_registrar_cadena,"lat_mv *mv, lat_cadena *cadena",MEM
+src/latmem.c,315,latP_fuente_compilada,lat_mv *mv,MEM
+src/latmem.c,327,latP_lista_datos,"lat_mv *mv, lista *l",MEM
+src/latmem.c,335,latP_lista_cubeta,"lat_mv *mv, lista *l",MEM
+src/latmem.c,340,latP_proteger_modulo,"lat_mv *mv, hash_map *mapa",MEM
+src/latmem.c,346,latP_contexto,"lat_mv *mv, hash_map *mapa",MEM
+src/latmem.c,351,latP_recoleccion_habilitada,lat_mv *mv,MEM
+src/latmem.c,356,latP_inhibir,lat_mv *mv,MEM
+src/latmem.c,361,latP_profundidad,lat_mv *mv,MEM
+src/latmem.c,366,latP_restaurar_profundidad,"lat_mv *mv, unsigned nivel",MEM
+src/latmem.c,374,latP_llamada_nativa,"lat_mv *mv, lat_CFuncion funcion",MEM
+src/latmem.c,382,latG_habilitar,lat_mv *mv,MEM
+src/latmem.c,391,latG_habilitar_cadenas,lat_mv *mv,MEM
+src/latmem.c,406,latG_autorizar,"lat_mv *mv, lat_CFuncion funcion",MEM
+src/latmem.c,421,latG_retener,"lat_mv *mv, const void *reserva",MEM
+src/latmem.c,438,latG_soltar,"lat_mv *mv, const void *reserva",MEM
+src/latmem.c,447,latG_medir,"lat_mv *mv, latG_medicion *medicion",MEM
+src/latmem.c,463,encolar,"latG_trazado *t, lat_propiedad_entrada *e",MEM
+src/latmem.c,470,marcar,"latG_trazado *t, const void *p, lat_propiedad_tipo tipo",MEM
+src/latmem.c,482,marcar_valor,"latG_trazado *t, const lat_objeto *o",MEM
+src/latmem.c,504,marcar_tabla,"latG_trazado *t, hash_map *mapa",MEM
+src/latmem.c,521,trazar,"lat_mv *mv, struct lat_constante_registro *r",MEM
+src/latmem.c,559,barrer,"lat_mv *mv, struct lat_constante_registro *r, lat_propiedad_tipo tipo",MEM
+src/latmem.c,575,barrer_cadenas,lat_mv *mv,MEM
+src/latmem.c,593,latG_recolectar,lat_mv *mv,MEM
+src/latmv.c,122,igualdad,lat_mv *mv,VM
+src/latmv.c,181,diferente,lat_mv *mv,VM
+src/latmv.c,237,menor_que,lat_mv *mv,VM
+src/latmv.c,254,menor_igual,lat_mv *mv,VM
+src/latmv.c,273,mayor_que,lat_mv *mv,VM
+src/latmv.c,290,mayor_igual,lat_mv *mv,VM
+src/latmv.c,307,y_logico,lat_mv *mv,VM
+src/latmv.c,329,o_logico,lat_mv *mv,VM
+src/latmv.c,351,no_logico,lat_mv *mv,VM
+src/latmv.c,364,apilar_contexto,"lat_mv *mv, lat_objeto *ctx",VM
+src/latmv.c,381,desapilar_contexto,lat_mv *mv,VM
+src/latmv.c,399,latMV_recuperar_contextos,"lat_mv *mv, int profundidad_inicial",VM
+src/latmv.c,413,cache_hash,const char *str,VM
+src/latmv.c,443,latMV_cache_insert,"lat_mv *mv, const char *name, lat_objeto *value, int ctx_level",VM
+src/latmv.c,458,latMV_cache_invalidate,lat_mv *mv,VM
+src/latmv.c,468,latC_abrir_liblatino,"lat_mv *mv, const char *nombre_lib, const lat_CReg *funs",VM
+src/latmv.c,594,latC_destruir_mv,lat_mv *mv,VM
+src/latmv.c,627,imprimir_pila,lat_mv *mv,VM
+src/latmv.c,644,checar_pila,lat_mv *mv,VM
+src/latmv.c,659,inc_pila,lat_mv *mv,VM
+src/latmv.c,665,dec_pila,lat_mv *mv,VM
+src/latmv.c,671,latC_apilar,"lat_mv *mv, lat_objeto *o",VM
+src/latmv.c,724,latC_apilar_double,"lat_mv *mv, double num",VM
+src/latmv.c,731,latC_apilar_int,"lat_mv *mv, int i",VM
+src/latmv.c,738,latC_apilar_char,"lat_mv *mv, char c",VM
+src/latmv.c,745,latC_apilar_string,"lat_mv *mv, const char *str",VM
+src/latmv.c,786,latMV_bytecode_crear,"int i, int a, int b, void *meta, long int nlin, long int ncol, char *nombre_archivo",VM
+src/latmv.c,851,latMV_set_symbol,"lat_mv *mv, lat_objeto *name, lat_objeto *val",VM
+src/latmv.c,887,latMV_store_name,"lat_mv *mv, lat_bytecode cur, lat_objeto *val",VM
+src/latmv.c,900,latMV_set_label,"lat_mv *mv, lat_objeto *name, lat_objeto *val",VM
+src/latmv.c,907,latMV_cantidad_operandos,"lat_mv *mv, lat_bytecode cur",VM
+src/latmv.c,924,latMV_call_function,"lat_mv *mv, lat_objeto *func, lat_bytecode cur, lat_bytecode next",VM
+src/latmv.c,1104,latMV_build_list,"lat_mv *mv, lat_bytecode cur",VM
+src/latmv.c,1126,latMV_load_attr,"lat_mv *mv, lat_bytecode cur, lat_bytecode next",VM
+src/latmv.c,1209,asignar_clave_convertida,"lat_mv *mv, hash_map *dic, lat_objeto *clave, lat_objeto *valor",VM
+src/latmv.c,1232,latMV_store_subscr,lat_mv *mv,VM
+src/latmv.c,1281,binary_subscr,lat_mv *mv,VM
+src/latmv.c,1349,latMV_store_map,lat_mv *mv,VM
+src/latmv.c,1374,latMV_store_attr,"lat_mv *mv, lat_bytecode cur",VM
+src/latmv.c,1398,latMV_op_var_args,"lat_mv *mv, lat_bytecode cur",VM
+src/latmv.c,1419,latMV_load_var_args,lat_mv *mv,VM
+src/latmv.c,1440,latMV_ejecutar_constructor_padre,"lat_mv *mv, lat_objeto *constructor, lat_objeto *instancia, int nargs",VM
+src/latmv.c,1524,dbg_super_log_stack,"lat_mv *mv, lat_objeto *func, lat_bytecode cur",VM
+src/latmv.c,1533,dbg_super_log_stack,"lat_mv *mv, lat_objeto *func, lat_bytecode cur",VM
+src/latmv.c,1542,ajustar_pila,"lat_mv *mv, lat_bytecode cur, int *inicio_asignacion",VM
+src/latmv.c,1572,ejecutar_funcion,"lat_mv *mv, lat_objeto *func",VM
+src/latmv.c,2761,latMV_funcion_correr,"lat_mv *mv, lat_objeto *func",VM
+src/latnumerico.h,6,latN_entero,"lat_mv *mv, double x, const char *mensaje",OBJ
+src/latnumerico.h,11,latN_caracter,"lat_mv *mv, double x",OBJ
+src/latobj.c,47,latP_funcion_registrada,"lat_mv *mv, const lat_funcion *fun",OBJ
+src/latobj.c,54,latO_registrar_funcion,"lat_mv *mv, lat_funcion *fun",OBJ
+src/latobj.c,60,latP_registrar_funcion_compilada,"lat_mv *mv, lat_funcion *fun",OBJ
+src/latobj.c,68,latO_liberar_funciones,lat_mv *mv,OBJ
+src/latobj.c,92,latO_liberar_constantes,lat_mv *mv,OBJ
+src/latobj.c,96,latP_liberar_objetos,lat_mv *mv,OBJ
+src/latobj.c,105,latS_liberar_cadenas,lat_mv *mv,OBJ
+src/latobj.c,131,latO_asignar_ctx,"lat_mv *mv, lat_objeto *ns, const char *name, lat_objeto *o",OBJ
+src/latobj.c,249,latO_destruir,"lat_mv *mv, lat_objeto *o",OBJ
+src/latobj.c,423,latO_es_igual,"lat_mv *mv, lat_objeto *lhs, lat_objeto *rhs",OBJ
+src/latobj.c,444,latO_comparar,"lat_mv *mv, lat_objeto *lhs, lat_objeto *rhs",OBJ
+src/latobj.c,492,texto_agregar,"lat_texto_objeto *t, const char *s, size_t n",OBJ
+src/latobj.c,513,texto_literal,"lat_texto_objeto *t, const char *s",OBJ
+src/latobj.c,517,texto_citado,"lat_texto_objeto *t, const char *s",OBJ
+src/latobj.c,529,texto_objeto,"lat_texto_objeto *t, const lat_objeto *o, bool citar",OBJ
+src/latobj.c,626,latL_modificar_elemento,"lat_mv *mv, lista *list, void *data, int pos",OBJ
+src/latobj.c,646,comparar_listas,"lat_mv *mv, lista *lhs, lista *rhs, const lat_comparacion_camino *camino, unsigned nivel",OBJ
+src/latobj.c,680,latL_comparar,"lat_mv *mv, lista *lhs, lista *rhs",OBJ
+src/latobj.c,684,latL_obtener_indice,"lat_mv *mv, lista *list, void *data",OBJ
+src/latobj.c,699,latO_imprimir,"lat_mv *mv, lat_objeto *o, bool fmt",OBJ
+src/latobj.c,714,latS_resize,"lat_mv *mv, int newsize",OBJ
+src/latobj.c,823,latC_checar_logico,"lat_mv *mv, lat_objeto *o",OBJ
+src/latobj.c,831,latC_checar_numerico,"lat_mv *mv, lat_objeto *o",OBJ
+src/latobj.c,839,latC_checar_entero,"lat_mv *mv, lat_objeto *o",OBJ
+src/latobj.c,847,latC_checar_caracter,"lat_mv *mv, lat_objeto *o",OBJ
+src/latobj.c,887,texto_igual_ascii,"const char *s, const char *palabra",OBJ
+src/latobj.c,896,latC_abool,"lat_mv *mv, lat_objeto *o",OBJ
+src/latobj.c,923,latC_adouble,"lat_mv *mv, lat_objeto *o",OBJ
+src/latobj.c,959,latC_aint,"lat_mv *mv, lat_objeto *o",OBJ
+src/latobj.c,998,latC_achar,"lat_mv *mv, lat_objeto *o",OBJ
+src/latpaqlib.c,40,throw_error,lat_mv *mv,PAQ
+src/latpaqlib.c,61,lat_sym,"lat_mv *mv, void *lib, const char *sym",PAQ
+src/latpaqlib.c,81,lat_sym,"lat_mv *mv, void *lib, const char *sym",PAQ
+src/latpaqlib.c,90,latC_cargarlib,"lat_mv *mv, const char *path, const char *sym",PAQ
+src/latpaqlib.c,109,latP_cargar,lat_mv *mv,PAQ
+src/latpaqlib.c,123,latC_abrir_liblatino_paqlib,lat_mv *mv,PAQ
+src/latparse.c,731,yysymbol_name,yysymbol_kind_t yysymbol,PAR
+src/latparse.c,1308,yy_location_print_,"FILE *yyo, YYLTYPE const * const yylocp",PAR
+src/latparse.c,1366,yy_symbol_value_print,"FILE *yyo, yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, ast **root, void *scanner",PAR
+src/latparse.c,1387,yy_symbol_print,"FILE *yyo, yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, ast **root, void *scanner",PAR
+src/latparse.c,1405,yy_stack_print,"yy_state_t *yybottom, yy_state_t *yytop",PAR
+src/latparse.c,1428,yy_reduce_print,"yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, ast **root, void *scanner",PAR
+src/latparse.c,1491,yydestruct,"const char *yymsg, yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, ast **root, void *scanner",PAR
+src/latparse.c,1851,yyparse,"ast **root, void *scanner",PAR
+src/latparse.c,3189,yyerror,"struct YYLTYPE *yylloc_param, void *scanner, struct ast **root, const char *s",PAR
+src/latrecurso.c,47,latR_propietarios,const lat_recurso *r,RES
+src/latrecurso.c,51,latR_soltar,"lat_mv *mv, lat_recurso **referencia",RES
+src/latrepl.c,31,completion,"const char *buf, linenoiseCompletions *lc",REPL
+src/latrepl.c,37,leer_linea,char *buffer,REPL
+src/latrepl.c,61,latR_REPL,lat_mv *mv,REPL
+src/latstrlib.c,34,oct,int o,STR
+src/latstrlib.c,202,inicia_con,"const char *base, const char *str",STR
+src/latstrlib.c,207,termina_con,"char *base, char *str",STR
+src/latstrlib.c,213,intercambiar_pos,"char *base, char *str, int startIndex",STR
+src/latstrlib.c,232,pos,"char *base, char *str",STR
+src/latstrlib.c,234,ultima_pos,"char *base, char *str",STR
+src/latstrlib.c,353,cadena_entero,"lat_mv *mv, lat_objeto *o",STR
+src/latstrlib.c,360,cadena_publicar,"lat_mv *mv, char *buffer",STR
+src/latstrlib.c,373,str_concatenar,lat_mv *mv,STR
+src/latstrlib.c,395,str_comparar,lat_mv *mv,STR
+src/latstrlib.c,403,str_contiene,lat_mv *mv,STR
+src/latstrlib.c,414,str_termina_con,lat_mv *mv,STR
+src/latstrlib.c,424,str_es_igual,lat_mv *mv,STR
+src/latstrlib.c,434,str_indice,lat_mv *mv,STR
+src/latstrlib.c,454,str_insertar,lat_mv *mv,STR
+src/latstrlib.c,463,str_ultimo_indice,lat_mv *mv,STR
+src/latstrlib.c,471,str_rellenar_izquierda,lat_mv *mv,STR
+src/latstrlib.c,479,str_rellenar_derecha,lat_mv *mv,STR
+src/latstrlib.c,487,str_eliminar,lat_mv *mv,STR
+src/latstrlib.c,493,str_esta_vacia,lat_mv *mv,STR
+src/latstrlib.c,502,str_longitud,lat_mv *mv,STR
+src/latstrlib.c,541,cadena_validar_escapes,"lat_mv *mv, const char *s",STR
+src/latstrlib.c,560,str_reemplazar,lat_mv *mv,STR
+src/latstrlib.c,578,str_inicia_con,lat_mv *mv,STR
+src/latstrlib.c,589,str_subcadena,lat_mv *mv,STR
+src/latstrlib.c,598,str_minusculas,lat_mv *mv,STR
+src/latstrlib.c,603,str_mayusculas,lat_mv *mv,STR
+src/latstrlib.c,608,str_recortar,lat_mv *mv,STR
+src/latstrlib.c,616,str_es_numerico,lat_mv *mv,STR
+src/latstrlib.c,627,str_esalfa,lat_mv *mv,STR
+src/latstrlib.c,645,str_separar,lat_mv *mv,STR
+src/latstrlib.c,681,str_invertir,lat_mv *mv,STR
+src/latstrlib.c,692,str_ejecutar,lat_mv *mv,STR
+src/latstrlib.c,713,str_regex,lat_mv *mv,STR
+src/latstrlib.c,730,str_match,lat_mv *mv,STR
+src/latstrlib.c,832,formato_agregar,"char **texto, size_t *longitud, size_t *capacidad, const char *parte, size_t n, const char **error",STR
+src/latstrlib.c,856,formato_numerico,"char *destino, size_t capacidad, char opcion, lat_mv *mv, lat_objeto *o, const char **error",STR
+src/latstrlib.c,887,str_formato,lat_mv *mv,STR
+src/latstrlib.c,949,str_char,lat_mv *mv,STR
+src/latstrlib.c,970,str_bytes,lat_mv *mv,STR
+src/latstrlib.c,1031,latC_abrir_liblatino_strlib,lat_mv *mv,STR
+src/latsyslib.c,53,buscar_os_version,,SYS
+src/latsyslib.c,125,sistema_pausar_ms,int milliseconds,SYS
+src/latsyslib.c,150,sleep_ms,int milliseconds,SYS
+src/latsyslib.c,154,latSO_ejecutar,lat_mv *mv,SYS
+src/latsyslib.c,161,latSO_dormir,lat_mv *mv,SYS
+src/latsyslib.c,177,sistema_publicar_texto,"lat_mv *mv, void *p",SYS
+src/latsyslib.c,181,latSO_pipe,lat_mv *mv,SYS
+src/latsyslib.c,239,sistema_reloj,lat_mv *mv,SYS
+src/latsyslib.c,245,sistema_calendario,"lat_mv *mv, const time_t *raw, struct tm *salida, int utc",SYS
+src/latsyslib.c,256,latSO_fecha,lat_mv *mv,SYS
+src/latsyslib.c,293,sistema_instante,"lat_mv *mv, double numero",SYS
+src/latsyslib.c,303,latSO_tiempo,lat_mv *mv,SYS
+src/latsyslib.c,320,proceso_al_activarse,int sig,SYS
+src/latsyslib.c,322,latSO_avisar,lat_mv *mv,SYS
+src/latsyslib.c,336,latSO_salir,lat_mv *mv,SYS
+src/latsyslib.c,338,latSO_cwd,lat_mv *mv,SYS
+src/latsyslib.c,347,latSO_iraxy,lat_mv *mv,SYS
+src/latsyslib.c,363,latSO_usuario,lat_mv *mv,SYS
+src/latsyslib.c,378,latSO_operativo,lat_mv *mv,SYS
+src/latsyslib.c,389,latOS_veriones,"lat_mv *mv, int i",SYS
+src/latsyslib.c,410,latSO_ver_mayor,lat_mv *mv,SYS
+src/latsyslib.c,412,latSO_ver_menor,lat_mv *mv,SYS
+src/latsyslib.c,414,latSO_ver_build,lat_mv *mv,SYS
+src/latsyslib.c,455,latC_abrir_liblatino_syslib,lat_mv *mv,SYS
+src/latuilib.c,31,ui_winProc,lat_mv *mv,OPTIONAL
+src/latuilib.c,66,ui_messagebox,lat_mv *mv,OPTIONAL
+src/latuilib.c,80,ui_flash,lat_mv *mv,OPTIONAL
+src/latuilib.c,94,latC_abrir_liblatino_uilib,lat_mv *mv,OPTIONAL
+src/linenoise/example.c,7,completion,"const char *buf, linenoiseCompletions *lc",LINE
+src/linenoise/example.c,15,main,"int argc, char *argv[]",LINE
+src/linenoise/linenoise.c,192,linenoiseHistoryFree,void,LINE
+src/linenoise/linenoise.c,212,isUnsupportedTerm,void,LINE
+src/linenoise/linenoise.c,226,enableRawMode,struct current *current,LINE
+src/linenoise/linenoise.c,268,disableRawMode,struct current *current,LINE
+src/linenoise/linenoise.c,275,linenoiseAtExit,void,LINE
+src/linenoise/linenoise.c,293,fd_printf,"int fd, const char *format, ...",LINE
+src/linenoise/linenoise.c,304,clearScreen,struct current *current,LINE
+src/linenoise/linenoise.c,308,cursorToLeft,struct current *current,LINE
+src/linenoise/linenoise.c,312,outputChars,"struct current *current, const char *buf, int len",LINE
+src/linenoise/linenoise.c,316,outputControlChar,"struct current *current, char ch",LINE
+src/linenoise/linenoise.c,320,eraseEol,struct current *current,LINE
+src/linenoise/linenoise.c,324,setCursorPos,"struct current *current, int x",LINE
+src/linenoise/linenoise.c,335,fd_read_char,"int fd, int timeout",LINE
+src/linenoise/linenoise.c,356,fd_read,struct current *current,LINE
+src/linenoise/linenoise.c,384,countColorControlChars,const char *prompt,LINE
+src/linenoise/linenoise.c,435,queryCursor,"int fd, int *cols",LINE
+src/linenoise/linenoise.c,469,getWindowSize,struct current *current,LINE
+src/linenoise/linenoise.c,534,check_special,int fd,LINE
+src/linenoise/linenoise.c,594,enableRawMode,struct current *current,LINE
+src/linenoise/linenoise.c,613,disableRawMode,struct current *current,LINE
+src/linenoise/linenoise.c,617,clearScreen,struct current *current,LINE
+src/linenoise/linenoise.c,629,cursorToLeft,struct current *current,LINE
+src/linenoise/linenoise.c,642,outputChars,"struct current *current, const char *buf, int len",LINE
+src/linenoise/linenoise.c,654,outputControlChar,"struct current *current, char ch",LINE
+src/linenoise/linenoise.c,666,eraseEol,struct current *current,LINE
+src/linenoise/linenoise.c,677,setCursorPos,"struct current *current, int x",LINE
+src/linenoise/linenoise.c,687,fd_read,struct current *current,LINE
+src/linenoise/linenoise.c,739,countColorControlChars,const char *prompt,LINE
+src/linenoise/linenoise.c,746,getWindowSize,struct current *current,LINE
+src/linenoise/linenoise.c,763,utf8_getchars,"char *buf, int c",LINE
+src/linenoise/linenoise.c,776,get_char,"struct current *current, int pos",LINE
+src/linenoise/linenoise.c,786,refreshLine,"const char *prompt, struct current *current",LINE
+src/linenoise/linenoise.c,885,set_current,"struct current *current, const char *str",LINE
+src/linenoise/linenoise.c,892,has_room,"struct current *current, int bytes",LINE
+src/linenoise/linenoise.c,902,remove_char,"struct current *current, int pos",LINE
+src/linenoise/linenoise.c,941,insert_char,"struct current *current, int pos, int ch",LINE
+src/linenoise/linenoise.c,984,capture_chars,"struct current *current, int pos, int n",LINE
+src/linenoise/linenoise.c,1004,remove_chars,"struct current *current, int pos, int n",LINE
+src/linenoise/linenoise.c,1020,insert_chars,"struct current *current, int pos, const char *chars",LINE
+src/linenoise/linenoise.c,1039,beep,,LINE
+src/linenoise/linenoise.c,1046,freeCompletions,linenoiseCompletions *lc,LINE
+src/linenoise/linenoise.c,1053,completeLine,struct current *current,LINE
+src/linenoise/linenoise.c,1112,linenoiseSetCompletionCallback,linenoiseCompletionCallback *fn,LINE
+src/linenoise/linenoise.c,1118,linenoiseAddCompletion,"linenoiseCompletions *lc, const char *str",LINE
+src/linenoise/linenoise.c,1125,linenoiseEdit,struct current *current,LINE
+src/linenoise/linenoise.c,1173,ctrl,"): if (remove_char(current, current->pos - 1) == 1",LINE
+src/linenoise/linenoise.c,1178,ctrl,): if (current->len == 0,LINE
+src/linenoise/linenoise.c,1314,ctrl,): if (current->pos > 0 && current->pos <= current->chars,LINE
+src/linenoise/linenoise.c,1324,ctrl,"): if (has_room(current, 3)",LINE
+src/linenoise/linenoise.c,1343,ctrl,): case SPECIAL_LEFT: if (current->pos > 0,LINE
+src/linenoise/linenoise.c,1350,ctrl,): case SPECIAL_RIGHT: if (current->pos < current->chars,LINE
+src/linenoise/linenoise.c,1369,ctrl,): case SPECIAL_DOWN: history_navigation: if (history_len > 1,LINE
+src/linenoise/linenoise.c,1400,ctrl,"): if (remove_chars(current, 0, current->pos)",LINE
+src/linenoise/linenoise.c,1406,ctrl,"): if (remove_chars(current, current->pos, current->chars - current->pos)",LINE
+src/linenoise/linenoise.c,1414,ctrl,"): if (current->capture && insert_chars(current, current->pos, current->capture)",LINE
+src/linenoise/linenoise.c,1439,linenoiseColumns,void,LINE
+src/linenoise/linenoise.c,1486,linenoiseHistoryAdd,const char *line,LINE
+src/linenoise/linenoise.c,1516,linenoiseHistoryGetMaxLen,void,LINE
+src/linenoise/linenoise.c,1518,linenoiseHistorySetMaxLen,int len,LINE
+src/linenoise/linenoise.c,1552,linenoiseHistorySave,const char *filename,LINE
+src/linenoise/linenoise.c,1585,linenoiseHistoryLoad,const char *filename,LINE
+src/linenoise/utf8.c,16,utf8_fromunicode,"char *p, unsigned short uc",LINE
+src/linenoise/utf8.c,38,utf8_charlen,int c,LINE
+src/linenoise/utf8.c,60,utf8_strlen,"const char *str, int bytelen",LINE
+src/linenoise/utf8.c,78,utf8_index,"const char *str, int index",LINE
+src/linenoise/utf8.c,89,utf8_charequal,"const char *s1, const char *s2",LINE
+src/linenoise/utf8.c,99,utf8_tounicode,"const char *str, int *uc",LINE

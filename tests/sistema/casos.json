@@ -1,0 +1,198 @@
+{
+  "tiempo_epoch": {
+    "programa": "poner(sis.tiempo(\"%Y-%m-%d %H:%M:%S\",0))\n",
+    "salida": "1970-01-01 00:00:00\n"
+  },
+  "tiempo_negativo": {
+    "programa": "poner(sis.tiempo(\"%Y-%m-%d %H:%M:%S\",-1))\n",
+    "salida": "1969-12-31 23:59:59\n"
+  },
+  "tiempo_trunc": {
+    "programa": "poner(sis.tiempo(\"%S\",1.9))\nponer(sis.tiempo(\"%S\",-1.9))\n",
+    "salida": "01\n59\n"
+  },
+  "tiempo_vacio": {
+    "programa": "poner(sis.tiempo(\"\",0))\n",
+    "salida": "nulo\n"
+  },
+  "tiempo_largo": {
+    "programa": "poner(sis.tiempo(\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",0))\n",
+    "salida": "nulo\n"
+  },
+  "tiempo_sin_formato": {
+    "programa": "poner(tipo(sis.tiempo(nulo,\"ignorado\")))\n",
+    "salida": "decimal\n"
+  },
+  "tiempo_nan": {
+    "programa": "sis.tiempo(\"%Y\",mate.raiz(-1))\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "Tiempo fuera de rango"
+  },
+  "tiempo_inf": {
+    "programa": "sis.tiempo(\"%Y\",mate.exp(10000))\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "Tiempo fuera de rango"
+  },
+  "tiempo_rango": {
+    "programa": "sis.tiempo(\"%Y\",9223372036854775808)\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "Tiempo fuera de rango"
+  },
+  "fecha_iso": {
+    "programa": "poner(tipo(sis.fecha(\"iso\")))\nponer(cadena.longitud(sis.fecha(\"iso\")))\n",
+    "salida": "cadena\n20\n"
+  },
+  "fecha_invalida": {
+    "programa": "sis.fecha(\"invalida\")\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "formato de tiempo"
+  },
+  "fecha_tipo": {
+    "programa": "sis.fecha(12)\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "cadena"
+  },
+  "dormir_cero": {
+    "programa": "sis.dormir(0)\nponer(\"ok\")\n",
+    "salida": "ok\n"
+  },
+  "dormir_negativo": {
+    "programa": "sis.dormir(-1)\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "Duracion fuera de rango"
+  },
+  "dormir_infinito": {
+    "programa": "sis.dormir(mate.exp(10000))\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "Duracion fuera de rango"
+  },
+  "iraxy_fraccion": {
+    "programa": "sis.iraxy(2.9,3.9)\n",
+    "salida": "\u001b[2;3f"
+  },
+  "iraxy_nan": {
+    "programa": "sis.iraxy(mate.raiz(-1),3)\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "Coordenada fuera de rango"
+  },
+  "usuario": {
+    "programa": "poner(sis.usuario())\n",
+    "salida": "usuario_sintetico\n"
+  },
+  "usuario_ausente": {
+    "programa": "poner(sis.usuario())\n",
+    "salida": "nulo\n",
+    "sin_usuario": true
+  },
+  "os": {
+    "programa": "poner(sis.os(\"LINUX\"))\nponer(sis.operativo(\"otra\"))\n",
+    "salida": "verdadero\nfalso\n"
+  },
+  "cwd": {
+    "programa": "poner(tipo(sis.cwd()))\n",
+    "salida": "cadena\n"
+  },
+  "versiones": {
+    "programa": "poner(tipo(sis.os_version_mayor()))\nponer(tipo(sis.os_version_menor()))\nponer(tipo(sis.os_version_parche()))\n",
+    "salida": "decimal\ndecimal\ndecimal\n"
+  },
+  "pipe_normal": {
+    "programa": "poner(sis.pipe(\"./productor normal\"))\n",
+    "salida": "hola\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_crlf": {
+    "programa": "poner(sis.pipe(\"./productor crlf\"))\n",
+    "salida": "hola\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_doble": {
+    "programa": "poner(sis.pipe(\"./productor doble\"))\n",
+    "salida": "hola\n\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_vacio": {
+    "programa": "poner(sis.pipe(\"./productor vacio\"))\n",
+    "salida": "\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_utf8": {
+    "programa": "poner(sis.pipe(\"./productor utf8\"))\n",
+    "salida": "María ñ 😀\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_sinlf": {
+    "programa": "poner(sis.pipe(\"./productor sinlf\"))\n",
+    "salida": "hola\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_hijo": {
+    "programa": "poner(sis.pipe(\"./productor hijo\"))\n",
+    "salida": "hola\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_nul": {
+    "programa": "sis.pipe(\"./productor nul\")\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "NUL",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_limite": {
+    "programa": "poner(cadena.longitud(sis.pipe(\"./productor limite\")))\n",
+    "salida": "1048575\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "pipe_exceso": {
+    "programa": "sis.pipe(\"./productor exceso\")\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "Salida de tuberia demasiado larga",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "ejecutar_hijo": {
+    "programa": "sis.ejecutar(\"./productor hijo\")\nponer(\"fin\")\n",
+    "salida": "hola\nfin\n",
+    "final": {
+      "productor.fin": "terminado\n"
+    }
+  },
+  "salir": {
+    "programa": "sis.salir()\nponer(\"no llegar\")\n",
+    "salida": ""
+  },
+  "avisar_invalido": {
+    "programa": "sis.avisar(0)\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "No se pudo registrar la senial"
+  }
+}

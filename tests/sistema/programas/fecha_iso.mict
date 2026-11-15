@@ -1,0 +1,2 @@
+poner(tipo(sis.fecha("iso")))
+poner(cadena.longitud(sis.fecha("iso")))

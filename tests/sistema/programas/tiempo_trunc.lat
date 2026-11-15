@@ -1,0 +1,2 @@
+poner(sis.tiempo("%S",1.9))
+poner(sis.tiempo("%S",-1.9))

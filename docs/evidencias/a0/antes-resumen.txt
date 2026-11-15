@@ -1,0 +1,363 @@
+Base de produccion: 2651317e4224f5499765b5b0ae16d1404a0adfc4
+Debug Debian13 GCC14.2 CMake4.4.5
+842 pruebas: 786 aprobadas, 56 fallidas, 0 omitidas, 0 bloqueadas.
+Anteriores: 676/676; nuevas A0: 110/166.
+
+mictlan_a0_tiempo_reloj
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_tiempo_local
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_tiempo_limite_alto
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_tiempo_limite_bajo
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_tiempo_no_representable
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_tiempo_nan
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_tiempo_inf
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_tiempo_menos_inf
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_tiempo_grande
+A0_ASSERT 116: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_fecha_reloj
+A0_ASSERT 127: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_fecha_local
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_fecha_utc
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_fecha_formato_sem
+A0_ASSERT 127: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_fecha_formato_iso
+A0_ASSERT 127: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_pipe_nul
+A0_ASSERT 145: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+pipe abiertos=1 cerrados=1 buffer=0 bytes=5/5 estado=0
+
+mictlan_a0_pipe_exceso
+A0_ASSERT 145: r==(error?LAT_ERRRUN:0)
+A0_ASSERT 147: posicion==cantidad
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+pipe abiertos=1 cerrados=1 buffer=0 bytes=1048576/1114111 estado=0
+
+mictlan_a0_pipe_eintr
+[NON-XML-CHAR-0x1B][1;31msistema-sintetico.mict:0:0:[NON-XML-CHAR-0x1B][0m Error al leer o cerrar la tuberia
+A0_ASSERT 145: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+pipe abiertos=1 cerrados=1 buffer=0 bytes=2/5 estado=2
+
+mictlan_a0_pipe_reserva
+[NON-XML-CHAR-0x1B][1;31msistema-sintetico.mict:0:0:[NON-XML-CHAR-0x1B][0m Reserva inyectada
+A0_ASSERT 147: abiertos==cerrados
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+pipe abiertos=1 cerrados=0 buffer=0 bytes=0/5 estado=2
+
+mictlan_a0_pipe_publicar
+[NON-XML-CHAR-0x1B][1;31msistema-sintetico.mict:0:0:[NON-XML-CHAR-0x1B][0m Publicacion inyectada
+A0_ASSERT 147: !reserva
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+pipe abiertos=1 cerrados=1 buffer=1 bytes=5/5 estado=2
+
+mictlan_a0_dormir_eintr
+A0_ASSERT 152: nsleep==(!strcmp(caso,"eintr")?2:1)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_dormir_error
+A0_ASSERT 151: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_dormir_-1
+A0_ASSERT 151: r==(error?LAT_ERRRUN:0)
+A0_ASSERT 152: nsleep==0
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_dormir_nan
+A0_ASSERT 151: r==(error?LAT_ERRRUN:0)
+A0_ASSERT 152: nsleep==0
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_dormir_inf
+A0_ASSERT 151: r==(error?LAT_ERRRUN:0)
+A0_ASSERT 152: nsleep==0
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_dormir_menos_inf
+A0_ASSERT 151: r==(error?LAT_ERRRUN:0)
+A0_ASSERT 152: nsleep==0
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_dormir_grande
+A0_ASSERT 151: r==(error?LAT_ERRRUN:0)
+A0_ASSERT 152: nsleep==0
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_dormir_2147483.648
+A0_ASSERT 151: r==(error?LAT_ERRRUN:0)
+A0_ASSERT 152: nsleep==0
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_avisar_fallo
+A0_ASSERT 155: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_avisar_nan
+A0_ASSERT 155: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_avisar_inf
+A0_ASSERT 155: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_avisar_menos_inf
+A0_ASSERT 155: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_avisar_grande
+A0_ASSERT 155: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_iraxy_nan
+A0_ASSERT 157: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_iraxy_inf
+A0_ASSERT 157: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_iraxy_menos_inf
+A0_ASSERT 157: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_iraxy_grande
+A0_ASSERT 157: r==(error?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_version_sufijo
+A0_ASSERT 160: v.osMayor==a&&v.osMenor==b&&v.osBuild==c
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_version_negativa
+A0_ASSERT 160: v.osMayor==a&&v.osMenor==b&&v.osBuild==c
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_version_desborde
+A0_ASSERT 160: v.osMayor==a&&v.osMenor==b&&v.osBuild==c
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_aux_ejecutar_error
+A0_ASSERT 162: r==(fallo==SISTEMA?LAT_ERRRUN:0)
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_dormir_infinito_lat
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_dormir_infinito_mict
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_dormir_negativo_lat
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_dormir_negativo_mict
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_iraxy_nan_lat
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+[NON-XML-CHAR-0x1B][-2147483648;3f
+
+mictlan_a0_cli_iraxy_nan_mict
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+[NON-XML-CHAR-0x1B][-2147483648;3f
+
+mictlan_a0_cli_pipe_exceso_lat
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 18, in <module>
+    assert actual=={k:v.encode() for k,v in c.get('final',{}).items()},('Disco',actual,r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Disco', {}, 0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_pipe_exceso_mict
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 18, in <module>
+    assert actual=={k:v.encode() for k,v in c.get('final',{}).items()},('Disco',actual,r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('Disco', {}, 0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_pipe_nul_lat
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_pipe_nul_mict
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_tiempo_inf_lat
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_tiempo_inf_mict
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_tiempo_nan_lat
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_tiempo_nan_mict
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_tiempo_rango_lat
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
+
+mictlan_a0_cli_tiempo_rango_mict
+Traceback (most recent call last):
+  File "/workspace/scratch/1de5cf9cbaa6/mictlan-core-a0/tests/sistema/cli.py", line 19, in <module>
+    assert r.returncode==c.get('codigo',0),(r.returncode,r.stderr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, '')
+ABI=Latino 1.5.0 biblioteca=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so esperada=/workspace/scratch/1de5cf9cbaa6/build-a0-debug/liblatino.so
+Biblioteca SHA256=88e81279c31c6b49a57805de7bd49c9b4ca5df44961e3f462598702c7c23b418
