@@ -80,6 +80,7 @@ static int modulos(const char *caso){
  else if(!strcmp(caso,"homonimos")){C(texto("a/mod.mict","incluir(\"dep.mict\")\n"));C(texto("b/mod.mict","incluir(\"dep.mict\")\n"));C(texto("a/dep.mict","archivo.anexar(\"traza\",\"A\")\n"));C(texto("b/dep.mict","archivo.anexar(\"traza\",\"B\")\n"));C(incluir("a/mod.mict")==0);nombre="b/mod.mict";esperado="AB";}
  else if(!strcmp(caso,"sintaxis")){nombre="mod.mict";C(texto(nombre,"fin\n"));error=1;}
  else if(!strcmp(caso,"ejecucion")){nombre="mod.lat";C(texto(nombre,"error(\"error sintetico\")\n"));error=1;}
+ else if(!strcmp(caso,"tipo_numero")||!strcmp(caso,"tipo_nulo")){error=1;}
  else if(!strcmp(caso,"vacio")){nombre="mod.mict";C(texto(nombre,""));error=1;}
  else if(!strcmp(caso,"ausente")){nombre="ausente.mict";error=1;}
  else if(!strcmp(caso,"ruta_larga")){static char largo[MAX_PATH_LENGTH+1];memset(largo,'x',sizeof largo-1);largo[sizeof largo-1]=0;nombre=largo;error=1;}
@@ -88,7 +89,7 @@ static int modulos(const char *caso){
  else if(!strcmp(caso,"vida_ruta")){nombre="mod.mict";C(texto(nombre,"global funcion retenida() retorno 42 fin\n"));esperado="";}
  else return 2;
  char *anterior=mv->nombre_archivo;mv->nlin=17;mv->ncol=23;mv->global->REPL=true;int nivel=mv->numejec;
- int e=incluir(nombre);C(e==(error?LAT_ERRRUN:0));C(mv->nombre_archivo==anterior&&mv->nlin==17&&mv->ncol==23&&mv->global->REPL);C(mv->numejec==nivel);mv->numejec=0;C(pila());
+ int e;if(!strcmp(caso,"tipo_numero")){latC_apilar_double(mv,12);e=invocar("incluir");}else if(!strcmp(caso,"tipo_nulo")){latC_apilar(mv,latO_nulo);e=invocar("incluir");}else e=incluir(nombre);C(e==(error?LAT_ERRRUN:0));C(mv->nombre_archivo==anterior&&mv->nlin==17&&mv->ncol==23&&mv->global->REPL);C(mv->numejec==nivel);mv->numejec=0;C(pila());
  if(!error&&*esperado)C(contenido("traza",esperado));else C(access("traza",F_OK)!=0);
  if(!strcmp(caso,"vida_ruta")){C(latG_recolectar(mv)==LAT_G_OK);C(invocar("retenida")==0);C(getNumerico(latC_desapilar(mv))==42);C(pila());}
  C(setenv("LATINO_LIB","lib",1)==0);C(texto("correcto.mict",x));C(incluir("correcto.mict")==0);C(pila());

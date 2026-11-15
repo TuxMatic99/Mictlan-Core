@@ -85,5 +85,9 @@
     "salida": "",
     "codigo": 1,
     "diagnostico": "No se encontró el módulo"
+  },
+  "conversiones": {
+    "programa": "poner(anumero(\"0\"))\nponer(anumero_estricto(\"0\"))\nponer(anumero_estricto(\" 1.5 \"))\nponer(anumero_estricto(\"-0\"))\n",
+    "salida": "nulo\n0\n1.5\n-0\n"
   }
 }

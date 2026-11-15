@@ -1,0 +1,237 @@
+Codigo de produccion en HEAD; ampliacion de pruebas y documentacion en esta entrega.
+$ git rev-parse HEAD
+8592713290dbc4829a023617492ed3f098b3d668
+estado=0
+$ cc --version
+cc (Debian 14.2.0-19) 14.2.0
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+estado=0
+$ /workspace/scratch/1de5cf9cbaa6/herramientas-p12b3/cmake/data/bin/cmake --version
+cmake version 4.4.5
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+estado=0
+$ /usr/bin/python3.13 --version
+Python 3.13.5
+estado=0
+$ ldd --version
+ldd (Debian GLIBC 2.41-12+deb13u4) 2.41
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Written by Roland McGrath and Ulrich Drepper.
+estado=0
+$ locale -a
+C
+C.utf8
+POSIX
+aa_DJ
+aa_DJ.utf8
+aa_ER
+aa_ET
+af_ZA
+af_ZA.utf8
+agr_PE
+am_ET
+an_ES.utf8
+anp_IN
+ar_AE
+ar_AE.utf8
+ar_BH
+ar_BH.utf8
+ar_EG
+ar_EG.utf8
+ar_IN
+as_IN
+az_IR
+be_BY
+be_BY.utf8
+be_BY@latin
+bg_BG
+bg_BG.utf8
+bho_IN
+bi_VU
+bn_BD
+bo_CN
+br_FR
+br_FR.utf8
+bs_BA
+bs_BA.utf8
+ca_AD.utf8
+ca_ES
+ca_ES.utf8
+ca_IT.utf8
+ce_RU
+chr_US
+cmn_TW
+crh_RU
+crh_UA
+cs_CZ
+cs_CZ.utf8
+csb_PL
+da_DK
+da_DK.utf8
+de_AT
+de_AT.utf8
+de_BE
+de_DE
+de_DE.utf8
+de_IT
+el_CY
+el_CY.utf8
+el_GR
+el_GR.utf8
+en_AG
+en_AU
+en_CA
+en_GB
+en_HK.utf8
+en_PH
+en_PH.utf8
+en_US
+en_US.utf8
+es_AR
+es_AR.utf8
+es_ES
+es_ES.utf8
+es_MX
+es_MX.utf8
+et_EE
+et_EE.utf8
+eu_ES
+eu_ES.utf8
+eu_FR
+eu_FR.utf8
+fa_IR
+fi_FI
+fi_FI.utf8
+fil_PH
+fr_CA
+fr_CA.utf8
+fr_FR
+fr_FR.utf8
+fy_NL
+gl_ES
+gu_IN
+hi_IN
+hr_HR
+hr_HR.utf8
+hsb_DE
+hu_HU
+hu_HU.utf8
+hy_AM
+id_ID
+id_ID.utf8
+is_IS
+is_IS.utf8
+it_IT
+it_IT.utf8
+ja_JP.utf8
+ka_GE
+ka_GE.utf8
+kk_KZ
+kk_KZ.utf8
+kn_IN
+ko_KR.utf8
+ku_TR
+ku_TR.utf8
+lt_LT
+lt_LT.utf8
+ltg_LV.utf8
+lv_LV
+lv_LV.utf8
+mk_MK
+mk_MK.utf8
+ml_IN
+mn_MN
+mnw_MM
+mr_IN
+ms_MY
+ms_MY.utf8
+my_MM
+nan_TW@latin
+nb_NO
+nb_NO.utf8
+nl_BE
+nl_NL
+nl_NL.utf8
+om_ET
+om_KE
+om_KE.utf8
+pa_IN
+pa_PK
+pl_PL
+pl_PL.utf8
+pt_BR
+pt_BR.utf8
+pt_PT
+pt_PT.utf8
+ro_RO
+ro_RO.utf8
+ru_RU
+ru_RU.utf8
+ru_UA
+sk_SK
+sk_SK.utf8
+sl_SI
+sl_SI.utf8
+so_DJ
+so_DJ.utf8
+so_KE
+so_KE.utf8
+so_SO
+so_SO.utf8
+sq_AL
+sq_AL.utf8
+sr_ME
+sr_RS
+sv_FI
+sv_FI.utf8
+sv_SE
+sv_SE.utf8
+sw_KE
+sw_TZ
+ta_IN
+te_IN
+th_TH
+th_TH.utf8
+tl_PH
+tl_PH.utf8
+tr_CY
+tr_CY.utf8
+tr_TR
+tr_TR.utf8
+ug_CN
+uk_UA
+uk_UA.utf8
+ur_PK
+vi_VN
+yue_HK
+zh_CN
+zh_CN.utf8
+zh_HK
+zh_HK.utf8
+zh_TW
+zh_TW.utf8
+estado=0
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 tests/colecciones/abi.py nm ../build-p12b4b-debug/liblatino.so
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 0 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+estado=0
+$ sha256sum ../build-p12b4b-debug/liblatino.so
+6fc8744ddcf0faa448e05567860d9668f6d8fce8ad6b678c08c44203f1200025  ../build-p12b4b-debug/liblatino.so
+estado=0
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 tests/colecciones/abi.py nm ../build-p12b4b-release/liblatino.so
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 0 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+estado=0
+$ sha256sum ../build-p12b4b-release/liblatino.so
+b6f8a817c53d645bc58912ec543a1ac271541e0b5aa07d81431cc06d0631b529  ../build-p12b4b-release/liblatino.so
+estado=0
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 tests/colecciones/abi.py nm ../build-p12b4b-asan/liblatino.so
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 7 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+estado=0
+$ sha256sum ../build-p12b4b-asan/liblatino.so
+6602b17ecba335722c740fd7cc632df77ccc38453a736deb500165c003b9b46c  ../build-p12b4b-asan/liblatino.so
+estado=0

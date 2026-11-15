@@ -1,0 +1,4 @@
+debug: 676 total, 285 adicionales sobre 391, nombres anteriores conservados.
+release: 676 total, 285 adicionales sobre 391, nombres anteriores conservados.
+asan: 692 total, 301 adicionales sobre 391, nombres anteriores conservados.
+Cabeceras y suites anteriores sin cambios de fuente. ASan incorpora ademas 16 regresiones instrumentadas anteriores.
