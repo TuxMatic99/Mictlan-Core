@@ -1,0 +1,4 @@
+a=leer()
+poner(tipo(a))
+poner(a)
+poner(leer())

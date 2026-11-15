@@ -1,0 +1,89 @@
+{
+  "historico": {
+    "programa": "a=leer()\nponer(tipo(a))\nponer(a)\na=leer()\nponer(tipo(a))\nponer(a)\na=leer()\nponer(tipo(a))\nponer(a)\na=leer()\nponer(tipo(a))\nponer(a)\na=leer()\nponer(tipo(a))\nponer(a)\na=leer()\nponer(tipo(a))\nponer(a)\na=leer()\nponer(tipo(a))\nponer(a)\nponer(leer())\n",
+    "entrada": "0\n-0\n0012\n1.5\n1e3\nhola\n\n",
+    "salida": "decimal\n0\ndecimal\n-0\ndecimal\n12\ndecimal\n1.5\ndecimal\n1000\ncadena\nhola\ncadena\n\nnulo\n"
+  },
+  "historico_crlf": {
+    "programa": "a=leer()\nponer(tipo(a))\nponer(a)\nponer(leer())\n",
+    "entrada": "12\r\n",
+    "salida": "decimal\n12\nnulo\n"
+  },
+  "texto": {
+    "programa": "poner(leer_texto())\nponer(leer_texto())\nponer(leer_texto())\nponer(leer_texto())\n",
+    "entrada": "0012\r\nMaría ñ\n\n",
+    "salida": "0012\nMaría ñ\n\nnulo\n"
+  },
+  "numero": {
+    "programa": "poner(leer_numero())\nponer(leer_numero())\nponer(leer_numero())\n",
+    "entrada": " 1.5 \r\n-0",
+    "salida": "1.5\n-0\nnulo\n"
+  },
+  "numero_error": {
+    "programa": "leer_numero()\n",
+    "entrada": "1,5\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "Conversion numerica estricta"
+  },
+  "eof": {
+    "programa": "poner(leer())\nponer(leer_texto())\nponer(leer_numero())\n",
+    "entrada": "",
+    "salida": "nulo\nnulo\nnulo\n"
+  },
+  "modulos_prioridad": {
+    "programa": "incluir(\"uno\")\nincluir(\"uno.mict\")\n",
+    "entrada": "",
+    "salida": "lat\nmict\n",
+    "inicial": {
+      "lib/uno.lat": "poner(\"lat\")\n",
+      "uno.mict": "poner(\"mict\")\n"
+    }
+  },
+  "modulos_repetidos": {
+    "programa": "incluir(\"uno.lat\")\nincluir(\"uno.lat\")\n",
+    "entrada": "",
+    "salida": "dos\ndos\n",
+    "inicial": {
+      "uno.lat": "poner(\"dos\")\n"
+    }
+  },
+  "modulos_anidados": {
+    "programa": "incluir(\"a/uno.mict\")\n",
+    "entrada": "",
+    "salida": "C\nB\nA\n",
+    "inicial": {
+      "a/uno.mict": "incluir(\"dos\")\nponer(\"A\")\n",
+      "a/dos.lat": "incluir(\"tres.mict\")\nponer(\"B\")\n",
+      "a/tres.mict": "poner(\"C\")\n"
+    }
+  },
+  "modulos_error": {
+    "programa": "incluir(\"a/uno.mict\")\nponer(\"no llegar\")\n",
+    "entrada": "",
+    "salida": "",
+    "inicial": {
+      "a/uno.mict": "incluir(\"dos.lat\")\n",
+      "a/dos.lat": "error(\"desde dos\")\n"
+    },
+    "codigo": 1,
+    "diagnostico": "a/dos.lat:1:"
+  },
+  "modulos_sintaxis": {
+    "programa": "incluir(\"uno.mict\")\n",
+    "entrada": "",
+    "salida": "",
+    "inicial": {
+      "uno.mict": "fin\n"
+    },
+    "codigo": 1,
+    "diagnostico": "Error de sintaxis"
+  },
+  "modulos_ausente": {
+    "programa": "incluir(\"ausente.mict\")\n",
+    "entrada": "",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "No se encontró el módulo"
+  }
+}
