@@ -14,6 +14,7 @@ static void liberar(void *p){for(int i=0;i<4096;++i)if(p&&reservas[i]==p){reserv
 static void *ampliar(void *p,size_t n){if(fallo==REDIMENSION){activado=1;errno=ENOMEM;return NULL;}int i=0;while(i<4096&&reservas[i]!=p)++i;void *q=realloc(p,n);if(q&&i<4096)reservas[i]=q;return q;}
 static char *leer_readline(const char *p){if(fallo==RESERVA||fallo==REDIMENSION){activado=1;errno=ENOMEM;return NULL;}char *r=readline(p);observar(r);return r;}
 static lat_objeto *cadena(lat_mv *m,const char *s){if(fallo==PUBLICAR){activado=1;++publicaciones;latC_error(m,"Publicacion inyectada");}return latC_crear_cadena(m,s);}
+static void apilar_texto(lat_mv *m,const char *s){if(fallo==PUBLICAR){activado=1;latC_error(m,"Publicacion inyectada");}latC_apilar_string(m,s);}
 static lat_objeto *numerico(lat_mv *m,double x){if(fallo==PUBLICAR){activado=1;latC_error(m,"Publicacion inyectada");}return latC_crear_numerico(m,x);}
 static void apilar_numero(lat_mv *m,double x){if(fallo==PUBLICAR){activado=1;latC_error(m,"Publicacion inyectada");}latC_apilar_double(m,x);}
 static lat_objeto *compilar(lat_mv *m,ast *n){if(fallo==COMPILAR){activado=1;latC_error(m,"Compilacion inyectada");}return latC_analizar(m,n);}
@@ -33,6 +34,7 @@ static void limpiar_inyectado(FILE *p){clearerr(p==stdin?entrada_controlada:p);}
 #define latC_crear_cadena cadena
 #define latC_crear_numerico numerico
 #define latC_apilar_double apilar_numero
+#define latC_apilar_string apilar_texto
 #define latC_analizar compilar
 #define latC_cargarlib no_cargar
 #include "../../src/latbaselib.c"
@@ -40,6 +42,7 @@ static void limpiar_inyectado(FILE *p){clearerr(p==stdin?entrada_controlada:p);}
 #undef latC_analizar
 #undef latC_crear_cadena
 #undef latC_crear_numerico
+#undef latC_apilar_string
 #undef latC_apilar_double
 #undef readline
 /* Se observa el AST que pertenece al importador, sin alterar gramática. */

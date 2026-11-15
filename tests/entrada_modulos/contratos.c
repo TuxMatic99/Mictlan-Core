@@ -64,6 +64,7 @@ static int entrada(const char *api,const char *caso,const char *locale){
 }
 static int incluir(const char *n){latC_apilar_string(mv,n);return invocar("incluir");}
 static int modulos(const char *caso){
+ if(!strcmp(caso,"vida_ruta")){C(latG_habilitar(mv)==LAT_G_OK);C(latG_habilitar_cadenas(mv)==LAT_G_OK);C(latG_autorizar(mv,getCfun(funcion("incluir")))==LAT_G_OK);}
  C(mkdir("src",0700)==0);C(mkdir("lib",0700)==0);C(mkdir("a",0700)==0);C(mkdir("b",0700)==0);C(setenv("LATINO_LIB","lib",1)==0);
  const char *nombre="mod",*esperado="X";int error=0;
  const char *x="archivo.anexar(\"traza\",\"X\")\n";
@@ -89,8 +90,8 @@ static int modulos(const char *caso){
  char *anterior=mv->nombre_archivo;mv->nlin=17;mv->ncol=23;mv->global->REPL=true;int nivel=mv->numejec;
  int e=incluir(nombre);C(e==(error?LAT_ERRRUN:0));C(mv->nombre_archivo==anterior&&mv->nlin==17&&mv->ncol==23&&mv->global->REPL);C(mv->numejec==nivel);mv->numejec=0;C(pila());
  if(!error&&*esperado)C(contenido("traza",esperado));else C(access("traza",F_OK)!=0);
+ if(!strcmp(caso,"vida_ruta")){C(latG_recolectar(mv)==LAT_G_OK);C(invocar("retenida")==0);C(getNumerico(latC_desapilar(mv))==42);C(pila());}
  C(setenv("LATINO_LIB","lib",1)==0);C(texto("correcto.mict",x));C(incluir("correcto.mict")==0);C(pila());
- if(!strcmp(caso,"vida_ruta")){C(latG_habilitar(mv)==LAT_G_OK);C(latG_recolectar(mv)==LAT_G_OK);C(invocar("retenida")==0);C(getNumerico(latC_desapilar(mv))==42);C(pila());}
  return 0;
 }
 int main(int argc,char **argv){

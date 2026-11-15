@@ -120,3 +120,19 @@ se corrigió el arnés y se repitió la batería. Ese aborto **no es evidencia d
 defecto de Core**. Las reservas observadas por el arnés se cuentan antes de su
 limpieza auxiliar. La inyección de compilación falla en la entrada del compilador;
 no simula todos los puntos internos posibles.
+
+## Nota de implementación (posterior a la entrega A)
+
+El primer commit de pruebas es `1ffcf2f8d7dbcfd246a3d374c1ce737791238d74`.
+La CI inicial [43664434426](https://github.com/TuxMatic99/Mictlan-Core/actions/runs/43664434426)
+registró 198 fallos en los tres perfiles (669 normales, 685 instrumentadas).
+El job instrumentado detectó además 2 bytes residuales en una reserva del AST
+al inyectar fallo al entrar al compilador; se conserva su log comprimido.
+
+Se corrigieron dos detalles de instrumentación sin relajar el contrato:
+la publicación ahora usa `latC_apilar_string`/`latC_apilar_double`, por lo que
+se observa también esa frontera; la prueba de vida de rutas activa y autoriza
+la recolección **antes** de ejecutar, como exige `latmemoria.h`, y barre cadenas.
+La hipótesis de habilitarla tras una nativa no autorizada era inválida. No se
+cambia el recolector para hacer pasar el arnés. Las pruebas de buffers pendientes
+siguen exigiendo cero y las 391 regresiones anteriores se conservan.

@@ -217,26 +217,13 @@ LATINO_API int latF_escribir_atomico(const char *path, const char *texto) {
     return file_guardar_atomico(path, texto);
 }
 
-/* El guard y los datos pertenecen al llamador, fuera del marco de setjmp:
-   siguen definidos aunque una operación lance longjmp. No se modifica la VM
-   ni se registra una segunda función nativa para realizar la limpieza. */
-static int file_proteger(lat_mv *mv, struct lat_longjmp *guard,
-                         void (*accion)(lat_mv *, void *), void *datos) {
-    guard->previo = mv->error;
-    guard->status = 0;
-    mv->error = guard;
-    LAT_TRY(mv, guard, accion(mv, datos););
-    mv->error = guard->previo;
-    return guard->status;
-}
-
 static void file_publicar_texto(lat_mv *mv, void *buf) {
     latC_apilar_string(mv, buf);
 }
 
 static void file_entregar_texto(lat_mv *mv, char *buf) {
     struct lat_longjmp guard;
-    int estado = file_proteger(mv, &guard, file_publicar_texto, buf);
+    int estado = latE_proteger(mv, &guard, file_publicar_texto, buf);
     free(buf);
     if (estado) latD_lanzar(mv, estado);
 }
@@ -309,7 +296,7 @@ static void file_lineas(lat_mv *mv) {
         return;
     }
     struct lat_longjmp guard;
-    int estado = file_proteger(mv, &guard, file_publicar_lineas, buf);
+    int estado = latE_proteger(mv, &guard, file_publicar_lineas, buf);
     /* Los objetos/listas parciales pertenecen al registro de la VM. Sólo
        este buffer crudo pertenece a la biblioteca de archivos. */
     free(buf);
@@ -372,7 +359,7 @@ static void file_ejecutar(lat_mv *mv) {
     mv->nombre_archivo = input;
     struct file_programa p = {nodo, NULL, 0};
     struct lat_longjmp guard;
-    estado = file_proteger(mv, &guard, file_correr_programa, &p);
+    estado = latE_proteger(mv, &guard, file_correr_programa, &p);
     if (p.func) latO_destruir(mv, p.func);
     latA_destruir(nodo);
     mv->nombre_archivo = archivo_previo;

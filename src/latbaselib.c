@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 
+#include <errno.h>
+#include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,6 +36,7 @@ THE SOFTWARE.
 #include "latino.h"
 #include "latdo.h"
 #include "latmem.h"
+#include "laterror.h"
 
 #define LIB_BASE_NAME ""
 
@@ -99,6 +102,18 @@ void base_imprimirf(lat_mv *mv) {
     latO_imprimir(mv, str, true);
 }
 
+struct incluir_programa {
+    ast *nodo;
+    lat_objeto *func;
+    int estado;
+};
+
+static void incluir_compilar_ejecutar(lat_mv *mv, void *datos) {
+    struct incluir_programa *p = datos;
+    p->func = latC_analizar(mv, p->nodo);
+    p->estado = latC_llamar_funcion(mv, p->func);
+}
+
 static bool incluir_fuente(lat_mv *mv, const char *prefijo, const char *nombre,
                             const char *extension) {
     char ruta[MAX_PATH_LENGTH];
@@ -119,13 +134,20 @@ static bool incluir_fuente(lat_mv *mv, const char *prefijo, const char *nombre,
         latC_error(mv, "No se pudo analizar el módulo '%s'", ruta);
     }
     char *anterior = mv->nombre_archivo;
+    bool repl = mv->global->REPL;
+    int linea = mv->nlin, columna = mv->ncol;
     mv->nombre_archivo = archivo;
-    lat_objeto *programa = latC_analizar(mv, nodo);
-    estado = latC_llamar_funcion(mv, programa);
-    latO_destruir(mv, programa);
+    mv->global->REPL = false;
+    struct incluir_programa p = {nodo, NULL, 0};
+    struct lat_longjmp guard;
+    estado = latE_proteger(mv, &guard, incluir_compilar_ejecutar, &p);
+    if (p.func) latO_destruir(mv, p.func);
     latA_destruir(nodo);
     mv->nombre_archivo = anterior;
-    if (estado != 0) latD_lanzar(mv, estado);
+    mv->global->REPL = repl;
+    mv->nlin = linea;
+    mv->ncol = columna;
+    if (estado || p.estado) latD_lanzar(mv, estado ? estado : p.estado);
     return true;
 }
 
@@ -187,76 +209,119 @@ static void base_incluir(lat_mv *mv) {
         latC_error(mv, "Error al cargar libreria dinamica '%s'", libpath);
 }
 
-static void base_leer(lat_mv *mv) {
-    // Lectura robusta de línea con manejo correcto por plataforma
-#if (defined __WIN32__) || (defined _WIN32)
-    char *buf = calloc(1, MAX_INPUT_SIZE);
-    if (!buf) {
-        latC_apilar(mv, latO_nulo);
-        return;
-    }
+enum entrada_estado { ENTRADA_OK, ENTRADA_EOF, ENTRADA_IO,
+                      ENTRADA_MEMORIA, ENTRADA_LIMITE, ENTRADA_NUL };
+enum entrada_modo { ENTRADA_HEREDADA, ENTRADA_TEXTO, ENTRADA_NUMERO };
+#define ENTRADA_MAX_TEXTO (8u * 1024u * 1024u)
 
-    bool ok = false;
-    // Si stdin es consola interactiva, usar ReadConsoleA; si viene por pipe, usar fgets.
-    HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
-    DWORD mode = 0;
-    BOOL is_console = (hStdin != INVALID_HANDLE_VALUE) && GetConsoleMode(hStdin, &mode);
-    if (is_console) {
-        DWORD readChars = 0;
-        if (ReadConsoleA(hStdin, buf, MAX_INPUT_SIZE - 1, &readChars, NULL)) {
-            buf[readChars] = '\0';
-            ok = true;
+/* Nunca publica un prefijo de una línea fallida. Después de un error de
+   tamaño/NUL/reserva consume hasta LF si la fuente permite continuar. */
+static char *entrada_linea(size_t limite, enum entrada_estado *estado) {
+    size_t capacidad = 256, usados = 0;
+    char *buf = malloc(capacidad);
+    *estado = buf ? ENTRADA_OK : ENTRADA_MEMORIA;
+    bool hay_bytes = false, lf = false;
+    for (;;) {
+        errno = 0;
+        int c = fgetc(stdin);
+        if (c == EOF) {
+            if (ferror(stdin)) {
+                int causa = errno;
+                clearerr(stdin);
+                if (causa == EINTR) continue;
+                *estado = ENTRADA_IO;
+            } else if (!hay_bytes && *estado == ENTRADA_OK) {
+                *estado = ENTRADA_EOF;
+            }
+            break;
         }
-    } else {
-        ok = latC_leer_linea(buf) != NULL;
+        hay_bytes = true;
+        if (c == '\n') { lf = true; break; }
+        if (*estado != ENTRADA_OK) continue;
+        if (c == 0) { *estado = ENTRADA_NUL; continue; }
+        /* Un byte extra permite CRLF con exactamente limite bytes útiles. */
+        if (usados == limite + 1) { *estado = ENTRADA_LIMITE; continue; }
+        if (usados + 1 >= capacidad) {
+            size_t nueva = capacidad > (limite + 2) / 2
+                               ? limite + 2 : capacidad * 2;
+            char *tmp = realloc(buf, nueva);
+            if (!tmp) { *estado = ENTRADA_MEMORIA; continue; }
+            buf = tmp;
+            capacidad = nueva;
+        }
+        buf[usados++] = (char)c;
     }
-
-    if (!ok) {
-        free(buf);
-        latC_apilar(mv, latO_nulo);
-        return;
+    if (*estado == ENTRADA_OK) {
+        if (lf && usados && buf[usados - 1] == '\r') --usados;
+        if (usados > limite) *estado = ENTRADA_LIMITE;
     }
-
-    // Normalizar fin de línea para Windows (eliminar CRLF/ LF)
-    size_t len = strlen(buf);
-    while (len > 0 && (buf[len - 1] == '\n' || buf[len - 1] == '\r')) {
-        buf[--len] = '\0';
-    }
-
-    char *endptr = NULL;
-    double ret = strtod(buf, &endptr);
-    lat_objeto *tmp = NULL;
-    // Si toda la cadena es numérica y no está vacía, regresar número; de lo contrario, cadena.
-    if (endptr && *endptr == '\0' && buf[0] != '\0') {
-        tmp = latC_crear_numerico(mv, ret);
-    } else {
-        tmp = latC_crear_cadena(mv, buf);
-    }
-    latC_apilar(mv, tmp);
-    free(buf);
-#else
-    char *line = latC_leer_linea(NULL);
-    if (!line) {
-        latC_apilar(mv, latO_nulo);
-        return;
-    }
-    size_t len = strlen(line);
-    if (len > 0 && line[len - 1] == '\n') {
-        line[len - 1] = '\0';
-    }
-
-    char *endptr = NULL;
-    double ret = strtod(line, &endptr);
-    lat_objeto *tmp = NULL;
-    if (endptr && *endptr == '\0' && line[0] != '\0') {
-        tmp = latC_crear_numerico(mv, ret);
-    } else {
-        tmp = latC_crear_cadena(mv, line);
-    }
-    latC_apilar(mv, tmp);
-    free(line);
-#endif
+    if (*estado != ENTRADA_OK) { free(buf); return NULL; }
+    buf[usados] = '\0';
+    return buf;
 }
+
+static double numero_desde_texto(lat_mv *mv, const char *inicio);
+struct entrada_publicacion { char *texto; enum entrada_modo modo; };
+static void entrada_publicar(lat_mv *mv, void *datos) {
+    struct entrada_publicacion *p = datos;
+    if (p->modo == ENTRADA_NUMERO) {
+        latC_apilar_double(mv, numero_desde_texto(mv, p->texto));
+    } else if (p->modo == ENTRADA_TEXTO) {
+        latC_apilar_string(mv, p->texto);
+    } else {
+        char *fin;
+        /* La inferencia histórica conserva el locale del consumidor C. */
+        double valor = strtod(p->texto, &fin);
+        if (*p->texto && *fin == '\0') latC_apilar_double(mv, valor);
+        else latC_apilar_string(mv, p->texto);
+    }
+}
+
+static void entrada_leer(lat_mv *mv, enum entrada_modo modo) {
+    enum entrada_estado estado = ENTRADA_OK;
+    char *linea;
+#if !defined(_WIN32) && !defined(__WIN32__)
+    if (modo == ENTRADA_HEREDADA && isatty(fileno(stdin))) {
+        /* Mantener edición/eco de terminal; no usar Readline para pipes. */
+        errno = 0;
+        linea = latC_leer_linea(NULL);
+        if (ferror(stdin)) {
+            clearerr(stdin);
+            free(linea);
+            linea = NULL;
+            estado = ENTRADA_IO;
+        } else if (!linea) {
+            estado = errno == ENOMEM ? ENTRADA_MEMORIA : ENTRADA_EOF;
+        }
+    } else
+#endif
+    {
+        size_t limite = modo == ENTRADA_HEREDADA
+                            ? SIZE_MAX - sizeof(lat_cadena) - 2
+                            : ENTRADA_MAX_TEXTO;
+        linea = entrada_linea(limite, &estado);
+    }
+    if (!linea) {
+        if (estado == ENTRADA_EOF || modo == ENTRADA_HEREDADA) {
+            latC_apilar(mv, latO_nulo);
+            return;
+        }
+        const char *causa = estado == ENTRADA_MEMORIA ? "memoria insuficiente" :
+                            estado == ENTRADA_LIMITE ? "linea demasiado larga (maximo 8 MiB)" :
+                            estado == ENTRADA_NUL ? "byte NUL no permitido" : "error de lectura";
+        latC_error(mv, "Entrada: %s", causa);
+        return;
+    }
+    struct entrada_publicacion p = {linea, modo};
+    struct lat_longjmp guard;
+    int fallo = latE_proteger(mv, &guard, entrada_publicar, &p);
+    free(linea);
+    if (fallo) latD_lanzar(mv, fallo);
+}
+
+static void base_leer(lat_mv *mv) { entrada_leer(mv, ENTRADA_HEREDADA); }
+static void base_leer_texto(lat_mv *mv) { entrada_leer(mv, ENTRADA_TEXTO); }
+static void base_leer_numero(lat_mv *mv) { entrada_leer(mv, ENTRADA_NUMERO); }
 
 static void base_limpiar(lat_mv *mv) {
     (void)mv;
@@ -287,45 +352,52 @@ static bool numero_espacio(unsigned char c) {
     return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v';
 }
 static bool numero_digito(unsigned char c) { return c >= '0' && c <= '9'; }
-static void base_anumero_estricto(lat_mv *mv) {
-    lat_objeto *o = latC_desapilar(mv);
+static double numero_desde_texto(lat_mv *mv, const char *inicio) {
+    const char *p = inicio;
     double x;
     bool mantisa_no_cero = false;
-    if (o->tipo == T_NUMERIC) x = getNumerico(o);
-    else if (o->tipo == T_STR) {
-        const char *inicio = latC_checar_cadena(mv, o), *p = inicio;
-        while (numero_espacio((unsigned char)*p)) ++p;
-        if (*p == '+' || *p == '-') ++p;
-        bool digitos = false;
+    while (numero_espacio((unsigned char)*p)) ++p;
+    if (*p == '+' || *p == '-') ++p;
+    bool digitos = false;
+    while (numero_digito((unsigned char)*p)) {
+        digitos = true; mantisa_no_cero |= *p != '0'; ++p;
+    }
+    if (*p == '.') {
+        ++p;
         while (numero_digito((unsigned char)*p)) {
             digitos = true; mantisa_no_cero |= *p != '0'; ++p;
         }
-        if (*p == '.') {
-            ++p;
-            while (numero_digito((unsigned char)*p)) {
-                digitos = true; mantisa_no_cero |= *p != '0'; ++p;
-            }
-        }
-        if (!digitos) latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
-        if (*p == 'e' || *p == 'E') {
-            ++p; if (*p == '+' || *p == '-') ++p;
-            if (!numero_digito((unsigned char)*p))
-                latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
-            while (numero_digito((unsigned char)*p)) ++p;
-        }
-        const char *fin_numero = p;
-        while (numero_espacio((unsigned char)*p)) ++p;
-        if (*p) latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
-        char *fin;
-        x = latC_strtod_c(inicio, &fin);
-        if (fin != fin_numero)
+    }
+    if (!digitos) latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
+    if (*p == 'e' || *p == 'E') {
+        ++p; if (*p == '+' || *p == '-') ++p;
+        if (!numero_digito((unsigned char)*p))
             latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
+        while (numero_digito((unsigned char)*p)) ++p;
+    }
+    const char *fin_numero = p;
+    while (numero_espacio((unsigned char)*p)) ++p;
+    if (*p) latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
+    char *fin;
+    x = latC_strtod_c(inicio, &fin);
+    if (fin != fin_numero)
+        latC_error(mv, "Conversion numerica estricta: sintaxis invalida");
+    if (!isfinite(x) || (x == 0 && mantisa_no_cero))
+        latC_error(mv, "Conversion numerica estricta: fuera de rango");
+    return x;
+}
+
+static void base_anumero_estricto(lat_mv *mv) {
+    lat_objeto *o = latC_desapilar(mv);
+    double x;
+    if (o->tipo == T_STR) x = numero_desde_texto(mv, latC_checar_cadena(mv, o));
+    else if (o->tipo == T_NUMERIC) {
+        x = getNumerico(o);
+        if (!isfinite(x)) latC_error(mv, "Conversion numerica estricta: fuera de rango");
     } else {
         latC_error(mv, "Conversion numerica estricta: tipo invalido");
         return;
     }
-    if (!isfinite(x) || (x == 0 && mantisa_no_cero))
-        latC_error(mv, "Conversion numerica estricta: fuera de rango");
     latC_apilar_double(mv, x);
 }
 
@@ -359,6 +431,8 @@ static const lat_CReg libbase[] = {
     {"alogico", base_alogico, 1},
     {"incluir", base_incluir, 1},
     {"leer", base_leer, 0},
+    {"leer_texto", base_leer_texto, 0},
+    {"leer_numero", base_leer_numero, 0},
     {"limpiar", base_limpiar, 0},
     {"tipo", base_tipo, 1},
     {"imprimirf", base_imprimirf, FUNCION_VAR_ARGS},
