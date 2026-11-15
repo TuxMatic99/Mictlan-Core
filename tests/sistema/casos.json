@@ -188,5 +188,11 @@
   "salir": {
     "programa": "sis.salir()\nponer(\"no llegar\")\n",
     "salida": ""
+  },
+  "avisar_invalido": {
+    "programa": "sis.avisar(0)\n",
+    "salida": "",
+    "codigo": 1,
+    "diagnostico": "No se pudo registrar la senial"
   }
 }

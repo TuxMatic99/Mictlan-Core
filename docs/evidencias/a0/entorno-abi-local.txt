@@ -1,0 +1,60 @@
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"
+VERSION_ID="13"
+VERSION="13 (trixie)"
+VERSION_CODENAME=trixie
+DEBIAN_VERSION_FULL=13.6
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+
+
+$ git rev-parse HEAD
+755f88c15f5a600c0d719ab2bd22e07651efd00a
+codigo=0
+
+$ cc --version
+cc (Debian 14.2.0-19) 14.2.0
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+codigo=0
+
+$ /workspace/scratch/1de5cf9cbaa6/herramientas-p12b3/cmake/data/bin/cmake --version
+cmake version 4.4.5
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+codigo=0
+
+$ python3 --version
+Python 3.12.14
+codigo=0
+
+$ ldd --version
+ldd (Debian GLIBC 2.41-12+deb13u4) 2.41
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Written by Roland McGrath and Ulrich Drepper.
+codigo=0
+
+$ python3 tests/colecciones/abi.py nm ../build-a0-debug/liblatino.so
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 0 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+codigo=0
+
+$ python3 tests/colecciones/abi.py nm ../build-a0-release/liblatino.so
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 0 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+codigo=0
+
+$ python3 tests/colecciones/abi.py nm ../build-a0-asan/liblatino.so
+ABI: 285 símbolos preservados, sin símbolos nuevos de Core; 7 guardias ODR de ASan identificadas. lista.unir es un alias de lenguaje.
+codigo=0
+
+$ git diff 2651317e4224f5499765b5b0ae16d1404a0adfc4 --stat -- include src tools/parser
+ src/latsyslib.c | 325 ++++++++++++++++++++++++++++++++++----------------------
+ 1 file changed, 196 insertions(+), 129 deletions(-)
+codigo=0
+
+Revisión anterior a los cuatro controles de cierre y documentación. No se cambió producción después de 755f88c1.

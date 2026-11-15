@@ -160,6 +160,7 @@ int main(int argc,char **argv){
   armado=1;Struct v=buscar_os_version();armado=0;C(v.osMayor==a&&v.osMenor==b&&v.osBuild==c);
  }else if(!strcmp(familia,"aux")){
   if(!strcmp(caso,"ejecutar_error")||!strcmp(caso,"ejecutar_hijo")){fallo=!strcmp(caso,"ejecutar_error")?SISTEMA:HIJO;texto("productor_controlado");armado=1;r=llamar("ejecutar");armado=0;C(r==(fallo==SISTEMA?LAT_ERRRUN:0));C(nsystem==1);}
+  else if(!strcmp(caso,"sleep_negativo")){errno=0;sleep_ms(-1);C(errno==EINVAL&&nsleep==0);}
   else if(!strcmp(caso,"salir")){C(llamar("salir")==0);C(salidas==1);}
   else if(!strcmp(caso,"cwd_error")){fallo=CWD;C(llamar("cwd")==0);C(latC_desapilar(mv)->tipo==T_NULL);}
   else if(!strcmp(caso,"cwd")){C(llamar("cwd")==0);resultado_texto(raiz);}
