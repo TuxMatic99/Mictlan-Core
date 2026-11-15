@@ -13,9 +13,9 @@ glibc 2.41, Python 3.12.14 y CMake 4.4.5; CI usa Ubuntu 24.04.
 
 ## Copia aislada y revisión
 
-El informe final enlaza la revisión probada. En esta fase, se puede capturar la
-punta actual de la PR y registrar su SHA antes de compilar; nunca suponer que
-el nombre de rama permanece fijo para siempre:
+Código y batería finales comprobados: `afc8920682e7f863c2162e620b12aaeaac3dd7a7`.
+Los commits posteriores sólo añaden el informe y evidencias. Se fija esta revisión
+para no depender de futuros cambios de la rama:
 
 ```sh
 set -eu
@@ -23,7 +23,7 @@ trabajo=$(mktemp -d -t mictlan-a0-XXXXXX)
 git clone --branch investigacion/a0-inventario-sistema \
   https://github.com/TuxMatic99/Mictlan-Core.git "$trabajo/core"
 cd "$trabajo/core"
-revision=$(git rev-parse HEAD)
+revision=afc8920682e7f863c2162e620b12aaeaac3dd7a7
 printf '%s\n' "$revision"
 git switch --detach "$revision"
 test "$(git rev-parse HEAD)" = "$revision"

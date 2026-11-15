@@ -1,0 +1,69 @@
+{
+  "main": "b3be302bbfdc0dfc371b6871dd203f7ff9ce3a0b",
+  "pull_requests": [
+    {
+      "pr": 7,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "c25eb7e5008e1201ebd1292da7b2da0dd0a554a0",
+      "base": "9f3a1965f2794c8921adf9cdfa3e0c192060c657",
+      "base_branch": "investigacion/p11-memoria-pila"
+    },
+    {
+      "pr": 8,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "6b8204ab92196fccfc217c80c6f381aa8ef03535",
+      "base": "c25eb7e5008e1201ebd1292da7b2da0dd0a554a0",
+      "base_branch": "investigacion/p12a-conformidad"
+    },
+    {
+      "pr": 9,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "3125a0016e1adcfa0ac68c2c37ba40108a033cc9",
+      "base": "6b8204ab92196fccfc217c80c6f381aa8ef03535",
+      "base_branch": "investigacion/p12b1-cadenas"
+    },
+    {
+      "pr": 10,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "b0a2d860363e07274feae1d0cf2b421515386d73",
+      "base": "3125a0016e1adcfa0ac68c2c37ba40108a033cc9",
+      "base_branch": "investigacion/p12b2-colecciones"
+    },
+    {
+      "pr": 11,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "82be31bf11b6fcfc3bb19979c2b62ca337edc2fd",
+      "base": "b0a2d860363e07274feae1d0cf2b421515386d73",
+      "base_branch": "investigacion/p12b3-matematicas"
+    },
+    {
+      "pr": 12,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "2651317e4224f5499765b5b0ae16d1404a0adfc4",
+      "base": "82be31bf11b6fcfc3bb19979c2b62ca337edc2fd",
+      "base_branch": "investigacion/p12b4a-integridad-archivos"
+    },
+    {
+      "pr": 13,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "afc8920682e7f863c2162e620b12aaeaac3dd7a7",
+      "base": "2651317e4224f5499765b5b0ae16d1404a0adfc4",
+      "base_branch": "investigacion/p12b4b-entrada-modulos"
+    }
+  ],
+  "nota": "Estado comprobado antes del commit final de informe; #13 avanza después sólo con documentación."
+}

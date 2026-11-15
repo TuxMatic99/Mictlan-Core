@@ -1,7 +1,7 @@
 {
   "perfil": "debug",
   "revision_produccion": "755f88c15f5a600c0d719ab2bd22e07651efd00a",
-  "nota": "más cuatro controles finales y documentación en el commit siguiente",
+  "nota": "Ejecutado antes de publicar afc8920, con los mismos archivos de producción y pruebas; producción sin cambios desde 755f88c1.",
   "cuentas": {
     "aprobado": 846,
     "fallo_funcional": 0,
@@ -862,5 +862,6 @@
     "fallo_sanitizador": [],
     "bloqueado_infraestructura": [],
     "omitido": []
-  }
+  },
+  "revision_codigo_y_bateria": "afc8920682e7f863c2162e620b12aaeaac3dd7a7"
 }
