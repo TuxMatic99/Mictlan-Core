@@ -1,0 +1,4 @@
+CI exacta c60b09883437f55a8ab0bb56bce6b846c4b0d92e, run 43665259418.
+debug: 100% tests passed, 0 tests failed out of 676; mismos 676 nombres que la bateria local.
+release: 100% tests passed, 0 tests failed out of 676; mismos 676 nombres que la bateria local.
+asan: 100% tests passed, 0 tests failed out of 692; mismos 692 nombres que la bateria local.

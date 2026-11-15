@@ -1,0 +1,13 @@
+Verificacion GitHub al inicio y al cierre de la implementacion, 2026-11-14 (Mexico):
+main: b3be302bbfdc0dfc371b6871dd203f7ff9ce3a0b
+PR #7 open draft no merge: c25eb7e5008e1201ebd1292da7b2da0dd0a554a0
+PR #8 open draft no merge: 6b8204ab92196fccfc217c80c6f381aa8ef03535; base #7
+PR #9 open draft no merge: 3125a0016e1adcfa0ac68c2c37ba40108a033cc9; base #8
+PR #10 open draft no merge: b0a2d860363e07274feae1d0cf2b421515386d73; base #9
+PR #11 open draft no merge: 82be31bf11b6fcfc3bb19979c2b62ca337edc2fd; base #10
+No existia rama ni PR B4-B al comenzar. Rama creada desde el SHA exacto de #11.
+Entrega A: 1ffcf2f8d7dbcfd246a3d374c1ce737791238d74 (solo pruebas, decisiones y evidencia).
+Entrega B: 8592713290dbc4829a023617492ed3f098b3d668 (implementacion funcional).
+Entrega C, bateria completa: c60b09883437f55a8ab0bb56bce6b846c4b0d92e.
+PR #12 draft: investigacion/p12b4b-entrada-modulos -> investigacion/p12b4a-integridad-archivos.
+No se hizo ninguna escritura en main ni en las PR #7-#11.
