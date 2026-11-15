@@ -1,0 +1,3 @@
+poner(tipo(sis.os_version_mayor()))
+poner(tipo(sis.os_version_menor()))
+poner(tipo(sis.os_version_parche()))

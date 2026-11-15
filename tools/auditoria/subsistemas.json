@@ -1,0 +1,349 @@
+[
+  {
+    "id": "LEX",
+    "patrones": [
+      "src/latlex.*",
+      "include/latlex.h",
+      "tools/parser/latlex.l"
+    ],
+    "proposito": "Tokens, palabras reservadas y literales",
+    "dependencias": "Flex, latlocale, objetos/AST",
+    "contrato": "Reconocer léxico Latino/Mictlán; conversiones de literales mediante ayudante C",
+    "errores": "Entradas inválidas, EOF en literal, reserva del scanner",
+    "pruebas": "tests/conformidad/; tests/matematicas/; tests/alpha/",
+    "riesgos": "Límites adversos de tokens, NUL/UTF-8 y agotamiento dentro del scanner pendientes"
+  },
+  {
+    "id": "PAR",
+    "patrones": [
+      "src/latparse.*",
+      "include/latparse.h",
+      "tools/parser/latparse.y"
+    ],
+    "proposito": "Gramática y precedencias; AST",
+    "dependencias": "Bison, lexer, latast",
+    "contrato": "Semántica P1.2-A; ^ y ** mantienen prioridades históricas distintas",
+    "errores": "Sintaxis incompleta, pila de parser, limpieza de producciones abortadas",
+    "pruebas": "tests/conformidad/; tests/alpha/; tests/entrada_modulos/",
+    "riesgos": "Correspondencia gramática/generados y liberación ante cada error no exhaustivamente comprobadas"
+  },
+  {
+    "id": "GEN",
+    "patrones": [
+      "tools/parser/generar_parser.sh"
+    ],
+    "proposito": "Regeneración de parser y lexer",
+    "dependencias": "Flex/Bison, rutas relativas, shell",
+    "contrato": "Script heredado mueve fuentes y cabeceras generadas",
+    "errores": "No set -e; comodines; versiones no fijadas",
+    "pruebas": "Sin prueba de reproducción exacta de generados en CTest",
+    "riesgos": "No ejecutar en el checkout de trabajo sin aislamiento; reproducibilidad pendiente"
+  },
+  {
+    "id": "AST",
+    "patrones": [
+      "src/latast.c",
+      "include/latast.h"
+    ],
+    "proposito": "Construcción, carga y destrucción del AST",
+    "dependencias": "malloc, archivos, scanner/parser",
+    "contrato": "B4-A comprueba lectura/cierre; quien recibe AST lo destruye",
+    "errores": "E/S, NUL, reserva, archivo vacío y error sintáctico",
+    "pruebas": "tests/archivos/; tests/entrada_modulos/",
+    "riesgos": "Fallo de reserva en todas las producciones y profundidad máxima pendientes"
+  },
+  {
+    "id": "COMP",
+    "patrones": [
+      "src/latdo.c",
+      "include/latdo.h",
+      "src/latbytecode.h",
+      "src/laterror.h"
+    ],
+    "proposito": "Compilación, bytecode y llamadas protegidas",
+    "dependencias": "AST, VM, propiedad, setjmp/longjmp",
+    "contrato": "Pila/contador/contexto recuperables; temporales se limpian mediante guard privado",
+    "errores": "Tipo, rango, compilación, reserva y saltos de control",
+    "pruebas": "tests/conformidad/; tests/stack_recovery_regression.c; tests/p11_pila.c; tests/bytecode*",
+    "riesgos": "ROMPER/CONTINUAR anidados, agotamiento dentro del compilador y todas las instrucciones requieren casos nuevos"
+  },
+  {
+    "id": "VM",
+    "patrones": [
+      "src/latmv.c",
+      "include/latmv.h"
+    ],
+    "proposito": "Ejecutor, pila, contextos y registro de bibliotecas",
+    "dependencias": "Objetos, mapas, bytecode, bibliotecas nativas",
+    "contrato": "Los objetos compartidos siguen el registro de Core; las celdas no implican propiedad independiente",
+    "errores": "Aridad, pila, recursión, fallos de nativas",
+    "pruebas": "tests/conformidad/; tests/context*; tests/stack_recovery_regression.c; tests/p11_pila.c",
+    "riesgos": "Límites de pila profunda, interacción clase/error, cachés de variables y estados auxiliares pendientes"
+  },
+  {
+    "id": "OBJ",
+    "patrones": [
+      "src/latobj.c",
+      "include/latobj.h",
+      "src/latnumerico.h"
+    ],
+    "proposito": "Tipos, conversiones, texto y comparación",
+    "dependencias": "memoria, listas/mapas, latlocale",
+    "contrato": "Compatibilidad de conversiones no estrictas; alternativas B1/B3 explícitas",
+    "errores": "Tipos inválidos, profundidad/ciclos, rango y reservas",
+    "pruebas": "tests/object_text*; tests/matematicas/; tests/colecciones/",
+    "riesgos": "Igualdad de estructuras complejas, cast T_INTEGER/T_CHAR y OOM interno necesitan revisión específica"
+  },
+  {
+    "id": "MEM",
+    "patrones": [
+      "src/latmem.c",
+      "include/latmem.h",
+      "include/latmemoria.h",
+      "src/latpropiedad.h"
+    ],
+    "proposito": "Asignador, propiedad y recolección explícita",
+    "dependencias": "VM, mapas, objetos, bytecode",
+    "contrato": "P0.2-E/F/G y P1.1: raíces explícitas, nativas autorizadas, no recolectar durante ejecución",
+    "errores": "OOM, referencia opaca, VM ocupada, ciclos compartidos",
+    "pruebas": "tests/p02f*; tests/p02g*; tests/p11_gc_cadenas.c; tests/alpha/agotamiento.c",
+    "riesgos": "Matriz de agotamiento y raíces para todos los tipos/nativas pendiente; no cambiar política global en A0"
+  },
+  {
+    "id": "GC_LEG",
+    "patrones": [
+      "src/latgc.c",
+      "include/latgc.h"
+    ],
+    "proposito": "Recolector histórico condicionado",
+    "dependencias": "HABILITAR_GC, objetos/listas",
+    "contrato": "Separado del registro y GC explícito actuales",
+    "errores": "Compilaciones alternativas y doble propiedad",
+    "pruebas": "Suite normal no certifica cada configuración de HABILITAR_GC",
+    "riesgos": "Determinar soporte de cada configuración antes de distribuir"
+  },
+  {
+    "id": "LIST",
+    "patrones": [
+      "src/latlist.c",
+      "include/latlist.h",
+      "src/latlistlib.c",
+      "src/latcolecciones.h"
+    ],
+    "proposito": "Listas y biblioteca lista",
+    "dependencias": "Nodos enlazados, registro de objetos",
+    "contrato": "B2: mutación/copia superficial/alias documentados; índices validados",
+    "errores": "Vacías, rango, duplicados, ciclos, OOM",
+    "pruebas": "tests/colecciones/; tests/diagnostico*lista*; tests/p02f*",
+    "riesgos": "Ciclos de igualdad y límites combinados todavía requieren auditorías adicionales"
+  },
+  {
+    "id": "DIC",
+    "patrones": [
+      "src/latdic.c",
+      "include/latdic.h",
+      "src/latdiclib.c"
+    ],
+    "proposito": "Hash map y biblioteca dic",
+    "dependencias": "Listas de cubetas, registro, hashing",
+    "contrato": "B2: borrar sólo una entrada y mantener longitud; sin orden de inserción prometido",
+    "errores": "Colisiones, crecimiento, claves largas, valores compartidos",
+    "pruebas": "tests/colecciones/; tests/hash*; tests/p02g*",
+    "riesgos": "OOM de redimensionamiento y combinaciones grandes de alias pendientes"
+  },
+  {
+    "id": "STR",
+    "patrones": [
+      "src/latstrlib.c",
+      "src/latstr_utf8.inc"
+    ],
+    "proposito": "Biblioteca cadena, formato y regex",
+    "dependencias": "libc/regex, objetos, listas, UTF-8 privado",
+    "contrato": "B1: bytes heredados y alternativas explícitas por puntos de código/ASCII",
+    "errores": "UTF-8 inválido, rango, formatos, reservas",
+    "pruebas": "tests/cadenas/; tests/strings_io*; tests/p02g_formato.c",
+    "riesgos": "Grafemas, comparación lingüística y Unicode avanzado son propuestas, no soporte implementado"
+  },
+  {
+    "id": "MATH",
+    "patrones": [
+      "src/latmathlib.c"
+    ],
+    "proposito": "Biblioteca mate",
+    "dependencias": "libm, double, estado de generador",
+    "contrato": "B3: dominios heredados y alternativas explícitas; redondeo/libm sin precisión decimal exacta",
+    "errores": "NaN, infinito, cast entero, intervalo aleatorio, rango",
+    "pruebas": "tests/matematicas/",
+    "riesgos": "No criptografía; reproducibilidad/precisión por plataforma delimitadas; no prometer igualdad decimal exacta"
+  },
+  {
+    "id": "BASE",
+    "patrones": [
+      "src/latbaselib.c",
+      "src/latlocale.c"
+    ],
+    "proposito": "Biblioteca base, entrada y módulos",
+    "dependencias": "strtod_l, stdin, parser/compilador, cargador nativo",
+    "contrato": "B4-B: leer compatible; leer_texto/leer_numero; .lat antes de .mict; sin caché",
+    "errores": "E/S, EOF, NUL, límites, errores de módulo y conversión",
+    "pruebas": "tests/entrada_modulos/; tests/matematicas/; tests/conformidad/",
+    "riesgos": "Ciclos profundos, todos los OOM internos, edición interactiva y plataformas no Linux pendientes"
+  },
+  {
+    "id": "FILE",
+    "patrones": [
+      "src/latfilelib.c"
+    ],
+    "proposito": "Biblioteca archivo y persistencia",
+    "dependencias": "FILE, stat, rename/fsync, cargador fuente",
+    "contrato": "B4-A: copia/reemplazo protegido; escritura directa sigue pudiendo quedar parcial",
+    "errores": "Apertura/lectura/escritura/cierre, EINTR, mismo inode, FIFO",
+    "pruebas": "tests/archivos/; tests/atomic_io_regression.c",
+    "riesgos": "Cortes de energía, escritores concurrentes, temporales no borrables y soporte no Linux delimitados"
+  },
+  {
+    "id": "SYS",
+    "patrones": [
+      "src/latsyslib.c"
+    ],
+    "proposito": "Biblioteca sis y ayudantes de sistema",
+    "dependencias": "libc, time_t, señales, tuberías, pausas, uname",
+    "contrato": "Contrato detallado en A0_SIS_DECISIONES.md; prioridad funcional de A0",
+    "errores": "Conversión no finita, time/localtime/strftime, tubería y limpieza",
+    "pruebas": "tests/system_regression.c; tests/sistema/ (A0)",
+    "riesgos": "Resultados anteriores y posteriores separados; no confundir fallos operativos con estado del programa hijo"
+  },
+  {
+    "id": "PAQ",
+    "patrones": [
+      "src/latpaqlib.c"
+    ],
+    "proposito": "Carga nativa explícita y fallback histórico",
+    "dependencias": "dlopen/dlsym o LoadLibrary/GetProcAddress",
+    "contrato": "paquete.cargar y latC_cargarlib; no sandbox; GC pasa a opaco",
+    "errores": "Símbolo ausente, carga fallida, error de inicializador",
+    "pruebas": "Regresiones FFI previas; B4-B sólo intercepta fallback",
+    "riesgos": "Handles tras fallo de símbolo/entrada y liberación de bibliotecas requieren auditoría propia; no cargar software desconocido"
+  },
+  {
+    "id": "CLASS",
+    "patrones": [
+      "src/latclass.c",
+      "include/latclass.h"
+    ],
+    "proposito": "Clases, instancias, métodos y super",
+    "dependencias": "VM, mapas, constructores y contexto mi",
+    "contrato": "Interfaz heredada parcialmente implementada; no declarar clases listas por tener estructuras",
+    "errores": "Método/constructor ausente, instancia inválida, error de ejecución",
+    "pruebas": "tests/alpha/; cobertura específica por inventariar",
+    "riesgos": "TODO de mi, nargs y llamada protegida ignorada en latC_llamar_metodo; reproducción dedicada pendiente"
+  },
+  {
+    "id": "REPL",
+    "patrones": [
+      "src/latrepl.c",
+      "include/latrepl.h"
+    ],
+    "proposito": "Bucle interactivo e historial",
+    "dependencias": "Readline/linenoise, parser y VM",
+    "contrato": "Interacción histórica de consola; no cambiar en A0",
+    "errores": "EOF, error sintáctico, fallo repetido, señales",
+    "pruebas": "Regresiones CLI indirectas; pruebas PTY completas pendientes",
+    "riesgos": "Recursos de terminal/historial y restauración tras señales sin certificación completa"
+  },
+  {
+    "id": "CLI",
+    "patrones": [
+      "src/latino.c",
+      "include/latino.h",
+      "include/mictlan_version.h"
+    ],
+    "proposito": "Entrada ejecutable, API central y versión",
+    "dependencias": "Todo Core, args, locale, build",
+    "contrato": "mictlan conserva .lat/.mict; 285 símbolos C de referencia",
+    "errores": "Argumentos, archivo ausente, ejecución y salida",
+    "pruebas": "tests/alpha/; tests/conformidad/; tests/colecciones/abi.py",
+    "riesgos": "Versión histórica no identifica revisión; ABI de Windows y packaging pendiente por plataforma"
+  },
+  {
+    "id": "RES",
+    "patrones": [
+      "src/latrecurso.*",
+      "src/latlista_recursos.*"
+    ],
+    "proposito": "Registro de recursos y colecciones de recursos",
+    "dependencias": "Asignador, callbacks y handles",
+    "contrato": "Propiedad y cierre de recursos P0.2; consumidores C/SDK conservados",
+    "errores": "Doble cierre, orden, OOM, callback inválido",
+    "pruebas": "tests/*recurso*; pruebas P0.2 anteriores",
+    "riesgos": "SDK no se modifica ni reconstruye aquí; callbacks/ciclos exóticos pendientes"
+  },
+  {
+    "id": "DEV",
+    "patrones": [
+      "src/latdevlib.c"
+    ],
+    "proposito": "Inspección lat.mostrar y lat.imprimir_pila",
+    "dependencias": "Formateo y objetos internos",
+    "contrato": "Diagnóstico que expone metadatos y direcciones del propio proceso",
+    "errores": "Tipo cíclico, formato/OOM, escritura de stdout",
+    "pruebas": "Pruebas indirectas de formato; sin batería exclusiva",
+    "riesgos": "Clasificar API de depuración antes de distribución; no considerar sus textos estables"
+  },
+  {
+    "id": "OPTIONAL",
+    "patrones": [
+      "src/latuilib.c",
+      "src/latcurseslib.c"
+    ],
+    "proposito": "UI histórica no integrada en build normal",
+    "dependencias": "Windows/PDCurses y terminal",
+    "contrato": "No disponible por defecto; ui contiene stubs",
+    "errores": "Compilación opcional y parámetros sin validar",
+    "pruebas": "No se ejecuta en la suite normal",
+    "riesgos": "No anunciar estas APIs como soporte operativo; fuera de A0 funcional"
+  },
+  {
+    "id": "LINE",
+    "patrones": [
+      "src/linenoise/*"
+    ],
+    "proposito": "Edición de línea y UTF-8 de tercero incluido",
+    "dependencias": "Terminal, libc, dos fuentes compiladas",
+    "contrato": "Conservar licencia/código de tercero; uso real depende de plataforma",
+    "errores": "UTF-8, ancho de pantalla, memoria, señales",
+    "pruebas": "Sin auditoría exhaustiva del tercero en A0",
+    "riesgos": "Fijar versión/procedencia y evaluar alcance real en consola"
+  },
+  {
+    "id": "PLATFORM",
+    "patrones": [
+      "include/latcompat.h",
+      "src/latino.def",
+      "src/latino_os_version.manifest",
+      "src/vs_resources/*",
+      "src/lib/*/*",
+      "src/latino-regex"
+    ],
+    "proposito": "Macros portables, recursos Windows y binarios heredados",
+    "dependencias": "Compilador/CRT/regex y DLLs incluidas",
+    "contrato": "Inventariar hashes; no ejecutar binarios incluidos para auditarlos",
+    "errores": "ABI divergente, dependencias ausentes, plataforma sin probar",
+    "pruebas": "Linux ABI; Windows/macOS requieren matriz propia",
+    "riesgos": "Binarios versionados sin reconstrucción de origen en esta misión; no certificarlos por existir"
+  },
+  {
+    "id": "BUILD_DOC",
+    "patrones": [
+      "src/CMakeLists.txt",
+      "src/man/*",
+      "src/gnu-utilities/*"
+    ],
+    "proposito": "Build, instalación y ayuda del sistema",
+    "dependencias": "CMake, empaquetado, docs heredadas",
+    "contrato": "mictlan como ejecutable; liblatino mantiene nombre ABI",
+    "errores": "Rutas de instalación, generados, ayuda desfasada",
+    "pruebas": "CI de Core, portable y suites anteriores",
+    "riesgos": "Manual man/editor puede no reflejar APIs nuevas; prueba de instalación limpia pendiente"
+  }
+]
