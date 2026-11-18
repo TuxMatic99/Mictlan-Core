@@ -1,0 +1,38 @@
+{
+  "basico": {
+    "programa": "a = 3 + 4\n"
+  },
+  "valores": {
+    "programa": "a = [verdadero, falso, nulo, 3.5, \"María\", 'literal']\n"
+  },
+  "compuestas": {
+    "programa": "a=2\na+=3\na-=1\na*=2\na/=2\na%=3\ns=\"a\"\ns..=\"b\"\n"
+  },
+  "funciones": {
+    "programa": "funcion suma(a,b)\n retorno a+b\nfin\nf = funcion(x)\n retorno x*2\nfin\nr=suma(f(3),4)\n"
+  },
+  "clases": {
+    "programa": "clase Ejemplo\n x=1\n constructor(a)\n mi.x=a\n fin\n funcion valor()\n retorno mi.x\n fin\nfin\n"
+  },
+  "bucles": {
+    "programa": "a=0\ndesde(i=0;i<3;i++)\n a+=i\nfin\npara j en rango(1,4,1)\n a+=j\nfin\n"
+  },
+  "colecciones": {
+    "programa": "a={clave: [1,2], \"otra\": 3}\nb=[1,2]\nb[0]=7\n"
+  },
+  "eleccion": {
+    "programa": "a=2\nelegir a\n caso 1: caso 2:\n b=7\n defecto:\n b=9\nfin\n"
+  },
+  "anidada": {
+    "programa": "funcion f(x)\n mientras x>0\n x-=1\n romper\n fin\n retorno x\nfin\na=f(2)\n"
+  },
+  "sintaxis": {
+    "programa": "a = [1, 2\n"
+  },
+  "rango_invalido": {
+    "programa": "para x en rango(1,4,0)\n a=1\nfin\n"
+  },
+  "varargs_invalidos": {
+    "programa": "funcion f(..., a)\n retorno a\nfin\n"
+  }
+}
