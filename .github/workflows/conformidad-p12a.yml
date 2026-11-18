@@ -11,6 +11,7 @@ on:
       - 'investigacion/p12b4a-*'
       - 'investigacion/p12b4b-*'
       - 'investigacion/a0-*'
+      - 'investigacion/a1-*'
 
 permissions:
   contents: read
